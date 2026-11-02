@@ -1,11 +1,15 @@
 using System;
 using System.Data;
 using System.Reflection;
-using System.Web;
-using System.Web.Services;
 using Incasbo.Api.App;
 using Incasbo.Web.Library;
 using Microsoft.VisualBasic.CompilerServices;
+#if NETFRAMEWORK
+using System.Web;
+using System.Web.Services;
+#else
+using Incasbo.Web.Compat;
+#endif
 
 namespace Incasbo.Web.WSC;
 

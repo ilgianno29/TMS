@@ -1,8 +1,12 @@
 using System;
 using System.ComponentModel;
-using System.Web.Services;
 using Incasbo.Web.Library;
 using Microsoft.VisualBasic.CompilerServices;
+#if NETFRAMEWORK
+using System.Web.Services;
+#else
+using Incasbo.Web.Compat;
+#endif
 
 namespace Incasbo.Web.WSC;
 

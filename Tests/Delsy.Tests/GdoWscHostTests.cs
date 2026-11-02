@@ -145,4 +145,44 @@ public class GdoWscHostTests : IClassFixture<GdoWscHostFixture>
         Assert.Contains("<a:RelatesTo>urn:uuid:11111111-2222-3333-4444-555555555555</a:RelatesTo>", body);
         Assert.Contains("<TestPingResult>RISPOSTA: ciao - ", body);
     }
+
+    [Fact]
+    public async Task GdoWSC_asmx_pubblica_il_WSDL_con_le_7_operazioni()
+    {
+        string wsdl = await _client.GetStringAsync("/GdoWSC.asmx?WSDL");
+        foreach (string op in new[] { "LogIn", "LogOut", "isAuthenticate", "GetDateTime", "TestDBConnection", "GetVersion", "TestPing" })
+        {
+            Assert.Contains($"soapAction=\"http://www.incasgroup.com/bologna/GdoWSC/{op}\"", wsdl);
+        }
+    }
+
+    [Fact]
+    public async Task GdoWSC_asmx_TestPing_e_isAuthenticate_con_sessione()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Post, "/GdoWSC.asmx")
+        {
+            Content = new StringContent(
+                "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body>" +
+                "<TestPing xmlns=\"http://www.incasgroup.com/bologna/GdoWSC\"><sStringa>ciao</sStringa></TestPing>" +
+                "</soap:Body></soap:Envelope>", Encoding.UTF8, "text/xml")
+        };
+        request.Headers.Add("SOAPAction", "\"http://www.incasgroup.com/bologna/GdoWSC/TestPing\"");
+        var response = await _client.SendAsync(request);
+        string body = await response.Content.ReadAsStringAsync();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Contains("<TestPingResult>RISPOSTA: ciao - ", body);
+        Assert.Contains(response.Headers.GetValues("Set-Cookie"), c => c.StartsWith("ASP.NET_SessionId="));
+
+        var auth = new HttpRequestMessage(HttpMethod.Post, "/GdoWSC.asmx")
+        {
+            Content = new StringContent(
+                "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body>" +
+                "<isAuthenticate xmlns=\"http://www.incasgroup.com/bologna/GdoWSC\" /></soap12:Body></soap12:Envelope>", Encoding.UTF8)
+        };
+        auth.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(
+            "application/soap+xml; charset=utf-8; action=\"http://www.incasgroup.com/bologna/GdoWSC/isAuthenticate\"");
+        string authBody = await (await _client.SendAsync(auth)).Content.ReadAsStringAsync();
+        Assert.Contains("<isAuthenticateResult>false</isAuthenticateResult>", authBody);
+    }
 }

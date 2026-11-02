@@ -70,7 +70,7 @@ con **gli stessi indirizzi, namespace e binding** del Web.config originale:
   è ora `BackgroundMaintenanceService`; gli errori finiscono nel log invece di essere ignorati.
 - Gli attributi `[ServiceContract]`/`[ServiceBehavior]` che il decompilatore non aveva ricostruito
   sono stati recuperati dall'IL originale (namespace, SessionMode, InstanceContextMode).
-- Il codice ASMX (`GdoWSC.asmx`, autenticazione Forms) **resta solo nella versione net48**: fase 3b.
+- Il servizio ASMX `GdoWSC.asmx` è nella fase 3b (sotto).
 
 ### Configurazione (`GdoWSC.Host/appsettings.json`, sezione `GdoWSC`)
 - `ApplicationRoot`: cartella con `IniConfig\` e `Log\` (vuoto = cartella del sito).
@@ -86,3 +86,26 @@ con **gli stessi indirizzi, namespace e binding** del Web.config originale:
    del sito attuale; copiare il vecchio Web.config come `IniConfig\WcfClients.config`.
 5. Verificare `http://server/.../TMSServiceForWMS.svc?wsdl` e confrontarlo con quello del sito attuale.
 - Test: 35 (le chiamate SOAP reali ai tre servizi avviano il vero host su Kestrel).
+
+## Fase 3b – GdoWSC.asmx (login del portale) su .NET 8
+
+`GdoWSC.Host` espone anche **`/GdoWSC.asmx`**, eseguendo **il codice originale** del servizio
+(`Incasbo.Web.WSC.GdoWSC`: LogIn, LogOut, isAuthenticate, GetDateTime, TestDBConnection, GetVersion, TestPing).
+
+- **Protocollo come ASMX**: SOAP 1.1 e SOAP 1.2 document/literal, `SOAPAction = http://www.incasgroup.com/bologna/GdoWSC/<metodo>`,
+  parametri `ref` restituiti nella risposta, errori come SOAP fault, WSDL con `?WSDL`.
+- **Sessione** come `<sessionState mode="InProc" timeout="10">`: cookie `ASP.NET_SessionId`, dati in memoria,
+  `WSC_SessionEnvironment` creato all'inizio (Session_Start) e distrutto alla scadenza (Session_End),
+  **richieste della stessa sessione eseguite una alla volta** come in ASP.NET.
+- **Login** come `<forms name="GdoWSC" timeout="10">`: cookie `GdoWSC` cifrato e firmato (ASP.NET Core Data Protection),
+  rinnovo automatico a metà durata.
+- Il codice originale compila su .NET 8 grazie a `Incasbo.Web.Compat` (sostituti minimi di `WebService`, `Session`,
+  `FormsAuthentication`, `HttpContext.Current`): nessuna riscrittura della logica di login.
+- Configurazione in `appsettings.json`, sezione `GdoWSC:Asmx`.
+
+**Da sapere al passaggio in produzione**
+- I cookie emessi dal vecchio sito non sono validi sul nuovo: gli utenti collegati dovranno **rifare il login una volta**.
+- Con più server (web farm) o riavvii: le sessioni sono in memoria come prima (InProc); per condividere il cookie di login
+  tra più server va configurata una cartella comune per le chiavi di Data Protection.
+
+Test: 48 (login/logout, cookie manomesso, sessione, parametri ref, fault, richieste concorrenti, chiamate reali al vero host).

@@ -27,8 +27,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <!--
-    .NET 8: i servizi WCF sono ospitati da GdoWSC.Host (CoreWCF).
-    Il codice legato a IIS/ASP.NET classico (ASMX, Global.asax, SoapExtension) resta solo in net48.
+    .NET 8: i servizi sono ospitati da GdoWSC.Host (CoreWCF per WCF, middleware SOAP per GdoWSC.asmx).
+    Il codice ASMX compila grazie a Incasbo.Web.Compat; Global.asax e le SoapExtension restano solo in net48
+    (la loro logica e' riprodotta nell'host).
   -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
     <PackageReference Include="System.ServiceModel.Http" Version="8.1.0" />
@@ -38,11 +39,6 @@
     <Compile Remove="Incasbo/Global_asax.cs" />
     <Compile Remove="Incasbo.My/**" />
     <Compile Remove="Incasbo.Web.WSC.SOAPExtensionsLib/**" />
-    <Compile Remove="Incasbo.Web.WSC/IncasWebService.cs" />
-    <Compile Remove="Incasbo.Web.WSC/IncasServiceFormsAuth.cs" />
-    <Compile Remove="Incasbo.Web.WSC/WSCStateWith.cs" />
-    <Compile Remove="Incasbo.Web.WSC/WSCStateless.cs" />
-    <Compile Remove="Incasbo.Web.WSC/GdoWSC.cs" />
     <Compile Remove="Incasbo.Web.WSC/IWSCBackgroundActivity.cs" />
     <Compile Remove="Incasbo.Web.WSC/CustomBackgroundActivity.cs" />
   </ItemGroup>
