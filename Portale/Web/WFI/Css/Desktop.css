@@ -1,0 +1,191 @@
+﻿.DesktopContainer, .DesktopContainer6 {
+    margin: 0 auto;
+    width: 1080px;
+    min-height: 480px;
+}
+
+.DesktopContainer7 {
+    margin: 0 auto;
+    width: 1260px;
+    min-height: 480px;
+}
+
+.DesktopContainer8 {
+    margin: 0 auto;
+    width: 1440px;
+    min-height: 480px;
+}
+
+.DesktopContainer9 {
+    margin: 0 auto;
+    width: 1620px;
+    min-height: 480px;
+}
+
+.TitleContainer {
+    border: 2px transparent #0000FF;
+    width: auto;
+    height: 20px;
+    padding: 8px;
+    background-color: #9e253b;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.TitleText1 {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #FFFFFF;
+    display: none;
+}
+
+    .TitleText1 + br {
+        display: none;
+    }
+
+.LinkPath, .LinkPath a {
+    font-style: italic;
+    color: #FFFFFF;
+}
+
+.GoToHome {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.dlDesktop {
+}
+
+    .dlDesktop .ItemContainer {
+        border: 3px solid transparent;
+        width: 148px;
+        height: 148px;
+        padding: 10px;
+        background-color: #9e253b;
+        border-radius: 10px;
+        font-weight: normal;
+        position: relative;
+        _float: left;
+        _margin: 7px;
+    }
+
+    .dlDesktop .ItemContainerInvisible {
+        _border: 3px solid transparent;
+        width: 148px;
+        height: 148px;
+        padding: 10px;
+        background-color: #9e253b;
+        border-radius: 10px;
+        font-weight: normal;
+        visibility: hidden;
+    }
+
+    .dlDesktop .ItemContainer:hover {
+        _border: 3px solid orange;
+        width: 148px;
+        height: 148px;
+        box-shadow: 0px 0px 10px 5px rgba(70,70,70,1);
+        _background-image: linear-gradient(to left, #9e253b, #ae354b);
+        background-color: #ae253b;
+        _transform: rotate(360deg);
+        transition-duration: 150ms;
+        transition-timing-function: ease;
+    }
+
+    .dlDesktop .ItemImagePanel {
+        width: 148px;
+        height: 99px;
+        padding: 0px;
+        overflow: hidden;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+    }
+
+    .dlDesktop .ItemTopRightPanel {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        height: 25px;
+        width: 25px;
+        border: 2px solid #ffffff;
+        border-radius: 14px;
+        color: #ffffff;
+    }
+
+    .dlDesktop .ItemTopRightValue {
+        top: 3px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 24px;
+        height: 23px;
+        line-height: 23px;
+    }
+
+    .dlDesktop .ItemTopLeftPanel {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        height: 25px;
+        width: 25px;
+        border: 2px solid #ffffff;
+        border-radius: 14px;
+        color: #ffffff;
+    }
+
+    .dlDesktop .ItemTopLeftValue {
+        top: 3px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 24px;
+        height: 23px;
+        line-height: 23px;
+    }
+
+    .dlDesktop .ItemTextPanel {
+        width: 148px;
+        height: 49px;
+        padding: 0px;
+        overflow: hidden;
+        text-align: Left;
+    }
+
+    .dlDesktop .ItemLink {
+        text-decoration: none;
+    }
+
+.ItemLink:hover {
+    text-decoration: none;
+}
+
+.dlDesktop .ItemImage {
+    width: 95px;
+    height: 95px;
+    border-width: 0px;
+}
+
+.dlDesktop .ItemText {
+    color: #FFFFFF;
+    font-size: 10pt;
+}
+
+.dlDesktop .ItemAdditionalText {
+    color: #FFFFFF;
+    font-style: italic;
+    font-size: 8pt;
+}
+
+
+.ItemTipoNodo_C {
+    cursor: default;
+}
+
+.ItemTipoNodo_P {
+    /*background-image: url('../images/arrow_right_white.png') !important;    
+    background-repeat:no-repeat;
+    background-position: right top !important; */
+}

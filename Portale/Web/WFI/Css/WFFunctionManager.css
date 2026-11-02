@@ -1,0 +1,278 @@
+﻿/************************************************************/
+/*				STILE DELLE FORM DI DETTAGLIO				*/
+/************************************************************/
+
+.DetailFormMainDiv
+{
+	padding: 5px;
+	text-align: center;
+    min-height:300px;
+}
+
+.DetailFormMainTable
+{
+	border-collapse: collapse;
+	padding: 0;
+}
+.DetailFormMainTable td
+{
+	padding: 5px;
+}
+
+.DetailFormHeaderTable /*INTESTAZIONE DELLA TABELLA*/
+{
+	width: 100%;
+	border-collapse: collapse;
+	/*background-color: #f0f0f0;*/
+	border: solid 1px #c0c0c0;	
+	background-color: #ABCDEF;
+	font-style: italic;
+	font-weight: bold; 
+	
+}
+
+.DetailFormHeaderTable td /*CELLA DELL'INTESTAZIONE DELLA TABELLA*/
+{
+	padding: 5px;
+}
+
+
+.DetailFormTitleDiv /*TITOLO*/
+{
+	font-size: 14pt;
+	font-weight: bold;
+	border: 0;
+}
+
+.DetailFormModeDiv /*MODALITA DI ACCESSO(VISUALIZZA MODIFICA...)*/
+{
+	font-size: 10pt;
+	font-weight: bold;
+	border: solid 1px #c0c0c0;
+	background-color: #fff080;
+	color: #c0c0c0;
+	min-width: 100px;
+	text-align: center;
+}
+
+.DetailFormSectionDiv
+{
+	padding: 0px;
+	width: auto;
+}
+
+.DetailFormSectionTable
+{
+	border-collapse: collapse;
+	padding: 0;
+	width: 100%;
+}
+
+.DetailFormSectionTable td
+{
+	border: 0;
+	vertical-align: top;
+	padding: 2px;
+	border-bottom: dotted 1px #c0c0c0;
+}
+
+.DetailFormSectionTable2Columns
+{
+	border-collapse: collapse;
+	padding: 0;
+}
+
+.DetailFormSectionTable2Columns td
+{
+	border: 0;
+	vertical-align: top;
+	padding: 0px;
+	border-bottom:    1px #c0c0c0;
+}
+
+.DetailFormSectionTitle
+{
+	padding: 0;
+}
+.DetailFormSectionContent
+{
+	padding: 0;
+}
+.DetailFormDescriptionCell /*CELLE DESCRIZIONE*/
+{
+	font-size: 7pt;
+	text-align: right;
+	vertical-align: top;
+}
+.DetailFormValueCell /*CELLE VALORE*/
+{
+	font-size: 8pt;
+	text-align: left;
+	vertical-align: top;	
+}
+
+.DetailFormDesignerTable /*TABELLA NELLE FORM DI DETTAGLIO*/
+{
+	border-collapse: separate;
+	border: 0;
+	width: 100%;
+}
+.DetailFormDesignerTable td
+{
+	padding: 5px;
+}
+
+.DetailFormVisibleGrid /*GRIGLIA NELLE FORM DI DETTAGLIO*/
+{
+	border-collapse: collapse;
+	width: 100%;
+	border: solid 1px #000000;
+	background-color: #ffffff;
+}
+
+.DetailFormVisibleGrid td
+{
+	padding: 3px;
+	border: solid 1px #a0a0a0;
+}
+.DetailFormVisibleGridTitle
+{
+	background-color: #ffe080; /*background-color: #80c0ff;*/
+}
+
+.DetailFormVisibleGridDescription
+{
+	font-size: 7pt;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: inherit; /*background-color: #c0e0ff;*/
+	background-color: #fff080;
+}
+
+
+.DetailFormCommandsDiv
+{
+	padding: 3px;
+	border: solid 1px #c0c0c0;
+	text-align: right;
+	background-color: #f0f0f0;
+}
+.DetailFormButton
+{
+	width: 80px;
+	height: 30px;
+}
+
+.DetailFormContainerDivGrande
+{
+	width: 100%;
+	height: 600px;
+	overflow: scroll;
+	padding: 0px;
+	border: solid 1px #000000;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv
+{
+	width: 100%;
+	height: 500px;
+	overflow: scroll;
+	padding: 0px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainerDivPiccolo
+{
+	width: 100%;
+	height: 300px;
+	overflow: scroll;
+	padding: 0px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv300
+{
+	width: 100%;
+	height: 300px;
+	overflow: scroll;
+	padding: 0px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv400
+{
+	width: 100%;
+	height: 400px;
+	overflow: scroll;
+	padding: 0px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv500
+{
+	width: 100%;
+	height: 500px;
+	overflow: scroll;
+	padding: 0px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainerDivAuto
+{
+	width: 100%;
+	height: auto;
+	overflow: auto;
+	padding: 0px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.DetailFormContainer
+{	
+	width: 620px;
+	height: auto;
+	min-height: 300px;
+	overflow: scroll;
+	padding: 15px;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;;
+	overflow: hidden;
+}
+
+/*
+	Classe per l'aspetto del componente SearchList dell'AjaxControlToolkit
+*/
+.ListSearchExtenderPrompt
+{
+	font-style:italic;
+	color:Gray;
+	background-color:white;
+}
+
+.lblEmptyDataTemplate
+{
+ font-style:italic;
+ font-size: medium; 	 
+ text-align:center;
+ height:100%;
+ width:100%;
+ vertical-align: middle; 
+}
+
+.EmptyDataTemplateContainer
+{
+	text-align:center;
+	height:auto;  
+	width:100%;		
+}
+
+.EmptyDataTemplateContainerInterno
+{		
+	vertical-align:middle;			
+}

@@ -1,0 +1,33 @@
+﻿.BarcodeDescriptionLabel {
+    font-size: 20pt;
+}
+
+.BarcodeInputBox {
+    font-size: 32pt;
+}
+
+.BarcodeErrorMessage {
+    font-size: 12pt;
+    color: red;
+    height: 24px;
+    display: block !important;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.BarcodeOkMessage {
+    font-size: 18pt;
+    color: red;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
+.BarcodeErrorMessageCell {
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ReadOnlyFieldValue {
+    font-weight: bold;
+}

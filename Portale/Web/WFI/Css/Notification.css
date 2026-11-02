@@ -1,0 +1,196 @@
+.WFINotificationMessage.RadNotification
+{
+    margin: 0;
+    padding: 0;
+    /*font-family: "Segoe UI" , Arial, Helvetica, sans-serif;*/
+    font-size: 12px;
+    word-wrap: break-word;
+    z-index: 9001; /* Titlebar */ /* Titlebar commands */ /* Content */ /* Right to left support */ /* We need it because of IE9 */
+}
+
+    .WFINotificationMessage.RadNotification.rnRoundedCorners
+    {
+        border-radius: 5px;
+    }
+
+    .WFINotificationMessage.RadNotification .rnTitleBar
+    {
+        height: 24px;
+        background-repeat: repeat-x;
+        background-position: 0 0;
+        margin: 0;
+        padding: 0 4px;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .WFINotificationMessage.RadNotification .rnTitleBarIcon
+    {
+        display: block;
+        float: left;
+        width: 16px;
+        height: 16px;
+        margin: 4px 4px 0 0;
+        overflow: hidden;
+    }
+
+    .WFINotificationMessage.RadNotification .rnTitleBarTitle
+    {
+        display: block;
+        float: left;
+        width: 70%;
+        height: 24px;
+        line-height: 24px;
+        overflow: hidden;
+    }
+
+    .WFINotificationMessage.RadNotification .rnCommands
+    {
+        width: auto;
+        height: 19px;
+        line-height: 19px;
+        float: right;
+        list-style: none;
+        margin: 3px 0 0 0;
+        padding: 0;
+    }
+
+        .WFINotificationMessage.RadNotification .rnCommands li
+        {
+            float: left;
+        }
+
+        .WFINotificationMessage.RadNotification .rnCommands a
+        {
+            display: block;
+            width: 19px;
+            height: 19px;
+        }
+
+        .WFINotificationMessage.RadNotification .rnCommands .rnMenuIcon a
+        {
+            background-position: 0 -27px;
+        }
+
+            .WFINotificationMessage.RadNotification .rnCommands .rnMenuIcon a:hover
+            {
+                background-position: 21px -27px;
+            }
+
+        .WFINotificationMessage.RadNotification .rnCommands .rnCloseIcon a
+        {
+            background-position: 0 -47px;
+        }
+
+            .WFINotificationMessage.RadNotification .rnCommands .rnCloseIcon a:hover
+            {
+                background-position: 21px -47px;
+            }
+
+        .WFINotificationMessage.RadNotification .rnCommands a .rnAccessibility
+        {
+            display: none;
+        }
+
+    .WFINotificationMessage.RadNotification div.rnNoTitleBar .rnContentWrapper
+    {
+        border-top: 0;
+    }
+
+    .WFINotificationMessage.RadNotification .rnContentWrapper
+    {
+        padding: 5px;
+        border: 0;
+    }
+
+    .WFINotificationMessage.RadNotification .rnContentIconClipIn
+    {
+        position: relative;
+        float: left;
+        margin: -2px 0 -34px 15px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .WFINotificationMessage.RadNotification .rnContentIconClip
+    {
+        position: absolute;
+        top: -1px;
+        clip: rect(16px 32px 48px 0);
+    }
+
+    * + html .WFINotificationMessage.RadNotification .rnContentIconClip
+    {
+        top: -18px;
+        right: -18px;
+    }
+
+    .WFINotificationMessage.RadNotification .rnContentIconClipIn .rnCustomIcon
+    {
+        clip: auto;
+        margin-top: 12px;
+        _top: 0;
+    }
+
+    .WFINotificationMessage.RadNotification .rnContent
+    {
+        padding: 12px 20px 20px 67px;
+    }
+
+    .WFINotificationMessage.RadNotification .rnContentTemplate, .WFINotificationMessage.RadNotification div.rnNoContentIcon .rnContent
+    {
+        padding: 0;
+    }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnCommands li, .WFINotificationMessage.RadNotification.rnRtl .rnTitleBarIcon, .WFINotificationMessage.RadNotification.rnRtl .rnTitleBarTitle, .WFINotificationMessage.RadNotification.rnRtl .rnContentIconClipIn
+    {
+        float: right;
+    }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnTitleBarTitle
+    {
+        padding-right: 4px;
+    }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnCommands
+    {
+        float: left;
+        margin-left: -4;
+    }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnTitleBarIcon
+    {
+        direction: ltr;
+        margin: 4px 0 0 0;
+    }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnContent
+    {
+        padding: 12px 67px 20px 20px;
+    }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnContentIconClipIn
+    {
+        margin: -2px 15px -34px 0;
+    }
+
+        .WFINotificationMessage.RadNotification.rnRtl .rnContentIconClipIn .rnCustomIcon
+        {
+            _cliptop: 0;
+            _top: 16px;
+        }
+
+    .WFINotificationMessage.RadNotification.rnRtl .rnContentIconClip
+    {
+        _margin-top: 25px;
+    }
+
+    .WFINotificationMessage.AutoHeight.RadNotification .rnContentWrapper
+    {
+        max-height: 150px;
+        min-height: 50px;
+    }
+    .WFINotificationMessage.FreeHeight.RadNotification .rnContentWrapper
+    {
+        max-height: 500px;
+        min-height: 50px;
+    }

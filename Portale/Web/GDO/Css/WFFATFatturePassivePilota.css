@@ -1,0 +1,88 @@
+﻿
+#btnAggiungi {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#btnTogli {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+}
+
+#ElencoTrasportatori {
+    width: 510px;
+    height: 240px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    padding: 3px;
+    overflow:auto;
+}
+
+#ElencoTrasportatoriDaFatturare {
+    width: 510px;
+    height: 240px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    padding: 3px;
+    overflow:auto;
+}
+
+select[multiple] option:checked {
+    background: linear-gradient(to right, #FF7777, #9e253b);
+    color: #FFFFFF;
+}
+
+.Browser_MSIE select[multiple] option:checked {
+    background: #FF7777;
+    color: #FFFFFF;
+}
+
+#pnlTrasportatoriDisponibili, #pnlElencoTrasportatoriDaFatturare, #pnlSposta, #pnlServerType {
+    float: left;
+}
+
+#pnlElencoTrasportatoriDaFatturare {
+    margin-left: 10px;
+    margin-top: 6px;
+}
+
+#pnlServerType {
+    margin-left: 10px;
+    height: 25px;
+}
+
+#pnlTrasportatoriDisponibili {
+    margin-right: 10px;
+}
+
+#pnlTrasportatori, #pnlComandi {
+    clear: both;
+}
+
+#pnlTrasportatori {
+    margin: 4px;
+}
+
+#pnlSposta {
+    margin-top: 40px;
+}
+
+#ElencoTrasportatoriFiltro {
+    width: 300px;
+    margin-bottom: 3px;
+}
+
+#lblElencoTrasportatoriSelezionati {
+    height: 23px;
+    margin-bottom: 3px;
+}
+
+#btnFiltro {
+    width: 55px;
+    height: 24px;
+    margin-bottom: 5px;
+}

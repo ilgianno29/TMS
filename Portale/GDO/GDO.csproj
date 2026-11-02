@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Portale Delsy (WebForms): codice delle pagine (code-behind) ricostruito da GDO.dll.
+    Resta su .NET Framework 4.8: WebForms, Telerik e AjaxControlToolkit non esistono su .NET 8.
+  -->
+  <PropertyGroup>
+    <AssemblyName>GDO</AssemblyName>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace />
+    <!-- Codice decompilato: molti avvisi, da ridurre progressivamente -->
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="Incasbo.Web.Library.modGeneral" Static="true" />
+    <Using Include="Incasbo.Web.Library.DBFormatFunctions" Static="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Incasbo.RPT_ANOMALIA_01.rpt" />
+    <None Remove="Incasbo.RPT_GIACENZA_01.rpt" />
+    <EmbeddedResource Include="Incasbo.RPT_ANOMALIA_01.rpt" LogicalName="Incasbo.RPT_ANOMALIA_01.rpt" />
+    <EmbeddedResource Include="Incasbo.RPT_GIACENZA_01.rpt" LogicalName="Incasbo.RPT_GIACENZA_01.rpt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <!-- Librerie di terze parti e componenti web interni (binari) -->
+  <ItemGroup>
+    <Reference Include="Telerik.Web.UI"><HintPath>../../lib/Portale/Telerik.Web.UI.dll</HintPath></Reference>
+    <Reference Include="AjaxControlToolkit"><HintPath>../../lib/Portale/AjaxControlToolkit.dll</HintPath></Reference>
+    <Reference Include="ICSharpCode.SharpZipLib"><HintPath>../../lib/Portale/ICSharpCode.SharpZipLib.dll</HintPath></Reference>
+    <Reference Include="IboWebComponents"><HintPath>../../lib/Portale/IboWebComponents.dll</HintPath></Reference>
+    <Reference Include="IboGridView"><HintPath>../../lib/Portale/IboGridView.dll</HintPath></Reference>
+    <Reference Include="IboPDF"><HintPath>../../lib/Portale/IboPDF.dll</HintPath></Reference>
+    <Reference Include="ContextMenu"><HintPath>../../lib/Portale/ContextMenu.dll</HintPath></Reference>
+    <Reference Include="IboColorPicker"><HintPath>../../lib/Portale/IboColorPicker.dll</HintPath></Reference>
+    <Reference Include="GridViewResizeExtender"><HintPath>../../lib/Portale/GridViewResizeExtender.dll</HintPath></Reference>
+  </ItemGroup>
+  <!--
+    Crystal Reports: le DLL reali (versione 13.0.2000.0) vanno copiate in lib/Crystal
+    dalla GAC di un server con il runtime installato. Se mancano si compila con degli
+    stub (solo per verificare il codice): la DLL prodotta NON e' installabile.
+  -->
+  <PropertyGroup>
+    <CrystalReale Condition="Exists('../../lib/Crystal/CrystalDecisions.CrystalReports.Engine.dll')">true</CrystalReale>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(CrystalReale)' == 'true'">
+    <Reference Include="CrystalDecisions.CrystalReports.Engine"><HintPath>../../lib/Crystal/CrystalDecisions.CrystalReports.Engine.dll</HintPath></Reference>
+    <Reference Include="CrystalDecisions.Shared"><HintPath>../../lib/Crystal/CrystalDecisions.Shared.dll</HintPath></Reference>
+    <Reference Include="CrystalDecisions.Web"><HintPath>../../lib/Crystal/CrystalDecisions.Web.dll</HintPath></Reference>
+    <Reference Include="CrystalDecisions.ReportSource"><HintPath>../../lib/Crystal/CrystalDecisions.ReportSource.dll</HintPath></Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(CrystalReale)' != 'true'">
+    <ProjectReference Include="../../CrystalStubs/CrystalStubs.csproj" />
+  </ItemGroup>
+  <Target Name="AvvisoCrystalStub" BeforeTargets="Build" Condition="'$(CrystalReale)' != 'true'">
+    <Warning Text="GDO compilato con gli STUB di Crystal Reports: la DLL serve solo per la verifica e non va installata. Copiare le DLL reali in lib/Crystal." />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="../../AppApi/AppApi.csproj" />
+    <ProjectReference Include="../../IboClassLib/IboClassLib.csproj" />
+    <ProjectReference Include="../../IboDbLib/IboDbLib.csproj" />
+    <ProjectReference Include="../../IboWebParam/IboWebParam.csproj" />
+    <ProjectReference Include="../../IboLabel/IboLabel.csproj" />
+    <ProjectReference Include="../../GdoApi/GdoApi.csproj" />
+    <ProjectReference Include="../../GdoApiCustom/GdoApiCustom.csproj" />
+    <ProjectReference Include="../../GdoParamsDefault/GdoParamsDefault.csproj" />
+    <ProjectReference Include="../../GdoParamsDefaultCustom/GdoParamsDefaultCustom.csproj" />
+    <ProjectReference Include="../../WMSApi/WMSApi.csproj" />
+    <ProjectReference Include="../../WMSApiCustom/WMSApiCustom.csproj" />
+  </ItemGroup>
+</Project>

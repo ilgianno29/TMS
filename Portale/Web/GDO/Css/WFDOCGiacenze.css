@@ -1,0 +1,150 @@
+﻿.DetailFormButton.btnCalcola {
+    background-image: url('../../WFI/images/Toolbar/24/calcola.png');
+    text-align: right;
+}
+
+div.DetailFormContainerDivCollapsiblePanel {
+    min-height: 400px;
+    max-height: 420px;
+}
+
+div.PanelGiacenza {
+    line-height: 22px;
+}
+
+/* Check Blocca Ricavi a fianco della toolbar della rispettiva grd */
+
+div.DetailFormGridContainerDiv {
+    clear: both;
+}
+
+.tableGridContainer .tlbgrdRicaviDiv .ToolbarPanel, .tableGridContainer .tlbgrdRicaviDiv .DivPnlChkBloccaRicavi {
+    float: left;
+}
+
+.tlbgrdRicaviDiv .ToolbarPanel {
+    width: calc(100% - 100px);
+}
+
+.tlbgrdRicaviDiv .DivPnlChkBloccaRicavi {
+    width: 100px;
+}
+
+/* Check Blocca Costi a fianco della toolbar della rispettiva grd */
+
+.tableGridContainer .tlbgrdCostiDiv .ToolbarPanel, .tableGridContainer .tlbgrdCostiDiv .DivPnlChkBloccaCosti {
+    float: left;
+}
+
+.tlbgrdCostiDiv .ToolbarPanel {
+    width: calc(100% - 100px);
+}
+
+.tlbgrdCostiDiv .DivPnlChkBloccaCosti {
+    width: 100px;
+}
+
+div.VbFrameBody {
+    border: solid 1px #cacaca;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 3px;
+}
+
+div.VbFrameTitle {
+    border: solid 1px #cacaca;
+    border-bottom: solid 0px;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    padding-bottom: 1px;
+    padding-left: 3px;
+    background-color: #fafafa;
+}
+
+div#pnlTestataBody {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    border: solid 0px #cacaca;
+}
+
+#pnlTestataBody2 {
+    float: left;
+    width: calc(100%);
+}
+
+#pnlTestataBodyLeft {
+    float: left;
+    width: calc(70% - 3px);
+    margin-right: 5px;
+}
+
+#pnlTestataBodyRight {
+    float: left;
+    width: calc(30% - 3px);
+}
+
+
+#pnlIntestazioniBodyLeft {
+    margin-right: 5px;
+}
+
+div#pnlGestioneOperativaBody {
+    height: 82px;
+}
+
+div#pnlRiferimentiTrasportoBody {
+    height: 78px;
+}
+
+div#pnlIntestazioniBody {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    border: solid 0px #cacaca;
+}
+
+#pnlIntestazioniBodyLeft, #pnlIntestazioniBodyRight {
+    float: left;
+    width: calc(50% - 6px);
+    margin-right: 3px;
+    padding-left: 3px;
+}
+
+hr.Separatore {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 0px;
+    height: 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+div#pnlDatiMittenteBody {
+    height: 60px;
+}
+
+div#pnlDestinazioneMerceBody {
+    height: 100px;
+}
+
+span.MyEllipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
+input.vediSpedizione {
+    width: 80px;
+    height: 24px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/24/visualizza.png');
+}
+
+.VisualizzaSpedizioneDimensions {
+    position: inherit;
+    width: 1280px;
+    height: 670px;
+}

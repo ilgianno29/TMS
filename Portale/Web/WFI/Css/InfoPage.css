@@ -1,0 +1,46 @@
+﻿/************************************************/
+/*			STILE DELLA PAGINA INFO				*/
+/************************************************/
+
+.InfoTitoloApplicazione
+{
+	font-size: 32pt;
+	text-align: left;
+}
+
+.InfoTitoloModuloSoftware
+{
+	font-size: 18pt;
+	text-align: right;
+}
+
+.InfoVersione
+{
+	font-size: 12pt;
+	text-align: right;
+}
+
+.InfoIncas
+{
+	font-size: 12pt;
+	text-align: right;
+}
+
+.pnlMainContent
+{
+	text-align:center;		
+}
+
+#MainTable
+{
+	margin: auto;
+	text-align: center;
+}
+
+#InnerTable
+{
+	padding:4px; 
+	border-spacing:1px;
+}
+
+ 

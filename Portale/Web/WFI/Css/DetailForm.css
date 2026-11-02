@@ -1,0 +1,791 @@
+﻿/************************************************************/
+/*				STILE DELLE FORM DI DETTAGLIO				*/
+/************************************************************/
+
+.DetailFormMainDiv {
+    padding: 3px;
+    text-align: center;
+}
+
+.DetailFormMainTable {
+    border-collapse: collapse;
+    padding: 0;
+    text-align: center;
+    margin: auto;
+}
+
+    .DetailFormMainTable td {
+        padding: 3px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .DetailFormMainTable tr {
+        text-align: left;
+    }
+
+/*INTESTAZIONE FORM DETTAGLIO */
+
+.DetailFormHeaderTable /*INTESTAZIONE DELLA TABELLA*/ {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f0f0f0;
+    border: solid 1px #c0c0c0;
+}
+
+    .DetailFormHeaderTable td /*CELLA DELL'INTESTAZIONE DELLA TABELLA*/ {
+        padding: 3px;
+    }
+
+    .DetailFormHeaderTable .DetailFormHeaderTable_r1 /*RIGA 1*/ {
+    }
+
+        .DetailFormHeaderTable .DetailFormHeaderTable_r1 .DetailFormHeaderTable_c1 /*RIGA 1 COLONNA 1*/ {
+            text-align: left;
+        }
+
+            .DetailFormHeaderTable .DetailFormHeaderTable_r1 .DetailFormHeaderTable_c1 .DetailFormTitleDiv /*TITOLO*/ {
+                font-size: 14pt;
+                font-weight: bold;
+                border: 0;
+            }
+
+        .DetailFormHeaderTable .DetailFormHeaderTable_r1 .DetailFormHeaderTable_c2 /*RIGA 1 COLONNA 2*/ {
+            text-align: right;
+            width: 150px;
+        }
+
+            .DetailFormHeaderTable .DetailFormHeaderTable_r1 .DetailFormHeaderTable_c2 .DetailFormModeDiv /*MODALITA DI ACCESSO(VISUALIZZA MODIFICA...)*/ {
+                font-size: 10pt;
+                font-weight: bold;
+                border: solid 1px #c0c0c0;
+                background-color: #fff080;
+                color: #c0c0c0;
+                min-width: 100px;
+                text-align: center;
+                display: none;
+            }
+
+        .DetailFormHeaderTable .DetailFormHeaderTable_r1 .DetailFormHeaderTable_c3 /*RIGA 1 COLONNA 3*/ {
+            text-align: center;
+            width: 30px;
+        }
+
+            .DetailFormHeaderTable .DetailFormHeaderTable_r1 .DetailFormHeaderTable_c3 .DetailFormModeImageDiv img /*IMMAGINE MODALITA DI ACCESSO(VISUALIZZA MODIFICA...)*/ {
+                border: solid 2px transparent;
+                background-color: #9e253b;
+                border-radius: 3px;
+                margin-right: 3px;
+                padding-right: 2px;
+                padding-left: 2px;
+                width: 24px;
+                height: 24px;
+            }
+
+div.DetailFormModeImageDiv.RightAbsoluteAlign {
+    position: absolute;
+    right: 2px;
+    top: 0px;
+}
+
+.DetailFormHeaderTitle {
+    color: #444444;
+}
+/**********************************************************************************************/
+
+.DetailFormSectionDiv {
+    padding: 0px;
+    width: auto;
+}
+
+.DetailFormSectionTable {
+    border-collapse: collapse;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-spacing: 0px;
+}
+
+    .DetailFormSectionTable tr {
+        border-spacing: 0px;
+    }
+
+    .DetailFormSectionTable td {
+        border: 0;
+        padding: 0;
+        vertical-align: top;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        border-bottom: dotted 1px #c0c0c0;
+    }
+
+.DetailFormSectionTable2 {
+    border-collapse: collapse;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-spacing: 0px;
+}
+
+    .DetailFormSectionTable2 tr {
+        border-spacing: 0px;
+    }
+
+    .DetailFormSectionTable2 td {
+        border: 0;
+        padding: 0;
+        vertical-align: top;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        _border-bottom: dotted 1px #c0c0c0;
+    }
+
+.DetailFormSectionTable2Fixed {
+    border-collapse: collapse;
+    table-layout: fixed;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    border-spacing: 0px;
+    white-space: nowrap;
+}
+
+    .DetailFormSectionTable2Fixed tr {
+        border-spacing: 0px;
+        white-space: nowrap;
+        table-layout: fixed;
+    }
+
+    .DetailFormSectionTable2Fixed td, .DetailFormSectionTable2Fixed th {
+        border: 0;
+        padding: 0;
+        vertical-align: top;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        white-space: nowrap;
+        table-layout: fixed;
+        vertical-align: middle;
+    }
+
+.DetailFormSectionTitle {
+    padding: 0;
+}
+
+.DetailFormSectionContent {
+    padding: 0;
+}
+
+.DetailFormDescriptionCell, .DetailFormSectionTable2Fixed .DetailFormDescriptionCell, .DetailFormSectionTable2 .DetailFormDescriptionCell {
+    font-size: 7pt;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.DetailFormDescriptionCellMiddle, .DetailFormSectionTable2Fixed .DetailFormDescriptionCellMiddle, .DetailFormSectionTable2 .DetailFormDescriptionCellMiddle {
+    font-size: 7pt;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.DetailFormDescriptionCellTop, .DetailFormSectionTable2Fixed .DetailFormDescriptionCellTop, .DetailFormSectionTable2 .DetailFormDescriptionCellTop {
+    font-size: 7pt;
+    text-align: right;
+    vertical-align: top;
+}
+
+.DetailFormCommandCell {
+}
+
+.DetailFormValueCell /*CELLE VALORE*/ {
+    font-size: 10pt;
+    text-align: left;
+    vertical-align: top;
+}
+
+.DetailFormValueCellMiddle /*CELLE VALORE*/ {
+    font-size: 10pt;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.DetailFormValueCellNoDataBounded /*CELLE VALORE senza data bound*/ {
+    font-size: 10pt;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.DetailFormValueCellNoDataBoundedNumber /*CELLE VALORE senza data bound*/ {
+    font-size: 10pt;
+    text-align: right;
+    vertical-align: top;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.DetailFormFieldSet {
+    padding: 5px;
+    border: 1px solid #aaaaaa;
+}
+
+.DetailFormCommandsDiv {
+    padding: 3px;
+    border: solid 1px #c0c0c0;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.unstyledTable {
+    border-collapse: collapse;
+    padding: 0px;
+    width: auto;
+}
+
+    .unstyledTable td {
+        border: 0;
+        padding: 0px;
+        border-bottom: 0px none transparent;
+    }
+
+    .unstyledTable tr td {
+        border: 0;
+        padding: 0px;
+        border-bottom: 0px none transparent;
+    }
+
+.noBorderTable {
+    border-collapse: collapse;
+    padding: 0px;
+    width: auto;
+}
+
+    .noBorderTable td {
+        border: 0;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 0px;
+        padding-right: 2px;
+        border-bottom: 0px none transparent;
+    }
+
+    .noBorderTable tr td {
+        border: 0;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 0px;
+        padding-right: 2px;
+        border-bottom: 0px none transparent;
+    }
+
+#tableButtons_L, .tableButtons_L {
+    text-align: left;
+    width: 110px;
+}
+
+#tableButtons_R, .tableButtons_R {
+    text-align: right;
+    width: 110px;
+}
+
+#tableButtons_C, .tableButtons_C {
+    text-align: center;
+    width: auto;
+}
+
+#tableButtons, .tableButtons {
+    width: 100%;
+}
+
+.DetailFormButton {
+    width: 100px;
+    height: 30px;
+    text-align: Center;
+}
+
+.DetailFormButton_Ok {
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+}
+
+.DetailFormButton_Cancel {
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+}
+
+.DetailFormButton_Delete {
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/elimina.png');
+}
+
+.DetailFormButton_Duplicate {
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/copia.png');
+}
+
+.Button_CheckAll {
+    width: 95px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/checkAll.png');
+    background-repeat: no-repeat;
+}
+
+.Button_UncheckAll {
+    width: 95px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/uncheckAll.png');
+    background-repeat: no-repeat;
+}
+
+.FilterButton_Combo {
+    width: 22px;
+    height: 22px;
+    text-align: right;
+    background-image: url('../images/Toolbar/16/find_again.png');
+    background-repeat: no-repeat;
+    border: 1px solid #AAAAAA;
+    background-color: #FFF4D4;
+    border-radius: 5px;
+    background-position: left center;
+}
+
+    .FilterButton_Combo:hover {
+        background-color: #FFE4C4;
+    }
+
+.FilterButton_ComboHide {
+    width: 22px;
+    height: 22px;
+    text-align: right;
+    background-image: url('../images/Toolbar/16/find_again.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    display: none;
+}
+
+.DetailFormContainerDivGrande {
+    width: 100%;
+    height: 600px;
+    overflow: scroll;
+    padding: 0px;
+    border: solid 1px #000000;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv100 {
+    width: 100%;
+    height: 100px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv200 {
+    width: 100%;
+    height: 200px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv300 {
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv400 {
+    width: 100%;
+    height: 400px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDiv500 {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormContainerDivAuto {
+    width: auto;
+    height: auto;
+    overflow: auto;
+    padding: 0px;
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormGridContainerDiv {
+    width: auto;
+    height: auto;
+    overflow: auto;
+    padding: 0px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.DetailFormGridContainerDiv200 {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+    .DetailFormGridContainerDiv200 td {
+        padding: 1px;
+    }
+
+.DetailFormGridContainerDiv250 {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+    .DetailFormGridContainerDiv250 td {
+        padding: 1px;
+    }
+
+.DetailFormGridContainerDiv300 {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+    .DetailFormGridContainerDiv300 td {
+        padding: 2px;
+    }
+
+.DetailFormGridContainerDiv400 {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    overflow: auto;
+    padding: 0px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+    .DetailFormGridContainerDiv400 td {
+        padding: 1px;
+    }
+
+.DetailFormGridTlkContainerDiv {
+    height: auto;
+    _width: 99.9%;
+    _overflow: auto;
+    padding: 0px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+/*
+	Classe per l'aspetto del componente SearchList dell'AjaxControlToolkit
+*/
+.ListSearchExtenderPrompt {
+    font-style: italic;
+    color: Gray;
+    background-color: white;
+}
+
+.TableCaption_td {
+    background-color: #ABCDEF;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.tableGridContainer {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+    .tableGridContainer td {
+        padding: 0px;
+        margin: 1px;
+    }
+
+    .tableGridContainer .IboWebGridView td {
+        padding: 1px 3px 1px 3px;
+        margin: 0px;
+    }
+
+    .tableGridContainer .ToolbarPanel {
+        float: inherit;
+    }
+
+/* *************************************************
+	
+	Empty datarow delle griglie interne
+
+**************************************************** */
+.lblEmptyDataTemplate {
+    font-style: italic;
+    font-size: medium;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.EmptyDataTemplateContainer {
+    text-align: center;
+    height: auto;
+    width: 100%;
+    background-color: #EEEEEE;
+}
+
+.EmptyDataTemplateContainerInterno {
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px;
+}
+
+.rgNoRecords .EmptyDataTemplateContainer {
+    border-bottom: 1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;
+    border-right: 1px solid #aaaaaa;
+}
+
+
+/* *************************************************
+	
+	Pannelli collassabili
+
+**************************************************** */
+.CollapsiblePanelTitle {
+    border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    height: 20px;
+    background-color: #9e253b;
+    background-repeat: repeat-x;
+    padding: 3px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.CollapsiblePanelBody {
+    border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    border-top-style: none;
+    background-color: rgb(240,240,240);
+    padding: 3px;
+}
+
+.CollapsiblePanelBodyWithoutTitle {
+    border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    background-color: rgb(240,240,240);
+    padding: 3px;
+}
+
+.ajax__tab_body_verticalleft .CollapsiblePanelBody {
+    border-width: 0px;
+}
+
+.ajax__tab_body_verticalleft .CollapsiblePanelBodyWithoutTitle {
+    border-width: 0px;
+}
+
+.CollapsiblePanelBodyGrid {
+    padding: 2px;
+}
+
+.CollapsiblePanelTitleCaption {
+    color: #FFFFFF;
+    font-size: 15px;
+    float: left;
+    font-style: italic;
+}
+
+.CollapsibleSubPanelTitleCaption {
+    color: #FFFFFF;
+    float: left;
+    font-style: italic;
+    margin-left: 10px;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.CollapsiblePanelTitleImage {
+    float: right;
+    vertical-align: middle;
+}
+
+.DetailFormContainerDivCollapsiblePanel {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    padding: 0px;
+    /*border: solid 1px #c0c0c0;*/
+    background-color: #f0f0f0;
+}
+
+.DetailFormCommandsDivCollapsiblePanel {
+    padding: 3px;
+    border: solid 1px #c0c0c0;
+    border-top-style: none;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/*
+	Stile per controlli posizionati in modo assoluto
+	Div che contiene i controlli posizionati in modo assoluto rispetto a questo
+*/
+.DetailFormSectionDivControlContainer {
+    position: relative;
+    padding: 3px;
+    overflow: hidden;
+}
+/*Controlli DESCRIZIONE*/
+.DetailFormDescriptionControl {
+    position: absolute;
+    font-size: 7pt;
+    text-align: right;
+    vertical-align: top;
+}
+/*Controlli Valore*/
+.DetailFormValueControl {
+    position: absolute;
+    font-size: 10pt;
+    text-align: left;
+    vertical-align: top;
+}
+
+.LineaVuota {
+    height: 15px;
+}
+
+#PanelContentX {
+    max-height: calc(100vh - 60px);
+    overflow: auto;
+}
+
+.PanelContentInFrame #PanelContentX, .PageWithoutMaxHeght #PanelContentX {
+    max-height: inherit;
+}
+
+hr.WFIHRSeparatore {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 0px;
+    height: 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+div.WFIFrameContainer {
+    border: 1px solid #cacaca;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+}
+
+    div.WFIFrameContainer div.WFIFrameTitle {
+        border-bottom: 1px solid #cacaca;
+        text-align: left;
+        font-size: 12px;
+        background-color: #dadada;
+        padding: 2px;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    div.WFIFrameContainer div.WFIFrameBody {
+        margin-top: 3px;
+    }
+
+/************************************************************/
+/*				STILI PER MODALITA' FULL SCREEN				*/
+/************************************************************/
+/*
+    Rimuove barra menù e header
+*/
+body.WFIFullScreen #PanelHeader {
+    display: none;
+}
+
+body.WFIFullScreen #ThinPanelTopHeader {
+    display: none;
+}
+
+body.WFIFullScreen #Collapser {
+    display: none;
+}
+/*
+    Dimensioni
+*/
+body.WFIFullScreen #PanelContent {
+    padding: 0px;
+}
+
+body.WFIFullScreen #PanelContentX {
+    height: auto;
+    max-height: inherit;
+    padding: 0px;
+    margin: 0px;
+}
+
+body.WFIFullScreen div.DetailFormMainDiv {
+    height: calc(100vh - 0px);
+    padding: 0px;
+    overflow: hidden;
+}
+
+.IboWebGridView.TipoGriglia_I .BlobFieldLink .BlobField {
+    width: 50px;
+    height: 22px;
+}

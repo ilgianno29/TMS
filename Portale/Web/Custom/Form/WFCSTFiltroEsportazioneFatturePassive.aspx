@@ -1,0 +1,117 @@
+﻿<%@ Page Title=" " Language="vb" AutoEventWireup="false" MasterPageFile="~/WFI/Form/WFIMaster.Master" CodeBehind="WFCSTFiltroEsportazioneFatturePassive.aspx.vb" Inherits="Incasbo.Web.GDO.WFCSTFiltroEsportazioneFatturePassive" %>
+
+<%@ Register Assembly="IboWebComponents" Namespace="Incasbo.Web.Components" TagPrefix="iwc" %>
+<%@ Register Assembly="IboGridView" Namespace="Incasbo.Web.Components" TagPrefix="iwc" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
+<%@ Register Src="~/WFI/Componenti/IboWebDate2.ascx" TagName="IboWebDate2" TagPrefix="iwc" %>
+<%@ Register Src="~/WFI/Componenti/IboWebNumeric.ascx" TagName="IboWebNumeric" TagPrefix="iwc" %>
+<%@ Register Src="~/WFI/Componenti/IboWebToolbar.ascx" TagName="iboWebToolbar" TagPrefix="iwc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="../../WFI/css/DetailForm.css" type="text/css" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="phPageContent" runat="server">
+    <asp:Panel ID="DetailFormMainDiv" runat="server" CssClass="DetailFormMainDiv">
+        <table class="DetailFormMainTable">
+            <tr>
+                <td>
+                    <table class="DetailFormHeaderTable">
+                        <tr class="DetailFormHeaderTable_r1">
+                            <td class="DetailFormHeaderTable_c1">
+                                <div class="DetailFormTitleDiv">
+                                    <iwc:IboWebLabel ID="lblTitle" runat="server" Text="Titolo Form" IncasTag=""></iwc:IboWebLabel>
+                                </div>
+                            </td>
+                            <td class="DetailFormHeaderTable_c2">
+                                <div class="DetailFormModeDiv">
+                                    <iwc:IboWebLabel ID="lblDataAccessMode" runat="server" Text="Modalità"></iwc:IboWebLabel>
+                                </div>
+                            </td>
+                            <td class="DetailFormHeaderTable_c3">
+                                <div class="DetailFormModeImageDiv">
+                                    <asp:Image ID="imgModalita" runat="server" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="DetailFormSectionDiv">
+                        <asp:Panel runat="server" ID="pnlMain" Width="700px">
+                            <div class="DetailFormContainerDivCollapsiblePanel">
+                                <asp:Panel runat="server" ID="cpInfoGen_Title" CssClass="CollapsiblePanelTitle">
+                                    <asp:Label runat="server" ID="cpInfoGen_Title_Caption" Text="Generale" CssClass="CollapsiblePanelTitleCaption"></asp:Label>
+                                </asp:Panel>
+                                <asp:Panel runat="server" ID="cpInfoGen_Body" CssClass="CollapsiblePanelBody">
+                                    <table class="DetailFormSectionTable2Fixed">
+                                        <tr>
+                                            <td class="DetailFormDescriptionCell" style="width: 130px">
+                                                <iwc:IboWebLabel ID="lblDaNumero" runat="server" IncasTag="" Text="Da Numero:"></iwc:IboWebLabel>
+                                            </td>
+                                            <td class="DetailFormValueCell" style="width: 90px">
+                                                <iwc:IboWebNumericTlk runat="server" ID="DaNumero" Width="70px" DecimalDigits="0"></iwc:IboWebNumericTlk>
+                                            </td>
+                                            <td class="DetailFormDescriptionCell" style="width: 130px">
+                                                <iwc:IboWebLabel ID="lblANumero" runat="server" IncasTag="" Text="A Numero:"></iwc:IboWebLabel>
+                                            </td>
+                                            <td class="DetailFormValueCell" style="width: 90px">
+                                                <iwc:IboWebNumericTlk runat="server" ID="ANumero" Width="70px" DecimalDigits="0"></iwc:IboWebNumericTlk>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="DetailFormSectionTable2Fixed">
+                                        <tr>
+                                            <td class="DetailFormDescriptionCell" style="width: 130px">
+                                                <iwc:IboWebLabel ID="lblDataFattura" runat="server" IncasTag="" Text="Data Fattura:"></iwc:IboWebLabel>
+                                            </td>
+                                            <td class="DetailFormValueCell">
+                                                <iwc:IboWebDate2 runat="server" ID="DataFattura" ControlType="DateOnly" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="DetailFormSectionTable2Fixed">
+                                        <tr>
+                                            <td class="DetailFormDescriptionCell" style="width: 130px">
+                                                <iwc:IboWebLabel ID="lblVettore" runat="server" Text="Vettore:"></iwc:IboWebLabel>
+                                            </td>
+                                            <td class="DetailFormValueCell">
+                                                <iwc:IboWebComboTlk ID="Vettore" runat="server" SqlQuery="SELECT * FROM CBO_ANA_Trasportatori" Width="350px" SqlQueryOrderBy="Descrizione"
+                                                    CampoDescrizione="Descrizione" DropDownWidth="500px" MaxHeight="250px" AutoLoadOnDemand="true" SqlQueryFilter="ATTIVO = 'S'">
+                                                </iwc:IboWebComboTlk>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="DetailFormSectionTable2Fixed">
+                                        <tr>
+                                            <td class="DetailFormDescriptionCell" style="width: 130px">
+                                                <iwc:IboWebLabel ID="lblRiesporta" runat="server" Text="Riesporta:"></iwc:IboWebLabel>
+                                            </td>
+                                            <td class="DetailFormValueCell" style="width: 50px">
+                                                <iwc:IboWebCheckBox ID="Riesporta" runat="server" Checked="false" Value="N"></iwc:IboWebCheckBox>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                            </div>
+                        </asp:Panel>
+                    </div>
+                    <div class="DetailFormCommandsDivCollapsiblePanel">
+                        <table id="tableButtons" class="tableButtons">
+                            <tr>
+                                <td id="tableButtons_L" class="tableButtons_L">
+                                    <iwc:IboWebButton ID="btnAnnulla" runat="server" Text="Esci" CssClass="DetailFormButton_Cancel" CausesValidation="False" />
+                                </td>
+                                <td id="tableButtons_C" class="tableButtons_C"></td>
+                                <td id="tableButtons_R" class="tableButtons_R">
+                                    <iwc:IboWebButton ID="btnConferma" runat="server" Text="Conferma" CssClass="DetailFormButton_Ok" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+</asp:Content>

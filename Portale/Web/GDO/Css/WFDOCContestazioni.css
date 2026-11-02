@@ -1,0 +1,104 @@
+﻿div.DetailFormModeImageDiv img /*IMMAGINE MODALITA DI ACCESSO(VISUALIZZA MODIFICA...)*/ {
+    border: solid 0px transparent;
+    background-color: #9e253b;
+    border-radius: 3px;
+    margin-right: 3px;
+    padding-right: 2px;
+    padding-left: 2px;
+    width: 24px;
+    height: 24px;
+}
+
+div.DetailFormModeImageDiv {
+    position: absolute;
+    right: 2px;
+    top: 0px;
+}
+
+div.DetailFormContainerDivCollapsiblePanel {
+    height: 426px;
+    overflow:hidden;
+}
+
+div.VbFrameBody {
+    border: solid 1px #cacaca;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 3px;
+}
+
+div.VbFrameTitle {
+    border: solid 1px #cacaca;
+    border-bottom: solid 0px;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    padding-bottom: 1px;
+    padding-left: 3px;
+    background-color: #fafafa;
+}
+
+div.DetailFormGridContainerDiv.pnlDocumenti, div.DetailFormGridContainerDiv.pnlEventi {
+    max-height: 360px;
+}
+
+.IFrameEventi {
+    position: inherit;
+    width: 800px;
+    height: 380px;
+}
+
+.IFrameNote {
+    position: inherit;
+    width: 800px;
+    height: 440px;
+}
+
+.IFrameDocumenti {
+    position: inherit;
+    width: 970px;
+    height: 460px;
+}
+
+input.checkSpedizione {
+    width: 80px;
+    height: 24px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/24/check.png');
+}
+
+input.vediSpedizione {
+    width: 80px;
+    height: 24px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/24/visualizza.png');
+}
+
+.VisualizzaSpedizioneDimensions {
+    position: inherit;
+    width: 1280px;
+    height: 670px;
+}
+
+div#pnlSoggettoBodyInternal {
+    float:left;
+    width:580px;
+    margin-right:5px;    
+}
+
+div#pnlSoggettoBody {
+    clear:both;
+}
+
+div#pnlNoteBodyInternal {
+    float:left;
+    width:457px;    
+}
+
+div#pnlDatiMittenteBody{
+    height:176px;
+}
+div#pnlDatiNoteBody {
+    padding:5px;
+    height:190px;
+}

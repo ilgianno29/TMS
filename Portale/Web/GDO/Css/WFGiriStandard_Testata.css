@@ -1,0 +1,244 @@
+﻿
+div.pnlIniziale
+{
+    clear: both;
+    height: 90px;
+}
+
+div.pnlPartenza
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 160px;
+    float: left;
+    position: relative;
+    height: 85px;
+}
+
+.lblPartenzaCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.PartenzaTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+div.pnlCutOff
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 160px;
+    float: left;
+    position: relative;
+    height: 85px;
+    margin-left: 5px;
+}
+
+.lblCutOffCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.CutOffTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+div.pnlZone
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 390px;
+    float: left;
+    position: relative;
+    height: 85px;
+    margin-left: 5px;
+}
+
+.lblZoneCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.ZoneTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+div.pnlDepositi
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 458px;
+    float: left;
+    position: relative;
+    height: 85px;
+    margin-left: 5px;
+}
+
+.lblDepositiCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.DepositiTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+div.pnlIniziale1
+{
+    clear: both;
+    height: 90px;
+}
+
+div.pnlTipo
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 724px;
+    float: left;
+    position: relative;
+    height: 85px;
+}
+
+.lblTipiCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.TipiTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+div.pnlInfoAggiuntive
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 458px;
+    float: left;
+    position: relative;
+    height: 85px;
+    margin-left: 5px;
+}
+
+.lblInfoCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.InfoTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+div.pnlIniziale2
+{
+    clear: both;
+    height: 40px;
+    /*border: solid 1px #cacaca;*/
+}
+
+div.pnlNotaCaption
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    width: 1188px;
+    float: left;
+    position: relative;
+    height: 15px;
+}
+
+.lblNotaCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.NoteTable
+{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+div.DetailFormGridContainerDiv.pnlgiristandard_dettagli
+{
+    max-height: 400px;
+    min-height: 150px;
+}
+
+div.DetailFormModeImageDiv img /*IMMAGINE MODALITA DI ACCESSO(VISUALIZZA MODIFICA...)*/
+{
+    border: solid 0px transparent;
+    background-color: #9e253b;
+    border-radius: 3px;
+    margin-right: 3px;
+    padding-right: 2px;
+    padding-left: 2px;
+    width: 24px;
+    height: 24px;
+}
+
+div.DetailFormModeImageDiv
+{
+    position: absolute;
+    right: 2px;
+    top: 0px;
+}

@@ -1,0 +1,18 @@
+﻿.DetailFormGridContainerDiv.pnlViaggiSpedizioni {
+    max-height: 450px;
+    min-height: 100px;
+    height: 568px;
+    overflow: auto;
+}
+
+div.cpInfoGen_Body {
+    border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    background-color: rgb(240,240,240);
+    padding: 3px;
+}
+
+div.DetailFormMainDiv {
+    padding: 1px;
+}

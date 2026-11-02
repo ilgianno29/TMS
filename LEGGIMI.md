@@ -109,3 +109,23 @@ con **gli stessi indirizzi, namespace e binding** del Web.config originale:
   tra più server va configurata una cartella comune per le chiavi di Data Protection.
 
 Test: 48 (login/logout, cookie manomesso, sessione, parametri ref, fault, richieste concorrenti, chiamate reali al vero host).
+
+## Portale (DelsyManager92) nel repository
+
+- `Portale/Web`: contenuto del sito (pagine `.aspx`/`.ascx`, script, stili, immagini, report `.rpt`).
+  **Esclusi**: `bin`, `Log`, `Download`, `aspnet_client` (runtime Crystal), `wfi.db`, tutti i `.ini`.
+  I `.ini` sono sostituiti da modelli `*.ini.esempio` **senza password** (`Portale/Web/IniConfig`,
+  `Portale/Web/WFI/IniConfig`, `GdoWSC.Host/IniConfig`).
+- `Portale/GDO`: codice delle pagine ricostruito da `GDO.dll` (.NET Framework 4.8; WebForms non esiste su .NET 8).
+  Verificato: **API pubblica identica all'originale** (34.431 tipi/metodi confrontati) e tutte le 227 pagine
+  trovano la propria classe (tranne `WFI/Form/WFStandardPrint.aspx`, la cui classe mancava già nella DLL originale).
+- `lib/Portale`: librerie di terze parti (Telerik, AjaxControlToolkit, SharpZipLib, iTextSharp) e componenti web
+  interni già compilati (IboWebComponents, IboGridView, IboPDF, ContextMenu, IboColorPicker, GridViewResizeExtender).
+- **Crystal Reports**: per una build installabile copiare in `lib/Crystal` le DLL reali (13.0.2000.0) dalla GAC di un
+  server con il runtime Crystal:
+  `CrystalDecisions.CrystalReports.Engine`, `.Shared`, `.Web`, `.ReportSource`.
+  Senza di esse si compila con `CrystalStubs` (solo verifica: la build avvisa e la DLL **non** va installata).
+
+Correzioni al codice decompilato (solo differenze VB → C#, nessun cambio di logica): proprietà VB con parametri
+convertite in metodi `get_X/set_X`, indicizzatori, costruttori che chiamavano `MyBase.New` dopo altro codice
+(`Incasbo.Compat.RefBox`), nomi ambigui (`Image`, `FirstDayOfWeek`, `Table`), proprietà passate `ByRef`.

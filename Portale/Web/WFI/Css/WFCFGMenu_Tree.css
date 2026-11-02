@@ -1,0 +1,44 @@
+﻿.verticale
+{
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    display: block;
+}
+
+.td_verticale
+{
+    width: 35px;
+    background: #9e253b;
+    color: #ffffff;
+}
+
+#pnlNodiPrimoLivello
+{
+    max-height: 250px;
+}
+
+#pnlNodiSecondoLivello
+{
+    max-height: 300px;
+}
+
+#pnlNodiTerzoLivello
+{
+    max-height: 300px;
+}
+.IFrameDimensionVoci
+{
+    position: inherit;
+    width: 800px;
+    height: 450px;
+}
+
+.DetailFormButton.btnAggiungiVoce
+{
+	background-image: url('../../WFI/images/Toolbar/24/plus.png');
+    text-align: right;
+    width: 110px;
+}
+
+

@@ -1,0 +1,23 @@
+﻿--
+--
+-- SCRIPT DI SVUOTAMENTO TABELLE EASYLINK PER NUOVO IMPIANTO
+--
+--
+DELETE FROM El_IdentificatoriTracciati;
+DELETE FROM El_Relazioni;
+DELETE FROM EL_Campi;
+DELETE FROM EL_TrascodificaCampiDettaglio;
+DELETE FROM EL_TrascodificaCampi;
+DELETE FROM EL_TracciatiRecord;
+DELETE FROM EL_Tabelle;
+DELETE FROM EL_Files;
+DELETE FROM EL_Espressioni;
+DELETE FROM EL_Jobs;
+--DELETE FROM EL_TipiJob;
+DELETE FROM EL_Connessioni;
+DELETE FROM EL_Soggetti;
+--DELETE FROM EL_TipiSoggetti;
+DELETE FROM EL_LogMessaggi;
+
+
+

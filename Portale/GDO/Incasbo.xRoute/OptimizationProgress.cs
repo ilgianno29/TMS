@@ -1,0 +1,63 @@
+using System;
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+namespace Incasbo.xRoute;
+
+[Serializable]
+[GeneratedCode("System.Xml", "4.0.30319.34234")]
+[DebuggerStepThrough]
+[DesignerCategory("code")]
+[XmlType(Namespace = "http://common.xserver.ptvag.com")]
+public class OptimizationProgress : TransientVO
+{
+	private int currentLoopIndexField;
+
+	private int lastLoopIndexField;
+
+	private int progressField;
+
+	[XmlAttribute]
+	public int currentLoopIndex
+	{
+		get
+		{
+			return currentLoopIndexField;
+		}
+		set
+		{
+			currentLoopIndexField = value;
+			RaisePropertyChanged("currentLoopIndex");
+		}
+	}
+
+	[XmlAttribute]
+	public int lastLoopIndex
+	{
+		get
+		{
+			return lastLoopIndexField;
+		}
+		set
+		{
+			lastLoopIndexField = value;
+			RaisePropertyChanged("lastLoopIndex");
+		}
+	}
+
+	[XmlAttribute]
+	public int progress
+	{
+		get
+		{
+			return progressField;
+		}
+		set
+		{
+			progressField = value;
+			RaisePropertyChanged("progress");
+		}
+	}
+}

@@ -1,0 +1,103 @@
+﻿[NotificationMessage]
+Width=700
+Height=0
+Animation=Fade
+EnableRoundedCorners=false
+EnableShadow=true 
+Position=TopCenter 
+AutoCloseDelay=10000 
+ContentScrolling=Auto
+
+[Debug]
+DebugMode = False
+UserDebug =
+ConfigMode = True
+ConfigUser = CFGUSR
+
+[Translation]
+FormTranslationSave = FALSE
+TranslationIsActive = TRUE
+
+[Application]
+LogoApplicazione  = ~/images/LogoApplicazione.gif
+LogoDitta = 
+LogoIncas = ~/images/LogoIncas.gif
+TitoloApplicazione = Delsy - Delivery System
+InfoIncas = © Incas 2016
+TitoloModuloSoftware = Transport Management System
+TitoloModuloSoftwareAcronimo = GDO
+
+[MasterPage]
+PanelTopHeaderVisible = False
+EnableEventValidation = True
+StandardHeaderUserVisible = True
+StandardHeaderFilialeVisible = False
+StandardHeaderOrganizationVisible = True
+
+[BackgroundActivity]
+BackgroundActivityTypeName = Incasbo.Web.GDO.GdoBackgroundActivity
+BackgroundActivityTimerLoop = 60000
+
+[MenuManager]
+UseVersion=2
+DesktopGenericIcon=~/images/Toolbar/96/DesktopGenericIcon.png
+FolderGenericIcon=~/images/Toolbar/96/folderIcon.png
+DesktopRepeatColumns=6
+
+[StandardGridManager]
+// 0=Disabilitato
+// 1=Abilitato solo per griglie a selezione singola
+// 2=Abilitato solo anche per griglie a selezione multipla.
+SelectByRightClickMode=0
+//
+// Inidica se visualizzare il pulsante che attiva il menu contestuale di fianco al titolo della griglia (S) oppure no (N)
+//
+ShowMenuActionButton=S
+
+[WFIPageConfig]
+// 0=Standard
+// 1=Salvataggio in sessione per tutte le form indistintamente (sconsigliato)
+// 2=Salvataggio in sessione solo per le pagine specificate nel parametro ViewStateSaveMode_Pages
+ViewStateSaveMode = 2
+ViewStateSaveModePages = WFPianificazioneBatch.aspx,WFFglFoglione.aspx,WFPIAPianificazioneZone.aspx,WFDOCViaggi.aspx,WFDOCViaggi_InCorso.aspx,WFDOCViaggi_Terminati.aspx,WFDOCViaggi_Chiusi.aspx,WFDOCViaggi_Certificati.aspx,WFSTANDARDGRID.ASPX
+DebugAsyncTimeout=300
+ReleaseAsyncTimeout=90
+LastActivityRealTime=N
+//
+// Parametro per attivazione KeepAlive. Indica la frequenza in millisecondi della richiesta di keep alive che impedisce alla sessione lato server di scadere
+// Il valore 0 indica che la funzionalità è disattivata. Un valore ragionevole è tra i 60000 e 120000
+//
+KeepAliveFrequency=60000
+
+[AutoTooltipify]
+Enable=True
+Type=JQuery
+//
+// Solo Se Type=Telerik
+//
+RelativeTo=Element
+Position=BottomCenter
+ContentScrolling=Default
+Animation=None
+AnimationDuration=300
+Width=
+Height=
+ShowCallout=False
+AutoCloseDelay=6000
+
+[LoginManager]
+// S=Si sempre
+// U=Chiedi all'utente (non implementato ancora)
+// N=No mai
+RememberMe=S
+CryptographyEnable=True
+//
+// 0=Nessuno; 1=Algoritmo Standard
+//
+PasswordValidationAlgorithm=1
+PreferredPasswordLength=8
+MinumumPasswordLength=6
+MinimumNumericCharacters=1
+MinimumSymbolCharacters=1
+MinimumUpperCaseCharacters=1
+MinimumLowerCaseCharacters=1

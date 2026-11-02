@@ -17,9 +17,26 @@
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
   </ItemGroup>
-  <!-- Crystal Reports non e' supportato: IboCRW.cs e' sostituito da IboCRW.Stub.cs (da rifare) -->
-  <ItemGroup>
+  <!--
+    Crystal Reports: su .NET 4.8 si usa l'IboCRW originale (lo estende anche il portale);
+    su .NET 8 Crystal non esiste e IboCRW.Stub.cs lo sostituisce (report da rifare).
+    Le DLL reali vanno in lib/Crystal; se mancano si compila con gli stub (solo verifica).
+  -->
+  <PropertyGroup>
+    <CrystalReale Condition="Exists('../lib/Crystal/CrystalDecisions.CrystalReports.Engine.dll')">true</CrystalReale>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
     <Compile Remove="Incasbo.Api.App/IboCRW.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <Compile Remove="Incasbo.Api.App/IboCRW.Stub.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' And '$(CrystalReale)' == 'true'">
+    <Reference Include="CrystalDecisions.CrystalReports.Engine"><HintPath>../lib/Crystal/CrystalDecisions.CrystalReports.Engine.dll</HintPath></Reference>
+    <Reference Include="CrystalDecisions.Shared"><HintPath>../lib/Crystal/CrystalDecisions.Shared.dll</HintPath></Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' And '$(CrystalReale)' != 'true'">
+    <ProjectReference Include="../CrystalStubs/CrystalStubs.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../IboClassLib/IboClassLib.csproj" />

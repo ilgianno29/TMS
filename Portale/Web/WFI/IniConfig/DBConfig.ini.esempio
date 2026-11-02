@@ -1,0 +1,15 @@
+﻿[Default]
+DefaultConnectionName=
+ConnectionList=
+
+[Main]
+DB_Provider=
+DB_ServerType=SQL
+DB_UseIntegratedSecurity=False
+DB_TimeOut=60
+DB_ProviderType=SQLCLIENT
+DB_Username=gdoadmin
+DB_Server=sbodev05
+DB_Password=
+DB_Database=DELSYManager8
+DB_Description=Delsy Manager

@@ -1,0 +1,77 @@
+﻿.BottonePiu {
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #990033;
+    background-image: url('../../images/Toolbar/16/right.png');
+}
+
+.BottoneMeno {
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: green;
+    background-image: url('../../images/Toolbar/16/right.png');
+}
+
+.Bottone {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.BottonePiu:focus {
+    background-color: #990033 !important;
+}
+
+.BottonePiu:Hover {
+    background-color: #990033 !important;
+}
+
+.BottoneMeno:focus {
+    background-color: green !important;
+}
+
+.BottoneMeno:Hover {
+    background-color: green !important;
+}
+
+.BottoneAggiungiFascia {
+    width: 30px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-image: url('../../images/Toolbar/16/ins.png');
+}
+
+.BottoneEliminaFascia {
+    width: 30px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-image: url('../../images/Toolbar/16/del.png');
+}
+
+div.CollapsiblePanelBody.VociCollapsiblePanelBodyTestata,
+div.CollapsiblePanelBody.VociCollapsiblePanelBodyVoci {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.CollapsiblePanelBody.VociCollapsiblePanelBodyFasce {
+    padding: 10px;
+    padding-left:20px;
+}

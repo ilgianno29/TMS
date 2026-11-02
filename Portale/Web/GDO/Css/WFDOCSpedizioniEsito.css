@@ -1,0 +1,17 @@
+﻿.btnVisualizza
+{
+    width: 30px;
+    height: 30px;
+	background-image: url('../../WFI/images/Toolbar/24/cerca.png');
+    text-align: right;
+}
+
+.DetailFormSectionTable2Fixed.RiepilogoSpedizioni tr 
+{
+    height: 40px;    
+}
+
+.DetailFormSectionTable2Fixed.RiepilogoSpedizioni tr td:first-child 
+{    
+    padding-left:20px;
+}

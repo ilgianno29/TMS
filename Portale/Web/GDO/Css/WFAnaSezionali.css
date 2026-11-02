@@ -1,0 +1,7 @@
+﻿.btnModificaContatore
+{
+    width: 130px;
+    height: 30px;
+	_background-image: url('../../WFI/images/Toolbar/24/cerca.png');
+    text-align: center;
+}

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Autologin</title>
+    <style id="Body" type="text/css">
+        .body /* BODY */
+        {
+            font-family: Verdana,Arial,Tahoma;
+            font-size: 10pt;
+            background-color: #ffffff;
+            margin: 0px;
+            padding: 0px;
+            margin-top: 0pt;
+            padding-top: 0pt;
+        }
+
+        #appIFrame
+        {
+            display: block; /* iframes are inline by default */
+            border: none; /* Reset default border */
+            height: 100vh; /* Viewport-relative units */
+            width: 100vw;
+        }
+    </style>
+</head>
+<body class="body">
+    <div id="contenitore" style="min-width: 500px; height: 100%; border: 0px solid #000; background-color: #FFFFFF; overflow: hidden;">
+        <iframe src="http://localhost:50025/WFI/Form/WFIAutoLogin.aspx?u=UTENTE&p=PASSWORD&r=~/wfi/Form/WFStandardgrid.aspx%3Fnomrif=DM.ANA.MEZZI" id="appIFrame"></iframe>
+    </div>
+</body>
+</html>
