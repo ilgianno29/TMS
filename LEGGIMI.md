@@ -129,3 +129,22 @@ Test: 48 (login/logout, cookie manomesso, sessione, parametri ref, fault, richie
 Correzioni al codice decompilato (solo differenze VB → C#, nessun cambio di logica): proprietà VB con parametri
 convertite in metodi `get_X/set_X`, indicizzatori, costruttori che chiamavano `MyBase.New` dopo altro codice
 (`Incasbo.Compat.RefBox`), nomi ambigui (`Image`, `FirstDayOfWeek`, `Table`), proprietà passate `ByRef`.
+
+## Sicurezza 2 – Utenti tecnici senza password fissa
+
+Prima i servizi GdoWSC accettavano da **chiunque** gli utenti `EU_INCAS`, `ES`, `ENGINE` con una password
+scritta nel codice (la stessa usata come chiave di cifratura delle password utenti).
+
+- **Chiamate interne** (il servizio che fa login da solo, la manutenzione): usano un segreto casuale
+  generato all'avvio (`TechnicalUsers.InternalPassword`), che non esce mai dal processo.
+- **Chiamate esterne** con un utente tecnico (il WMS con `ES`): accettate **solo** se l'utente è configurato in
+  `IniConfig\UtentiTecnici.ini` con l'**hash** della password (PBKDF2-SHA256, 600.000 iterazioni).
+  Utente non configurato = rifiutato. Modello: `GdoWSC.Host/IniConfig/UtentiTecnici.ini.esempio`.
+- Strumento `Strumenti/DelsyPassword`: `DelsyPassword genera` crea una password robusta e il suo hash;
+  `DelsyPassword hash` calcola l'hash di una password scelta.
+
+**Passaggio in produzione (coordinare con il WMS)**
+1. `DelsyPassword genera` → si ottengono password e `PasswordHash=...`.
+2. Inserire `PasswordHash` nella sezione `[ES]` di `IniConfig\UtentiTecnici.ini` di GdoWSC.
+3. Configurare la nuova password nel WMS (credenziali `Sender` verso TMSServiceForWMS).
+Finché il WMS invia la vecchia password, le sue chiamate che richiedono credenziali vengono rifiutate.

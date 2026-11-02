@@ -65,7 +65,7 @@ public abstract class IncasWCFStandardAuth : IncasWCF
 				CallStackAdd();
 				Username = sUtente;
 				int incomingBytes = getIncomingBytes();
-				if ((Operators.CompareString(sUtente, _EmbeddedUser, false) == 0) & (Operators.CompareString(sPassword, _EmbeddedPassword, false) == 0))
+				if (Incasbo.Web.WSCWCF.TechnicalUsers.IsInternal(sUtente, sPassword, _EmbeddedUser) || (Operators.CompareString(sUtente, _EmbeddedUser, false) == 0 && Incasbo.Web.WSCWCF.TechnicalUsers.VerifyExternal(sUtente, sPassword, WSApplicationIniConfigDir)))
 				{
 					text2 = "EMBEDDED USER OK";
 					text3 = "EMBEDDED USER";
