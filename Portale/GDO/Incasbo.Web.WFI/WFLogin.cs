@@ -683,15 +683,11 @@ public class WFLogin : WFIPage
 							rsMess = "Password is required";
 							return;
 						}
-						if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-						{
-							IboCrypt val3 = new IboCrypt();
-							text = val3.EncryptString128Bit(text);
-						}
+						// La password resta in chiaro fino alla verifica (hash PBKDF2 o vecchio formato): vedi UserPasswords
 					}
 					else
 					{
-						text = "__DO_NOT_VERIFY__";
+						text = TrustedLogin.Token;
 						txtPassword.CustomTag = "";
 					}
 					string dBConfigSection = "";
@@ -725,7 +721,7 @@ public class WFLogin : WFIPage
 					txtNuovaPassword2.Text = "";
 					return;
 				}
-				if (Operators.CompareString(txtNuovaPassword1.Text, base.SessionEnvironment.WebUser.WebUserInfo.Password, false) == 0)
+				if (Incasbo.Security.UserPasswords.Verify(txtNuovaPassword1.Text, base.SessionEnvironment.WebUser.WebUserInfo.Password, base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable, out _))
 				{
 					rsMess = TranslateMessage("XXX", "La nuova password non può essere uguare alla vecchia");
 					txtNuovaPassword1.Text = "";
@@ -737,23 +733,15 @@ public class WFLogin : WFIPage
 					rsMess = TranslateMessage("XXX", "La nuova password non rispetta i requisiti minimi di sicurezza<br />" + WriteTooltipForPasswordRules());
 					return;
 				}
-				string text2 = "";
-				if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-				{
-					IboCrypt val4 = new IboCrypt();
-					text2 = val4.EncryptString128Bit(txtNuovaPassword1.Text);
-				}
-				else
-				{
-					text2 = txtNuovaPassword1.Text;
-				}
+				// ModificaPassword salva l\'hash della password (UserPasswords.ForStorage)
+				string text2 = txtNuovaPassword1.Text;
 				val = base.SessionEnvironment.WebUser.ModificaPassword(txtUser.Text, text2, ref rsMess);
 				if ((int)val > 0)
 				{
 					val2 = val;
 					return;
 				}
-				val = base.SessionEnvironment.WebUser.Check(base.SessionEnvironment.WebUser.WebUserInfo.Password, ref rsMess);
+				val = base.SessionEnvironment.WebUser.Check(txtNuovaPassword1.Text, ref rsMess);
 				if ((int)val > 0)
 				{
 					val2 = val;
@@ -1257,7 +1245,7 @@ public class WFLogin : WFIPage
 					text = txtPassword.Text;
 					if (Operators.CompareString(txtPassword.CustomTag, "*", false) == 0)
 					{
-						text = "__DO_NOT_VERIFY__";
+						text = TrustedLogin.Token;
 						txtPassword.CustomTag = "";
 						goto IL_0144;
 					}
@@ -1269,11 +1257,7 @@ public class WFLogin : WFIPage
 					{
 						if (Operators.CompareString(txtPassword.Text, "", false) != 0)
 						{
-							if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-							{
-								IboCrypt val3 = new IboCrypt();
-								text = val3.EncryptString128Bit(text);
-							}
+							// La password resta in chiaro fino alla verifica (hash PBKDF2 o vecchio formato): vedi UserPasswords
 							goto IL_0144;
 						}
 						rsMess2 = "Password is required";
@@ -1295,7 +1279,7 @@ public class WFLogin : WFIPage
 						txtNuovaPassword1.Text = "";
 						txtNuovaPassword2.Text = "";
 					}
-					else if (Operators.CompareString(txtNuovaPassword1.Text, base.SessionEnvironment.WebUser.WebUserInfo.Password, false) == 0)
+					else if (Incasbo.Security.UserPasswords.Verify(txtNuovaPassword1.Text, base.SessionEnvironment.WebUser.WebUserInfo.Password, base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable, out _))
 					{
 						rsMess2 = TranslateMessage("XXX", "La nuova password non può essere uguare alla vecchia");
 						txtNuovaPassword1.Text = "";
@@ -1307,16 +1291,8 @@ public class WFLogin : WFIPage
 					}
 					else
 					{
-						string text2 = "";
-						if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-						{
-							IboCrypt val4 = new IboCrypt();
-							text2 = val4.EncryptString128Bit(txtNuovaPassword1.Text);
-						}
-						else
-						{
-							text2 = txtNuovaPassword1.Text;
-						}
+						// ModificaPassword salva l\'hash della password (UserPasswords.ForStorage)
+						string text2 = txtNuovaPassword1.Text;
 						val = base.SessionEnvironment.WebUser.ModificaPassword(txtUser.Text, text2, ref rsMess2);
 						if ((int)val > 0)
 						{
@@ -1324,7 +1300,7 @@ public class WFLogin : WFIPage
 						}
 						else
 						{
-							val = base.SessionEnvironment.WebUser.Check(base.SessionEnvironment.WebUser.WebUserInfo.Password, ref rsMess2);
+							val = base.SessionEnvironment.WebUser.Check(txtNuovaPassword1.Text, ref rsMess2);
 							if ((int)val <= 0)
 							{
 								goto IL_045f;

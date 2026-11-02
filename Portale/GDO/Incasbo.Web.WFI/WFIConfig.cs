@@ -38,6 +38,15 @@ public class WFIConfig
 
 	public WFILoginManagerConfig LoginManagerConfig { get; set; }
 
+	/// <summary>
+	/// Utente di servizio con cui il portale chiama i servizi GdoWSC (calcolo km/tempi, ecc.),
+	/// sezione [ServizioGdoWSC] di WFIConfig.ini. Prima si usava la password decifrata dell'utente collegato.
+	/// Lato GdoWSC l'utente va configurato in IniConfig\UtentiTecnici.ini con l'hash della password.
+	/// </summary>
+	public string ServizioGdoWSCUtente { get; set; } = "";
+
+	public string ServizioGdoWSCPassword { get; set; } = "";
+
 	public WFICookiesConfig CookiesConfig { get; set; }
 
 	public WFIVersion WFIVersion { get; set; }
@@ -433,6 +442,16 @@ public class WFIConfig
 				if (text != null && Operators.CompareString(text.Trim(), "", false) != 0)
 				{
 					AutoTooltipifyConfig.TooltipByIdEnabled = Operators.CompareString(text.Trim().ToUpper(), "TRUE", false) == 0;
+				}
+				text = val2.GetKeyValue("ServizioGdoWSC", "Utente");
+				if (text != null)
+				{
+					ServizioGdoWSCUtente = text.Trim();
+				}
+				text = val2.GetKeyValue("ServizioGdoWSC", "Password");
+				if (text != null)
+				{
+					ServizioGdoWSCPassword = text.Trim();
 				}
 				text = val2.GetKeyValue("LoginManager", "RememberMe");
 				if (text != null)

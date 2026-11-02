@@ -32,11 +32,7 @@ public class WFIAutoLogin : WFIPage
 			string text2 = ((Page)this).Request.QueryString["p"] ?? "";
 			string sUrl = ((Page)this).Request.QueryString["r"] ?? "";
 			string text3 = ((Page)this).Request.QueryString["par"] ?? "";
-			if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-			{
-				IboCrypt val2 = new IboCrypt();
-				text2 = val2.EncryptString128Bit(text2);
-			}
+			// La password resta in chiaro fino alla verifica (vedi UserPasswords)
 			val = base.SessionEnvironment.Init(text, text2, "", base.SessionEnvironment.Session["ConfigFile"].ToString(), base.SessionEnvironment.Session["DBConfigFile"].ToString(), "", ref rsMess);
 			if ((int)val > 0)
 			{

@@ -130,7 +130,7 @@
                                             </td>
                                             <td class="DetailFormValueCell" style="width: 130px">
                                                 <iwc:IboWebLabel ID="IboWebLabel2" runat="server" Text="*********"></iwc:IboWebLabel>
-                                                <iwc:IboWebTextBox ID="txtPassword" runat="server" MaxLength="15" Visible="False" CharacterCase="None"></iwc:IboWebTextBox>
+                                                <iwc:IboWebTextBox ID="txtPassword" runat="server" MaxLength="128" Visible="False" CharacterCase="None"></iwc:IboWebTextBox>
                                             </td>
                                             <td class="DetailFormBottonPlusCell" style="text-align: left; width: 30px;">
                                                 <%--<iwc:IboWebButton ID="btnGeneraPassword" runat="server" CssClass="BottoneGeneraPassword" ToolTip="Generazione Automatica Password" />--%>

@@ -148,3 +148,29 @@ scritta nel codice (la stessa usata come chiave di cifratura delle password uten
 2. Inserire `PasswordHash` nella sezione `[ES]` di `IniConfig\UtentiTecnici.ini` di GdoWSC.
 3. Configurare la nuova password nel WMS (credenziali `Sender` verso TMSServiceForWMS).
 Finché il WMS invia la vecchia password, le sue chiamate che richiedono credenziali vengono rifiutate.
+
+## Sicurezza 3 – Password utenti con hash
+
+Prima le password in `WFI_UTENTI.PASSWORD` erano **cifrate in modo reversibile** con una chiave fissa
+(o in chiaro con `CryptographyEnable=False`): chi leggeva il database o la DLL poteva recuperarle tutte.
+
+- Ora si salva l'**hash PBKDF2-SHA256** (`Incasbo.Security.UserPasswords`), non reversibile.
+- **Conversione automatica al primo accesso**: al login (portale, GdoWSC.asmx, servizi WCF) una password nel
+  vecchio formato viene verificata e riscritta come hash. Nessun utente deve cambiare password.
+- **Conversione di tutte le password subito**: `DelsyPassword migra-utenti --connessione "..." [--esegui]`
+  (senza `--esegui` è una prova che mostra solo i numeri).
+- Cambio password e creazione utenti salvano direttamente l'hash.
+- Rimossa la parola magica `__DO_NOT_VERIFY__`: con `CryptographyEnable=False` permetteva di entrare con
+  qualsiasi utente digitandola come password. Ora gli utenti "ricordati" usano un token casuale di processo.
+- **Utente di servizio**: le chiamate dal portale a GdoWSC (calcolo km/tempi, PCS più lontano) non usano più
+  la password decifrata dell'utente collegato ma un utente di servizio, sezione `[ServizioGdoWSC]` di
+  `WFIConfig.ini` del portale; in GdoWSC lo stesso utente va in `IniConfig\UtentiTecnici.ini` (solo hash,
+  nessuna scadenza password).
+- Corretti due difetti originali del cambio password: il controllo "nuova uguale alla vecchia" non funzionava
+  con la cifratura attiva; il ricontrollo dopo il cambio usava il valore salvato invece della password.
+
+**Ordine di installazione**
+1. `Database/2026-11_01_password_hash.sql` (allarga `PASSWORD` da 30 a 128 caratteri).
+2. Nuova versione di portale e GdoWSC; configurare `[ServizioGdoWSC]` e `[SVC_PORTALE]`.
+3. (Facoltativo, consigliato) `DelsyPassword migra-utenti ... --esegui` per convertire tutti subito.
+Dopo la conversione completa, le password non sono più recuperabili: un utente che la dimentica va reimpostato.

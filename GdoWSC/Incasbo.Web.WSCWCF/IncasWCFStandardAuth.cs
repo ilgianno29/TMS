@@ -65,7 +65,7 @@ public abstract class IncasWCFStandardAuth : IncasWCF
 				CallStackAdd();
 				Username = sUtente;
 				int incomingBytes = getIncomingBytes();
-				if (Incasbo.Web.WSCWCF.TechnicalUsers.IsInternal(sUtente, sPassword, _EmbeddedUser) || (Operators.CompareString(sUtente, _EmbeddedUser, false) == 0 && Incasbo.Web.WSCWCF.TechnicalUsers.VerifyExternal(sUtente, sPassword, WSApplicationIniConfigDir)))
+				if (Incasbo.Web.WSCWCF.TechnicalUsers.IsInternal(sUtente, sPassword, _EmbeddedUser) || Incasbo.Web.WSCWCF.TechnicalUsers.VerifyExternal(sUtente, sPassword, WSApplicationIniConfigDir))
 				{
 					text2 = "EMBEDDED USER OK";
 					text3 = "EMBEDDED USER";
@@ -90,12 +90,14 @@ public abstract class IncasWCFStandardAuth : IncasWCF
 				else
 				{
 					string text6 = rObjDataTable.Rows[0]["PASSWORD"].ToString();
-					if (SessionEnvironment.WSCConfig.LoginManagerConfig.CryptographyEnable)
+					// Hash PBKDF2 oppure vecchio formato (cifrato/in chiaro); il vecchio formato viene convertito in hash
+					bool passwordOk = Incasbo.Security.UserPasswords.Verify(sPassword, text6, SessionEnvironment.WSCConfig.LoginManagerConfig.CryptographyEnable, out bool passwordUpgrade);
+					if (passwordOk && passwordUpgrade)
 					{
-						IboCrypt val3 = new IboCrypt();
-						text6 = val3.DecryptString128Bit(text6);
+						string rsMessUpgrade = "";
+						SessionEnvironment.DbMain.SqlExec("UPDATE " + SessionEnvironment.WSCConfig.TablesConfig.UserTable + " SET PASSWORD=" + SessionEnvironment.DbMain.SQLFormatString(Incasbo.Security.UserPasswords.ForStorage(sPassword)) + " WHERE CODICE=" + SessionEnvironment.DbMain.SQLFormatString(sUtente) + " AND Tipo='U'", ref rsMessUpgrade);
 					}
-					if (Operators.CompareString(text6, sPassword, false) != 0)
+					if (!passwordOk)
 					{
 						rsmess = "Password non valida";
 					}

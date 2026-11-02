@@ -862,11 +862,7 @@ public class WFCFGUtenti_OrganizzazioniWizard : WFIDBPageMasterDetail
 				text2 = text7 + dbConn2.SQLFormatNumber(ref text6) + ",";
 				text2 = text2 + base.DbConn.SQLFormatString(cmbLingua.ObjValue.ToString()) + ",";
 				text4 = ((Operators.CompareString(PasswordUtente.ObjValue.ToString(), "", false) == 0) ? GeneraPswCasuale() : PasswordUtente.ObjValue.ToString());
-				if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-				{
-					IboCrypt val3 = new IboCrypt();
-					text4 = val3.EncryptString128Bit(text4);
-				}
+				text4 = Incasbo.Security.UserPasswords.ForStorage(text4);
 				text2 = text2 + base.DbConn.SQLFormatString(text4) + ",";
 				text2 = text2 + base.DbConn.SQLFormatDate((eTipoData)1, dDataScadenzaPassword) + ",";
 				text2 = ((Operators.CompareString(MenuUtenteProfileId.ObjValue.ToString(), "", false) == 0) ? (text2 + "NULL,") : (text2 + base.DbConn.SQLFormatString(MenuUtenteProfileId.ObjValue.ToString()) + ","));

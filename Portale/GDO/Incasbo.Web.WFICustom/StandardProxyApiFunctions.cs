@@ -1600,7 +1600,7 @@ public class StandardProxyApiFunctions : IIboProxyApiFunctions
 			{
 				string text2 = "";
 				string text3 = robjFunctionArguments.Data[0].get_FieldValues(i).ToString();
-				val2 = ViaggioRicalcolaKmETempi_GDOWSC_Invoker.Instance.RunProc(rObjSessionEnvironment.CreateApiContext(), text3, null, rObjSessionEnvironment.WebUser.WebUserInfo.Codice, rObjSessionEnvironment.WebUser.WebUserInfo.DecryptedPassword(), ref rsMess);
+				val2 = ViaggioRicalcolaKmETempi_GDOWSC_Invoker.Instance.RunProc(rObjSessionEnvironment.CreateApiContext(), text3, null, rObjSessionEnvironment.WFIConfig.ServizioGdoWSCUtente, rObjSessionEnvironment.WFIConfig.ServizioGdoWSCPassword, ref rsMess);
 				if ((int)val2 > 0)
 				{
 					text = text + rObjSessionEnvironment.Translator.TranslateMessage("XXX", "Problema nel calcolo dei km/tempi per il viaggio {0}", new string[1] { text3 }) + ": " + text2 + "\r\n";

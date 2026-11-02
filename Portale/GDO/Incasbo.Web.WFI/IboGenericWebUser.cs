@@ -228,7 +228,8 @@ public abstract class IboGenericWebUser : IDisposable, IIboResource
 			_objCallStackHandler.CallStackAdd();
 			rsMess = "";
 			text = "UPDATE " + NomeTabella + " SET ";
-			text = text + "PASSWORD=" + _dbMain.SQLFormatString(vsPassword) + ", ";
+			// Si salva sempre l'hash PBKDF2 della nuova password (vsPassword arriva in chiaro)
+			text = text + "PASSWORD=" + _dbMain.SQLFormatString(Incasbo.Security.UserPasswords.ForStorage(vsPassword)) + ", ";
 			text = (((int)_dbMain.ServerTypeConnection != 1) ? (text + "SCADENZAPASSWORD=dateadd(d, GIORNIVALIDITAPWD, " + _dbMain.GetDate() + "), ") : (text + "SCADENZAPASSWORD=dateadd('d', GIORNIVALIDITAPWD, " + _dbMain.GetDate() + "), "));
 			text = text + "UTEAGG=" + _dbMain.SQLFormatString(_objWebUserInfo.Codice.ToUpper()) + ", ";
 			text = text + "DATAGG=" + _dbMain.GetDate() + " ";
@@ -303,6 +304,39 @@ public abstract class IboGenericWebUser : IDisposable, IIboResource
 		return result;
 	}
 
+	/// <summary>
+	/// Verifica la password inserita (in chiaro) contro quella salvata: hash PBKDF2 oppure vecchio formato
+	/// (cifrato con IboCrypt o in chiaro). Se e' nel vecchio formato e la verifica riesce, la riscrive come hash:
+	/// ogni utente viene cosi' convertito al primo accesso.
+	/// </summary>
+	protected virtual bool VerificaPassword(string vsPassword)
+	{
+		bool cryptographyEnable = _wfiConfig != null && _wfiConfig.LoginManagerConfig.CryptographyEnable;
+		if (!Incasbo.Security.UserPasswords.Verify(vsPassword, _objWebUserInfo.Password, cryptographyEnable, out bool needsUpgrade))
+		{
+			return false;
+		}
+		if (needsUpgrade)
+		{
+			try
+			{
+				string hash = Incasbo.Security.UserPasswords.ForStorage(vsPassword);
+				string sql = "UPDATE " + NomeTabella + " SET PASSWORD=" + _dbMain.SQLFormatString(hash) + " WHERE CODICE=" + _dbMain.SQLFormatString(_objWebUserInfo.Codice.ToUpper());
+				string rsMess = "";
+				if ((int)_dbMain.SqlExec(sql, ref rsMess) <= 0)
+				{
+					_objWebUserInfo.Password = hash;
+				}
+			}
+			catch (Exception)
+			{
+				// La conversione fallita (es. colonna ancora corta) non deve impedire l'accesso:
+				// verra' ritentata al prossimo login.
+			}
+		}
+		return true;
+	}
+
 	public FXRETURN Check(string vsPassword, ref string rsMess)
 	{
 		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
@@ -356,7 +390,7 @@ public abstract class IboGenericWebUser : IDisposable, IIboResource
 				rsMess = "Username " + _objWebUserInfo.Codice + " not loaded ";
 				_objWebUserInfo.AuthenticationError = rsMess;
 			}
-			else if (Operators.CompareString(vsPassword, _objWebUserInfo.Password, false) != 0)
+			else if (!TrustedLogin.IsToken(vsPassword) && !VerificaPassword(vsPassword))
 			{
 				_objWebUserInfo.Authenticated = IboWebUserInfo.AuthenticationState.PasswordNotCorrected;
 				_objWebUserInfo.AuthenticationError = "Password errata";

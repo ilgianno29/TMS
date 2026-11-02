@@ -3120,7 +3120,7 @@ public class WFDOCViaggi_Chiusi : ViaggiUI
 				val = val2;
 				return;
 			}
-			val2 = ViaggioRicalcolaKmETempi_GDOWSC_Invoker.Instance.RunProc(CreateApiContext(), txtIdViaggio.ObjValue.ToString(), null, base.SessionEnvironment.WebUser.WebUserInfo.Codice, base.SessionEnvironment.WebUser.WebUserInfo.DecryptedPassword(), ref rsMess);
+			val2 = ViaggioRicalcolaKmETempi_GDOWSC_Invoker.Instance.RunProc(CreateApiContext(), txtIdViaggio.ObjValue.ToString(), null, base.SessionEnvironment.WFIConfig.ServizioGdoWSCUtente, base.SessionEnvironment.WFIConfig.ServizioGdoWSCPassword, ref rsMess);
 			if ((int)val2 > 0)
 			{
 				val = val2;
@@ -3476,7 +3476,7 @@ public class WFDOCViaggi_Chiusi : ViaggiUI
 				val = val2;
 				return;
 			}
-			val2 = ViaggioCalcoloOttimizzatoKmETempi_GDOWSC_Invoker.Instance.RunProc(CreateApiContext(), txtIdViaggio.ObjValue.ToString(), 0, base.SessionEnvironment.WebUser.WebUserInfo.Codice, base.SessionEnvironment.WebUser.WebUserInfo.DecryptedPassword(), ref rsMess);
+			val2 = ViaggioCalcoloOttimizzatoKmETempi_GDOWSC_Invoker.Instance.RunProc(CreateApiContext(), txtIdViaggio.ObjValue.ToString(), 0, base.SessionEnvironment.WFIConfig.ServizioGdoWSCUtente, base.SessionEnvironment.WFIConfig.ServizioGdoWSCPassword, ref rsMess);
 			if ((int)val2 > 0)
 			{
 				val = val2;
@@ -3686,7 +3686,7 @@ public class WFDOCViaggi_Chiusi : ViaggiUI
 				val = val2;
 				return;
 			}
-			val2 = Viaggio_DeterminaPCSPiuLontano_Invoker.Instance.RunProc(CreateApiContext(), txtIdViaggio.ObjValue.ToString(), base.SessionEnvironment.WebUser.WebUserInfo.Codice, base.SessionEnvironment.WebUser.WebUserInfo.DecryptedPassword(), ref rsMess);
+			val2 = Viaggio_DeterminaPCSPiuLontano_Invoker.Instance.RunProc(CreateApiContext(), txtIdViaggio.ObjValue.ToString(), base.SessionEnvironment.WFIConfig.ServizioGdoWSCUtente, base.SessionEnvironment.WFIConfig.ServizioGdoWSCPassword, ref rsMess);
 			if ((int)val2 > 0)
 			{
 				val = val2;

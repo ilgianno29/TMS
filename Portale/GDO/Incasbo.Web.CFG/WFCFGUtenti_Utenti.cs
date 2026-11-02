@@ -866,11 +866,8 @@ public class WFCFGUtenti_Utenti : WFIDBPageMasterDetail
 			if ((Operators.CompareString(_objFunctionArguments.Name, "INSERIMENTO", false) == 0) | (Operators.CompareString(_objFunctionArguments.Name, "DUPLICAZIONE", false) == 0))
 			{
 				string text = GeneraPswCasuale();
-				if (base.SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-				{
-					IboCrypt val3 = new IboCrypt();
-					text = val3.EncryptString128Bit(text);
-				}
+				// Nuovo utente: password casuale salvata come hash (l'utente la reimposta al primo accesso)
+				text = Incasbo.Security.UserPasswords.ForStorage(text);
 				txtPassword.ObjValue = text;
 			}
 			val2 = base.BeforeSaveData(ref rsMess);

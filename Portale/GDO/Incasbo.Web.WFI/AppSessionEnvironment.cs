@@ -573,15 +573,8 @@ public abstract class AppSessionEnvironment : IDisposable
 				val2 = InitDBConnection(ref rsMess);
 				if ((int)val2 <= 0)
 				{
-					if (Operators.CompareString(sPassword, "__DO_NOT_VERIFY__", false) == 0)
-					{
-						string text = "SELECT Password FROM WFI_UTENTI WHERE CODICE=" + DbConn.SQLFormatString(sUsername);
-						object obj = null;
-						DBConnection dbConn = DbConn;
-						string text2 = "";
-						dbConn.DoSql(text, ref obj, ref text2);
-						sPassword = obj.ToString();
-					}
+					// Utente gia' autenticato dal cookie: le pagine di login passano TrustedLogin.Token,
+					// che IboGenericWebUser.Check riconosce (prima: parola magica fissa + lettura della password)
 					val2 = InitUser(sUsername, sPassword, sIdentityUser, ref rsMess);
 					if ((int)val2 <= 0)
 					{
