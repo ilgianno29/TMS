@@ -91,7 +91,7 @@ public class IboMailer
 			result = false;
 			smess = "";
 			_mex = new MailMessage();
-			_mex.BodyEncoding = Encoding.Default;
+			_mex.BodyEncoding = LegacyEncoding.Ansi;
 			_mex.IsBodyHtml = _isBodyHtml;
 			_mex.Subject = Strings.Replace(_Oggetto, "\r\n", " ", 1, -1, (CompareMethod)0);
 			_mex.Sender = author;

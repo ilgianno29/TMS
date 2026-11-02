@@ -65,7 +65,7 @@ public class Spedizione_CancellaSubSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_CancellaSubSpedizioni spedizione_CancellaSubSpedizioni = (Spedizione_CancellaSubSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_CancellaSubSpedizioni).ParametersIn.Add("Unibol", Unibol);
 			val = ((AppAbstractApi)spedizione_CancellaSubSpedizioni).Run(ref rsmess);

@@ -65,7 +65,7 @@ public class Spedizione_ConfermaPrebolla_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ConfermaPrebolla spedizione_ConfermaPrebolla = (Spedizione_ConfermaPrebolla)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ConfermaPrebolla).ParametersIn.Add("Unibol", Unibol);
 			if (Operators.CompareString(CodiceEtichettaBolla, "", false) != 0)

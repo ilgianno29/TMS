@@ -66,7 +66,7 @@ public class ContrassegniAgganciaTariffaAttiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ContrassegniAgganciaTariffaAttiva contrassegniAgganciaTariffaAttiva = (ContrassegniAgganciaTariffaAttiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegniAgganciaTariffaAttiva).ParametersIn.Add("ListOfIdContrassegni", ListOfIdContrassegni);
 			val = ((AppAbstractApi)contrassegniAgganciaTariffaAttiva).Run(ref rsmess);
@@ -114,7 +114,7 @@ public class ContrassegniAgganciaTariffaAttiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ContrassegniAgganciaTariffaAttiva contrassegniAgganciaTariffaAttiva = (ContrassegniAgganciaTariffaAttiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			StringCollection stringCollection = new StringCollection();
 			stringCollection.Add(IdContrassegno);

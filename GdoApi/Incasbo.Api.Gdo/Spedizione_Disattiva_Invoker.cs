@@ -65,7 +65,7 @@ public class Spedizione_Disattiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Disattiva spedizione_Disattiva = (Spedizione_Disattiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Disattiva).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_Disattiva).ParametersIn.Add("Note", Note);

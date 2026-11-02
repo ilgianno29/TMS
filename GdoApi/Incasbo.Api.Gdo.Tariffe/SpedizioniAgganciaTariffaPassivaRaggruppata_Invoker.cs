@@ -66,7 +66,7 @@ public class SpedizioniAgganciaTariffaPassivaRaggruppata_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			SpedizioniAgganciaTariffaPassivaRaggruppata spedizioniAgganciaTariffaPassivaRaggruppata = (SpedizioniAgganciaTariffaPassivaRaggruppata)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizioniAgganciaTariffaPassivaRaggruppata).ParametersIn.Add("IdViaggio", IdViaggio);
 			val = ((AppAbstractApi)spedizioniAgganciaTariffaPassivaRaggruppata).Run(ref rsmess);
@@ -114,7 +114,7 @@ public class SpedizioniAgganciaTariffaPassivaRaggruppata_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			SpedizioniAgganciaTariffa spedizioniAgganciaTariffa = (SpedizioniAgganciaTariffa)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			StringCollection stringCollection = new StringCollection();
 			stringCollection.Add(Unibol);

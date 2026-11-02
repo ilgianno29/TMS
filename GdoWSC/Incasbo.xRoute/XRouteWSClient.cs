@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+#if !NETFRAMEWORK
+using Incasbo.ServiceModel;
+#endif
 
 namespace Incasbo.xRoute;
 
@@ -10,6 +13,7 @@ namespace Incasbo.xRoute;
 [DebuggerStepThrough]
 public class XRouteWSClient : ClientBase<XRouteWS>, XRouteWS
 {
+#if NETFRAMEWORK
 	public XRouteWSClient()
 	{
 	}
@@ -29,6 +33,29 @@ public class XRouteWSClient : ClientBase<XRouteWS>, XRouteWS
 	{
 	}
 
+#else
+	// .NET 8: indirizzo e binding da Incasbo.ServiceModel.WcfEndpoints (non piu' dal web.config)
+	public XRouteWSClient()
+		: base(WcfEndpoints.GetBinding(null, "xRoute.XRouteWS"), WcfEndpoints.GetAddress(null, "xRoute.XRouteWS"))
+	{
+	}
+
+	public XRouteWSClient(string endpointConfigurationName)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xRoute.XRouteWS"), WcfEndpoints.GetAddress(endpointConfigurationName, "xRoute.XRouteWS"))
+	{
+	}
+
+	public XRouteWSClient(string endpointConfigurationName, string remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xRoute.XRouteWS"), WcfEndpoints.GetAddress(endpointConfigurationName, "xRoute.XRouteWS", remoteAddress))
+	{
+	}
+
+	public XRouteWSClient(string endpointConfigurationName, EndpointAddress remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xRoute.XRouteWS"), remoteAddress)
+	{
+	}
+
+#endif
 	public XRouteWSClient(Binding binding, EndpointAddress remoteAddress)
 		: base(binding, remoteAddress)
 	{

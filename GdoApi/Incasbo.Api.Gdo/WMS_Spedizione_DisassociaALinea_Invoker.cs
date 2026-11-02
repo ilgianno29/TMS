@@ -65,7 +65,7 @@ public class WMS_Spedizione_DisassociaALinea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Spedizione_DisassociaALinea wMS_Spedizione_DisassociaALinea = (WMS_Spedizione_DisassociaALinea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Spedizione_DisassociaALinea).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)wMS_Spedizione_DisassociaALinea).ParametersIn.Add("IdLinea", IdLinea);

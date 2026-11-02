@@ -1,15 +1,27 @@
 using Incasbo.Api.App;
 using Incasbo.Api.Default;
 using Incasbo.Api.Params;
-using Incasbo.My;
 using Incasbo.Web.Library;
-using Microsoft.VisualBasic.ApplicationServices;
 
 namespace Incasbo.Api.Gdo;
 
 public abstract class GdoAbstractApi : AppAbstractApi
 {
 	private static IboLabel _objIboLabel = null;
+
+
+	/// <summary>
+	/// Cartella dell'applicazione (come My.Application.Info.DirectoryPath di VB):
+	/// cartella dell'eseguibile, oppure di questa DLL quando gira dentro IIS.
+	/// </summary>
+	protected static string ApplicationDirectory
+	{
+		get
+		{
+			System.Reflection.Assembly assembly = System.Reflection.Assembly.GetEntryAssembly() ?? typeof(GdoAbstractApi).Assembly;
+			return System.IO.Path.GetDirectoryName(assembly.Location);
+		}
+	}
 
 	protected IboLabel objIboLabel
 	{
@@ -20,8 +32,8 @@ public abstract class GdoAbstractApi : AppAbstractApi
 			{
 				_objIboLabel = new IboLabel(this._ApiContext);
 				IboLabel iboLabel = _objIboLabel;
-				string fileDir = ((ApplicationBase)Incasbo.My.MyProject.Application).Info.DirectoryPath + "\\Labels\\";
-				string fileCustomDir = ((ApplicationBase)Incasbo.My.MyProject.Application).Info.DirectoryPath + "\\Custom\\Labels\\";
+				string fileDir = ApplicationDirectory + "\\Labels\\";
+				string fileCustomDir = ApplicationDirectory + "\\Custom\\Labels\\";
 				string rsmess = "";
 				iboLabel.LoadConfig(fileDir, fileCustomDir, ref rsmess);
 			}

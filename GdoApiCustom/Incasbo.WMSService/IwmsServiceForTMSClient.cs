@@ -2,6 +2,9 @@ using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+#if !NETFRAMEWORK
+using Incasbo.ServiceModel;
+#endif
 
 namespace Incasbo.WMSService;
 
@@ -9,6 +12,7 @@ namespace Incasbo.WMSService;
 [GeneratedCode("System.ServiceModel", "4.0.0.0")]
 public class IwmsServiceForTMSClient : ClientBase<IwmsServiceForTMS>, IwmsServiceForTMS
 {
+#if NETFRAMEWORK
 	public IwmsServiceForTMSClient()
 	{
 	}
@@ -28,6 +32,29 @@ public class IwmsServiceForTMSClient : ClientBase<IwmsServiceForTMS>, IwmsServic
 	{
 	}
 
+#else
+	// .NET 8: indirizzo e binding da Incasbo.ServiceModel.WcfEndpoints (non piu' dal web.config)
+	public IwmsServiceForTMSClient()
+		: base(WcfEndpoints.GetBinding(null, "WMSService.IwmsServiceForTMS"), WcfEndpoints.GetAddress(null, "WMSService.IwmsServiceForTMS"))
+	{
+	}
+
+	public IwmsServiceForTMSClient(string endpointConfigurationName)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "WMSService.IwmsServiceForTMS"), WcfEndpoints.GetAddress(endpointConfigurationName, "WMSService.IwmsServiceForTMS"))
+	{
+	}
+
+	public IwmsServiceForTMSClient(string endpointConfigurationName, string remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "WMSService.IwmsServiceForTMS"), WcfEndpoints.GetAddress(endpointConfigurationName, "WMSService.IwmsServiceForTMS", remoteAddress))
+	{
+	}
+
+	public IwmsServiceForTMSClient(string endpointConfigurationName, EndpointAddress remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "WMSService.IwmsServiceForTMS"), remoteAddress)
+	{
+	}
+
+#endif
 	public IwmsServiceForTMSClient(Binding binding, EndpointAddress remoteAddress)
 		: base(binding, remoteAddress)
 	{

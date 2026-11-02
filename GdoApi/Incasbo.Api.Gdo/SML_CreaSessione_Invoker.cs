@@ -66,7 +66,7 @@ public class SML_CreaSessione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			SML_CreaSessione sML_CreaSessione = (SML_CreaSessione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)sML_CreaSessione).ParametersIn.Add("IdGiri", IdGiri);
 			((AppAbstractApi)sML_CreaSessione).ParametersIn.Add("PCSLiberi", PCSLiberi);
@@ -120,7 +120,7 @@ public class SML_CreaSessione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			SML_CreaSessione sML_CreaSessione = (SML_CreaSessione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)sML_CreaSessione).ParametersIn.Add("IdGiri", IdGiri);
 			((AppAbstractApi)sML_CreaSessione).ParametersIn.Add("PCSLiberi", PCSLiberi);

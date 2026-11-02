@@ -66,7 +66,7 @@ public class Contrassegno_Rimessa_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contrassegno_Rimessa contrassegno_Rimessa = (Contrassegno_Rimessa)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegno_Rimessa).ParametersIn.Add("IdContrassegni", IdContrassegni);
 			((AppAbstractApi)contrassegno_Rimessa).ParametersIn.Add("DataRimessa", DataRimessa);

@@ -143,7 +143,7 @@ public class Viaggio_Chiudi : Incasbo.Api.Gdo.Viaggio_Chiudi
 							}
 							stringBuilder.Append("</Viaggio>");
 							stringBuilder.Append("\r\n");
-							streamWriter = new StreamWriter(text + text3, append: true, Encoding.Default);
+							streamWriter = new StreamWriter(text + text3, append: true, LegacyEncoding.Ansi);
 							streamWriter.Write(stringBuilder.ToString());
 							streamWriter.Close();
 							streamWriter = null;

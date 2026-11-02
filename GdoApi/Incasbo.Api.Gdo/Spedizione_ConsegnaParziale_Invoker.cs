@@ -65,7 +65,7 @@ public class Spedizione_ConsegnaParziale_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ConsegnaParziale spedizione_ConsegnaParziale = (Spedizione_ConsegnaParziale)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ConsegnaParziale).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_ConsegnaParziale).ParametersIn.Add("CodiceEvento", CodiceEvento);

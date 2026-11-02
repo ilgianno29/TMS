@@ -65,7 +65,7 @@ public class Spedizione_DocumentoInserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_DocumentoInserisci spedizione_DocumentoInserisci = (Spedizione_DocumentoInserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_DocumentoInserisci).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_DocumentoInserisci).ParametersIn.Add("FileName", FileName);

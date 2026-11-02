@@ -65,7 +65,7 @@ public class FattureAttiveCancella_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveCancella fattureAttiveCancella = (FattureAttiveCancella)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureAttiveCancella).ParametersIn.Add("IdFattura", IdFattura);
 			val = ((AppAbstractApi)fattureAttiveCancella).Run(ref rsMess);

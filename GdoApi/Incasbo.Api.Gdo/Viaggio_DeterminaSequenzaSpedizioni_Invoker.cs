@@ -65,7 +65,7 @@ public class Viaggio_DeterminaSequenzaSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_DeterminaSequenzaSpedizioni viaggio_DeterminaSequenzaSpedizioni = (Viaggio_DeterminaSequenzaSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_DeterminaSequenzaSpedizioni).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_DeterminaSequenzaSpedizioni).ParametersIn.Add("ApplyQuery", ApplyQuery);
@@ -114,7 +114,7 @@ public class Viaggio_DeterminaSequenzaSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_DeterminaSequenzaSpedizioni viaggio_DeterminaSequenzaSpedizioni = (Viaggio_DeterminaSequenzaSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_DeterminaSequenzaSpedizioni).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_DeterminaSequenzaSpedizioni).ParametersIn.Add("ApplyQuery", ApplyQuery);

@@ -65,7 +65,7 @@ public class BatchDetermina_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			BatchDetermina batchDetermina = (BatchDetermina)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)batchDetermina).ParametersIn.Add("ZonaSpedizione", ZonaSpedizione);
 			((AppAbstractApi)batchDetermina).ParametersIn.Add("DataSpedizione", DataSpedizione);

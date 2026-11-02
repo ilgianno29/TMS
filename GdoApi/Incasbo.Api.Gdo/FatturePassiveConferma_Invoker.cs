@@ -65,7 +65,7 @@ public class FatturePassiveConferma_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FatturePassiveConferma fatturePassiveConferma = (FatturePassiveConferma)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fatturePassiveConferma).ParametersIn.Add("IdFattura", IdFattura);
 			((AppAbstractApi)fatturePassiveConferma).ParametersIn.Add("Sezionale", Sezionale);

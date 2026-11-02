@@ -144,7 +144,7 @@ public class Viaggio_Partenza_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Partenza viaggio_Partenza = (Viaggio_Partenza)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Partenza).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Partenza).ParametersIn.Add("Data", Data);

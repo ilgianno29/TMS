@@ -65,7 +65,7 @@ public class Giacenza_Crea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Giacenza_Crea giacenza_Crea = (Giacenza_Crea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)giacenza_Crea).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)giacenza_Crea).ParametersIn.Add("Data", DataApertura);
@@ -120,7 +120,7 @@ public class Giacenza_Crea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Giacenza_Crea giacenza_Crea = (Giacenza_Crea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)giacenza_Crea).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)giacenza_Crea).ParametersIn.Add("DataApertura", DataApertura);

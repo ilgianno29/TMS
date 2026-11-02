@@ -65,7 +65,7 @@ public class Viaggio_RipartisciRicavi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_RipartisciRicavi viaggio_RipartisciRicavi = (Viaggio_RipartisciRicavi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_RipartisciRicavi).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_RipartisciRicavi).ParametersIn.Add("CampoDiRipartizione", CampoDiRipartizione);

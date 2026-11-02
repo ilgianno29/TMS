@@ -30,7 +30,7 @@ public class Api_Invoker
 		//IL_004e: Expected O, but got Unknown
 		//IL_0088: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008e: Expected O, but got Unknown
-		string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+		string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 		string text = localPath + "\\WMSApiCustom.dll";
 		AppAbstractApi val = null;
 		if (_IsCustomized)

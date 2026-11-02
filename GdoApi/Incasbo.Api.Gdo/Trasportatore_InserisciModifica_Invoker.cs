@@ -65,7 +65,7 @@ public class Trasportatore_InserisciModifica_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Trasportatore_InserisciModifica trasportatore_InserisciModifica = (Trasportatore_InserisciModifica)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)trasportatore_InserisciModifica).ParametersIn.Add("Trasportatore", Trasportatore);
 			val = ((AppAbstractApi)trasportatore_InserisciModifica).Run(ref rsmess);

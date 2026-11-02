@@ -75,7 +75,7 @@ public class Viaggi_DeterminaVettoreMigliore_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggi_DeterminaVettoreMigliore viaggi_DeterminaVettoreMigliore = (Viaggi_DeterminaVettoreMigliore)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggi_DeterminaVettoreMigliore).ParametersIn.Add("ListOfVettori", ListOfVettori);
 			((AppAbstractApi)viaggi_DeterminaVettoreMigliore).ParametersIn.Add("IdViaggio", IdViaggio);

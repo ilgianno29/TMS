@@ -65,7 +65,7 @@ public class Zona_DeterminaCorrispondente_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Zona_DeterminaCorrispondente zona_DeterminaCorrispondente = (Zona_DeterminaCorrispondente)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)zona_DeterminaCorrispondente).ParametersIn.Add("ZonaSpedizione", ZonaSpedizione);
 			((AppAbstractApi)zona_DeterminaCorrispondente).ParametersIn.Add("TipoSpedizione", TipoSpedizione);

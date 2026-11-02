@@ -67,7 +67,7 @@ public class DelsyTrackGeneraViaggi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			DelsyTrackGeneraViaggi delsyTrackGeneraViaggi = (DelsyTrackGeneraViaggi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)delsyTrackGeneraViaggi).ParametersIn.Add("Filtro", Filtro);
 			((AppAbstractApi)delsyTrackGeneraViaggi).ParametersIn.Add("SoloEffettivi", SoloEffettivi);

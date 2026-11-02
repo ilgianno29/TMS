@@ -66,7 +66,7 @@ public class Spedizione_DisassociaDaViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_DisassociaDaViaggio spedizione_DisassociaDaViaggio = (Spedizione_DisassociaDaViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_DisassociaDaViaggio).ParametersIn.Add("ListOfUnibol", ListOfUnibol);
 			((AppAbstractApi)spedizione_DisassociaDaViaggio).ParametersIn.Add("IdViaggio", IdViaggio);

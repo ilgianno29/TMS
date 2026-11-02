@@ -65,7 +65,7 @@ public class FattureAttiveCalcoloIva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveCalcoloIva fattureAttiveCalcoloIva = (FattureAttiveCalcoloIva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureAttiveCalcoloIva).ParametersIn.Add("IdFattura", lIdFattura);
 			val = ((AppAbstractApi)fattureAttiveCalcoloIva).Run(ref rsmess);

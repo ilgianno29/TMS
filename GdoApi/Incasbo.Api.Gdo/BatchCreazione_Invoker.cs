@@ -65,7 +65,7 @@ public class BatchCreazione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			BatchCreazione batchCreazione = (BatchCreazione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)batchCreazione).ParametersIn.Add("Data", Data);
 			((AppAbstractApi)batchCreazione).ParametersIn.Add("ZonaSpedizione", ZonaSpedizione);

@@ -65,7 +65,7 @@ public class UDS_Associa_UDT_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			UDS_Associa_UDT uDS_Associa_UDT = (UDS_Associa_UDT)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)uDS_Associa_UDT).ParametersIn.Add("CodiceUds", CodiceUds);
 			((AppAbstractApi)uDS_Associa_UDT).ParametersIn.Add("Unibols", Unibols);

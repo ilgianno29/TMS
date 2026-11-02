@@ -67,7 +67,7 @@ public class Simulation_ViaggiAgganciaTariffaPassiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Simulation_ViaggiAgganciaTariffaPassiva simulation_ViaggiAgganciaTariffaPassiva = (Simulation_ViaggiAgganciaTariffaPassiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)simulation_ViaggiAgganciaTariffaPassiva).ParametersIn.Add("ListOfVettori", ListOfVettori);
 			((AppAbstractApi)simulation_ViaggiAgganciaTariffaPassiva).ParametersIn.Add("IdViaggio", IdViaggio);

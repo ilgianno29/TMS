@@ -65,7 +65,7 @@ public class Viaggio_CreaDaModello_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_CreaDaModello viaggio_CreaDaModello = (Viaggio_CreaDaModello)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_CreaDaModello).ParametersIn.Add("IdModello", IdModello);
 			((AppAbstractApi)viaggio_CreaDaModello).ParametersIn.Add("DataPartenzaPrevista", DataPartenzaPrevista);

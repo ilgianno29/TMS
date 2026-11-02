@@ -65,7 +65,7 @@ public class ViaggioDiLinea_AssociaSpedizioneAttiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioDiLinea_AssociaSpedizioneAttiva viaggioDiLinea_AssociaSpedizioneAttiva = (ViaggioDiLinea_AssociaSpedizioneAttiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioDiLinea_AssociaSpedizioneAttiva).ParametersIn.Add("Unibol", Unibol);
 			val = ((AppAbstractApi)viaggioDiLinea_AssociaSpedizioneAttiva).Run(ref rsmess);

@@ -65,7 +65,7 @@ public class ViaggioCalcoloOttimizzatoKmETempi_GDOWSC_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioCalcoloOttimizzatoKmETempi_GDOWSC viaggioCalcoloOttimizzatoKmETempi_GDOWSC = (ViaggioCalcoloOttimizzatoKmETempi_GDOWSC)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioCalcoloOttimizzatoKmETempi_GDOWSC).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggioCalcoloOttimizzatoKmETempi_GDOWSC).ParametersIn.Add("ServiceUser", ServiceUser);
@@ -107,7 +107,7 @@ public class ViaggioCalcoloOttimizzatoKmETempi_GDOWSC_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioCalcoloOttimizzatoKmETempi_GDOWSC viaggioCalcoloOttimizzatoKmETempi_GDOWSC = (ViaggioCalcoloOttimizzatoKmETempi_GDOWSC)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioCalcoloOttimizzatoKmETempi_GDOWSC).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggioCalcoloOttimizzatoKmETempi_GDOWSC).ParametersIn.Add("TempoCaricoScarico", TempoCaricoScarico);

@@ -66,7 +66,7 @@ public class ViaggioRicalcolaKmETempi_GDOWSC_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioRicalcolaKmETempi_GDOWSC viaggioRicalcolaKmETempi_GDOWSC = (ViaggioRicalcolaKmETempi_GDOWSC)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioRicalcolaKmETempi_GDOWSC).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggioRicalcolaKmETempi_GDOWSC).ParametersIn.Add("RoutingOptions", RoutingOptions);
@@ -109,7 +109,7 @@ public class ViaggioRicalcolaKmETempi_GDOWSC_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioRicalcolaKmETempi_GDOWSC viaggioRicalcolaKmETempi_GDOWSC = (ViaggioRicalcolaKmETempi_GDOWSC)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioRicalcolaKmETempi_GDOWSC).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggioRicalcolaKmETempi_GDOWSC).ParametersIn.Add("RoutingOptions", RoutingOptions);

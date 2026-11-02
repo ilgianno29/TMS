@@ -65,7 +65,7 @@ public class Viaggio_UnisciViaggi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_UnisciViaggi viaggio_UnisciViaggi = (Viaggio_UnisciViaggi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_UnisciViaggi).ParametersIn.Add("IdViaggioDestinazione", IdViaggioDestinazione);
 			((AppAbstractApi)viaggio_UnisciViaggi).ParametersIn.Add("IdViaggioSorgente", IdViaggioSorgente);

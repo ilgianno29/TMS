@@ -65,7 +65,7 @@ public class PCS_InserisciModifica_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			PCS_InserisciModifica pCS_InserisciModifica = (PCS_InserisciModifica)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)pCS_InserisciModifica).ParametersIn.Add("PCS", PCS);
 			val = ((AppAbstractApi)pCS_InserisciModifica).Run(ref rsmess);

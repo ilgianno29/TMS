@@ -65,7 +65,7 @@ public class Contrassegno_Esita_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contrassegno_Esita contrassegno_Esita = (Contrassegno_Esita)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegno_Esita).ParametersIn.Add("IdContrassegno", IdContrassegno);
 			((AppAbstractApi)contrassegno_Esita).ParametersIn.Add("CausaleEsito", CausaleEsito);

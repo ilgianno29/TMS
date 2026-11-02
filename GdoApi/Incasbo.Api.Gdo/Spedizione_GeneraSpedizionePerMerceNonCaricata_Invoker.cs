@@ -65,7 +65,7 @@ public class Spedizione_GeneraSpedizionePerMerceNonCaricata_Invoker : Api_Invoke
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_GeneraSpedizionePerMerceNonCaricata spedizione_GeneraSpedizionePerMerceNonCaricata = (Spedizione_GeneraSpedizionePerMerceNonCaricata)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_GeneraSpedizionePerMerceNonCaricata).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_GeneraSpedizionePerMerceNonCaricata).ParametersIn.Add("ApplyQuery", ApplyQuery);

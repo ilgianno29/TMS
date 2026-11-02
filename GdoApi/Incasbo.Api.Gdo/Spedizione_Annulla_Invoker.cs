@@ -65,7 +65,7 @@ public class Spedizione_Annulla_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Annulla spedizione_Annulla = (Spedizione_Annulla)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Annulla).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_Annulla).ParametersIn.Add("Note", Note);

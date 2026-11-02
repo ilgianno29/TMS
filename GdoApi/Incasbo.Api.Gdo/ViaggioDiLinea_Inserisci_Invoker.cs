@@ -65,7 +65,7 @@ public class ViaggioDiLinea_Inserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioDiLinea_Inserisci viaggioDiLinea_Inserisci = (ViaggioDiLinea_Inserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioDiLinea_Inserisci).ParametersIn.Add("ViaggioDiLinea", ViaggioDiLinea);
 			val = ((AppAbstractApi)viaggioDiLinea_Inserisci).Run(ref rsmess);

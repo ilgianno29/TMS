@@ -67,7 +67,7 @@ public class Simulation_SpedizioniAgganciaTariffaPassiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Simulation_SpedizioniAgganciaTariffaPassiva simulation_SpedizioniAgganciaTariffaPassiva = (Simulation_SpedizioniAgganciaTariffaPassiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)simulation_SpedizioniAgganciaTariffaPassiva).ParametersIn.Add("ListOfCorrispondenti", ListOfCorrispondenti);
 			((AppAbstractApi)simulation_SpedizioniAgganciaTariffaPassiva).ParametersIn.Add("Unibol", Unibol);

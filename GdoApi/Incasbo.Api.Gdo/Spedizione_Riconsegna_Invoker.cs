@@ -65,7 +65,7 @@ public class Spedizione_Riconsegna_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Riconsegna spedizione_Riconsegna = (Spedizione_Riconsegna)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Riconsegna).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_Riconsegna).ParametersIn.Add("ApplyQuery", ApplyQuery);
@@ -114,7 +114,7 @@ public class Spedizione_Riconsegna_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Riconsegna spedizione_Riconsegna = (Spedizione_Riconsegna)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Riconsegna).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_Riconsegna).ParametersIn.Add("Manuale", Unibol);

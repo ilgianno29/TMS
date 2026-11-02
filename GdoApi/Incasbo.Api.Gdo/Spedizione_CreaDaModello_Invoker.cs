@@ -65,7 +65,7 @@ public class Spedizione_CreaDaModello_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_CreaDaModello spedizione_CreaDaModello = (Spedizione_CreaDaModello)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_CreaDaModello).ParametersIn.Add("IdModello", IdModello);
 			((AppAbstractApi)spedizione_CreaDaModello).ParametersIn.Add("DataConsegnaPrevista", DataConsegnaPrevista);

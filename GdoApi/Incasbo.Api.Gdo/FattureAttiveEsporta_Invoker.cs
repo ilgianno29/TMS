@@ -65,7 +65,7 @@ public class FattureAttiveEsporta_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveEsporta fattureAttiveEsporta = (FattureAttiveEsporta)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureAttiveEsporta).ParametersIn.Add("IdFattura", IdFattura);
 			val = ((AppAbstractApi)fattureAttiveEsporta).Run(ref rsMess);

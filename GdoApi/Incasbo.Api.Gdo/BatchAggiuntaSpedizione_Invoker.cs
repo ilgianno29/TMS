@@ -65,7 +65,7 @@ public class BatchAggiuntaSpedizione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			BatchAggiuntaSpedizione batchAggiuntaSpedizione = (BatchAggiuntaSpedizione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)batchAggiuntaSpedizione).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)batchAggiuntaSpedizione).ParametersIn.Add("Batch", Batch);

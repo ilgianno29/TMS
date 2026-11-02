@@ -65,7 +65,7 @@ public class Localita_DeterminaZone_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Localita_DeterminaZone localita_DeterminaZone = (Localita_DeterminaZone)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)localita_DeterminaZone).ParametersIn.Add("TipoMerce", TipoMerce);
 			((AppAbstractApi)localita_DeterminaZone).ParametersIn.Add("Localita", Localita);

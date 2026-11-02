@@ -65,7 +65,7 @@ public class BatchModificaData_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			BatchModificaData batchModificaData = (BatchModificaData)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)batchModificaData).ParametersIn.Add("BatchId", BatchId);
 			((AppAbstractApi)batchModificaData).ParametersIn.Add("DataSpedizione", DataSpedizione);

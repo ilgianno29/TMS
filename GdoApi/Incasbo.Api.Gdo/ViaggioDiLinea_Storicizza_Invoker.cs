@@ -65,7 +65,7 @@ public class ViaggioDiLinea_Storicizza_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioDiLinea_Storicizza viaggioDiLinea_Storicizza = (ViaggioDiLinea_Storicizza)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioDiLinea_Storicizza).ParametersIn.Add("IdViaggioDiLinea", IdViaggioDiLinea);
 			val = ((AppAbstractApi)viaggioDiLinea_Storicizza).Run(ref rsmess);

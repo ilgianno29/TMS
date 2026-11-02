@@ -60,7 +60,7 @@ public class FattureAttiveGeneraDettagli_Invoker : Api_Invoker
 		{
 			rsMess = "";
 			APIInstance = null;
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveGeneraDettagli fattureAttiveGeneraDettagli = (FattureAttiveGeneraDettagli)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			APIInstance = fattureAttiveGeneraDettagli;
 			val2 = (FXRETURN)0;

@@ -66,7 +66,7 @@ public class Spedizioni_DeterminaElencoCorrispondentiDaSpedizione_Invoker : Api_
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizioni_DeterminaElencoCorrispondentiDaSpedizione spedizioni_DeterminaElencoCorrispondentiDaSpedizione = (Spedizioni_DeterminaElencoCorrispondentiDaSpedizione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizioni_DeterminaElencoCorrispondentiDaSpedizione).ParametersIn.Add("unibol", unibol);
 			val = ((AppAbstractApi)spedizioni_DeterminaElencoCorrispondentiDaSpedizione).Run(ref rsmess);

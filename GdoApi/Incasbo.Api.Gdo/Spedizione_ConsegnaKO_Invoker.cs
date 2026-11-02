@@ -65,7 +65,7 @@ public class Spedizione_ConsegnaKO_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ConsegnaKO spedizione_ConsegnaKO = (Spedizione_ConsegnaKO)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ConsegnaKO).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_ConsegnaKO).ParametersIn.Add("CodiceEvento", CodiceEvento);
@@ -129,7 +129,7 @@ public class Spedizione_ConsegnaKO_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ConsegnaKO spedizione_ConsegnaKO = (Spedizione_ConsegnaKO)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ConsegnaKO).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_ConsegnaKO).ParametersIn.Add("CodiceEvento", CodiceEvento);

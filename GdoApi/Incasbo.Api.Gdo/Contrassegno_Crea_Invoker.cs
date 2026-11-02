@@ -65,7 +65,7 @@ public class Contrassegno_Crea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contrassegno_Crea contrassegno_Crea = (Contrassegno_Crea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegno_Crea).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)contrassegno_Crea).ParametersIn.Add("Data", Data);

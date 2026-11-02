@@ -66,7 +66,7 @@ public class WMSMessage_Send_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMSAbstractApi wMSAbstractApi = (WMSAbstractApi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMSAbstractApi).ParametersIn.Add("TipoMessaggio", TipoMessaggio);
 			((AppAbstractApi)wMSAbstractApi).ParametersIn.Add("InputInfo", InputInfo);

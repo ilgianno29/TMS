@@ -65,7 +65,7 @@ public class Viaggio_Chiudi_E_Parti_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Chiudi_E_Parti viaggio_Chiudi_E_Parti = (Viaggio_Chiudi_E_Parti)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Chiudi_E_Parti).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Chiudi_E_Parti).ParametersIn.Add("DataEvento", DataEvento);
@@ -106,7 +106,7 @@ public class Viaggio_Chiudi_E_Parti_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Chiudi_E_Parti viaggio_Chiudi_E_Parti = (Viaggio_Chiudi_E_Parti)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Chiudi_E_Parti).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Chiudi_E_Parti).ParametersIn.Add("DataEvento", DataEvento);

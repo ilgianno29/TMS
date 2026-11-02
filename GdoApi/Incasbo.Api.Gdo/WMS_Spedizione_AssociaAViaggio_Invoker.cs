@@ -65,7 +65,7 @@ public class WMS_Spedizione_AssociaAViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Spedizione_AssociaAViaggio wMS_Spedizione_AssociaAViaggio = (WMS_Spedizione_AssociaAViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Spedizione_AssociaAViaggio).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)wMS_Spedizione_AssociaAViaggio).ParametersIn.Add("IdViaggio", IdViaggio);

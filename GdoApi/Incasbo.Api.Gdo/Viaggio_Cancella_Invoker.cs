@@ -65,7 +65,7 @@ public class Viaggio_Cancella_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Cancella viaggio_Cancella = (Viaggio_Cancella)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Cancella).ParametersIn.Add("IdViaggio", IdViaggio);
 			val = ((AppAbstractApi)viaggio_Cancella).Run(ref rsmess);

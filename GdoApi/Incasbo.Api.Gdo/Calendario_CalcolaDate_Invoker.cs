@@ -65,7 +65,7 @@ public class Calendario_CalcolaDate_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Calendario_CalcolaDate calendario_CalcolaDate = (Calendario_CalcolaDate)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)calendario_CalcolaDate).ParametersIn.Add("DataRiferimento", DataRiferimento);
 			((AppAbstractApi)calendario_CalcolaDate).ParametersIn.Add("GiorniDaAggiungere", GiorniDaAggiungere);

@@ -65,7 +65,7 @@ public class GMB_MovimentoCancella_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			GMB_MovimentoCancella gMB_MovimentoCancella = (GMB_MovimentoCancella)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)gMB_MovimentoCancella).ParametersIn.Add("IdMovimento", IdMovimento);
 			val = ((AppAbstractApi)gMB_MovimentoCancella).Run(ref rsmess);

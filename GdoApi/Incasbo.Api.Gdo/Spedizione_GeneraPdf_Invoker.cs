@@ -65,7 +65,7 @@ public class Spedizione_GeneraPdf_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_GeneraPdf spedizione_GeneraPdf = (Spedizione_GeneraPdf)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_GeneraPdf).ParametersIn.Add("Unibol", Unibol);
 			val = ((AppAbstractApi)spedizione_GeneraPdf).Run(ref rsmess);

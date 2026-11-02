@@ -66,7 +66,7 @@ public class GiacenzeAgganciaTariffaPassiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			GiacenzeAgganciaTariffaPassiva giacenzeAgganciaTariffaPassiva = (GiacenzeAgganciaTariffaPassiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)giacenzeAgganciaTariffaPassiva).ParametersIn.Add("ListOfIdGiacenze", ListOfIdGiacenze);
 			val = ((AppAbstractApi)giacenzeAgganciaTariffaPassiva).Run(ref rsmess);
@@ -114,7 +114,7 @@ public class GiacenzeAgganciaTariffaPassiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			GiacenzeAgganciaTariffaPassiva giacenzeAgganciaTariffaPassiva = (GiacenzeAgganciaTariffaPassiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			StringCollection stringCollection = new StringCollection();
 			stringCollection.Add(IdGiacenza);

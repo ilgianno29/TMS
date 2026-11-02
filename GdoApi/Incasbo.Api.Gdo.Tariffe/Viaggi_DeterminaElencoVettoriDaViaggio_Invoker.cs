@@ -66,7 +66,7 @@ public class Viaggi_DeterminaElencoVettoriDaViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggi_DeterminaElencoVettoriDaViaggio viaggi_DeterminaElencoVettoriDaViaggio = (Viaggi_DeterminaElencoVettoriDaViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggi_DeterminaElencoVettoriDaViaggio).ParametersIn.Add("IdViaggio", IdViaggio);
 			val = ((AppAbstractApi)viaggi_DeterminaElencoVettoriDaViaggio).Run(ref rsmess);

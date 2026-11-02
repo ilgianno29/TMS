@@ -65,7 +65,7 @@ public class SpedizioniAgganciaTariffaAttivaRaggruppata_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			SpedizioniAgganciaTariffaAttivaRaggruppata spedizioniAgganciaTariffaAttivaRaggruppata = (SpedizioniAgganciaTariffaAttivaRaggruppata)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizioniAgganciaTariffaAttivaRaggruppata).ParametersIn.Add("IdViaggio", IdViaggio);
 			val = ((AppAbstractApi)spedizioniAgganciaTariffaAttivaRaggruppata).Run(ref rsmess);
@@ -113,7 +113,7 @@ public class SpedizioniAgganciaTariffaAttivaRaggruppata_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			SpedizioniAgganciaTariffaAttivaRaggruppata spedizioniAgganciaTariffaAttivaRaggruppata = (SpedizioniAgganciaTariffaAttivaRaggruppata)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizioniAgganciaTariffaAttivaRaggruppata).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)spedizioniAgganciaTariffaAttivaRaggruppata).ParametersIn.Add("Cliente", Cliente);

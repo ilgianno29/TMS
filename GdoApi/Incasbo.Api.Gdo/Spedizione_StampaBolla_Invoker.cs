@@ -65,7 +65,7 @@ public class Spedizione_StampaBolla_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_StampaBolla spedizione_StampaBolla = (Spedizione_StampaBolla)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_StampaBolla).ParametersIn.Add("Unibol", Unibol);
 			val = ((AppAbstractApi)spedizione_StampaBolla).Run(ref rsmess);

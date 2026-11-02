@@ -36,3 +36,20 @@ Tutti i 12 progetti compilano (`dotnet build Delsy.sln`) senza errori, con targe
 - Solo in net48 (API non presenti su .NET 8, non usate nella soluzione):
   `Incasbo.Security.Impersonator`, `Incasbo.IboMailerPEC` (da rifare con MailKit se servono).
 - Test: `dotnet test Tests/Delsy.Tests` (20 test).
+
+## Fase 2 – Logica di business su .NET 8
+
+- **GdoApi, GdoApiCustom, WMSApi, WMSApiCustom, GdoParamsDefault(+Custom), IboLabel** compilano
+  per `net48` e `net8.0-windows`. Solo **GdoWSC** (servizi web) resta su net48: è la fase 3.
+- **Client WCF/SOAP** (WMS, PTV xLocate/xRoute/xTour, TMSServiceForMap): su .NET 8 non leggono
+  più il web.config. Indirizzi e binding si configurano con `Incasbo.ServiceModel.WcfEndpoints`:
+  - `WcfEndpoints.LoadFromConfigFile("web.config")` legge la **stessa** sezione
+    `<system.serviceModel><client>` usata oggi (supporta basicHttpBinding);
+  - oppure `WcfEndpoints.Register(nome, contratto, indirizzo)`.
+  Su net48 i client si comportano esattamente come prima.
+- `Assembly.CodeBase` (188 punti) sostituito da `AssemblyLocation.DirectoryOf(...)`:
+  su net48 resta CodeBase (necessario con lo shadow copy di IIS), su .NET 8 usa Location.
+- `Encoding.Default` sostituito da `LegacyEncoding.Ansi`: su .NET 8 Encoding.Default è UTF-8,
+  mentre i file esportati e le email devono restare in ANSI (Windows-1252) come prima.
+- Cartella etichette in `GdoAbstractApi`: non usa più il codice "My" di VB.
+- Test: 26 (incluso una vera chiamata SOAP al client WMS su .NET 8 verso un server finto).

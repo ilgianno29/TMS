@@ -66,7 +66,7 @@ public class WMS_RichiesteVolumetrichePerRaggruppamentoOrdini_Invoker : Api_Invo
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_RichiesteVolumetrichePerRaggruppamentoOrdini wMS_RichiesteVolumetrichePerRaggruppamentoOrdini = (WMS_RichiesteVolumetrichePerRaggruppamentoOrdini)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_RichiesteVolumetrichePerRaggruppamentoOrdini).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)wMS_RichiesteVolumetrichePerRaggruppamentoOrdini).ParametersIn.Add("CodiceRaggruppamento", CodiceRaggruppamento);

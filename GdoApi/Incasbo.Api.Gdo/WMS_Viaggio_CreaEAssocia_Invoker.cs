@@ -66,7 +66,7 @@ public class WMS_Viaggio_CreaEAssocia_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Viaggio_CreaEAssocia wMS_Viaggio_CreaEAssocia = (WMS_Viaggio_CreaEAssocia)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Viaggio_CreaEAssocia).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)wMS_Viaggio_CreaEAssocia).ParametersIn.Add("Unibols", Unibols);
@@ -107,7 +107,7 @@ public class WMS_Viaggio_CreaEAssocia_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Viaggio_CreaEAssocia wMS_Viaggio_CreaEAssocia = (WMS_Viaggio_CreaEAssocia)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Viaggio_CreaEAssocia).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)wMS_Viaggio_CreaEAssocia).ParametersIn.Add("Unibols", null);

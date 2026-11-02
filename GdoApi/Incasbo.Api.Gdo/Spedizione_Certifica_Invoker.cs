@@ -65,7 +65,7 @@ public class Spedizione_Certifica_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Certifica spedizione_Certifica = (Spedizione_Certifica)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Certifica).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_Certifica).ParametersIn.Add("Data", Data);
