@@ -565,11 +565,6 @@ public class IboWebUserInfo
 		_Authenticated = AuthenticationState.WaitingForAuthentication;
 	}
 
-	public string DecryptedPassword()
-	{
-		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0007: Expected O, but got Unknown
-		IboCrypt val = new IboCrypt();
-		return val.DecryptString128Bit(_Password);
-	}
+	// DecryptedPassword() rimosso: le password sono salvate come hash e non sono piu' decifrabili.
+	// Le chiamate ai servizi usano l'utente di servizio (WFIConfig.ServizioGdoWSCUtente/Password).
 }

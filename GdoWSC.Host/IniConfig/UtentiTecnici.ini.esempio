@@ -1,6 +1,6 @@
 ; Utenti tecnici accettati dai servizi GdoWSC quando arrivano DALL'ESTERNO
 ; (es. il WMS che si collega come "ES"). Le chiamate interne non hanno bisogno di questo file.
-; Un utente non presente qui viene RIFIUTATO.
+; Ogni sezione e' un utente tecnico accettato da tutti i servizi. Un utente non presente qui viene RIFIUTATO.
 ; Generare l'hash con:  DelsyPassword genera   (oppure: DelsyPassword hash)
 ; e configurare la password in chiaro solo nel sistema che si collega (es. il WMS).
 
@@ -9,3 +9,7 @@ PasswordHash=
 
 ;[EU_INCAS]
 ;PasswordHash=
+
+; Utente di servizio del portale (vedi [ServizioGdoWSC] in WFIConfig.ini del portale)
+[SVC_PORTALE]
+PasswordHash=

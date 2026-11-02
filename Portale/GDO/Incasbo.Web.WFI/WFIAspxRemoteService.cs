@@ -373,11 +373,7 @@ public abstract class WFIAspxRemoteService : Page
 			_Username = ((Page)this).Request.Headers["Username"];
 			_Password = ((Page)this).Request.Headers["Password"];
 			PerformanceLogAppend("Begin Load WFIAspxRemoteService page");
-			if (SessionEnvironment.WFIConfig.LoginManagerConfig.CryptographyEnable)
-			{
-				IboCrypt val3 = new IboCrypt();
-				_Password = val3.EncryptString128Bit(_Password);
-			}
+			// La password resta in chiaro fino alla verifica (vedi UserPasswords)
 			val2 = SessionEnvironment.Init(_Username, _Password, "", SessionEnvironment.Session["ConfigFile"].ToString(), SessionEnvironment.Session["DBConfigFile"].ToString(), "", ref rsmess);
 			if ((int)val2 > 0)
 			{

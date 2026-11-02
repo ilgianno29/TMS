@@ -147,3 +147,10 @@ Element=
 Append=
 Fixed=
 Bottom=
+
+[ServizioGdoWSC]
+// Utente di servizio con cui il portale chiama GdoWSC (calcolo km e tempi, ecc.).
+// In GdoWSC configurare lo stesso utente in IniConfig\UtentiTecnici.ini con l'hash della password
+// (DelsyPassword genera). Prima si usava la password dell'utente collegato.
+Utente=SVC_PORTALE
+Password=
