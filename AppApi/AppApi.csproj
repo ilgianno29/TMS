@@ -1,37 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>AppApi</AssemblyName>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <TargetFramework>net40</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Using Include="Incasbo.Web.Library.modGeneral" Static="true" />
+    <Using Include="Incasbo.Web.Library.DBFormatFunctions" Static="true" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="Microsoft.VisualBasic" />
-    
     <Reference Include="System.Data" />
-    
-    
-    
-    
-    <Reference Include="System.Core" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.3" PrivateAssets="all" />
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
   </ItemGroup>
-  <PropertyGroup><Nullable>disable</Nullable><TreatWarningsAsErrors>false</TreatWarningsAsErrors><NoWarn>$(NoWarn);CS0618;CS0612</NoWarn></PropertyGroup>
+  <!-- Crystal Reports non e' supportato: IboCRW.cs e' sostituito da IboCRW.Stub.cs (da rifare) -->
+  <ItemGroup>
+    <Compile Remove="Incasbo.Api.App/IboCRW.cs" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../IboClassLib/IboClassLib.csproj" />
     <ProjectReference Include="../IboDbLib/IboDbLib.csproj" />
     <ProjectReference Include="../IboWebParam/IboWebParam.csproj" />
   </ItemGroup>
-  <ItemGroup><Compile Remove="Incasbo.Api.App/IboCRW.cs" /></ItemGroup>
-  <ItemGroup><!--mods--><Using Include="Incasbo.Web.Library.modGeneral" Static="true" /><Using Include="Incasbo.Web.Library.DBFormatFunctions" Static="true" /></ItemGroup>
 </Project>

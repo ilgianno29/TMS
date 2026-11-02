@@ -1,28 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>IboClassLib</AssemblyName>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <TargetFramework>net40</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Using Include="Incasbo.Web.Library.modGeneral" Static="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+  <!-- Usano API presenti solo in .NET Framework (WindowsImpersonationContext, System.Web.Mail);
+       non sono usate dal resto della soluzione. Da riscrivere se servono su .NET 8. -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <Compile Remove="Incasbo.Security/Impersonator.cs" />
+    <Compile Remove="Incasbo/IboMailerPEC.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System.Web" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.3" PrivateAssets="all" />
-  </ItemGroup>
-  <PropertyGroup><Nullable>disable</Nullable><TreatWarningsAsErrors>false</TreatWarningsAsErrors><NoWarn>$(NoWarn);CS0618;CS0612</NoWarn></PropertyGroup>
-  <ItemGroup><!--mods--><Using Include="Incasbo.Web.Library.modGeneral" Static="true" /></ItemGroup>
 </Project>

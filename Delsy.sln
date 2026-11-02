@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSApi", "WMSApi\WMSApi.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSApiCustom", "WMSApiCustom\WMSApiCustom.csproj", "{B1606F14-6DC4-4710-87C3-E0C590F0D41B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D34459BB-F205-42EA-B628-BED42810C1D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delsy.Tests", "Tests\Delsy.Tests\Delsy.Tests.csproj", "{AB93636B-3054-426F-88D7-955D01C1F797}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,5 +88,12 @@ Global
 		{B1606F14-6DC4-4710-87C3-E0C590F0D41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1606F14-6DC4-4710-87C3-E0C590F0D41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1606F14-6DC4-4710-87C3-E0C590F0D41B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB93636B-3054-426F-88D7-955D01C1F797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB93636B-3054-426F-88D7-955D01C1F797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB93636B-3054-426F-88D7-955D01C1F797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB93636B-3054-426F-88D7-955D01C1F797}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB93636B-3054-426F-88D7-955D01C1F797} = {D34459BB-F205-42EA-B628-BED42810C1D8}
 	EndGlobalSection
 EndGlobal
