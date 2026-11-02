@@ -5194,8 +5194,8 @@ public class WFStandardGrid : WFIPage
 									string text2 = Strings.Trim(((DataTable)((BaseDataBoundControl)val2).DataSource).Rows[val3.DataItemIndex][columnName].ToString());
 									if (Operators.CompareString(text2, "", false) != 0)
 									{
-										IboCrypt val6 = new IboCrypt();
-										string text3 = val6.EncryptString128Bit(text2);
+										// La query resta in sessione: nella pagina va solo un identificativo casuale
+										string text3 = TooltipQueryStore.Register(text2);
 										((WebControl)((TableRow)val3).Cells[num]).ToolTip = ((TableRow)val3).Cells[num].Text;
 										((TableRow)val3).Cells[num].Text = "<a class=\"WFIAjaxHtmlTooltip\"><input type=\"hidden\" id=\"TooltipSelect\" value=\"<%SSQL%>\"><%TEXT%></a>";
 										((TableRow)val3).Cells[num].Text = Strings.Replace(((TableRow)val3).Cells[num].Text, "<%TEXT%>", ((WebControl)((TableRow)val3).Cells[num]).ToolTip, 1, -1, (CompareMethod)0);

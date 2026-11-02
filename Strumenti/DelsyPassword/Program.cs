@@ -8,6 +8,9 @@ using Incasbo.Security;
 //   DelsyPassword migra-utenti --connessione "..." [--cifratura true|false] [--tabella WFI_UTENTI] [--esegui]
 //                           -> converte in hash tutte le password utenti ancora nel vecchio formato
 //                              (senza --esegui mostra solo cosa farebbe)
+//   DelsyPassword autologin-crea --connessione "..." --utente TOTEM --descrizione "Totem 1" [--pagina "~/..."] [--scadenza 31/12/2027] [--url http://server/WFI/Form/WFIAutoLogin.aspx]
+//   DelsyPassword autologin-elenca --connessione "..."
+//   DelsyPassword autologin-revoca --connessione "..." --id N
 
 if (args.Length == 0 || args[0] is "-h" or "--help" or "aiuto")
 {
@@ -17,6 +20,9 @@ if (args.Length == 0 || args[0] is "-h" or "--help" or "aiuto")
 	Console.WriteLine("  DelsyPassword migra-utenti --connessione \"Server=...;Database=...;...\" [--cifratura true|false] [--tabella WFI_UTENTI] [--esegui]");
 	Console.WriteLine("                         Converte in hash le password nel vecchio formato. Senza --esegui e' una prova.");
 	Console.WriteLine("                         --cifratura = valore di LoginManager/CryptographyEnable (default true).");
+	Console.WriteLine("  DelsyPassword autologin-crea --connessione \"...\" --utente TOTEM --descrizione \"Totem 1\" [--pagina \"~/...\"] [--scadenza 31/12/2027] [--url ...]");
+	Console.WriteLine("  DelsyPassword autologin-elenca --connessione \"...\"");
+	Console.WriteLine("  DelsyPassword autologin-revoca --connessione \"...\" --id N");
 	return 0;
 }
 
@@ -48,6 +54,10 @@ switch (args[0].ToLowerInvariant())
 	}
 	case "migra-utenti":
 		return MigraUtenti.Run(args);
+	case "autologin-crea":
+	case "autologin-elenca":
+	case "autologin-revoca":
+		return AutoLogin.Run(args[0].ToLowerInvariant(), args);
 	default:
 		Console.Error.WriteLine("Comando sconosciuto: " + args[0]);
 		return 1;

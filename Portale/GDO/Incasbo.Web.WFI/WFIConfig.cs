@@ -45,6 +45,9 @@ public class WFIConfig
 	/// </summary>
 	public string ServizioGdoWSCUtente { get; set; } = "";
 
+	/// <summary>[AutoLogin] ConsentiPasswordInUrl: vecchio autologin con password nell'indirizzo (default False).</summary>
+	public bool AutoLoginConsentiPasswordInUrl { get; set; }
+
 	public string ServizioGdoWSCPassword { get; set; } = "";
 
 	public WFICookiesConfig CookiesConfig { get; set; }
@@ -442,6 +445,11 @@ public class WFIConfig
 				if (text != null && Operators.CompareString(text.Trim(), "", false) != 0)
 				{
 					AutoTooltipifyConfig.TooltipByIdEnabled = Operators.CompareString(text.Trim().ToUpper(), "TRUE", false) == 0;
+				}
+				text = val2.GetKeyValue("AutoLogin", "ConsentiPasswordInUrl");
+				if (text != null && Operators.CompareString(text.Trim(), "", false) != 0)
+				{
+					AutoLoginConsentiPasswordInUrl = Operators.CompareString(text.Trim().ToUpper(), "TRUE", false) == 0;
 				}
 				text = val2.GetKeyValue("ServizioGdoWSC", "Utente");
 				if (text != null)

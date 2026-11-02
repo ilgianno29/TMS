@@ -174,3 +174,23 @@ Prima le password in `WFI_UTENTI.PASSWORD` erano **cifrate in modo reversibile**
 2. Nuova versione di portale e GdoWSC; configurare `[ServizioGdoWSC]` e `[SVC_PORTALE]`.
 3. (Facoltativo, consigliato) `DelsyPassword migra-utenti ... --esegui` per convertire tutti subito.
 Dopo la conversione completa, le password non sono più recuperabili: un utente che la dimentica va reimpostato.
+
+## Sicurezza 4 – SQL dal browser, autologin con token, redirect, XSS, file di configurazione
+
+- **SQL eseguito su richiesta del browser (critico)**: i tooltip AJAX delle griglie mettevano nella pagina la
+  query SQL cifrata con la chiave fissa; `getWFIAjaxTooltipContent` la decifrava ed eseguiva qualsiasi testo con
+  "SELECT ". Con la chiave nota, ogni utente collegato poteva eseguire SQL arbitrario. Ora la query resta in
+  sessione sul server (`TooltipQueryStore`) e la pagina riceve solo un identificativo casuale.
+- **Autologin con token**: `WFIAutoLogin.aspx?t=TOKEN` al posto di `?u=UTENTE&p=PASSWORD`.
+  Token casuali (256 bit), nel database solo l'hash (`WFI_AUTOLOGIN_TOKEN`), revocabili, con scadenza facoltativa,
+  registrazione di ultimo uso e IP. La vecchia modalità è disattivata (`[AutoLogin] ConsentiPasswordInUrl=False`).
+  Gestione: `DelsyPassword autologin-crea | autologin-elenca | autologin-revoca`.
+- **Reindirizzamenti**: il parametro `r` dell'autologin accetta solo pagine interne (`SafeRedirect`).
+- **XSS**: il messaggio d'errore dell'autologin è codificato prima di essere inserito nella pagina.
+- **File di configurazione**: i parametri `CF` e `DBCFG` dell'indirizzo accettano solo nomi semplici
+  (prima `..\..\` permetteva di far caricare altri file `.ini` del server).
+
+**Installazione**
+1. `Database/2026-11_02_autologin_token.sql`.
+2. Per ogni totem: `DelsyPassword autologin-crea --connessione "..." --utente TOTEM --descrizione "Totem 1" --url http://server/WFI/Form/WFIAutoLogin.aspx`
+   e aggiornare l'indirizzo nella pagina del totem (`Autologin.htm`, `Autologin2.htm`).

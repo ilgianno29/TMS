@@ -15,32 +15,58 @@ public class WFIAutoLogin : WFIPage
 		((Control)this).Load += Page_Load;
 	}
 
+	/// <summary>
+	/// Autologin per dispositivi (totem, monitor):
+	/// <list type="bullet">
+	/// <item><c>?t=TOKEN</c>: token per dispositivo (vedi AutoLoginTokens), modalita' raccomandata;</item>
+	/// <item><c>?u=UTENTE&amp;p=PASSWORD</c>: vecchia modalita', DISATTIVATA salvo [AutoLogin] ConsentiPasswordInUrl=True
+	/// (la password finiva in cronologia, log del server e dei proxy).</item>
+	/// </list>
+	/// Il parametro <c>r</c> (pagina di destinazione) e' accettato solo se interno all'applicazione.
+	/// </summary>
 	private void Page_Init1(object sender, EventArgs e)
 	{
-		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00fd: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0102: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0103: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0105: Invalid comparison between Unknown and I4
-		//IL_00a3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00aa: Expected O, but got Unknown
 		FXRETURN val = (FXRETURN)3;
 		string rsMess = "";
 		try
 		{
+			string token = ((Page)this).Request.QueryString["t"] ?? "";
 			string text = ((Page)this).Request.QueryString["u"] ?? "";
 			string text2 = ((Page)this).Request.QueryString["p"] ?? "";
-			string sUrl = ((Page)this).Request.QueryString["r"] ?? "";
+			string sUrl = Incasbo.Security.SafeRedirect.LocalOrEmpty(((Page)this).Request.QueryString["r"] ?? "");
 			string text3 = ((Page)this).Request.QueryString["par"] ?? "";
-			// La password resta in chiaro fino alla verifica (vedi UserPasswords)
+			if (token.Length > 0)
+			{
+				AutoLoginTokens.TokenInfo info = null;
+				try
+				{
+					info = AutoLoginTokens.Find(base.SessionEnvironment.WFIConfig.DefaultDBConnectionConfig, token, ((Page)this).Request.UserHostAddress);
+				}
+				catch (Exception)
+				{
+					info = null;
+				}
+				if (info == null)
+				{
+					WriteError("Token di accesso non valido, scaduto o revocato.");
+					return;
+				}
+				text = info.Utente;
+				text2 = TrustedLogin.Token;
+				if (sUrl.Length == 0)
+				{
+					sUrl = Incasbo.Security.SafeRedirect.LocalOrEmpty(info.Pagina);
+				}
+			}
+			else if (!base.SessionEnvironment.WFIConfig.AutoLoginConsentiPasswordInUrl)
+			{
+				WriteError("Accesso con utente e password nell'indirizzo disattivato: usare un token di accesso.");
+				return;
+			}
 			val = base.SessionEnvironment.Init(text, text2, "", base.SessionEnvironment.Session["ConfigFile"].ToString(), base.SessionEnvironment.Session["DBConfigFile"].ToString(), "", ref rsMess);
 			if ((int)val > 0)
 			{
-				((Page)this).Response.Clear();
-				((Page)this).Response.ContentType = "text/HTML";
-				((Page)this).Response.ContentEncoding = Encoding.UTF8;
-				((Page)this).Response.Write("<!DOCTYPE html><html><head><title>Errore di login</title></head><body><h1><p>Si è verificato un errore sulla pagina web</p></h1><h3><p>" + rsMess + "</p></h3></body></html>");
-				((Page)this).Response.End();
+				WriteError(rsMess);
 				return;
 			}
 			if (Operators.CompareString(sUrl, "", false) == 0)
@@ -57,6 +83,16 @@ public class WFIAutoLogin : WFIPage
 			Exception ex2 = ex;
 			ProjectData.ClearProjectError();
 		}
+	}
+
+	private void WriteError(string message)
+	{
+		((Page)this).Response.Clear();
+		((Page)this).Response.ContentType = "text/HTML";
+		((Page)this).Response.ContentEncoding = Encoding.UTF8;
+		// Messaggio codificato: prima veniva inserito nella pagina cosi' com'era (XSS)
+		((Page)this).Response.Write("<!DOCTYPE html><html><head><title>Errore di login</title></head><body><h1><p>Si è verificato un errore sulla pagina web</p></h1><h3><p>" + System.Web.HttpUtility.HtmlEncode(message ?? "") + "</p></h3></body></html>");
+		((Page)this).Response.End();
 	}
 
 	protected void Page_Load(object sender, EventArgs e)

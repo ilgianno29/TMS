@@ -6792,8 +6792,8 @@ public class WFIPage : Page, IIboResource, IIboMenuClickable, IIboToolbarClickab
 		}
 		try
 		{
-			IboCrypt val4 = new IboCrypt();
-			string text3 = val4.DecryptString128Bit(Param1);
+			// Solo query registrate dal server per questa sessione (prima: qualsiasi SQL cifrato con la chiave fissa)
+			string text3 = TooltipQueryStore.Resolve(Param1) ?? "";
 			object obj = "";
 			if (text3.ToUpper().Contains("SELECT "))
 			{
