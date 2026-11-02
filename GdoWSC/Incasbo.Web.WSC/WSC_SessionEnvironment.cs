@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+#if NETFRAMEWORK
 using System.Web;
-using System.Web.Hosting;
+#endif
 using Incasbo.Api.App;
 using Incasbo.Api.Default;
 using Incasbo.Api.Params;
@@ -167,7 +168,12 @@ public class WSC_SessionEnvironment : WSC_AbstractSessionEnvironment
 			string result;
 			try
 			{
+#if NETFRAMEWORK
 				result = HttpContext.Current.Session.SessionID;
+#else
+				// Nei servizi WCF HttpContext.Current era null: il valore era sempre "" (comportamento invariato)
+				result = "";
+#endif
 			}
 			catch (Exception ex)
 			{
@@ -180,7 +186,7 @@ public class WSC_SessionEnvironment : WSC_AbstractSessionEnvironment
 		}
 	}
 
-	protected string WSApplicationRoot => HostingEnvironment.ApplicationPhysicalPath;
+	protected string WSApplicationRoot => Incasbo.Web.Hosting.WscHosting.ApplicationRoot;
 
 	protected string WSApplicationName => Assembly.GetExecutingAssembly().GetName().Name;
 

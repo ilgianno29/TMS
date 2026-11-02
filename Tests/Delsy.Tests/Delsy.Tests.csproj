@@ -14,5 +14,6 @@
     <ProjectReference Include="../../AppApi/AppApi.csproj" />
     <ProjectReference Include="../../WMSApi/WMSApi.csproj" />
     <ProjectReference Include="../../GdoApi/GdoApi.csproj" />
+    <ProjectReference Include="../../GdoWSC.Host/GdoWSC.Host.csproj" />
   </ItemGroup>
 </Project>

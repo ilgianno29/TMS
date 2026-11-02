@@ -53,3 +53,36 @@ Tutti i 12 progetti compilano (`dotnet build Delsy.sln`) senza errori, con targe
   mentre i file esportati e le email devono restare in ANSI (Windows-1252) come prima.
 - Cartella etichette in `GdoAbstractApi`: non usa più il codice "My" di VB.
 - Test: 26 (incluso una vera chiamata SOAP al client WMS su .NET 8 verso un server finto).
+
+## Fase 3a – Servizi WCF su .NET 8 (GdoWSC.Host)
+
+Nuovo progetto **GdoWSC.Host** (ASP.NET Core + CoreWCF, .NET 8) che espone i 3 servizi WCF
+con **gli stessi indirizzi, namespace e binding** del Web.config originale:
+
+| Servizio | Indirizzo | Binding | Namespace |
+|---|---|---|---|
+| TMSServiceForWMS | `/TMSServiceForWMS.svc` | wsHttpBinding, security None (SOAP 1.2 + WS-Addressing) | `http://www.incasgroup.com/bologna/GdoWSCWCF` |
+| TMSApiService | `/TMSApiService.svc` | basicHttpBinding, security None (SOAP 1.1) | `http://www.incasgroup.com/bologna/GdoApiService` |
+| TMSServiceForMap | `/TMSServiceForMap.svc` | wsHttpBinding, security None, timeout 10 min | `http://www.incasgroup.com/bologna/TMSServiceForMap` |
+
+- WSDL disponibile con `?wsdl`, come prima (`serviceMetadata httpGetEnabled="true"`).
+- La manutenzione periodica che girava in `Global.asax` (ogni 60 s, per i tre servizi)
+  è ora `BackgroundMaintenanceService`; gli errori finiscono nel log invece di essere ignorati.
+- Gli attributi `[ServiceContract]`/`[ServiceBehavior]` che il decompilatore non aveva ricostruito
+  sono stati recuperati dall'IL originale (namespace, SessionMode, InstanceContextMode).
+- Il codice ASMX (`GdoWSC.asmx`, autenticazione Forms) **resta solo nella versione net48**: fase 3b.
+
+### Configurazione (`GdoWSC.Host/appsettings.json`, sezione `GdoWSC`)
+- `ApplicationRoot`: cartella con `IniConfig\` e `Log\` (vuoto = cartella del sito).
+- `TMSServiceForWMSPath`, `TMSApiServicePath`, `TMSServiceForMapPath`: indirizzi dei servizi.
+- `WcfClientConfigFile`: file con la sezione `<system.serviceModel>` del **vecchio Web.config**
+  (indirizzi di WMS e PTV). Default `IniConfig\WcfClients.config`.
+
+### Installazione su IIS (Windows Server)
+1. Installare l'**ASP.NET Core 8 Hosting Bundle** sul server.
+2. `dotnet publish GdoWSC.Host -c Release -o <cartella>`.
+3. In IIS: nuovo sito/applicazione sulla cartella; **Application Pool con ".NET CLR version = No Managed Code"**.
+4. Copiare in `<cartella>` le cartelle `IniConfig\` (DBConfig.ini, WSCConfig.ini, ecc.) e `Log\`
+   del sito attuale; copiare il vecchio Web.config come `IniConfig\WcfClients.config`.
+5. Verificare `http://server/.../TMSServiceForWMS.svc?wsdl` e confrontarlo con quello del sito attuale.
+- Test: 35 (le chiamate SOAP reali ai tre servizi avviano il vero host su Kestrel).

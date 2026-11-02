@@ -3,7 +3,7 @@ using System.ServiceModel;
 
 namespace Incasbo;
 
-[ServiceContract(/*Could not decode attribute arguments.*/)]
+[ServiceContract(SessionMode = SessionMode.Allowed, Namespace = "http://www.incasgroup.com/bologna/GdoApiService")]
 public interface ITMSApiService
 {
 	[OperationContract]
