@@ -1,0 +1,18 @@
+namespace Incasbo.Model.Map;
+
+public enum Tipologia
+{
+	DESTINAZIONE = 1,
+	DEPOSITO = 2,
+	GPS = 3,
+	GPSVIAGGIO_OK = 4,
+	GPSVIAGGIO_WA = 5,
+	GPSVIAGGIO_KO = 6,
+	FERMATA = 7,
+	PARTENZA = 8,
+	ARRIVO = 9,
+	GPSFERMATAOK = 10,
+	GPSFERMATAKO = 11,
+	TEMPERATURA = 12,
+	NONDEFINITO = 999
+}

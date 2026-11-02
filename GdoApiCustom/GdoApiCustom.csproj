@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>GdoApiCustom</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    
+    
+    
+    <Reference Include="System.Data" />
+    
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    
+    
+    
+    
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <PropertyGroup><Nullable>disable</Nullable><TreatWarningsAsErrors>false</TreatWarningsAsErrors><NoWarn>$(NoWarn);CS0618;CS0612</NoWarn></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../GdoApi/GdoApi.csproj" />
+    <ProjectReference Include="../AppApi/AppApi.csproj" />
+    <ProjectReference Include="../IboClassLib/IboClassLib.csproj" />
+    <ProjectReference Include="../GdoParamsDefault/GdoParamsDefault.csproj" />
+    <ProjectReference Include="../IboDbLib/IboDbLib.csproj" />
+    <ProjectReference Include="../GdoParamsDefaultCustom/GdoParamsDefaultCustom.csproj" />
+    <ProjectReference Include="../WMSApiCustom/WMSApiCustom.csproj" />
+    <ProjectReference Include="../IboWebParam/IboWebParam.csproj" />
+  </ItemGroup>
+  <ItemGroup><!--mods--><Using Include="Incasbo.Web.Library.modGeneral" Static="true" /><Using Include="Incasbo.Web.Library.DBFormatFunctions" Static="true" /></ItemGroup>
+</Project>

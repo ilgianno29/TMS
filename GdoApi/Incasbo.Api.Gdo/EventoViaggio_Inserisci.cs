@@ -1,0 +1,320 @@
+using System;
+using System.Data;
+using Incasbo.Api.App;
+using Incasbo.Web.Library;
+using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.CompilerServices;
+
+namespace Incasbo.Api.Gdo;
+
+public class EventoViaggio_Inserisci : AppAbstractApi
+{
+	protected EventoViaggio _Evento;
+
+	protected string _EventoTipo;
+
+	protected string _IdViaggio;
+
+	protected bool _ApplyQuery;
+
+	protected bool _EventoSingolo;
+
+	public EventoViaggio_Inserisci(AppApiContext objApiContext)
+		: base(objApiContext)
+	{
+		_Evento = null;
+		_EventoTipo = "";
+		_IdViaggio = "";
+		_ApplyQuery = true;
+		_EventoSingolo = false;
+	}
+
+	protected override FXRETURN CheckData(ref string rsmess)
+	{
+		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0004: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0449: Unknown result type (might be due to invalid IL or missing references)
+		//IL_044e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0460: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0461: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0464: Unknown result type (might be due to invalid IL or missing references)
+		//IL_010f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0309: Unknown result type (might be due to invalid IL or missing references)
+		//IL_030e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_030f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0311: Invalid comparison between Unknown and I4
+		//IL_01db: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01e0: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01e1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01e3: Invalid comparison between Unknown and I4
+		//IL_0319: Unknown result type (might be due to invalid IL or missing references)
+		//IL_031a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01eb: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01ec: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0439: Unknown result type (might be due to invalid IL or missing references)
+		FXRETURN val = (FXRETURN)3;
+		FXRETURN val2 = (FXRETURN)3;
+		string text = "";
+		FXRETURN result;
+		try
+		{
+			this.CallStackAdd();
+			rsmess = "";
+			((AppAbstractApi)this).ParametersOut.Add("RetQueryToApply", "");
+			if (((AppAbstractApi)this).ParametersIn.ContainsKey("Evento"))
+			{
+				_Evento = (EventoViaggio)((AppAbstractApi)this).ParametersIn["Evento"];
+			}
+			if (((AppAbstractApi)this).ParametersIn.ContainsKey("EventoTipo"))
+			{
+				_EventoTipo = ((AppAbstractApi)this).ParametersIn["EventoTipo"].ToString();
+			}
+			if (((AppAbstractApi)this).ParametersIn.ContainsKey("ApplyQuery"))
+			{
+				_ApplyQuery = Conversions.ToBoolean(((AppAbstractApi)this).ParametersIn["ApplyQuery"]);
+			}
+			_IdViaggio = _Evento.IdViaggio;
+			if ((Operators.CompareString(_Evento.CodiceEvento, "", false) == 0) & (Operators.CompareString(_EventoTipo, "", false) == 0))
+			{
+				val = (FXRETURN)5;
+				rsmess = this.TranslateMessage("XXX", "Chiamata all'api sbagliata. Specificare o l'evento o la tipologia dell'evento");
+			}
+			else
+			{
+				if (((AppAbstractApi)this).ParametersIn.ContainsKey("Utente") && Operators.CompareString(((AppAbstractApi)this).ParametersIn["Utente"].ToString(), "", false) != 0)
+				{
+					this._User = ((AppAbstractApi)this).ParametersIn["Utente"].ToString();
+				}
+				DataTable dataTable = null;
+				if (Operators.CompareString(_Evento.CodiceEvento, "", false) == 0)
+				{
+					dataTable = null;
+					text = "SELECT EventoDefault,EventoSingolo FROM Eventi_Tipi ";
+					text = text + "WHERE Codice=" + ((AppBaseClass)this).DbConn.SQLFormatString(_EventoTipo);
+					val = ((AppBaseClass)this).DbConn.OpenDataTable(text, ref dataTable, ref rsmess);
+					if ((int)val > 0)
+					{
+						val2 = val;
+					}
+					else if (dataTable.Rows.Count == 0)
+					{
+						rsmess = this.TranslateMessage("XXX", "Impossibile determinare l'evento di default dal tipo evento '{0}'", new string[1] { _EventoTipo });
+					}
+					else
+					{
+						_Evento.CodiceEvento = dataTable.Rows[0]["EventoDefault"].ToString();
+						_EventoSingolo = Operators.CompareString(dataTable.Rows[0]["EventoSingolo"].ToString(), "S", false) == 0;
+						if (Operators.CompareString(_Evento.CodiceEvento, "", false) != 0)
+						{
+							goto IL_0403;
+						}
+						rsmess = this.TranslateMessage("XXX", "Impossibile determinare l'evento di default dal tipo evento '{0}'", new string[1] { _EventoTipo });
+					}
+				}
+				else
+				{
+					dataTable = null;
+					text = "SELECT E.TipoEvento, ET.EventoSingolo FROM Eventi E INNER JOIN Eventi_Tipi ET ON ET.CODICE=E.TipoEvento ";
+					text = text + "WHERE E.Codice=" + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.CodiceEvento);
+					val = ((AppBaseClass)this).DbConn.OpenDataTable(text, ref dataTable, ref rsmess);
+					if ((int)val > 0)
+					{
+						val2 = val;
+					}
+					else if (dataTable.Rows.Count == 0)
+					{
+						rsmess = this.TranslateMessage("XXX", "Impossibile determinare il tipo evento di default dall'evento '{0}'", new string[1] { _Evento.CodiceEvento });
+					}
+					else
+					{
+						if (Operators.CompareString(dataTable.Rows[0]["TipoEvento"].ToString().ToUpper(), _EventoTipo.ToUpper(), false) == 0)
+						{
+							_EventoSingolo = Operators.CompareString(dataTable.Rows[0]["EventoSingolo"].ToString(), "S", false) == 0;
+							goto IL_0403;
+						}
+						rsmess = this.TranslateMessage("XXX", "L'evento {0} non è congruente con il tipo evento {1}", new string[2] { _Evento.CodiceEvento, _EventoTipo });
+					}
+				}
+			}
+			goto end_IL_000b;
+			IL_0403:
+			if (!_Evento.DataOraEvento.HasValue)
+			{
+				_Evento.DataOraEvento = DateAndTime.Now;
+			}
+			val2 = (FXRETURN)0;
+			end_IL_000b:;
+		}
+		catch (Exception ex)
+		{
+			ProjectData.SetProjectError(ex);
+			Exception ex2 = ex;
+			val2 = this.HandleError(ref ex2, ref rsmess);
+			ProjectData.ClearProjectError();
+		}
+		finally
+		{
+			this.CallStackRemove();
+			result = val2;
+		}
+		return result;
+	}
+
+	protected override FXRETURN Core(ref string rsmess)
+	{
+		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0004: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04ff: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0504: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0516: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0517: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04ef: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04c5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04ca: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04cb: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04cd: Invalid comparison between Unknown and I4
+		//IL_051a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04d5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04d6: Unknown result type (might be due to invalid IL or missing references)
+		FXRETURN val = (FXRETURN)3;
+		FXRETURN val2 = (FXRETURN)3;
+		string text = "";
+		FXRETURN result;
+		try
+		{
+			this.CallStackAdd();
+			rsmess = "";
+			text = "";
+			if (_EventoSingolo)
+			{
+				text += "UPDATE Viaggi_Eventi SET ANNULLATO='S' ";
+				text = text + "WHERE IdViaggio=" + ((AppBaseClass)this).DbConn.SQLFormatString(_IdViaggio) + " ";
+				text = text + "AND CodiceEvento IN (SELECT CODICE FROM EVENTI WHERE TipoEvento=" + ((AppBaseClass)this).DbConn.SQLFormatString(_EventoTipo) + "); ";
+			}
+			text += "INSERT INTO Viaggi_Eventi (IdViaggio,CodiceEvento,DataOraEvento,NoteInterne,NoteEsterne,Importato,";
+			text += "Autista,Terminale,Motrice,Rimorchio1,Contenitore1,Rimorchio2,Contenitore2,";
+			text += "DatiAggiuntivi,Latitudine,Longitudine,DataValiditaGPS,KmGPS,KmManuali,";
+			text += "Localita,Indirizzo,Cap,Provincia,Nazione,Unibol,IdServizio,IdRifornimento,UteIns,UteAgg) VALUES (";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_IdViaggio) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.CodiceEvento) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatDate((eTipoData)2, _Evento.DataOraEvento) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.NoteInterne) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.NoteEsterne) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(Interaction.IIf(_Evento.Importato, (object)"S", (object)"N").ToString()) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Autista) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Terminale) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Motrice) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Rimorchio1) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Contenitore1) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Rimorchio2) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Contenitore2) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.DatiAggiuntivi) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Latitudine) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Longitudine) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatDate((eTipoData)2, _Evento.DataValiditaGPS) + ", ";
+			string text2 = text;
+			DBConnection dbConn = ((AppBaseClass)this).DbConn;
+			EventoViaggio evento;
+			decimal? pNumero = (evento = _Evento).KmGPS;
+			string text3 = dbConn.SQLFormatNumber(ref pNumero);
+			evento.KmGPS = pNumero;
+			text = text2 + text3 + ", ";
+			string text4 = text;
+			DBConnection dbConn2 = ((AppBaseClass)this).DbConn;
+			pNumero = (evento = _Evento).KmManuali;
+			string text5 = dbConn2.SQLFormatNumber(ref pNumero);
+			evento.KmManuali = pNumero;
+			text = text4 + text5 + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Localita) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Indirizzo) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Cap) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Provincia) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Nazione) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.Unibol) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.IdServizio) + ", ";
+			text = text + ((AppBaseClass)this).DbConn.SQLFormatString(_Evento.IdRifornimento) + ", ";
+			text = text + this.DbConn.SQLFormatString(this._User) + ", ";
+			text = text + this.DbConn.SQLFormatString(this._User) + "); ";
+			if (!_ApplyQuery)
+			{
+				goto IL_04db;
+			}
+			val = ((AppBaseClass)this).DbConn.SqlExec(text, ref rsmess);
+			if ((int)val <= 0)
+			{
+				goto IL_04db;
+			}
+			val2 = val;
+			goto end_IL_000b;
+			IL_04db:
+			((AppAbstractApi)this).ParametersOut["RetQueryToApply"] = text;
+			val2 = (FXRETURN)0;
+			end_IL_000b:;
+		}
+		catch (Exception ex)
+		{
+			ProjectData.SetProjectError(ex);
+			Exception ex2 = ex;
+			val2 = this.HandleError(ref ex2, ref rsmess);
+			ProjectData.ClearProjectError();
+		}
+		finally
+		{
+			this.CallStackRemove();
+			result = val2;
+		}
+		return result;
+	}
+
+	public static FXRETURN RunProc(AppApiContext objApiContext, EventoViaggio Evento, string EventoTipo, string Utente, bool ApplyQuery, ref string RetQueryToApply, ref string rsmess)
+	{
+		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0004: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00a1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00b6: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00b7: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0066: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006e: Invalid comparison between Unknown and I4
+		//IL_0094: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0076: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0077: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00ba: Unknown result type (might be due to invalid IL or missing references)
+		FXRETURN val = (FXRETURN)3;
+		FXRETURN val2 = (FXRETURN)3;
+		FXRETURN result;
+		try
+		{
+			rsmess = "";
+			EventoViaggio_Inserisci eventoViaggio_Inserisci = new EventoViaggio_Inserisci(objApiContext);
+			((AppAbstractApi)eventoViaggio_Inserisci).ParametersIn.Add("Evento", Evento);
+			((AppAbstractApi)eventoViaggio_Inserisci).ParametersIn.Add("EventoTipo", EventoTipo);
+			((AppAbstractApi)eventoViaggio_Inserisci).ParametersIn.Add("Utente", Utente);
+			((AppAbstractApi)eventoViaggio_Inserisci).ParametersIn.Add("ApplyQuery", ApplyQuery);
+			val = ((AppAbstractApi)eventoViaggio_Inserisci).Run(ref rsmess);
+			if ((int)val > 0)
+			{
+				val2 = val;
+			}
+			else
+			{
+				RetQueryToApply = ((AppAbstractApi)eventoViaggio_Inserisci).ParametersOut["RetQueryToApply"].ToString();
+				val2 = (FXRETURN)0;
+			}
+		}
+		catch (Exception ex)
+		{
+			ProjectData.SetProjectError(ex);
+			Exception ex2 = ex;
+			val2 = (FXRETURN)3;
+			rsmess = ex2.Message;
+			ProjectData.ClearProjectError();
+		}
+		finally
+		{
+			result = val2;
+		}
+		return result;
+	}
+}

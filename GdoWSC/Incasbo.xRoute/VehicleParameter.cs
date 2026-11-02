@@ -1,0 +1,35 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Xml.Serialization;
+
+namespace Incasbo.xRoute;
+
+[Serializable]
+[XmlType(Namespace = "http://xroute.xserver.ptvag.com")]
+[GeneratedCode("System.Xml", "4.0.30319.34234")]
+public enum VehicleParameter
+{
+	TYPE,
+	TOTAL_WEIGHT,
+	TRAILER_WEIGHT,
+	AXLE_WEIGHT,
+	NUMBER_OF_AXLES,
+	EMISSION_CLASS,
+	HEIGHT,
+	LENGTH,
+	WIDTH,
+	CYLINDER_CAPACITY,
+	NUMBER_OF_PASSENGERS,
+	TRAILER_HAS_BREAKS,
+	FUEL_TYPE,
+	EMPTY_WEIGHT,
+	EMISSION_TECHNOLOGY,
+	LOAD_WEIGHT,
+	AVERAGE_FUEL_CONSUMPTION,
+	BIO_FUEL_RATIO,
+	PARTICLE_FILTER_TYPE,
+	HEIGHT_ABOVE_FRONT_AXLE,
+	PARTICLE_REDUCTION_CLASS,
+	YEAR_OF_MANUFACTURE,
+	TUNNEL_RESTRICTION
+}

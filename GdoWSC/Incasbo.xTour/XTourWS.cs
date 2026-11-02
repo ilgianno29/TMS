@@ -1,0 +1,193 @@
+using System.CodeDom.Compiler;
+using System.ServiceModel;
+
+namespace Incasbo.xTour;
+
+[ServiceContract(Namespace = "http://jwsdp.xtour.xserver.ptvag.com", ConfigurationName = "xTour.XTourWS")]
+[GeneratedCode("System.ServiceModel", "4.0.0.0")]
+public interface XTourWS
+{
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[ServiceKnownType(typeof(BaseException))]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	fetchPlanResponse fetchPlan(fetchPlanRequest request);
+
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	fetchSequencingPlanResponse fetchSequencingPlan(fetchSequencingPlanRequest request);
+
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	findToursForUnscheduledOrderResponse findToursForUnscheduledOrder(findToursForUnscheduledOrderRequest request);
+
+	[ServiceKnownType(typeof(BaseException))]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	findToursForVehicleResponse findToursForVehicle(findToursForVehicleRequest request);
+
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	findUnscheduledOrdersForTourResponse findUnscheduledOrdersForTour(findUnscheduledOrdersForTourRequest request);
+
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	findVehiclesForTourResponse findVehiclesForTour(findVehiclesForTourRequest request);
+
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[ServiceKnownType(typeof(TransientVO))]
+	planBasicToursResponse planBasicTours(planBasicToursRequest request);
+
+	[ServiceKnownType(typeof(BaseException))]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	planOvernightToursResponse planOvernightTours(planOvernightToursRequest request);
+
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	planSequenceResponse planSequence(planSequenceRequest request);
+
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(BaseException))]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	startPlanBasicToursResponse startPlanBasicTours(startPlanBasicToursRequest request);
+
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	startPlanOvernightToursResponse startPlanOvernightTours(startPlanOvernightToursRequest request);
+
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(DatabaseException), Action = "", Name = "DatabaseException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(ConstraintViolationException), Action = "", Name = "ConstraintViolationException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(OptimisticRollbackException), Action = "", Name = "OptimisticRollbackException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(TableNotFoundException), Action = "", Name = "TableNotFoundException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(XTourException), Action = "", Name = "XTourException", Namespace = "http://xtour.xserver.ptvag.com")]
+	[FaultContract(typeof(XServiceException), Action = "", Name = "XServiceException", Namespace = "http://common.xserver.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[ServiceKnownType(typeof(BaseException))]
+	[ServiceKnownType(typeof(TransientVO))]
+	startPlanSequenceResponse startPlanSequence(startPlanSequenceRequest request);
+
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[ServiceKnownType(typeof(TransientVO))]
+	watchJobResponse watchJob(watchJobRequest request);
+
+	[OperationContract(Action = "", ReplyAction = "*")]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(TransientVO))]
+	[ServiceKnownType(typeof(BaseException))]
+	deleteJobResponse deleteJob(deleteJobRequest request);
+
+	[ServiceKnownType(typeof(TransientVO))]
+	[FaultContract(typeof(SystemException), Action = "", Name = "SystemException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[FaultContract(typeof(UnexpectedException), Action = "", Name = "UnexpectedException", Namespace = "http://exception.core.jabba.ptvag.com")]
+	[ServiceKnownType(typeof(BaseException))]
+	[XmlSerializerFormat(SupportFaults = true)]
+	[OperationContract(Action = "", ReplyAction = "*")]
+	stopJobResponse stopJob(stopJobRequest request);
+}
