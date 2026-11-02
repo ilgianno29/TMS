@@ -1,34 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>GdoApi</AssemblyName>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <TargetFramework>net40</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup />
-  <ItemGroup />
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    
-    
     <Reference Include="System.Data" />
-    
-    
-    
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
-    
     <Reference Include="System.Core" />
-    
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.3" PrivateAssets="all" />
-  </ItemGroup>
-  <PropertyGroup><Nullable>disable</Nullable><TreatWarningsAsErrors>false</TreatWarningsAsErrors><NoWarn>$(NoWarn);CS0618;CS0612</NoWarn></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../AppApi/AppApi.csproj" />
     <ProjectReference Include="../IboClassLib/IboClassLib.csproj" />

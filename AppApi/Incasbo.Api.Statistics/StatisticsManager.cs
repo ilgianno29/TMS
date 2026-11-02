@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Web.Script.Serialization;
 using Incasbo.Api.App;
 using Incasbo.Web.Library;
 using Microsoft.VisualBasic;
@@ -424,8 +423,7 @@ public class StatisticsManager : AppBaseClass
 			}
 			else
 			{
-				JavaScriptSerializer val = new JavaScriptSerializer();
-				string vsStringa = val.Serialize((object)FilterToApply);
+				string vsStringa = LegacyJson.Serialize(FilterToApply);
 				string text = "INSERT INTO WFI_Statistiche_Queue(CodiceStatistica, Utente, SelectionFormula, StatisticFilename, StatisticContentExtension, UteIns, UteAgg) VALUES (";
 				text = text + DbConn.SQLFormatString(MyStat.Codice) + ", ";
 				text = text + DbConn.SQLFormatString(_User + ";" + _Group + ";" + _Organization + ";" + _OrganizationType + ";" + _OrganizationInternalExternal + ";") + ", ";

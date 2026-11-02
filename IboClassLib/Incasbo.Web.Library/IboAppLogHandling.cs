@@ -1,8 +1,6 @@
 using System;
-using System.Data.Odbc;
-using System.Data.OleDb;
-using System.Data.OracleClient;
-using System.Data.SqlClient;
+using System.Data.Common;
+using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -300,96 +298,39 @@ public class IboAppLogHandling
 				}
 				string text = stackTrace.GetFrame(i).GetMethod().Name.ToUpper();
 				stackTrace = null;
-				bool flag = true;
 				int j = default(int);
 				string text2;
-				if (flag == ((object)objEx.GetType() == typeof(OleDbException)))
+				if (objEx is SqlException sqlEx)
 				{
-					OleDbException val;
-					for (val = (OleDbException)Information.Err().GetException(); j < val.Errors.Count; j++)
+					// SQL Server (Microsoft.Data.SqlClient): un messaggio per ogni errore restituito dal server
+					for (j = 0; j < sqlEx.Errors.Count; j++)
 					{
 						if (rsMess.Length > 0)
 						{
 							rsMess += "\r\n";
 						}
-						if (Operators.CompareString(val.Errors[j].SQLState, "", false) != 0)
+						if (sqlEx.Errors[j].State != 0)
 						{
-							rsMess = rsMess + val.Errors[j].SQLState + " - " + val.Errors[j].Message;
+							rsMess = rsMess + sqlEx.Errors[j].State + " - " + sqlEx.Errors[j].Message;
 						}
 						else
 						{
-							rsMess += val.Errors[j].Message;
+							rsMess += sqlEx.Errors[j].Message;
 						}
 						rsMess = TranslateSqlMessage(rsMess, ref bWriteLog);
 					}
-					val = null;
-					if (Operators.CompareString(rsMess, "", false) == 0)
+					if (rsMess.Length == 0)
 					{
 						rsMess = objEx.Message;
 					}
 					fXRETURN = modGeneral.FXRETURN.DatabaseError;
 					text2 = "DB Error: ";
 				}
-				else if (flag == ((object)objEx.GetType() == typeof(SqlException)))
+				else if (objEx is DbException)
 				{
-					SqlException val2;
-					for (val2 = (SqlException)Information.Err().GetException(); j < val2.Errors.Count; j++)
-					{
-						if (rsMess.Length > 0)
-						{
-							rsMess += "\r\n";
-						}
-						if (val2.Errors[j].State != 0)
-						{
-							rsMess = rsMess + val2.Errors[j].State + " - " + val2.Errors[j].Message;
-						}
-						else
-						{
-							rsMess += val2.Errors[j].Message;
-						}
-						rsMess = TranslateSqlMessage(rsMess, ref bWriteLog);
-					}
-					val2 = null;
-					if (Operators.CompareString(rsMess, "", false) == 0)
-					{
-						rsMess = objEx.Message;
-					}
-					fXRETURN = modGeneral.FXRETURN.DatabaseError;
-					text2 = "DB Error: ";
-				}
-				else if (flag == ((object)objEx.GetType() == typeof(OracleException)))
-				{
-					OracleException val3 = (OracleException)Information.Err().GetException();
-					rsMess += ((Exception)(object)val3).Message;
+					// Qualsiasi altro errore di un provider ADO.NET
+					rsMess += objEx.Message;
 					rsMess = TranslateSqlMessage(rsMess, ref bWriteLog);
-					val3 = null;
-					fXRETURN = modGeneral.FXRETURN.DatabaseError;
-					text2 = "DB Error: ";
-				}
-				else if (flag == ((object)objEx.GetType() == typeof(OdbcException)))
-				{
-					OdbcException val4;
-					for (val4 = (OdbcException)Information.Err().GetException(); j < val4.Errors.Count; j++)
-					{
-						if (rsMess.Length > 0)
-						{
-							rsMess += "\r\n";
-						}
-						if (Operators.CompareString(val4.Errors[j].SQLState, "", false) != 0)
-						{
-							rsMess = rsMess + val4.Errors[j].SQLState.ToString() + " - " + val4.Errors[j].Message;
-						}
-						else
-						{
-							rsMess += val4.Errors[j].Message;
-						}
-						rsMess = TranslateSqlMessage(rsMess, ref bWriteLog);
-					}
-					val4 = null;
-					if (Operators.CompareString(rsMess, "", false) == 0)
-					{
-						rsMess = objEx.Message;
-					}
 					fXRETURN = modGeneral.FXRETURN.DatabaseError;
 					text2 = "DB Error: ";
 				}

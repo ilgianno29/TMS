@@ -2,11 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
-using System.Data.Odbc;
-using System.Data.OleDb;
-using System.Data.OracleClient;
-using System.Data.SQLite;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -132,16 +128,20 @@ public class DBConnection : IDisposable, ICloneable
 	public DBConnection(string v_ConnectionString, DBFormatFunctions.eServerType veServerType, IboAppCallStackHandling rObjCallStackHandler, ref IboAppLogHandling rObjIboAppLogHandling, ref IncasTranslator rObjTranslator)
 		: this(ref rObjCallStackHandler, ref rObjIboAppLogHandling, ref rObjTranslator)
 	{
-		_ConnectionString = v_ConnectionString;
 		eServerType = veServerType;
+		EnsureSqlServer(veServerType);
+		_ProviderType = DBFormatFunctions.eProviderType.SqlClient;
+		_ConnectionString = NormalizeSqlServerConnectionString(v_ConnectionString);
 		_TimeOut = 60;
 	}
 
 	public DBConnection(string v_ConnectionString, DBFormatFunctions.eServerType veServerType, int v_TimeOut, IboAppCallStackHandling rObjCallStackHandler, ref IboAppLogHandling rObjIboAppLogHandling, ref IncasTranslator rObjTranslator)
 		: this(ref rObjCallStackHandler, ref rObjIboAppLogHandling, ref rObjTranslator)
 	{
-		_ConnectionString = v_ConnectionString;
 		eServerType = veServerType;
+		EnsureSqlServer(veServerType);
+		_ProviderType = DBFormatFunctions.eProviderType.SqlClient;
+		_ConnectionString = NormalizeSqlServerConnectionString(v_ConnectionString);
 		_TimeOut = v_TimeOut;
 		if (_TimeOut == 0)
 		{
@@ -162,8 +162,6 @@ public class DBConnection : IDisposable, ICloneable
 	public DBConnection(DBFormatFunctions.eProviderType veProviderType, string vsProvider, string vsServer, DBFormatFunctions.eServerType veServerType, string vsDataBase, string vsUser, string vsPassword, bool bUseIntegratedSecurity, int v_TimeOut, IboAppCallStackHandling rObjCallStackHandler, ref IboAppLogHandling rObjIboAppLogHandling, ref IncasTranslator rObjTranslator)
 		: this(ref rObjCallStackHandler, ref rObjIboAppLogHandling, ref rObjTranslator)
 	{
-		string connectionString = "";
-		_ProviderType = veProviderType;
 		_Provider = vsProvider;
 		eServerType = veServerType;
 		_Server = vsServer;
@@ -171,173 +169,80 @@ public class DBConnection : IDisposable, ICloneable
 		_User = vsUser;
 		_Password = vsPassword;
 		_UseIntegratedSecurity = bUseIntegratedSecurity;
-		if (eServerType == DBFormatFunctions.eServerType.AS400)
+		_TimeOut = (v_TimeOut == 0) ? 60 : v_TimeOut;
+		// Supportato solo SQL Server, sempre tramite Microsoft.Data.SqlClient
+		// (veProviderType OleDb/Odbc/SqlClient viene ignorato: il risultato e' lo stesso database).
+		EnsureSqlServer(veServerType);
+		_ProviderType = DBFormatFunctions.eProviderType.SqlClient;
+		_ConnectionString = BuildSqlServerConnectionString(_Server, _Database, _User, _Password, _UseIntegratedSecurity, _TimeOut);
+	}
+
+	/// <summary>Solleva un errore chiaro se si tenta di usare un database diverso da SQL Server.</summary>
+	private static void EnsureSqlServer(DBFormatFunctions.eServerType serverType)
+	{
+		if (serverType != DBFormatFunctions.eServerType.SQL)
 		{
-			_ProviderType = DBFormatFunctions.eProviderType.Odbc;
-			_UseIntegratedSecurity = false;
+			throw new NotSupportedException("Database '" + serverType + "' non piu' supportato: e' supportato solo SQL Server.");
 		}
-		else if (eServerType == DBFormatFunctions.eServerType.SQLite)
+	}
+
+	/// <summary>
+	/// Costruisce la stringa di connessione SQL Server in modo sicuro (nessuna concatenazione:
+	/// password con caratteri speciali come ';' non rompono piu' la stringa).
+	/// </summary>
+	public static string BuildSqlServerConnectionString(string server, string database, string user, string password, bool useIntegratedSecurity, int timeoutSeconds)
+	{
+		SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+		builder.DataSource = server ?? "";
+		builder.InitialCatalog = database ?? "";
+		if (useIntegratedSecurity)
 		{
-			_ProviderType = DBFormatFunctions.eProviderType.SQLiteClient;
-			_UseIntegratedSecurity = false;
+			builder.IntegratedSecurity = true;
 		}
-		if (_ProviderType == DBFormatFunctions.eProviderType.OleDb)
+		else
 		{
-			if ((Operators.CompareString(_Provider.Trim(), "", false) == 0) & (eServerType == DBFormatFunctions.eServerType.Oracle))
-			{
-				_Provider = "MSDAORA.1";
-			}
-			else if ((Operators.CompareString(_Provider.Trim(), "", false) == 0) & (eServerType == DBFormatFunctions.eServerType.SQL))
-			{
-				_Provider = "SQLOLEDB";
-			}
-			_TimeOut = v_TimeOut;
-			if (_TimeOut == 0)
-			{
-				_TimeOut = 60;
-			}
-			if (eServerType == DBFormatFunctions.eServerType.Oracle)
-			{
-				connectionString = "Provider=" + _Provider + ";User ID=" + _User + ";Data Source=" + _Server + ";Password=" + _Password + ";";
-			}
-			else
-			{
-				if (eServerType != 0)
-				{
-					string message = _Translator.TranslateMessage(Assembly.GetExecutingAssembly().GetName().FullName, kDatab0004, new string[0]);
-					throw new Exception(message);
-				}
-				connectionString = ((!_UseIntegratedSecurity) ? ("Provider=" + _Provider + ";Persist Security Info=False;User ID=" + _User + ";Password=" + _Password + ";Initial Catalog=" + _Database + ";Server=" + _Server + ";Connect Timeout=" + _TimeOut + ";") : ("Provider=" + _Provider + ";Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=" + _Database + ";Server=" + _Server + ";Connect Timeout=" + _TimeOut + ";"));
-			}
+			builder.UserID = user ?? "";
+			builder.Password = password ?? "";
 		}
-		else if (_ProviderType == DBFormatFunctions.eProviderType.Odbc)
+		builder.PersistSecurityInfo = false;
+		builder.ConnectTimeout = (timeoutSeconds > 0) ? timeoutSeconds : 60;
+		// Stesso comportamento del vecchio driver: cifratura non obbligatoria.
+		// Per attivarla: aggiungere Encrypt=True alla stringa di connessione (richiede certificato valido sul server).
+		builder.Encrypt = SqlConnectionEncryptOption.Optional;
+		return builder.ConnectionString;
+	}
+
+	/// <summary>
+	/// Converte una stringa di connessione in stile OLE DB/ODBC (es. "Provider=SQLOLEDB;...")
+	/// in una stringa valida per Microsoft.Data.SqlClient.
+	/// </summary>
+	public static string NormalizeSqlServerConnectionString(string connectionString)
+	{
+		if (string.IsNullOrWhiteSpace(connectionString))
 		{
-			if ((Operators.CompareString(_Provider.Trim(), "", false) == 0) & (eServerType == DBFormatFunctions.eServerType.Oracle))
-			{
-				_Provider = "{Oracle Home}";
-			}
-			else if ((Operators.CompareString(_Provider.Trim(), "", false) == 0) & (eServerType == DBFormatFunctions.eServerType.SQL))
-			{
-				_Provider = "{SQL Server}";
-			}
-			_TimeOut = v_TimeOut;
-			if (_TimeOut == 0)
-			{
-				_TimeOut = 60;
-			}
-			if (eServerType == DBFormatFunctions.eServerType.Oracle)
-			{
-				connectionString = "DRIVER=<%ODBCName%>;SERVER=<%ServerNome%>;DBQ=<%ServerNome%>;UID=<%ServerUtente%>;PWD=<%ServerPassword%>;APP=<%AppTitle%>;";
-			}
-			else if (eServerType == DBFormatFunctions.eServerType.SQL)
-			{
-				connectionString = "DRIVER=<%ODBCName%>;SERVER=<%ServerNome%>;DATABASE=<%ServerDB%>;UID=<%ServerUtente%>;PWD=<%ServerPassword%>;APP=<%AppTitle%>;";
-				if (_UseIntegratedSecurity)
-				{
-					connectionString += "INTEGRATED SECURITY=SSPI;";
-				}
-			}
-			else
-			{
-				if (eServerType != DBFormatFunctions.eServerType.AS400)
-				{
-					string message2 = _Translator.TranslateMessage(Assembly.GetExecutingAssembly().GetName().FullName, kDatab0004, new string[0]);
-					throw new Exception(message2);
-				}
-				connectionString = "Dsn=<%ServerNome%>;uid=<%ServerUtente%>;pwd=<%ServerPassword%>;";
-			}
-			connectionString = Strings.Replace(connectionString, "<%ODBCName%>", _Provider, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerNome%>", _Server, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerDB%>", _Database, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerUtente%>", _User, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerPassword%>", _Password, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%AppTitle%>", "", 1, -1, (CompareMethod)0);
+			return connectionString ?? "";
 		}
-		else if (_ProviderType == DBFormatFunctions.eProviderType.SqlClient)
+		System.Data.Common.DbConnectionStringBuilder generic = new System.Data.Common.DbConnectionStringBuilder();
+		generic.ConnectionString = connectionString;
+		bool encryptSpecified = generic.ContainsKey("Encrypt");
+		foreach (string key in new string[] { "Provider", "Driver", "Dsn", "OLE DB Services" })
 		{
-			_TimeOut = v_TimeOut;
-			if (_TimeOut == 0)
-			{
-				_TimeOut = 60;
-			}
-			if (eServerType != 0)
-			{
-				string message3 = _Translator.TranslateMessage(Assembly.GetExecutingAssembly().GetName().FullName, kDatab0004, new string[0]);
-				throw new Exception(message3);
-			}
-			connectionString = "Data Source=<%ServerNome%>;Initial Catalog=<%ServerDB%>;User ID=<%ServerUtente%>;Password=<%ServerPassword%>;Application Name=<%AppTitle%>;";
-			connectionString = Strings.Replace(connectionString, "<%ServerNome%>", _Server, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerDB%>", _Database, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerUtente%>", _User, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerPassword%>", _Password, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%AppTitle%>", "", 1, -1, (CompareMethod)0);
+			generic.Remove(key);
 		}
-		else if (_ProviderType == DBFormatFunctions.eProviderType.MSOracleClient)
+		SqlConnectionStringBuilder builder;
+		try
 		{
-			_TimeOut = v_TimeOut;
-			if (_TimeOut == 0)
-			{
-				_TimeOut = 60;
-			}
-			if (eServerType != DBFormatFunctions.eServerType.Oracle)
-			{
-				string message4 = _Translator.TranslateMessage(Assembly.GetExecutingAssembly().GetName().FullName, kDatab0004, new string[0]);
-				throw new Exception(message4);
-			}
-			connectionString = "Data Source=<%ServerNome%>;";
-			connectionString += "User ID=<%ServerUtente%>;";
-			connectionString += "Password=<%ServerPassword%>;";
-			connectionString = Strings.Replace(connectionString, "<%ServerNome%>", _Server, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerDB%>", _Database, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerUtente%>", _User, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerPassword%>", _Password, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%AppTitle%>", "", 1, -1, (CompareMethod)0);
+			builder = new SqlConnectionStringBuilder(generic.ConnectionString);
 		}
-		else if (_ProviderType == DBFormatFunctions.eProviderType.OracleClient)
+		catch (ArgumentException ex)
 		{
-			_TimeOut = v_TimeOut;
-			if (_TimeOut == 0)
-			{
-				_TimeOut = 60;
-			}
-			if (eServerType != DBFormatFunctions.eServerType.Oracle)
-			{
-				string message5 = _Translator.TranslateMessage(Assembly.GetExecutingAssembly().GetName().FullName, kDatab0004, new string[0]);
-				throw new Exception(message5);
-			}
-			connectionString = "Data Source=<%ServerNome%>;";
-			connectionString += "User ID=<%ServerUtente%>;";
-			connectionString += "Password=<%ServerPassword%>;";
-			connectionString = Strings.Replace(connectionString, "<%ServerNome%>", _Server, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerDB%>", _Database, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerUtente%>", _User, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerPassword%>", _Password, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%AppTitle%>", "", 1, -1, (CompareMethod)0);
+			throw new ArgumentException("Stringa di connessione non valida per SQL Server: " + ex.Message, ex);
 		}
-		else if (_ProviderType == DBFormatFunctions.eProviderType.SQLiteClient)
+		if (!encryptSpecified)
 		{
-			_TimeOut = v_TimeOut;
-			if (_TimeOut == 0)
-			{
-				_TimeOut = 60;
-			}
-			if (eServerType != DBFormatFunctions.eServerType.SQLite)
-			{
-				string message6 = _Translator.TranslateMessage(Assembly.GetExecutingAssembly().GetName().FullName, kDatab0004, new string[0]);
-				throw new Exception(message6);
-			}
-			connectionString = "Data Source=<%ServerDB%>;Version=3;Pooling=True;Max Pool Size=100;BinaryGUID=False;";
-			if (Operators.CompareString(_Password, "", false) != 0)
-			{
-				connectionString += "Password=<%ServerPassword%>;";
-			}
-			connectionString = Strings.Replace(connectionString, "<%ServerNome%>", _Server, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerDB%>", _Database, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerUtente%>", _User, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%ServerPassword%>", _Password, 1, -1, (CompareMethod)0);
-			connectionString = Strings.Replace(connectionString, "<%AppTitle%>", "", 1, -1, (CompareMethod)0);
+			builder.Encrypt = SqlConnectionEncryptOption.Optional;
 		}
-		_ConnectionString = connectionString;
+		return builder.ConnectionString;
 	}
 
 	protected void EnsureConnectionOpen()
@@ -2020,30 +1925,7 @@ public class DBConnection : IDisposable, ICloneable
 			rsMess = "";
 			if (_Connection == null)
 			{
-				if (_ProviderType == DBFormatFunctions.eProviderType.OleDb)
-				{
-					_Connection = (IDbConnection)new OleDbConnection(_ConnectionString);
-				}
-				else if (_ProviderType == DBFormatFunctions.eProviderType.Odbc)
-				{
-					_Connection = (IDbConnection)new OdbcConnection(_ConnectionString);
-				}
-				else if (_ProviderType == DBFormatFunctions.eProviderType.SqlClient)
-				{
-					_Connection = (IDbConnection)new SqlConnection(_ConnectionString);
-				}
-				else if (_ProviderType == DBFormatFunctions.eProviderType.MSOracleClient)
-				{
-					_Connection = (IDbConnection)new OracleConnection(_ConnectionString);
-				}
-				else if (_ProviderType == DBFormatFunctions.eProviderType.OracleClient)
-				{
-					_Connection = (IDbConnection)new OracleConnection(_ConnectionString);
-				}
-				else if (_ProviderType == DBFormatFunctions.eProviderType.SQLiteClient)
-				{
-					_Connection = (IDbConnection)new SQLiteConnection(_ConnectionString);
-				}
+				_Connection = new SqlConnection(_ConnectionString);
 			}
 			val = (FXRETURN)0;
 		}
@@ -2078,30 +1960,7 @@ public class DBConnection : IDisposable, ICloneable
 		//IL_0062: Expected O, but got Unknown
 		if (_Connection != null)
 		{
-			if (_ProviderType == DBFormatFunctions.eProviderType.OleDb)
-			{
-				return (IDbDataParameter)new OleDbParameter();
-			}
-			if (_ProviderType == DBFormatFunctions.eProviderType.Odbc)
-			{
-				return (IDbDataParameter)new OdbcParameter();
-			}
-			if (_ProviderType == DBFormatFunctions.eProviderType.SqlClient)
-			{
-				return (IDbDataParameter)new SqlParameter();
-			}
-			if (_ProviderType == DBFormatFunctions.eProviderType.MSOracleClient)
-			{
-				return (IDbDataParameter)new OracleParameter();
-			}
-			if (_ProviderType == DBFormatFunctions.eProviderType.OracleClient)
-			{
-				return (IDbDataParameter)new OracleParameter();
-			}
-			if (_ProviderType == DBFormatFunctions.eProviderType.SQLiteClient)
-			{
-				return (IDbDataParameter)new SQLiteParameter();
-			}
+			return new SqlParameter();
 		}
 		return null;
 	}
@@ -2392,30 +2251,7 @@ public class DBConnection : IDisposable, ICloneable
 			CheckIfDisposed();
 			_ObjCallStackHandler.CallStackAdd();
 			rsMess = "";
-			if (_ProviderType == DBFormatFunctions.eProviderType.OleDb)
-			{
-				objDa = (IDbDataAdapter)new OleDbDataAdapter(vsSQLClause, (OleDbConnection)_Connection);
-			}
-			else if (_ProviderType == DBFormatFunctions.eProviderType.Odbc)
-			{
-				objDa = (IDbDataAdapter)new OdbcDataAdapter(vsSQLClause, (OdbcConnection)_Connection);
-			}
-			else if (_ProviderType == DBFormatFunctions.eProviderType.SqlClient)
-			{
-				objDa = (IDbDataAdapter)new SqlDataAdapter(vsSQLClause, (SqlConnection)_Connection);
-			}
-			else if (_ProviderType == DBFormatFunctions.eProviderType.MSOracleClient)
-			{
-				objDa = (IDbDataAdapter)new OracleDataAdapter(vsSQLClause, (OracleConnection)_Connection);
-			}
-			else if (_ProviderType == DBFormatFunctions.eProviderType.OracleClient)
-			{
-				objDa = (IDbDataAdapter)new OracleDataAdapter(vsSQLClause, (OracleConnection)_Connection);
-			}
-			else if (_ProviderType == DBFormatFunctions.eProviderType.SQLiteClient)
-			{
-				objDa = (IDbDataAdapter)new SQLiteDataAdapter(vsSQLClause, (SQLiteConnection)_Connection);
-			}
+			objDa = new SqlDataAdapter(vsSQLClause, (SqlConnection)_Connection);
 			val = (FXRETURN)0;
 		}
 		catch (Exception ex)
@@ -2851,7 +2687,9 @@ public class DBConnection : IDisposable, ICloneable
 	public object Clone()
 	{
 		//IL_0057: Unknown result type (might be due to invalid IL or missing references)
-		DBConnection dBConnection = new DBConnection(_ProviderType, _Provider, _Server, eServerType, _Database, _User, _Password, _UseIntegratedSecurity, _TimeOut, _ObjCallStackHandler, ref _ObjIboAppLogHandling, ref _Translator);
+		DBConnection dBConnection = (_Server.Length == 0 && _ConnectionString.Length > 0)
+			? new DBConnection(_ConnectionString, eServerType, _TimeOut, _ObjCallStackHandler, ref _ObjIboAppLogHandling, ref _Translator)
+			: new DBConnection(_ProviderType, _Provider, _Server, eServerType, _Database, _User, _Password, _UseIntegratedSecurity, _TimeOut, _ObjCallStackHandler, ref _ObjIboAppLogHandling, ref _Translator);
 		string rsMess = "";
 		dBConnection.DBConnectionObjectCreate(ref rsMess);
 		return dBConnection;
