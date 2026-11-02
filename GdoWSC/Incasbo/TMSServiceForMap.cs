@@ -8,7 +8,11 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace Incasbo;
 
-[ServiceBehavior(/*Could not decode attribute arguments.*/)]
+#if NETFRAMEWORK
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+#else
+[CoreWCF.ServiceBehavior(InstanceContextMode = CoreWCF.InstanceContextMode.PerSession)]
+#endif
 public class TMSServiceForMap : IncasWCFStandardAuth, ITMSServiceForMap
 {
 	public TMSServiceForMap()

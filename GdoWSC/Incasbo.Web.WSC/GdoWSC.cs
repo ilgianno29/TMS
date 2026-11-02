@@ -8,7 +8,7 @@ namespace Incasbo.Web.WSC;
 
 [WebService(Namespace = "http://www.incasgroup.com/bologna/GdoWSC")]
 [ToolboxItem(false)]
-[WebServiceBinding(/*Could not decode attribute arguments.*/)]
+[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 public class GdoWSC : WSCStateWith
 {
 	protected override string ServiceName()

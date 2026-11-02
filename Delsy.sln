@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D34459BB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delsy.Tests", "Tests\Delsy.Tests\Delsy.Tests.csproj", "{AB93636B-3054-426F-88D7-955D01C1F797}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdoWSC.Host", "GdoWSC.Host\GdoWSC.Host.csproj", "{A811261A-B09A-49C9-A708-B0C2078E208D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{AB93636B-3054-426F-88D7-955D01C1F797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB93636B-3054-426F-88D7-955D01C1F797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB93636B-3054-426F-88D7-955D01C1F797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A811261A-B09A-49C9-A708-B0C2078E208D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A811261A-B09A-49C9-A708-B0C2078E208D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A811261A-B09A-49C9-A708-B0C2078E208D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A811261A-B09A-49C9-A708-B0C2078E208D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AB93636B-3054-426F-88D7-955D01C1F797} = {D34459BB-F205-42EA-B628-BED42810C1D8}

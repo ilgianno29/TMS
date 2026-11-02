@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!--
+    Host .NET 8 dei servizi WCF di GdoWSC (CoreWCF su ASP.NET Core).
+    Su Windows si pubblica in IIS con l'ASP.NET Core Module (vedi LEGGIMI.md).
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>GdoWSC.Host</AssemblyName>
+    <RootNamespace>Incasbo.Web.Host</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CoreWCF.Primitives" Version="1.6.0" />
+    <PackageReference Include="CoreWCF.Http" Version="1.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../GdoWSC/GdoWSC.csproj" />
+  </ItemGroup>
+</Project>

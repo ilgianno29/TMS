@@ -2,9 +2,14 @@ using System;
 using System.Data;
 using System.IO;
 using System.Reflection;
+#if NETFRAMEWORK
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Web.Hosting;
+#else
+// Su .NET 8 i servizi girano in CoreWCF: il contesto della richiesta e' CoreWCF.OperationContext
+using CoreWCF;
+using CoreWCF.Channels;
+#endif
 using Incasbo.Api.App;
 using Incasbo.Api.Default;
 using Incasbo.Api.Params;
@@ -37,7 +42,7 @@ public abstract class IncasWCF : IDisposable
 
 	private bool disposedValue;
 
-	protected string WSApplicationRoot => HostingEnvironment.ApplicationPhysicalPath;
+	protected string WSApplicationRoot => Incasbo.Web.Hosting.WscHosting.ApplicationRoot;
 
 	protected string WSApplicationName => Assembly.GetExecutingAssembly().GetName().Name;
 
