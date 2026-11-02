@@ -2792,11 +2792,11 @@ public class WFIMaster : MasterPage
 			SessionEnvironment.Session["DBConfigFile"] = "";
 			if (Operators.CompareString(((UserControl)this).Request.QueryString["CF"], "", false) != 0)
 			{
-				SessionEnvironment.Session["ConfigFile"] = ((UserControl)this).Request.QueryString["CF"];
+				SessionEnvironment.Session["ConfigFile"] = Incasbo.Security.ConfigNames.Sanitize(((UserControl)this).Request.QueryString["CF"]);
 			}
 			if (Operators.CompareString(((UserControl)this).Request.QueryString["DBCFG"], "", false) != 0)
 			{
-				SessionEnvironment.Session["DBConfigFile"] = ((UserControl)this).Request.QueryString["DBCFG"];
+				SessionEnvironment.Session["DBConfigFile"] = Incasbo.Security.ConfigNames.Sanitize(((UserControl)this).Request.QueryString["DBCFG"]);
 			}
 			SessionEnvironment.WebApplicationIniConfigFile = SessionEnvironment.WebApplicationIniConfigFile.Replace("<%CFG%>", SessionEnvironment.Session["ConfigFile"].ToString());
 			SessionEnvironment.WebApplicationDBConfigFile = SessionEnvironment.WebApplicationDBConfigFile.Replace("<%CFG%>", SessionEnvironment.Session["DBConfigFile"].ToString());

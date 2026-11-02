@@ -245,11 +245,11 @@ public abstract class WFIAspxRemoteService : Page
 				SessionEnvironment.Session["DBConfigFile"] = "";
 				if (Operators.CompareString(((Page)this).Request.QueryString["CF"], "", false) != 0)
 				{
-					SessionEnvironment.Session["ConfigFile"] = ((Page)this).Request.QueryString["CF"];
+					SessionEnvironment.Session["ConfigFile"] = Incasbo.Security.ConfigNames.Sanitize(((Page)this).Request.QueryString["CF"]);
 				}
 				if (Operators.CompareString(((Page)this).Request.QueryString["DBCFG"], "", false) != 0)
 				{
-					SessionEnvironment.Session["DBConfigFile"] = ((Page)this).Request.QueryString["DBCFG"];
+					SessionEnvironment.Session["DBConfigFile"] = Incasbo.Security.ConfigNames.Sanitize(((Page)this).Request.QueryString["DBCFG"]);
 				}
 				SessionEnvironment.WebApplicationIniConfigFile = SessionEnvironment.WebApplicationIniConfigFile.Replace("<%CFG%>", SessionEnvironment.Session["ConfigFile"].ToString());
 				SessionEnvironment.WebApplicationDBConfigFile = SessionEnvironment.WebApplicationDBConfigFile.Replace("<%CFG%>", SessionEnvironment.Session["DBConfigFile"].ToString());

@@ -108,3 +108,8 @@ MinimumLowerCaseCharacters=1
 // (DelsyPassword genera). Prima si usava la password dell'utente collegato.
 Utente=SVC_PORTALE
 Password=
+
+[AutoLogin]
+// Vecchio autologin con utente e password nell'indirizzo (WFIAutoLogin.aspx?u=...&p=...).
+// Lasciare False e usare i token: WFIAutoLogin.aspx?t=TOKEN (DelsyPassword autologin-crea).
+ConsentiPasswordInUrl=False
