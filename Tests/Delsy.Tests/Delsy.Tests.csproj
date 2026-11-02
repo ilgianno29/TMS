@@ -10,6 +10,9 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../../IboDbLib/IboDbLib.csproj" />
     <ProjectReference Include="../../AppApi/AppApi.csproj" />
     <ProjectReference Include="../../WMSApi/WMSApi.csproj" />

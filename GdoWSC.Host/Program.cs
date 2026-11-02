@@ -5,6 +5,7 @@ using CoreWCF.Description;
 using Incasbo;
 using Incasbo.ServiceModel;
 using Incasbo.Web.Host;
+using Incasbo.Web.Host.Asmx;
 using Incasbo.Web.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,14 @@ builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddSingleton<CoreWCF.Description.IServiceBehavior, UseRequestHeadersForMetadataAddressBehavior>();
 builder.Services.AddHostedService<BackgroundMaintenanceService>();
+
+// GdoWSC.asmx: sessione InProc e cookie di login come in ASP.NET classico
+builder.Services.Configure<AsmxOptions>(builder.Configuration.GetSection("GdoWSC:Asmx"));
+builder.Services.AddDataProtection();
+builder.Services.AddSingleton<AsmxSessionStore>();
+builder.Services.AddSingleton<FormsAuthCookie>();
+builder.Services.AddSingleton<AsmxSoapEndpoint<Incasbo.Web.WSC.GdoWSC>>();
+builder.Services.AddHostedService<AsmxSessionCleanupService>();
 
 WebApplication app = builder.Build();
 
@@ -53,6 +62,10 @@ app.UseServiceModel(serviceBuilder =>
 	serviceBuilder.AddService<TMSServiceForMap>(o => o.DebugBehavior.IncludeExceptionDetailInFaults = true);
 	serviceBuilder.AddServiceEndpoint<TMSServiceForMap, ITMSServiceForMap>(Bindings.TMSServiceForMap(), options.TMSServiceForMapPath);
 });
+
+// Servizio ASMX (login del portale)
+AsmxOptions asmxOptions = app.Services.GetRequiredService<IOptions<AsmxOptions>>().Value;
+app.Map(asmxOptions.Path, branch => branch.Run(http => http.RequestServices.GetRequiredService<AsmxSoapEndpoint<Incasbo.Web.WSC.GdoWSC>>().HandleAsync(http)));
 
 // WSDL via HTTP GET (?wsdl), come serviceMetadata httpGetEnabled="true"
 ServiceMetadataBehavior metadata = app.Services.GetRequiredService<ServiceMetadataBehavior>();

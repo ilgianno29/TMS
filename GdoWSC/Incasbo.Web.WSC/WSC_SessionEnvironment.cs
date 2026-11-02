@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-#if NETFRAMEWORK
-using System.Web;
-#endif
 using Incasbo.Api.App;
 using Incasbo.Api.Default;
 using Incasbo.Api.Params;
 using Incasbo.Web.Library;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
+#if NETFRAMEWORK
+using System.Web;
+#else
+using Incasbo.Web.Compat;
+#endif
 
 namespace Incasbo.Web.WSC;
 
@@ -168,12 +170,7 @@ public class WSC_SessionEnvironment : WSC_AbstractSessionEnvironment
 			string result;
 			try
 			{
-#if NETFRAMEWORK
 				result = HttpContext.Current.Session.SessionID;
-#else
-				// Nei servizi WCF HttpContext.Current era null: il valore era sempre "" (comportamento invariato)
-				result = "";
-#endif
 			}
 			catch (Exception ex)
 			{
