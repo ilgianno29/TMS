@@ -65,7 +65,7 @@ public class Spedizione_Attiva_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Attiva spedizione_Attiva = (Spedizione_Attiva)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Attiva).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_Attiva).ParametersIn.Add("Note", Note);

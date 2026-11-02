@@ -4863,7 +4863,7 @@ public class TMSServiceForWMS : IncasWCFEasystorAuth, ITMSServiceForWMS
 					if ((int)rnRes == 0)
 					{
 						text6 = text6.Replace("*", Args.NumeroOrdine.ToString() + "_" + DateAndTime.Now.ToString("yyyyMMddHHmmssfff"));
-						streamWriter = new StreamWriter(text5 + text6, append: true, Encoding.Default);
+						streamWriter = new StreamWriter(text5 + text6, append: true, LegacyEncoding.Ansi);
 						goto IL_0150;
 					}
 				}

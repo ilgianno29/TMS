@@ -65,7 +65,7 @@ public class BatchAttivazione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			BatchAttivazione batchAttivazione = (BatchAttivazione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)batchAttivazione).ParametersIn.Add("Batch", Batch);
 			val = ((AppAbstractApi)batchAttivazione).Run(ref rsmess);

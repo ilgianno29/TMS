@@ -66,7 +66,7 @@ public class Spedizione_CreaSubSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_CreaSubSpedizioni spedizione_CreaSubSpedizioni = (Spedizione_CreaSubSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_CreaSubSpedizioni).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_CreaSubSpedizioni).ParametersIn.Add("Tratte", Tratte);

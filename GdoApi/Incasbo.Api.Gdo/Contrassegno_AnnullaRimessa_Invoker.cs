@@ -65,7 +65,7 @@ public class Contrassegno_AnnullaRimessa_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contrassegno_AnnullaRimessa contrassegno_AnnullaRimessa = (Contrassegno_AnnullaRimessa)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegno_AnnullaRimessa).ParametersIn.Add("IdRimessa", IdRimessa);
 			val = ((AppAbstractApi)contrassegno_AnnullaRimessa).Run(ref rsmess);

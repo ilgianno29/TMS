@@ -65,7 +65,7 @@ public class WMS_Spedizione_AssociaALinea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Spedizione_AssociaALinea wMS_Spedizione_AssociaALinea = (WMS_Spedizione_AssociaALinea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Spedizione_AssociaALinea).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)wMS_Spedizione_AssociaALinea).ParametersIn.Add("IdLinea", IdLinea);

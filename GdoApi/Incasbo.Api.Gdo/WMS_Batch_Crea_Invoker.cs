@@ -65,7 +65,7 @@ public class WMS_Batch_Crea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Batch_Crea wMS_Batch_Crea = (WMS_Batch_Crea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Batch_Crea).ParametersIn.Add("IdBatch", IdBatch);
 			val = wMS_Batch_Crea.Run(ref rsmess);

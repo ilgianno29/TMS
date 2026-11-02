@@ -65,7 +65,7 @@ public class UDS_SpuntaUscita_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			UDS_SpuntaUscita uDS_SpuntaUscita = (UDS_SpuntaUscita)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)uDS_SpuntaUscita).ParametersIn.Add("Codice", Codice);
 			((AppAbstractApi)uDS_SpuntaUscita).ParametersIn.Add("Unibol", Unibol);

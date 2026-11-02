@@ -65,7 +65,7 @@ public class Viaggio_Chiudi_da_Wms_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Chiudi_da_Wms viaggio_Chiudi_da_Wms = (Viaggio_Chiudi_da_Wms)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Chiudi_da_Wms).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Chiudi_da_Wms).ParametersIn.Add("DataEvento", DataEvento);

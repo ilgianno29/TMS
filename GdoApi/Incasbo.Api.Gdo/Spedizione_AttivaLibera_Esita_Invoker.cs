@@ -65,7 +65,7 @@ public class Spedizione_AttivaLibera_Esita_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_AttivaLibera_Esita spedizione_AttivaLibera_Esita = (Spedizione_AttivaLibera_Esita)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_AttivaLibera_Esita).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_AttivaLibera_Esita).ParametersIn.Add("Esito", Esito.ToUpper());

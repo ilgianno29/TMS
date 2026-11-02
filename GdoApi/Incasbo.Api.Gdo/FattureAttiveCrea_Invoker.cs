@@ -65,7 +65,7 @@ public class FattureAttiveCrea_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveCrea fattureAttiveCrea = (FattureAttiveCrea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureAttiveCrea).ParametersIn.Add("TipoDocumento", TipoDocumento);
 			((AppAbstractApi)fattureAttiveCrea).ParametersIn.Add("Cliente", Cliente);
@@ -109,7 +109,7 @@ public class FattureAttiveCrea_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveCrea fattureAttiveCrea = (FattureAttiveCrea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureAttiveCrea).ParametersIn.Add("TipoDocumento", TipoDocumento);
 			((AppAbstractApi)fattureAttiveCrea).ParametersIn.Add("Cliente", Cliente);
@@ -161,7 +161,7 @@ public class FattureAttiveCrea_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureAttiveCrea fattureAttiveCrea = (FattureAttiveCrea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureAttiveCrea).ParametersIn.Add("TipoDocumento", TipoDocumento);
 			((AppAbstractApi)fattureAttiveCrea).ParametersIn.Add("Cliente", Cliente);

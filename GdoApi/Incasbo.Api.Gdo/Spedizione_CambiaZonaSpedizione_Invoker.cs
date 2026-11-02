@@ -66,7 +66,7 @@ public class Spedizione_CambiaZonaSpedizione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_CambiaZonaSpedizione spedizione_CambiaZonaSpedizione = (Spedizione_CambiaZonaSpedizione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_CambiaZonaSpedizione).ParametersIn.Add("ListOfUnibol", ListOfUnibol);
 			((AppAbstractApi)spedizione_CambiaZonaSpedizione).ParametersIn.Add("ZonaSpedizione", ZonaSpedizione);

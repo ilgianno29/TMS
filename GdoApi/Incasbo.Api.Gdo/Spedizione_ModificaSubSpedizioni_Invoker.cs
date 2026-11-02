@@ -66,7 +66,7 @@ public class Spedizione_ModificaSubSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ModificaSubSpedizioni spedizione_ModificaSubSpedizioni = (Spedizione_ModificaSubSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ModificaSubSpedizioni).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_ModificaSubSpedizioni).ParametersIn.Add("Tratte", Tratte);

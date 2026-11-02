@@ -65,7 +65,7 @@ public class TempiResa_CalcolaGiorni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			TempiResa_CalcolaGiorni tempiResa_CalcolaGiorni = (TempiResa_CalcolaGiorni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)tempiResa_CalcolaGiorni).ParametersIn.Add("Cliente", Cliente);
 			((AppAbstractApi)tempiResa_CalcolaGiorni).ParametersIn.Add("TipoServizio", TipoServizio);

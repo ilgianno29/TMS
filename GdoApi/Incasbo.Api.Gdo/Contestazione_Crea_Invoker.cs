@@ -65,7 +65,7 @@ public class Contestazione_Crea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contestazione_Crea contestazione_Crea = (Contestazione_Crea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contestazione_Crea).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)contestazione_Crea).ParametersIn.Add("DataApertura", DataApertura);

@@ -65,7 +65,7 @@ public class DelsyTrackMapProperties_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			DelsyTrackMapProperties delsyTrackMapProperties = (DelsyTrackMapProperties)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)delsyTrackMapProperties).ParametersIn.Add("Tipologia", Tipologia);
 			((AppAbstractApi)delsyTrackMapProperties).ParametersIn.Add("Proprieta", Proprieta);

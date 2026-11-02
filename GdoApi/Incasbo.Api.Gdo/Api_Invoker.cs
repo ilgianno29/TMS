@@ -28,7 +28,7 @@ public class Api_Invoker
 		//IL_004f: Expected O, but got Unknown
 		//IL_008f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0095: Expected O, but got Unknown
-		string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+		string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 		string text = localPath + "\\GdoApiCustom.dll";
 		AppAbstractApi val = null;
 		if (_IsCustomized)

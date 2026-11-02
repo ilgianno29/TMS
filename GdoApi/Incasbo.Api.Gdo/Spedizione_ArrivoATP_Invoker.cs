@@ -65,7 +65,7 @@ public class Spedizione_ArrivoATP_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ArrivoATP spedizione_ArrivoATP = (Spedizione_ArrivoATP)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ArrivoATP).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_ArrivoATP).ParametersIn.Add("CodiceEvento", CodiceEvento);

@@ -65,7 +65,7 @@ public class Spedizione_ConsegnaOk_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_ConsegnaOk spedizione_ConsegnaOk = (Spedizione_ConsegnaOk)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_ConsegnaOk).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_ConsegnaOk).ParametersIn.Add("CodiceEvento", CodiceEvento);

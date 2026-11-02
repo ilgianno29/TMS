@@ -66,7 +66,7 @@ public class Viaggio_InserisciConSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_InserisciConSpedizioni viaggio_InserisciConSpedizioni = (Viaggio_InserisciConSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_InserisciConSpedizioni).ParametersIn.Add("Viaggio", Viaggio);
 			((AppAbstractApi)viaggio_InserisciConSpedizioni).ParametersIn.Add("ElencoUnibol", ListOfUnibol);
@@ -115,7 +115,7 @@ public class Viaggio_InserisciConSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_InserisciConSpedizioni viaggio_InserisciConSpedizioni = (Viaggio_InserisciConSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_InserisciConSpedizioni).ParametersIn.Add("Viaggio", Viaggio);
 			((AppAbstractApi)viaggio_InserisciConSpedizioni).ParametersIn.Add("ElencoUnibol", ListOfUnibol);
@@ -165,7 +165,7 @@ public class Viaggio_InserisciConSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_InserisciConSpedizioni viaggio_InserisciConSpedizioni = (Viaggio_InserisciConSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_InserisciConSpedizioni).ParametersIn.Add("Viaggio", Viaggio);
 			((AppAbstractApi)viaggio_InserisciConSpedizioni).ParametersIn.Add("ElencoUnibol", ListOfUnibol);

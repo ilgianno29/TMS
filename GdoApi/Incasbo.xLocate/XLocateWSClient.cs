@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+#if !NETFRAMEWORK
+using Incasbo.ServiceModel;
+#endif
 
 namespace Incasbo.xLocate;
 
@@ -10,6 +13,7 @@ namespace Incasbo.xLocate;
 [GeneratedCode("System.ServiceModel", "4.0.0.0")]
 public class XLocateWSClient : ClientBase<XLocateWS>, XLocateWS
 {
+#if NETFRAMEWORK
 	public XLocateWSClient()
 	{
 	}
@@ -29,6 +33,29 @@ public class XLocateWSClient : ClientBase<XLocateWS>, XLocateWS
 	{
 	}
 
+#else
+	// .NET 8: indirizzo e binding da Incasbo.ServiceModel.WcfEndpoints (non piu' dal web.config)
+	public XLocateWSClient()
+		: base(WcfEndpoints.GetBinding(null, "xLocate.XLocateWS"), WcfEndpoints.GetAddress(null, "xLocate.XLocateWS"))
+	{
+	}
+
+	public XLocateWSClient(string endpointConfigurationName)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xLocate.XLocateWS"), WcfEndpoints.GetAddress(endpointConfigurationName, "xLocate.XLocateWS"))
+	{
+	}
+
+	public XLocateWSClient(string endpointConfigurationName, string remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xLocate.XLocateWS"), WcfEndpoints.GetAddress(endpointConfigurationName, "xLocate.XLocateWS", remoteAddress))
+	{
+	}
+
+	public XLocateWSClient(string endpointConfigurationName, EndpointAddress remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xLocate.XLocateWS"), remoteAddress)
+	{
+	}
+
+#endif
 	public XLocateWSClient(Binding binding, EndpointAddress remoteAddress)
 		: base(binding, remoteAddress)
 	{

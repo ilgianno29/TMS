@@ -103,7 +103,7 @@ public class Viaggio_Sosta_Fine_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Sosta_Fine viaggio_Sosta_Fine = (Viaggio_Sosta_Fine)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Sosta_Fine).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Sosta_Fine).ParametersIn.Add("Data", Data);

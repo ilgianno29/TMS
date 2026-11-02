@@ -66,7 +66,7 @@ public class Spedizione_AssociaAViaggioChiuso_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_AssociaAViaggioChiuso spedizione_AssociaAViaggioChiuso = (Spedizione_AssociaAViaggioChiuso)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_AssociaAViaggioChiuso).ParametersIn.Add("ListOfUnibol", ListOfUnibol);
 			((AppAbstractApi)spedizione_AssociaAViaggioChiuso).ParametersIn.Add("IdViaggio", IdViaggio);

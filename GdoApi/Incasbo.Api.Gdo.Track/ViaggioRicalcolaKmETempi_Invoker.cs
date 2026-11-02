@@ -66,7 +66,7 @@ public class ViaggioRicalcolaKmETempi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioRicalcolaKmETempi viaggioRicalcolaKmETempi = (ViaggioRicalcolaKmETempi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioRicalcolaKmETempi).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggioRicalcolaKmETempi).ParametersIn.Add("RoutingOptions", RoutingOptions);
@@ -107,7 +107,7 @@ public class ViaggioRicalcolaKmETempi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioRicalcolaKmETempi viaggioRicalcolaKmETempi = (ViaggioRicalcolaKmETempi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioRicalcolaKmETempi).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggioRicalcolaKmETempi).ParametersIn.Add("RoutingOptions", RoutingOptions);

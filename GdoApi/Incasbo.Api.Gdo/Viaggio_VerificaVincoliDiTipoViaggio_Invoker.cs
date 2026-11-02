@@ -65,7 +65,7 @@ public class Viaggio_VerificaVincoliDiTipoViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_VerificaVincoliDiTipoViaggio viaggio_VerificaVincoliDiTipoViaggio = (Viaggio_VerificaVincoliDiTipoViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_VerificaVincoliDiTipoViaggio).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_VerificaVincoliDiTipoViaggio).ParametersIn.Add("CheckCampiObbligatori", CheckCampiObbligatori);
@@ -108,7 +108,7 @@ public class Viaggio_VerificaVincoliDiTipoViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_VerificaVincoliDiTipoViaggio viaggio_VerificaVincoliDiTipoViaggio = (Viaggio_VerificaVincoliDiTipoViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_VerificaVincoliDiTipoViaggio).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_VerificaVincoliDiTipoViaggio).ParametersIn.Add("CheckCampiObbligatori", true);

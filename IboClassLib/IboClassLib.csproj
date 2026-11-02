@@ -10,6 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <PackageReference Include="System.ServiceModel.Http" Version="8.1.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.0" />
+  </ItemGroup>
   <!-- Usano API presenti solo in .NET Framework (WindowsImpersonationContext, System.Web.Mail);
        non sono usate dal resto della soluzione. Da riscrivere se servono su .NET 8. -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">

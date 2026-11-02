@@ -65,7 +65,7 @@ public class WMS_Viaggio_ImpostaSequenzaSpedizioni_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Viaggio_ImpostaSequenzaSpedizioni wMS_Viaggio_ImpostaSequenzaSpedizioni = (WMS_Viaggio_ImpostaSequenzaSpedizioni)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Viaggio_ImpostaSequenzaSpedizioni).ParametersIn.Add("IdViaggio", IdViaggio);
 			val = wMS_Viaggio_ImpostaSequenzaSpedizioni.Run(ref rsmess);

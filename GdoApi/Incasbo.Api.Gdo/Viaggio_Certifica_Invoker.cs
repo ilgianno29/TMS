@@ -65,7 +65,7 @@ public class Viaggio_Certifica_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Certifica viaggio_Certifica = (Viaggio_Certifica)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Certifica).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Certifica).ParametersIn.Add("Data", Data);
@@ -115,7 +115,7 @@ public class Viaggio_Certifica_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Certifica viaggio_Certifica = (Viaggio_Certifica)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Certifica).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_Certifica).ParametersIn.Add("Data", Data);

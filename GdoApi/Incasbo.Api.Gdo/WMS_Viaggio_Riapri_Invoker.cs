@@ -65,7 +65,7 @@ public class WMS_Viaggio_Riapri_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Viaggio_Riapri wMS_Viaggio_Riapri = (WMS_Viaggio_Riapri)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Viaggio_Riapri).ParametersIn.Add("IdViaggio", IdViaggio);
 			val = wMS_Viaggio_Riapri.Run(ref rsmess);

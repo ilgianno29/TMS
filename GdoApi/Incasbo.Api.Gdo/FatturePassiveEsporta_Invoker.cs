@@ -65,7 +65,7 @@ public class FatturePassiveEsporta_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FatturePassiveEsporta fatturePassiveEsporta = (FatturePassiveEsporta)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fatturePassiveEsporta).ParametersIn.Add("IdFattura", IdFattura);
 			val = ((AppAbstractApi)fatturePassiveEsporta).Run(ref rsMess);

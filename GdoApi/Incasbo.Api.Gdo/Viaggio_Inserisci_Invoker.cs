@@ -65,7 +65,7 @@ public class Viaggio_Inserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Inserisci viaggio_Inserisci = (Viaggio_Inserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Inserisci).ParametersIn.Add("Viaggio", Viaggio);
 			val = ((AppAbstractApi)viaggio_Inserisci).Run(ref rsmess);
@@ -113,7 +113,7 @@ public class Viaggio_Inserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Inserisci viaggio_Inserisci = (Viaggio_Inserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Inserisci).ParametersIn.Add("Viaggio", Viaggio);
 			if (IdViaggioLinea == null)
@@ -166,7 +166,7 @@ public class Viaggio_Inserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_Inserisci viaggio_Inserisci = (Viaggio_Inserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_Inserisci).ParametersIn.Add("Viaggio", Viaggio);
 			if (IdViaggioLinea == null)

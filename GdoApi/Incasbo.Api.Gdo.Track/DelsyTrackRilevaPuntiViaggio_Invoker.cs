@@ -66,7 +66,7 @@ public class DelsyTrackRilevaPuntiViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			DelsyTrackRilevaPuntiViaggio delsyTrackRilevaPuntiViaggio = (DelsyTrackRilevaPuntiViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)delsyTrackRilevaPuntiViaggio).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)delsyTrackRilevaPuntiViaggio).ParametersIn.Add("SoloEffettivo", SoloEffettivo);

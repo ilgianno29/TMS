@@ -65,7 +65,7 @@ public class Contrassegno_SincronizzaConSpedizione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contrassegno_SincronizzaConSpedizione contrassegno_SincronizzaConSpedizione = (Contrassegno_SincronizzaConSpedizione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegno_SincronizzaConSpedizione).ParametersIn.Add("IdContrassegno", IdContrassegno);
 			((AppAbstractApi)contrassegno_SincronizzaConSpedizione).ParametersIn.Add("ApplyQuery", ApplyQuery);

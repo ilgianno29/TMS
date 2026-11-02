@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 using System.Web.Mail;
+using Incasbo.Web.Library;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -93,7 +94,7 @@ public class IboMailerPEC
 			result = false;
 			smess = "";
 			_mex = new MailMessage();
-			_mex.BodyEncoding = Encoding.Default;
+			_mex.BodyEncoding = LegacyEncoding.Ansi;
 			if (_isBodyHtml)
 			{
 				_mex.BodyFormat = (MailFormat)1;

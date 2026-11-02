@@ -65,7 +65,7 @@ public class Spedizione_UdsKo_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_UdsKo spedizione_UdsKo = (Spedizione_UdsKo)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_UdsKo).ParametersIn.Add("Unibol", Unibol);
 			((AppAbstractApi)spedizione_UdsKo).ParametersIn.Add("CodiceUds", CodiceUds);

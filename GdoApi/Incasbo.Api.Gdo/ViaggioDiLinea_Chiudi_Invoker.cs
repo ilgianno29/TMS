@@ -65,7 +65,7 @@ public class ViaggioDiLinea_Chiudi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			ViaggioDiLinea_Chiudi viaggioDiLinea_Chiudi = (ViaggioDiLinea_Chiudi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggioDiLinea_Chiudi).ParametersIn.Add("IdViaggioDiLinea", IdViaggioDiLinea);
 			val = ((AppAbstractApi)viaggioDiLinea_Chiudi).Run(ref rsmess);

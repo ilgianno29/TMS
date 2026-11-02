@@ -2,6 +2,9 @@ using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+#if !NETFRAMEWORK
+using Incasbo.ServiceModel;
+#endif
 
 namespace Incasbo.TMSServiceForMap;
 
@@ -9,6 +12,7 @@ namespace Incasbo.TMSServiceForMap;
 [GeneratedCode("System.ServiceModel", "4.0.0.0")]
 public class TMSServiceForMapClient : ClientBase<ITMSServiceForMap>, ITMSServiceForMap
 {
+#if NETFRAMEWORK
 	public TMSServiceForMapClient()
 	{
 	}
@@ -28,6 +32,29 @@ public class TMSServiceForMapClient : ClientBase<ITMSServiceForMap>, ITMSService
 	{
 	}
 
+#else
+	// .NET 8: indirizzo e binding da Incasbo.ServiceModel.WcfEndpoints (non piu' dal web.config)
+	public TMSServiceForMapClient()
+		: base(WcfEndpoints.GetBinding(null, "TMSServiceForMap.ITMSServiceForMap"), WcfEndpoints.GetAddress(null, "TMSServiceForMap.ITMSServiceForMap"))
+	{
+	}
+
+	public TMSServiceForMapClient(string endpointConfigurationName)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "TMSServiceForMap.ITMSServiceForMap"), WcfEndpoints.GetAddress(endpointConfigurationName, "TMSServiceForMap.ITMSServiceForMap"))
+	{
+	}
+
+	public TMSServiceForMapClient(string endpointConfigurationName, string remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "TMSServiceForMap.ITMSServiceForMap"), WcfEndpoints.GetAddress(endpointConfigurationName, "TMSServiceForMap.ITMSServiceForMap", remoteAddress))
+	{
+	}
+
+	public TMSServiceForMapClient(string endpointConfigurationName, EndpointAddress remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "TMSServiceForMap.ITMSServiceForMap"), remoteAddress)
+	{
+	}
+
+#endif
 	public TMSServiceForMapClient(Binding binding, EndpointAddress remoteAddress)
 		: base(binding, remoteAddress)
 	{

@@ -67,7 +67,7 @@ public class DelsyTrackCalcolaPercorsoViaggio_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			DelsyTrackCalcolaPercorsoViaggio delsyTrackCalcolaPercorsoViaggio = (DelsyTrackCalcolaPercorsoViaggio)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)delsyTrackCalcolaPercorsoViaggio).ParametersIn.Add("inXRouteWS", inXRouteWS);
 			((AppAbstractApi)delsyTrackCalcolaPercorsoViaggio).ParametersIn.Add("inViaggio", inViaggio);

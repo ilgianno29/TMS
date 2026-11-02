@@ -65,7 +65,7 @@ public class Calendario_Crea_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Calendario_Crea calendario_Crea = (Calendario_Crea)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)calendario_Crea).ParametersIn.Add("Anno", Anno);
 			val = ((AppAbstractApi)calendario_Crea).Run(ref rsmess);

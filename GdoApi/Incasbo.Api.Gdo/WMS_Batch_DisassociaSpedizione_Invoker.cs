@@ -65,7 +65,7 @@ public class WMS_Batch_DisassociaSpedizione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			WMS_Batch_DisassociaSpedizione wMS_Batch_DisassociaSpedizione = (WMS_Batch_DisassociaSpedizione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)wMS_Batch_DisassociaSpedizione).ParametersIn.Add("IdBatch", IdBatch);
 			((AppAbstractApi)wMS_Batch_DisassociaSpedizione).ParametersIn.Add("Unibol", IdBatch);

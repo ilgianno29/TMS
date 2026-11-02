@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+#if !NETFRAMEWORK
+using Incasbo.ServiceModel;
+#endif
 
 namespace Incasbo.xTour;
 
@@ -10,6 +13,7 @@ namespace Incasbo.xTour;
 [DebuggerStepThrough]
 public class XTourWSClient : ClientBase<XTourWS>, XTourWS
 {
+#if NETFRAMEWORK
 	public XTourWSClient()
 	{
 	}
@@ -29,6 +33,29 @@ public class XTourWSClient : ClientBase<XTourWS>, XTourWS
 	{
 	}
 
+#else
+	// .NET 8: indirizzo e binding da Incasbo.ServiceModel.WcfEndpoints (non piu' dal web.config)
+	public XTourWSClient()
+		: base(WcfEndpoints.GetBinding(null, "xTour.XTourWS"), WcfEndpoints.GetAddress(null, "xTour.XTourWS"))
+	{
+	}
+
+	public XTourWSClient(string endpointConfigurationName)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xTour.XTourWS"), WcfEndpoints.GetAddress(endpointConfigurationName, "xTour.XTourWS"))
+	{
+	}
+
+	public XTourWSClient(string endpointConfigurationName, string remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xTour.XTourWS"), WcfEndpoints.GetAddress(endpointConfigurationName, "xTour.XTourWS", remoteAddress))
+	{
+	}
+
+	public XTourWSClient(string endpointConfigurationName, EndpointAddress remoteAddress)
+		: base(WcfEndpoints.GetBinding(endpointConfigurationName, "xTour.XTourWS"), remoteAddress)
+	{
+	}
+
+#endif
 	public XTourWSClient(Binding binding, EndpointAddress remoteAddress)
 		: base(binding, remoteAddress)
 	{

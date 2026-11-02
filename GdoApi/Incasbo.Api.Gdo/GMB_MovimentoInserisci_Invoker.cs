@@ -66,7 +66,7 @@ public class GMB_MovimentoInserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			GMB_MovimentoInserisci gMB_MovimentoInserisci = (GMB_MovimentoInserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)gMB_MovimentoInserisci).ParametersIn.Add("Gmb_Documento", Gmb_Documento);
 			val = ((AppAbstractApi)gMB_MovimentoInserisci).Run(ref rsmess);

@@ -65,7 +65,7 @@ public class Contrassegno_AnnullaEsito_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Contrassegno_AnnullaEsito contrassegno_AnnullaEsito = (Contrassegno_AnnullaEsito)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)contrassegno_AnnullaEsito).ParametersIn.Add("IdContrassegno", IdContrassegno);
 			((AppAbstractApi)contrassegno_AnnullaEsito).ParametersIn.Add("ApplyQuery", ApplyQuery);

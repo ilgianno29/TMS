@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>GdoParamsDefaultCustom</AssemblyName>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../AppApi/AppApi.csproj" />
     <ProjectReference Include="../IboClassLib/IboClassLib.csproj" />
     <ProjectReference Include="../IboWebParam/IboWebParam.csproj" />
   </ItemGroup>
   <ItemGroup><!--mods--><Using Include="Incasbo.Web.Library.modGeneral" Static="true" /><Using Include="Incasbo.Web.Library.DBFormatFunctions" Static="true" /></ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <Reference Include="Microsoft.VisualBasic" />
+  </ItemGroup>
 </Project>

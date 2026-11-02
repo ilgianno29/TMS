@@ -12,5 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="../../IboDbLib/IboDbLib.csproj" />
     <ProjectReference Include="../../AppApi/AppApi.csproj" />
+    <ProjectReference Include="../../WMSApi/WMSApi.csproj" />
+    <ProjectReference Include="../../GdoApi/GdoApi.csproj" />
   </ItemGroup>
 </Project>

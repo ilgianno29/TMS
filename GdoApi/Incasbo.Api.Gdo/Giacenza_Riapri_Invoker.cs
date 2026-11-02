@@ -65,7 +65,7 @@ public class Giacenza_Riapri_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Giacenza_Riapri giacenza_Riapri = (Giacenza_Riapri)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)giacenza_Riapri).ParametersIn.Add("IdGiacenza", IdGiacenza);
 			((AppAbstractApi)giacenza_Riapri).ParametersIn.Add("DataRiapertura", DataRiapertura);

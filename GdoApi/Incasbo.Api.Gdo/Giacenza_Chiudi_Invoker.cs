@@ -65,7 +65,7 @@ public class Giacenza_Chiudi_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Giacenza_Chiudi giacenza_Chiudi = (Giacenza_Chiudi)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)giacenza_Chiudi).ParametersIn.Add("UnibolChiusura", UnibolChiusura);
 			((AppAbstractApi)giacenza_Chiudi).ParametersIn.Add("IdGiacenza", IdGiacenza);

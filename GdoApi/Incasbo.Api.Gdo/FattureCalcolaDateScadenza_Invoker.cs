@@ -65,7 +65,7 @@ public class FattureCalcolaDateScadenza_Invoker : Api_Invoker
 		try
 		{
 			rsMess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			FattureCalcolaDateScadenza fattureCalcolaDateScadenza = (FattureCalcolaDateScadenza)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)fattureCalcolaDateScadenza).ParametersIn.Add("IdFattura", IdFattura);
 			((AppAbstractApi)fattureCalcolaDateScadenza).ParametersIn.Add("TipoPagamento", TipoPagamento);

@@ -65,7 +65,7 @@ public class Spedizione_Inserisci_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Spedizione_Inserisci spedizione_Inserisci = (Spedizione_Inserisci)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)spedizione_Inserisci).ParametersIn.Add("Spedizione", Spedizione);
 			val = ((AppAbstractApi)spedizione_Inserisci).Run(ref rsmess);

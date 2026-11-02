@@ -23,7 +23,7 @@ internal class StatisticPreprocessingFactory
 				return null;
 			}
 			string text3 = "";
-			text3 = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			text3 = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			text3 = text3 + "\\" + text;
 			return (StatisticPreprocessing)IncasReflection.InstantiateClass(text2, ref text3, new object[1] { objApiContext });
 		}

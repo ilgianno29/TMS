@@ -66,7 +66,7 @@ public class Viaggio_AnnullaCertificazione_Invoker : Api_Invoker
 		try
 		{
 			rsmess = "";
-			string localPath = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+			string localPath = AssemblyLocation.DirectoryOf(Assembly.GetExecutingAssembly());
 			Viaggio_AnnullaCertificazione viaggio_AnnullaCertificazione = (Viaggio_AnnullaCertificazione)(object)InstantiateApi(ref objApiContext, ClassName, ClassNameCustom);
 			((AppAbstractApi)viaggio_AnnullaCertificazione).ParametersIn.Add("IdViaggio", IdViaggio);
 			((AppAbstractApi)viaggio_AnnullaCertificazione).ParametersIn.Add("Data", Data);
