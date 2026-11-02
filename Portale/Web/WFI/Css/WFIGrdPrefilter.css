@@ -1,0 +1,44 @@
+﻿.pnlListPrefilter {
+    height: 300px;
+    overflow: auto;
+    width: 740px;
+    border: 1px solid #aaaaaa;
+}
+
+    .pnlListPrefilter .ItemLink, ItemLink:hover {
+        text-decoration: none !important;
+        font-weight: normal;
+    }
+
+    .pnlListPrefilter .ItemContainer {
+        height: 45px;
+        overflow: hidden;
+        width: 100%;
+        border: 0;
+        margin: 0px;
+        border-bottom: 1px solid #aaaaaa;
+        font-size: 14pt;
+        color: #9e253b;
+        clear:both;
+    }
+
+    .pnlListPrefilter .ItemSelected {
+        background-color: #9e253b;
+        color: #ffffff;
+    }
+
+    /*.pnlListPrefilter .ItemContainer:hover {
+        background-color: #ffaaaa;
+        text-decoration: none;
+    }*/
+
+    .pnlListPrefilter .ItemValue {
+        padding: 10px;
+        float:left;
+        width:670px;
+    }
+
+    .pnlListPrefilter .ImageLink {        
+        float:left;
+        padding: 10px;                
+    }

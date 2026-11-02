@@ -1,0 +1,24 @@
+﻿
+#pnlElencoStatistiche
+{
+    width: 550px;
+    float: left;
+}
+
+#pnlElencoFiltri
+{
+    float: left;
+    width: 695px;
+    margin-left:5px;
+}
+
+div.CollapsiblePanelBody.ElencoFiltri
+{
+    height:440px;
+}
+
+div.CollapsiblePanelBody.ElencoFiltri, div.CollapsiblePanelBody.ElencoStatistiche
+{
+    height:440px;
+}
+

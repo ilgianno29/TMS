@@ -1,0 +1,719 @@
+﻿/************************************************************/
+/*					STILE DELLA MODAL POPUP					*/
+/************************************************************/
+.popupBack /* STILE BACKGROUND DELLA POPUP*/ {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+div.popupDragBar /*BARRA PER IL DRAG&GROP DELLA POPUP*/ {
+    background-color: #9e253b;
+    border: solid 1px #555555;
+    height: 30px;
+    cursor: pointer;
+    vertical-align: middle;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    text-align: left;
+    padding-left: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #eeeeee;
+}
+
+div.popupContent {
+    background-color: #eeeeee;
+    border-left: solid 1px #555555;
+    border-right: solid 1px #555555;
+    height: 260px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+div.pnlFiltro_V2 div.popupContent {
+    height: 300px;
+    padding-top: 10px;
+}
+
+table.popupContentList /*CONTENUTO*/ {
+    font-size: medium;
+    font-weight: bold;
+    color: #555555; /*width:458px;		*/
+    width: 100%;
+}
+
+    table.popupContentList tr td {
+        padding: 3px;
+        height: 22px;
+    }
+
+    table.popupContentList tr:hover /*CONTENUTO*/ {
+        background-color: #9E253B;
+        color: #FFFFFF;
+    }
+
+    table.popupContentList.IboWebRadioButtonList input[type=radio] {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        margin-left: 5px;
+    }
+
+
+div.popupButtons /*PULSANTI*/ {
+    background-color: #ff9900;
+    background-color: #d2d2d2;
+    border: solid 1px #555555;
+    height: 43px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+    div.popupButtons input {
+        width: 95px;
+        height: 30px;
+        position: relative;
+        top: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+.pnlExport_btnFiltroConferma {
+    border-width: 1px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+.pnlExport_btnFiltroAnnulla {
+    border-width: 1px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+.popupDiv {
+    width: 550px;
+    height: auto;
+}
+
+div.pnlFiltro_V2.popupDiv {
+    width: 590px;
+    height: auto;
+}
+
+.popupTitle {
+    font-size: 16pt;
+    font-weight: bold;
+    position: relative;
+    top: 2px;
+}
+
+div.popupButtons #tableButtons, div.popupButtons .tableButtons {
+    width: 100%;
+}
+
+div.popupButtons #tableButtons_L, div.popupButtons .tableButtons_L {
+    text-align: left;
+    width: 110px;
+}
+
+div.popupButtons #tableButtons_R, div.popupButtons .tableButtons_R {
+    text-align: right;
+    width: 110px;
+}
+
+.popupReportListBox {
+    font-size: 8pt;
+    background-color: #FFFFCC;
+    font-family: "Courier New";
+    height: 100%;
+    width: 390px;
+}
+
+.popupSubTitle {
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.popupMessage {
+    font-size: 10pt;
+    font-weight: normal;
+    height: 250px;
+    width: 100%;
+}
+
+.popupTable {
+    border-collapse: collapse;
+    padding: 10px;
+    width: 100%;
+}
+
+    .popupTable td {
+        text-align: left;
+        vertical-align: top;
+        padding: 5px 10px 5px 10px;
+    }
+
+div.pnlFiltro_V2 .popupTable td {
+    padding: 3px 10px 3px 10px;
+}
+
+.pnlFiltro_txtFiltroStringVal {
+    width: 365px;
+    font-size: medium;
+}
+
+.pnlFiltro_ddlFiltroOperatore {
+    width: 372px;
+    font-size: medium;
+    height: auto;
+}
+
+.pnlFiltro_ddlFiltroCampo {
+    width: 372px;
+    font-size: medium;
+    height: auto;
+}
+
+select.pnlFiltro_ddlFiltroSalvato {
+    width: 372px;
+    font-size: 11pt;
+    height: 24px;
+    color: #bb2544;
+}
+
+    select.pnlFiltro_ddlFiltroSalvato option {
+        background-color: #eeeecc;
+        font-size: 11pt;
+    }
+
+.pnlFiltro_lblFiltroOperatore {
+    font-size: medium;
+}
+
+.pnlFiltro_lblFiltroVal {
+    font-size: medium;
+}
+
+.pnlFiltro_txtFiltroNumericVal {
+    font-size: medium;
+}
+
+.pnlFiltro_txtFiltroDateVal {
+    font-size: medium;
+}
+
+.pnlFiltro_lblFiltroCampo {
+    font-weight: bold;
+    font-size: medium;
+    font-style: italic;
+    display: none;
+}
+
+.pnlFiltro_lblFiltroCampoDesc {
+    font-size: medium;
+    font-weight: normal;
+}
+
+.pnlFiltro_txtFiltroDescrizione {
+    width: 365px;
+    font-size: medium;
+}
+
+.pnlFiltro_btnFiltroConferma {
+    border-width: 1px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+.pnlFiltro_btnFiltroAnnulla {
+    border-width: 1px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+input.pnlFiltro_btnFiltroSalva {
+    border-width: 1px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/salva.png');
+    background-repeat: no-repeat;
+    width: 70px;
+    margin: 0px;
+    height: 23px;
+}
+
+input.pnlFiltro_btnFiltroCancella {
+    border-width: 1px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/elimina.png');
+    background-repeat: no-repeat;
+    width: 70px;
+    margin: 0px;
+    height: 23px;
+}
+
+.avanzamento {
+    width: 100%;
+    border: 1px solid #000000;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+.IboWebGridView .EmptyDataRow td {
+    padding: 0px;
+}
+
+.IboWebGridView .EmptyDataRow .lblEmptyDataTemplate {
+    font-style: italic;
+    font-size: large;
+    text-align: center;
+    height: 100%;
+    _width: 100%;
+    vertical-align: middle;
+}
+
+.IboWebGridView .EmptyDataRow .EmptyDataTemplateContainer {
+    border: 1px solid #aaaaaa;
+    height: 300px;
+    text-align: center;
+    overflow: hidden;
+    max-height: none;
+}
+
+.IboWebGridView .EmptyDataRow .EmptyDataTemplateTable {
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+
+.IboWebGridView .EmptyDataRow .EmptyDataTemplateContainerInterno {
+    vertical-align: middle;
+}
+
+.WFStandardGrid_pnlGrd {
+    width: 100%;
+    text-align: left;
+}
+
+    .WFStandardGrid_pnlGrd .GridHeader {
+        background-color: rgb(158, 37, 59);
+        vertical-align: middle;
+        text-align: left;
+        font-size: 14pt;
+        color: #DDDDDD;
+        font-weight: bold;
+        min-width: 250px;
+        white-space: nowrap;
+        padding: 0px;
+        padding-top: 0px;
+        border: 1px solid #aaaaaa;
+        border-bottom-width: 0px;
+    }
+
+        .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable {
+            padding: 0px;
+            width: 100%;
+        }
+
+            .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable tbody {
+                padding: 0px;
+                border: 0px;
+                border-collapse: collapse;
+                margin: 0px;
+                margin-top: -2px;
+            }
+
+            .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderCellTitle {
+            }
+
+                .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderCellTitle .GridHeaderCellAction {
+                    border: 1px solid transparent;
+                    color: #ffffff;
+                    width: 23px;
+                    height: 24px;
+                    margin-right: 2px;
+                }
+
+                .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderCellTitle .GridHeaderCellLegend {
+                    border: 1px solid transparent;
+                    color: #ffffff;
+                    width: 23px;
+                    height: 24px;
+                    margin-right: 2px;
+                }
+
+.LegendPopupMenu {
+    border: 1px solid #aaaaaa;
+    background-color: #eeeeee;
+    padding: 5px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+    .LegendPopupMenu .LegendCaption {
+        margin: -5px;
+        background-color: #9e253b;
+        color: #dddddd;
+        padding: 3px 3px 3px 3px;
+        font-size: 10pt;
+    }
+
+    .LegendPopupMenu .LegendContentPopupMenu {
+        margin-top: 5px;
+        margin-left: -5px;
+        margin-right: -5px;
+        font-size: 10pt;
+        color: #000000;
+        font-weight: normal;
+    }
+
+        .LegendPopupMenu .LegendContentPopupMenu .LegendContentPopupMenu2 {
+            margin: 3px;
+            margin-top: 10px;
+            border: 0px solid #aaaaaa;
+        }
+
+            .LegendPopupMenu .LegendContentPopupMenu .LegendContentPopupMenu2 .LegendItem {
+                padding: 5px;
+                margin: 5px;
+                border: 1px solid #aaaaaa;
+            }
+
+            .LegendPopupMenu .LegendContentPopupMenu .LegendContentPopupMenu2 .LegendItemWithImage {
+                padding-left: 25px !important;
+            }
+
+.WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderIdleCell {
+    width: 190px;
+    font-size: 12px;
+    text-align: right;
+}
+
+    .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderIdleCell label {
+        margin-right: 5px;
+    }
+
+.WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderCellSearchText {
+    vertical-align: middle;
+    text-align: right;
+    width: 225px;
+}
+
+    .WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderCellSearchText div {
+        vertical-align: middle;
+    }
+
+.WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .lblPagerSearchText {
+    display: none;
+    font-weight: bold;
+}
+
+.WFStandardGrid_pnlGrd .GridHeader .GridHeaderTable .GridHeaderCellSearchTextTxt {
+    Width: 130px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+
+
+.StdGridTitle {
+    /*font-family: 'Open Sans',sans-serif!important;    */
+    font-size: 18px !important;
+    font-style: normal !important;
+    color: #333333;
+}
+
+.StdGridIntestazionePanel {
+    padding-top: 7px;
+    display: none;
+}
+
+#divGrdGrigliaContainer {
+    padding-bottom: 1px;
+}
+
+.lblGridFilter {
+    background-color: #fff080;
+    background-color: #9e253b;
+    border: solid 1px #AAAAAA;
+    font-size: 8pt;
+    padding: 3px;
+    color: #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#IntestazioneTable {
+    padding: 0px;
+    border-collapse: collapse;
+    border: 0;
+    width: 100%;
+}
+
+#IntestazioneTableR1 {
+    display: none;
+}
+
+#IntestazioneTableR1C1 {
+    padding: 1px;
+}
+
+#IntestazioneTableR1C2 {
+    padding: 1px;
+    width: 150px;
+    text-align: right;
+}
+
+#IntestazioneTableR2C1 {
+    padding: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#IntestazioneTableR2C2 {
+    padding: 1px;
+    width: 150px;
+    text-align: right;
+}
+
+#lblNumeroRecordTotali {
+    font-weight: bold;
+    text-align: Left;
+}
+
+select.pnlFiltro_lstFiltroTot {
+    width: 372px;
+    font-size: 10pt;
+    padding: 1px;
+    padding-left: 2px;
+    border: 1px solid #AAAAAA;
+}
+
+    select.pnlFiltro_lstFiltroTot option {
+        padding-bottom: 2px;
+        padding-top: 2px;
+    }
+
+.pnlFiltro_lblFiltroTot {
+    font-size: medium;
+}
+
+.pnlFiltro_lblFiltroDescrizione {
+    font-size: medium;
+}
+
+.pnlFiltro_Aggiungi {
+    border-width: 1px;
+    width: 40px;
+    height: 25px;
+}
+
+.pnlFiltro_Elimina {
+    border-width: 1px;
+    width: 40px;
+    height: 25px;
+    margin-top: 5px;
+}
+
+/*
+	PANNELLO PULSANTI
+*/
+.pnlCommands {
+    border-width: 0px;
+    border-style: none;
+    width: 100%;
+}
+
+    .pnlCommands #tableButtons_L, .pnlCommands .tableButtons_L {
+    }
+
+    .pnlCommands #tableButtons_R, .pnlCommands .tableButtons_R {
+        text-align: right;
+        width: 103px;
+    }
+
+    .pnlCommands #tableButtons_C, .pnlCommands .tableButtons_C {
+        text-align: left;
+        width: 103px;
+    }
+
+    .pnlCommands #tableButtons, .pnlCommands .tableButtons {
+        width: 100%;
+    }
+
+    .pnlCommands .DetailFormButton_Ok {
+        width: 100px;
+        height: 30px;
+        text-align: right;
+        background-image: url('../images/Toolbar/24/conferma.png');
+    }
+
+    .pnlCommands .DetailFormButton_Cancel {
+        width: 100px;
+        height: 30px;
+        text-align: right;
+        background-image: url('../images/Toolbar/24/annulla.png');
+    }
+
+    .pnlCommands .DetailFormButton_SelezionaTutto {
+        width: 30px;
+        height: 30px;
+        text-align: right;
+        background-image: url('../images/Toolbar/24/SelectAll.png');
+    }
+
+    .pnlCommands .DetailFormButton_DeselezionaTutto {
+        width: 30px;
+        height: 30px;
+        text-align: right;
+        background-image: url('../images/Toolbar/24/SelectNone.png');
+    }
+/*
+	PANNELLO PULSANTE BACK
+*/
+.pnlBackButton {
+    border-width: 0px;
+    border-style: none;
+    width: 100%;
+}
+
+#tableBackButton_L, .tableBackButton_L {
+    text-align: left;
+    width: 110px;
+}
+
+#tableBackButton_R, .tableBackButton_R {
+    text-align: right;
+    width: 105px;
+}
+
+#tableBackButton_C, .tableBackButton_C {
+    text-align: center;
+    width: auto;
+}
+
+#tableBackButton, .tableBackButton {
+    width: 100%;
+}
+
+.Button_Back {
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/arrow_left_white.png');
+}
+
+.btnPagerSearchSvuotaFiltro {
+    margin-left: -5px;
+}
+
+/*
+    Footer
+*/
+.IboWebGridView .FooterRow {
+    border: solid 1px #aaaaaa;
+}
+
+    .IboWebGridView .FooterRow .SelectionCell {
+    }
+
+    .IboWebGridView .FooterRow .FooterCellFull {
+        border: solid 1px #aaaaaa;
+        font-weight: bold;
+    }
+
+        .IboWebGridView .FooterRow .FooterCellFull.FooterCellNumeric {
+            text-align: right;
+        }
+
+.IboWebGridView .PagerRow {
+    height: 35px;
+}
+
+.IboWebGridView .HeaderRow {
+    height: 30px;
+}
+
+div.up_grdGriglia.PanelTopHeaderVisible > div:first-child {
+    max-height: calc(100vh - 255px);
+    overflow: auto;
+}
+
+div.up_grdGriglia.NotPanelTopHeaderVisible > div:first-child {
+    max-height: calc(100vh - 180px);
+    overflow: auto;
+}
+
+.IsInIframe div.up_grdGriglia.NotPanelTopHeaderVisible > div:first-child {
+    max-height: none;
+    overflow: hidden;
+}
+
+
+/*
+
+Stili per pallini colorati sulla griglia
+    
+*/
+div.PallinoVerde {
+    background-color: #99FF99;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+div.PallinoRosso {
+    background-color: #FF9999;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+body {
+    min-height: 450px;
+}
+
+/*
+    Stile per la visualizzazione dell'elenco dei contrassegni
+*/
+table.ElencoDettaglioDiGrigliaTable {
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+    table.ElencoDettaglioDiGrigliaTable td {
+        border: 1px solid #acacac;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        text-align: left;
+        min-width: 40px;
+    }
+
+    table.ElencoDettaglioDiGrigliaTable tr:first-child td {
+        font-weight: bold;
+        background-color: #dddddd;
+    }
+
+.grdGriglia .BlobFieldLink .BlobField {
+    width: 50px;
+    height: 22px;
+}
+
+hr.WFIHRSeparatore {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 0px;
+    height: 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,548 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="WFIMaster.Master.vb" Inherits="Incasbo.Web.WFI.WFIMaster" %>
+
+<%@ Register Assembly="IboWebComponents" Namespace="Incasbo.Web.Components" TagPrefix="iwc" %>
+<%@ Register Assembly="IboGridView" Namespace="Incasbo.Web.Components" TagPrefix="iwc" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
+<%@ Register Src="~/WFI/Componenti/IboWebDate.ascx" TagName="IboWebDate" TagPrefix="iwc" %>
+<%@ Register Src="~/WFI/Componenti/IboWebNumeric.ascx" TagName="IboWebNumeric" TagPrefix="iwc" %>
+<%@ Register Src="~/WFI/Componenti/IboWebToolbar.ascx" TagName="iboWebToolbar" TagPrefix="iwc" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <%-- DEBUG BEGIN--%>
+
+    <%--        <link href="~/WFI/scripts/jquery-ui.min.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/scripts/jquery-ui.theme.min.css?d=20180913" rel="stylesheet" />    
+
+    <link href="~/WFI/css/Input.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Input.Incas.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/IncasControl.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/WFIMaster.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/MessageBox.css?d=20180913" rel="stylesheet" type="text/css" />               
+    <link href="~/WFI/css/Menu.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Menu.Incas.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Notification.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Notification.Default.css?d=20180913" rel="stylesheet" type="text/css" />    
+    <link href="~/WFI/css/WFIMasterPrint.css?d=20180913" rel="stylesheet" type="text/css" media="print" />   
+    <link href="~/WFI/css/WFIImageViewer.css" rel="stylesheet" type="text/css" />     
+    
+    <script src="../../WFI/scripts/jquery-2.2.4.min.js?d=20180913" type="text/javascript"></script>
+    <script src="../../WFI/scripts/jquery-ui.min.js?d=20180913" type="text/javascript"></script>  
+    <script src="../../WFI/scripts/WFIImageViewer.js"></script>
+        --%>
+
+    <%-- DEBUG END--%>
+
+
+    <%-- release BEGIN --%>
+
+    <link href="~/WFI/scripts/jquery-ui.min.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/scripts/jquery-ui.theme.min.css?d=20180913" rel="stylesheet" />
+    <link href="~/WFI/css/Input.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Input.Incas.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/IncasControl-min.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/WFIMaster-min.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/MessageBox.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Menu-min.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Menu.Incas-min.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Notification.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/Notification.Default.css?d=20180913" rel="stylesheet" type="text/css" />
+    <link href="~/WFI/css/WFIMasterPrint.css?d=20180913" rel="stylesheet" type="text/css" media="print" />
+    <link href="~/WFI/css/WFIImageViewer-min.css?d=20180913" rel="stylesheet" type="text/css" />    
+
+    <script src="../../WFI/scripts/jquery-2.2.4.min.js?d=20180913" type="text/javascript"></script>
+    <script src="../../WFI/scripts/jquery-ui.min.js?d=20180913" type="text/javascript"></script>
+    <script src="../../WFI/scripts/WFIImageViewer-min.js?d=20180913"></script>
+
+    <%-- release END --%>
+
+    <asp:PlaceHolder runat="server">
+        <% Response.Write("<link rel=""stylesheet"" type=""text/css"" href=""../../Custom/css/WFIMasterCustom.css?d=" + Now.Date.ToString("yyyyMMdd") + """ />")%>
+    </asp:PlaceHolder>
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body id="MasterPageBodyTag" runat="server" clientidmode="Static">
+    <form id="frm" runat="server" autocomplete="off">
+        <asp:UpdatePanel runat="server" ID="up_ScriptManager" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="True" EnableScriptGlobalization="true" EnableScriptLocalization="true">
+                    <Scripts>
+                        <asp:ScriptReference Path="../../WFI/scripts/WFI-min.js?d=20180913" />
+                        <%--<asp:ScriptReference Path="../../WFI/scripts/WFI.js?d=20180913" />--%>
+                    </Scripts>
+                </asp:ScriptManager>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <asp:UpdateProgress ID="UpdProgressMaster" runat="server" AssociatedUpdatePanelID="PanelGlobalContainer" DisplayAfter="2000">
+            <ProgressTemplate>
+                <asp:Panel ID="UPPnlMainContainer" runat="server" CssClass="UPPnlMainContainer">
+                </asp:Panel>
+                <asp:Panel runat="server" ID="UPPnlMain" CssClass="UPPnlMain">
+                    <asp:UpdatePanel runat="server" ID="up_UpdProgressMaster" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:Image runat="server" ID="imgprova" ImageUrl="~/WFI/images/loading.gif" />
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblWaitMessage" Text="" Visible="false"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </asp:Panel>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+        <asp:UpdatePanel ID="PanelGlobalContainer" runat="server" ClientIDMode="Static" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:HiddenField runat="server" ID="ScreenDimensions" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="BrowserDetect" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="KeepAlive_StartPolling" ClientIDMode="Static" Value="0" />
+                <asp:UpdatePanel runat="server" ID="UP_IncasFocus" ClientIDMode="Static" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                    <ContentTemplate>
+                        <asp:HiddenField ID="HFIncasFocus" runat="server" Value="" ClientIDMode="Static" />
+                        <asp:HiddenField ID="HFIncasFocus2" runat="server" Value="" ClientIDMode="Static" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel runat="server" ID="UP_JavascriptEval" ClientIDMode="Static" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                    <ContentTemplate>
+                        <asp:HiddenField runat="server" ID="JavascriptEval" ClientIDMode="Static" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel runat="server" ID="UP_TooltipManager" ClientIDMode="Static" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                    <ContentTemplate>
+                        <asp:HiddenField runat="server" ID="JqueryToolTipManagerEnable" Value="" ClientIDMode="Static" />
+                        <asp:HiddenField runat="server" ID="JqueryToolTipManagerDuration" Value="6000" ClientIDMode="Static" />
+                        <asp:HiddenField runat="server" ID="JqueryToolTipManager_NotCloseIfHover" Value="0" ClientIDMode="Static" />
+                        <asp:HiddenField runat="server" ID="JqueryToolTipManager_ShowDelay" Value="500" ClientIDMode="Static" />
+                        <asp:HiddenField runat="server" ID="JqueryToolTipManager_AnimationDuration" Value="300" ClientIDMode="Static" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel runat="server" ID="up_LastPostback" ClientIDMode="Static" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                    <ContentTemplate>
+                        <asp:HiddenField ID="HF_LastPostBack" runat="server" Value="" ClientIDMode="Static" />
+                        <asp:HiddenField ID="HF_IsPostBack" runat="server" Value="" ClientIDMode="Static" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:Panel ID="pnlMainMaster" runat="server" CssClass="pnlMainMaster">
+                    <asp:UpdatePanel runat="server" ID="UP_pnlMainMaster" RenderMode="Block" UpdateMode="Conditional" ChildrenAsTriggers="False">
+                        <ContentTemplate>
+                            <asp:Panel ID="PanelTopHeader" runat="server" ClientIDMode="Static" Visible="true">
+                                <div id="PanelTopHeader1">
+                                    <asp:Image ID="imgMasterLogoCliente" CssClass="imgMasterLogoCliente" runat="server" ImageUrl="~/images/LogoIncas.gif" />
+                                    <asp:Image ID="imgMasterLogoIncas" CssClass="imgMasterLogoIncas" runat="server" ImageUrl="~/images/LogoIncas.gif" />
+                                    <iwc:IboWebLabel runat="server" CssClass="MasterPanelTopTitle" ID="MasterPanelTopTitle" ClientIDMode="Static"></iwc:IboWebLabel>
+                                </div>
+                                <div id="PanelTopHeader2">
+                                    <input id="IdleButton1" type="submit" name="IdleButton" style="width: 0px; height: 0px; top: -100px; position: absolute;" />
+                                </div>
+                                <div id="PanelTopHeader3">
+                                    <div id="PanelHeaderContentRightTop">
+                                        <asp:Label ID="lblMasterTitoloModuloSoftware" runat="server" Text="Modulo Software" CssClass="lblMasterTitoloModuloSoftware"></asp:Label>
+                                    </div>
+                                    <div id="PanelHeaderContentRightBottom">
+                                        <asp:Table runat="server" ID="PanelTopHeader3Table" CssClass="PanelTopHeader3Table" ClientIDMode="Static">
+                                            <asp:TableRow runat="server" ID="PanelTopHeader3Table_R1" ClientIDMode="Static">
+                                                <asp:TableCell>
+                                                    <asp:Label ID="lblMasterUtenteApplicazione" runat="server" Text="" CssClass="lblMasterUtenteApplicazione"></asp:Label>
+                                                </asp:TableCell>
+                                                <asp:TableCell>
+                                                    <iwc:IboWebButton ID="LogOFF" runat="server" Text="" Visible="false" CssClass="BottoneLogOff" title-data-duration="10000" title-data-notCloseIfHover="1" />
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow runat="server" ID="PanelTopHeader3Table_R2" ClientIDMode="Static">
+                                                <asp:TableCell>
+                                                    <asp:Label ID="lblMasterFilialeApplicazione" runat="server" Text="" CssClass="lblMasterFilialeApplicazione"></asp:Label>
+                                                </asp:TableCell>
+                                                <asp:TableCell>
+                                                    <iwc:IboWebButton ID="Filiale" runat="server" Text="" CssClass="BottoneFiliale" Visible="false" />
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow runat="server" ID="PanelTopHeader3Table_R3" ClientIDMode="Static">
+                                                <asp:TableCell>
+                                                    <asp:Label ID="lblMasterOrganizzazioneApplicazione" runat="server" Text="" CssClass="lblMasterOrganizzazioneApplicazione"></asp:Label>
+                                                </asp:TableCell>
+                                                <asp:TableCell>                                                
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                        </asp:Table>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                            <asp:Panel ID="ThinPanelTopHeader" runat="server" ClientIDMode="Static" Visible="false">
+                                <div id="ThinPanelTopHeader1">
+                                    <asp:Image ID="ThinImgMasterLogoCliente" CssClass="ThinImgMasterLogoCliente" runat="server" ImageUrl="~/images/LogoIncas.gif" />
+                                    <asp:Image ID="ThinImgMasterLogoIncas" CssClass="ThinImgMasterLogoIncas" runat="server" ImageUrl="~/images/LogoIncas.gif" />
+                                    <iwc:IboWebLabel runat="server" CssClass="MasterThinPanelTopTitle" ID="MasterThinPanelTopTitle" ClientIDMode="Static"></iwc:IboWebLabel>
+                                </div>
+                                <div id="ThinPanelTopHeader2">
+                                    <input id="IdleButton2" type="submit" name="IdleButton" style="width: 0px; height: 0px; top: -100px; position: absolute;" />
+                                </div>
+                                <div id="ThinPanelTopHeader3">
+                                    <asp:Label ID="ThinLblMasterTitoloModuloSoftware" runat="server" Text="Modulo Software" CssClass="ThinLblMasterTitoloModuloSoftware"></asp:Label>
+                                    <iwc:IboWebButton ID="ThinLogOff" runat="server" Text="" Visible="false" CssClass="ThinBottoneLogOff" title-data-duration="10000" title-data-notCloseIfHover="1" />
+                                    <iwc:IboWebButton ID="ThinFiliale" runat="server" Text="" CssClass="ThinBottoneFiliale" Visible="false" />
+                                </div>
+                            </asp:Panel>
+                            <asp:Panel runat="server" ID="CollapserContainer" ClientIDMode="Static">
+                                <asp:ImageButton ID="Collapser" runat="server" ImageUrl="~/WFI/Images/collapsemain2.png" ClientIDMode="Static" />
+                            </asp:Panel>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="Collapser" />
+                            <asp:AsyncPostBackTrigger ControlID="Filiale" />
+                            <asp:AsyncPostBackTrigger ControlID="ThinFiliale" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                    <asp:Panel ID="PanelHeader" runat="server" ClientIDMode="Static">
+                        <table class="onlydesign">
+                            <tr>
+                                <td>
+                                    <div runat="server" id="PanelHeaderLeft" class="GoToHomePanel">
+                                        <asp:ImageButton ID="imgGoToHomeLnk" runat="server" CssClass="imgGoToHome" ImageUrl="~/images/Toolbar/24/home.png"></asp:ImageButton>
+                                    </div>
+                                </td>
+                                <td style="width: 100%">
+                                    <div id="PanelHeaderContent">
+                                        <div id="PanelHeaderContentMenu">
+                                            <iwc:IboWebMenu ID="mnuMain" runat="server" Orientation="Horizontal" CssClass="IboWebMenu" RenderingMode="List" DynamicPopOutImageUrl="~/images/arrowss.png"
+                                                StaticEnableDefaultPopOutImage="False" DynamicHorizontalOffset="5" ClientIDMode="Static" Visible="false">
+                                            </iwc:IboWebMenu>
+                                            <iwc:IboWebMenuTlk ID="mnuMainTlk" runat="server" EnableRoundedCorners="true" EnableShadows="true" EnableEmbeddedBaseStylesheet="False"
+                                                EnableEmbeddedSkins="False" ClickToOpen="True" Skin="Incas" />
+                                        </div>
+                                        <div id="PanelHeaderContentRight">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="PanelHeaderRight">
+                                        <asp:Panel ID="MPGeneralSearchContainer" runat="server" DefaultButton="MPGeneralSearchGo" ClientIDMode="Static">
+                                            <iwc:IboWebLabel runat="server" ID="MPGeneralSearchLabel" ClientIDMode="Static" Text="Azione:"></iwc:IboWebLabel>
+                                            <iwc:IboWebTextBox runat="server" ID="MPGeneralSearch" AutoPostBack="false" ClientIDMode="Static" ToolTip="Puoi inserire<br />1) Il codice azione<br />2) La descrizione della voce da cercare prefissata con il punto (.)"></iwc:IboWebTextBox>
+                                            <asp:Button runat="server" ID="MPGeneralSearchGo" ClientIDMode="Static" Style="display: none;" />
+                                            <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" CompletionInterval="300" ServiceMethod="GetSearchItems"
+                                                MinimumPrefixLength="3" EnableCaching="False" CompletionSetCount="10" FirstRowSelected="true" TargetControlID="MPGeneralSearch"
+                                                ShowOnlyCurrentWordInCompletionListItem="true" CompletionListCssClass="AutoCompleteExtenderList" CompletionListHighlightedItemCssClass="AutoCompleteExtenderHighlightedItem"
+                                                CompletionListItemCssClass="AutoCompleteExtenderItem" OnClientItemSelected="WFI.SetHFMPSelectedValue">
+                                            </ajaxToolkit:AutoCompleteExtender>
+                                            <asp:HiddenField runat="server" ID="HFMPGeneralSearch" ClientIDMode="Static" />
+                                        </asp:Panel>
+                                        <asp:Image runat="server" ID="imgCloseApplication" ImageUrl="~/images/Toolbar/36/CloseApplication.png" onclick="self.close()"
+                                            CssClass="imgCloseApplication" Visible="false" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                    <asp:Panel ID="PanelContent" runat="server" ClientIDMode="Static">
+                        <asp:Panel ID="PanelContentX" runat="server" ClientIDMode="Static">
+                            <asp:UpdatePanel ID="UP_ToolbarContainer" runat="server" ClientIDMode="Static" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Panel ID="ToolbarContainer" CssClass="ToolbarContainer" runat="server">
+                                        <iwc:iboWebToolbar ID="ToolbarMain" runat="server" ButtonHeight="24" ButtonWidth="24" SeparatorWidth="12" SeparatorHeight="32"
+                                            CssClassButton="ToolbarButton" CssClassPanel="ToolbarPanel" CssClassTable="ToolbarTable" />
+                                        <asp:Panel ID="ToolbarPanelRight" CssClass="ToolbarPanelRight" runat="server">
+                                        </asp:Panel>
+                                    </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                            <asp:UpdatePanel ID="UPphPageContent" runat="server" ClientIDMode="Static" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:ContentPlaceHolder ID="phPageContent" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </asp:Panel>
+                    </asp:Panel>
+                    <asp:UpdatePanel runat="server" ID="UPIboMessageBox" ChildrenAsTriggers="True" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <telerik:RadNotification ID="NotificationMessage" runat="server" VisibleOnPageLoad="false" Width="700px" Height="100" Animation="Fade"
+                                EnableRoundedCorners="false" EnableShadow="true" Title="..." Text="..." Style="z-index: 35000" Position="TopCenter" AutoCloseDelay="10000"
+                                Visible="false" EnableEmbeddedBaseStylesheet="False" EnableEmbeddedSkins="False" ContentScrolling="Auto" Translate="false">
+                                <ContentTemplate>
+                                    <div class="NotificationContent">
+                                        <table class="NotificationTable">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="NM_Text1" runat="server" Text="XXXX:" CssClass="NotificationSubTitle"></asp:Label>
+                                                    <asp:Label ID="NM_Text2" runat="server" CssClass="NotificationMessage" Text="XXXX:"></asp:Label>
+                                                </td>
+                                                <td style="width: 40px;">
+                                                    <asp:Image runat="server" ID="Notification_MessageBoxInfo" CssClass="Notificationimg" ImageUrl="~/images/Toolbar/36/MessageBoxInfo.png"
+                                                        Visible="False" />
+                                                    <asp:Image runat="server" ID="Notification_MessageBoxExclamation" CssClass="Notificationimg" ImageUrl="~/images/Toolbar/36/MessageBoxExclamation.png"
+                                                        Visible="False" />
+                                                    <asp:Image runat="server" ID="Notification_MessageBoxCritical" CssClass="Notificationimg" ImageUrl="~/images/Toolbar/36/MessageBoxCritical.png"
+                                                        Visible="False" />
+                                                    <asp:Image runat="server" ID="Notification_MessageBoxQuestion" CssClass="Notificationimg" ImageUrl="~/images/Toolbar/36/MessageBoxQuestion.png"
+                                                        Visible="False" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </ContentTemplate>
+                            </telerik:RadNotification>
+                            <iwc:IboWebPanel ID="pnlMessaggio01Container" runat="server" Visible="false" EscButtonId="IboMessageBox_cmdAnnulla01">
+                                <asp:Panel ID="pnlMessaggio01" runat="server" CssClass="IboMessageBox_popupDiv" Style="display: none;">
+                                    <div id="popupMessageTitleBar" class="IboMessageBox_popupDragBar">
+                                        <asp:Label ID="lblCaption01" runat="server" Text="Messaggio" CssClass="IboMessageBox_popupTitle"></asp:Label>
+                                    </div>
+                                    <div class="IboMessageBox_popupContent">
+                                        <table class="IboMessageBox_popupTable">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lblMessaggio01" runat="server" Text="XXXX:" CssClass="IboMessageBox_popupSubTitle"></asp:Label>
+                                                </td>
+                                                <td style="width: 80px;">
+                                                    <asp:Image runat="server" ID="pnlMessaggio01_MessageBoxInfo" CssClass="IboMessageBox_img" ImageUrl="~/images/Toolbar/64/MessageBoxInfo.png"
+                                                        Visible="False" />
+                                                    <asp:Image runat="server" ID="pnlMessaggio01_MessageBoxExclamation" CssClass="IboMessageBox_img" ImageUrl="~/images/Toolbar/64/MessageBoxExclamation.png"
+                                                        Visible="False" />
+                                                    <asp:Image runat="server" ID="pnlMessaggio01_MessageBoxCritical" CssClass="IboMessageBox_img" ImageUrl="~/images/Toolbar/64/MessageBoxCritical.png"
+                                                        Visible="False" />
+                                                    <asp:Image runat="server" ID="pnlMessaggio01_MessageBoxQuestion" CssClass="IboMessageBox_img" ImageUrl="~/images/Toolbar/64/MessageBoxQuestion.png"
+                                                        Visible="False" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <asp:Label ID="lblMessaggio02" runat="server" CssClass="IboMessageBox_popupMessage" Text="XXXX:"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="IboMessageBox_popupButtons">
+                                        <table class="tableButtons">
+                                            <tr>
+                                                <td class="tableButtons_L">
+                                                    <iwc:IboWebButton ID="IboMessageBox_cmdAnnulla01" CssClass="IboMessageBox_cmdAnnulla01" runat="server" Text="Esci" CausesValidation="False"
+                                                        ClientIDMode="Static" />
+                                                    <iwc:IboWebButton ID="IboMessageBox_cmdNo" CssClass="IboMessageBox_cmdOkNo" runat="server" Text="No" />
+                                                </td>
+                                                <td class="tableButtons_R">
+                                                    <iwc:IboWebButton ID="IboMessageBox_cmdOk01" CssClass="IboMessageBox_cmdOk01" runat="server" Text="Ok" ClientIDMode="Static" />
+                                                    <iwc:IboWebButton ID="IboMessageBox_cmdYes" CssClass="IboMessageBox_cmdOkYes" runat="server" Text="Si" />
+                                                    <iwc:IboWebButton ID="IboMessageBox_cmdOkOnly" CssClass="IboMessageBox_cmdOkOnly" runat="server" Text="Ok" CausesValidation="False"
+                                                        ClientIDMode="Static" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </asp:Panel>
+                                <ajaxToolkit:ModalPopupExtender runat="server" ID="popMessaggioConferma" TargetControlID="hiddenTargetControlForMessageBoxPopup"
+                                    PopupControlID="pnlMessaggio01" BackgroundCssClass="IboMessageBox_popupBack" RepositionMode="RepositionOnWindowResize"
+                                    Drag="True" PopupDragHandleControlID="popupMessageTitleBar" BehaviorID="popMessaggioConfermaBehavior" DropShadow="True">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Button runat="server" ID="hiddenTargetControlForMessageBoxPopup" Style="display: none" />
+                            </iwc:IboWebPanel>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel runat="server" ID="UPProgressbarGlobalContainer" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:Panel ID="ProgressbarGlobalContainer" runat="server" Visible="false">
+                                <asp:Panel ID="ProgressbarContainer" runat="server" CssClass="ProgressbarContainer" Style="display: none;">
+                                    <asp:Panel ID="ProgressbarTitleBar" runat="server" CssClass="ProgressbarTitleBar">
+                                        <iwc:IboWebLabel ID="ProgressbarCaption" runat="server" Text="..." CssClass="ProgressbarCaption" Translate="false" ClientIDMode="Static"></iwc:IboWebLabel>
+                                    </asp:Panel>
+                                    <asp:UpdatePanel runat="server" ID="UPProgressbar" ChildrenAsTriggers="True" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <asp:Panel ID="ProgressbarBody" runat="server" CssClass="ProgressbarBody">
+                                                <asp:HiddenField runat="server" ID="Progressbar_StartPolling" ClientIDMode="Static" Value="" />
+                                                <asp:Button runat="server" ID="Progressbar_StopPolling" Text="" Style="display: none;" ClientIDMode="Static" />
+                                                <asp:Panel ID="ProgressbarDescriptionPanel" runat="server" CssClass="ProgressbarDescriptionPanel">
+                                                    <iwc:IboWebLabel ID="ProgressbarDescription" runat="server" Text="..." CssClass="ProgressbarDescription" Translate="false"
+                                                        ClientIDMode="Static"></iwc:IboWebLabel>
+                                                </asp:Panel>
+                                                <asp:Panel ID="ProgressBarLayoutContainerPanel" runat="server" CssClass="ProgressBarLayoutContainerPanel">
+                                                    <div id="ProgressBarLayoutContainer" class="ProgressBarLayoutContainer">
+                                                        <asp:Panel ID="ProgressBarLayout" runat="server" CssClass="ProgressBarLayout" Width="0%" ClientIDMode="Static">
+                                                        </asp:Panel>
+                                                        <div id="ProgressBarLayoutPercentuale" class="ProgressBarLayoutPercentuale">
+                                                            <asp:Label ID="lblProgressbarPercentuale" runat="server" Text="" ClientIDMode="Static"></asp:Label>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="ProgressBarLayoutContainerPanel2" runat="server" CssClass="ProgressBarLayoutContainerPanel2" Visible="false">
+                                                    <div id="ProgressBarLayoutContainer2" class="ProgressBarLayoutContainer2">
+                                                        <asp:Image runat="server" ID="ProgressBarLayoutStaticImage" ClientIDMode="Static" ImageAlign="AbsMiddle" ImageUrl="~/WFI/Images/Progressbar.GIF" />
+                                                        <div id="ProgressBarLayoutTimeElapsed" class="ProgressBarLayoutTimeElapsed">
+                                                            <asp:Label ID="lblProgressbarTimeElapsed" runat="server" Text="" ClientIDMode="Static"></asp:Label>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
+                                                <br />
+                                                <asp:Panel ID="ProgressbarDetailPanel" runat="server" CssClass="ProgressbarDetailPanel">
+                                                    <iwc:IboWebLabel ID="ProgressbarDetail" runat="server" Text="..." CssClass="ProgressbarDetail" Translate="false" ClientIDMode="Static"></iwc:IboWebLabel>
+                                                </asp:Panel>
+                                            </asp:Panel>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:Panel ID="ProgressbarButtons" runat="server" CssClass="ProgressbarButtons">
+                                        <iwc:IboWebButton ID="Progressbar_cmdAnnulla" CssClass="Progressbar_cmdAnnulla" runat="server" Text="Esci" CausesValidation="False"
+                                            ClientIDMode="Static" />
+                                    </asp:Panel>
+                                </asp:Panel>
+                                <asp:Button runat="server" ID="hiddenTargetControlForProgressbar" Style="display: none" />
+                                <ajaxToolkit:ModalPopupExtender runat="server" ID="Progressbar" TargetControlID="hiddenTargetControlForProgressbar" PopupControlID="ProgressbarContainer"
+                                    BackgroundCssClass="ProgressbarBackground" RepositionMode="RepositionOnWindowResize" Drag="True" PopupDragHandleControlID="ProgressbarTitleBar"
+                                    DropShadow="True" CancelControlID="" OkControlID="">
+                                </ajaxToolkit:ModalPopupExtender>
+                            </asp:Panel>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel runat="server" ID="UP_pnlSelectBoxContainer" ChildrenAsTriggers="True" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:Panel ID="pnlSelectBoxContainer" runat="server" Visible="false">
+                                <asp:Panel ID="pnlSelectBox" runat="server" CssClass="IboSelectBox_popupDiv" Style="display: none">
+                                    <div id="popupSelectBoxTitleBar" class="IboSelectBox_popupDragBar">
+                                        <asp:Label ID="lblSelectBoxTitle" runat="server" Text="Titolo" CssClass="IboSelectBox_popupTitle"></asp:Label>
+                                    </div>
+                                    <div class="IboSelectBox_popupContent" align="center">
+                                        <table class="IboSelectBox_popupTable" align="center" width="100%">
+                                            <tr>
+                                                <td>&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lblSelectBoxSubtitle" runat="server" Text="XXXX:" CssClass="IboSelectBox_popupSubTitle"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lblSelectBoxText" runat="server" CssClass="IboSelectBox_popupMessage" Text="XXXX:"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <iwc:IboWebRadioButtonList ID="IboSelectBoxRadioButtonList" CssClass="IboSelectBoxRadioButtonList" runat="server" AutoPostBack="False">
+                                                    </iwc:IboWebRadioButtonList>
+                                                    <iwc:IboDropDownList ID="IboSelectBoxDropDownList" CssClass="IboSelectBoxDropDownList" runat="server" AutoPostBack="False">
+                                                    </iwc:IboDropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="IboSelectBox_popupButtons">
+                                        <table class="tableButtons">
+                                            <tr>
+                                                <td class="tableButtons_L">
+                                                    <iwc:IboWebButton ID="btnIboSelectBoxCancel" CssClass="btnIboSelectBoxCancel" runat="server" Text="Esci" ClientIDMode="Static"
+                                                        CausesValidation="false" />
+                                                </td>
+                                                <td class="tableButtons_R">
+                                                    <iwc:IboWebButton ID="btnIboSelectBoxConfirm" CssClass="btnIboSelectBoxConfirm" runat="server" Text="Conferma" ClientIDMode="Static"
+                                                        CausesValidation="false" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </asp:Panel>
+                                <ajaxToolkit:ModalPopupExtender runat="server" ID="popSelectBox" TargetControlID="hiddenTargetControlForSelectBoxPopup" PopupControlID="pnlSelectBox"
+                                    BackgroundCssClass="popupBack" RepositionMode="RepositionOnWindowResize" Drag="True" PopupDragHandleControlID="popupSelectBoxTitleBar"
+                                    DropShadow="True">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Button runat="server" ID="hiddenTargetControlForSelectBoxPopup" CssClass="WFIHidden" />
+                            </asp:Panel>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel runat="server" ID="UPIFrame" Visible="true" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:HiddenField runat="server" ID="IFrameManager_StartPolling" ClientIDMode="Static" Value="" />
+                            <asp:HiddenField runat="server" ID="IFrameManager_AutoResize" ClientIDMode="Static" Value="0" />
+                            <asp:Button runat="server" ID="IFrameManager_StopPolling" Text="" Style="display: none;" ClientIDMode="Static" />
+                            <asp:Panel ID="IFrameGlobalContainer" runat="server" Visible="false" ClientIDMode="Static">
+                                <asp:Panel ID="IFramePopupExtenderContainer" runat="server" CssClass="IFramePopupExtenderContainer" Visible="false">
+                                    <asp:Panel ID="IFrameContainer" runat="server" CssClass="IFrameContainer" Visible="false">
+                                        <asp:Panel runat="server" ID="IFrameTitleDiv" CssClass="IFrameTitle">
+                                            <asp:Label ID="IFrameTitle" runat="server" Text="" CssClass="IFrameTitleLabel"></asp:Label>
+                                            <asp:ImageButton runat="server" ID="IFrameCloseButton" CssClass="IFrameCloseButton" ToolTip="Chiudi" ImageAlign="AbsMiddle" ImageUrl="~/WFI/Images/Toolbar/24/CloseRoundedButton.png"
+                                                Visible="False" />
+                                        </asp:Panel>
+                                        <asp:Panel ID="IFrameContainerDiv" runat="server" CssClass="IFrameContainerDiv">
+                                            <iframe runat="server" id="MasterIFrame" class="MasterIFrame" visible="false" src="">Your browser doesn't support IFrames</iframe>
+                                        </asp:Panel>
+                                    </asp:Panel>
+                                    <ajaxToolkit:ModalPopupExtender runat="server" ID="MPEIFrameContainer" PopupControlID="IFramePopupExtenderContainer" BackgroundCssClass="IboMessageBox_popupBack"
+                                        RepositionMode="RepositionOnWindowResize" Drag="true" PopupDragHandleControlID="hTCForIFramePopup" BehaviorID="" DropShadow="false" 
+                                        TargetControlID="hTCForIFramePopup">
+                                    </ajaxToolkit:ModalPopupExtender>
+                                    <asp:Button runat="server" ID="hTCForIFramePopup" CssClass="WFIHidden" />
+                                </asp:Panel>
+                            </asp:Panel>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel runat="server" ID="UPMasterPopupFormGlobalContainer" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:Panel ID="MasterPopupFormGlobalContainer" runat="server" Visible="false">
+                                <asp:Panel ID="MasterPopupFormContainer" runat="server" CssClass="MasterPopupFormContainer" Style="display: none;" DefaultButton="MasterPopupForm_cmdOk">
+                                    <asp:Panel ID="MasterPopupFormTitleBar" runat="server" CssClass="MasterPopupFormTitleBar">
+                                        <iwc:IboWebLabel ID="MasterPopupFormCaption" runat="server" Text="..." CssClass="MasterPopupFormCaption" Translate="false"></iwc:IboWebLabel>
+                                    </asp:Panel>
+                                    <asp:UpdatePanel runat="server" ID="UPMasterPopupForm" ChildrenAsTriggers="True" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <asp:Panel ID="MasterPopupFormBody" runat="server" CssClass="MasterPopupFormBody">
+                                                <asp:ContentPlaceHolder ID="phMasterPopupForm" runat="server">
+                                                </asp:ContentPlaceHolder>
+                                            </asp:Panel>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:Panel ID="MasterPopupFormButtons" runat="server" CssClass="MasterPopupFormButtons">
+                                        <table class="MasterPopupFormTableButtons">
+                                            <tr>
+                                                <td class="MasterPopupFormTableButtons_L">
+                                                    <iwc:IboWebButton ID="MasterPopupForm_cmdAnnulla" CssClass="MasterPopupForm_cmdAnnulla" runat="server" Text="Esci" CausesValidation="False"
+                                                        ClientIDMode="Static" />
+                                                </td>
+                                                <td class="MasterPopupFormTableButtons_R">
+                                                    <iwc:IboWebButton ID="MasterPopupForm_cmdOk" CssClass="MasterPopupForm_cmdOk" runat="server" Text="Conferma" ClientIDMode="Static" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </asp:Panel>
+                                <asp:Button runat="server" ID="hForMasterPopupForm" Style="display: none" />
+                                <ajaxToolkit:ModalPopupExtender runat="server" ID="MasterPopupForm" TargetControlID="hForMasterPopupForm" PopupControlID="MasterPopupFormContainer"
+                                    BackgroundCssClass="MasterPopupFormBackground" RepositionMode="RepositionOnWindowResize" Drag="True" PopupDragHandleControlID="MasterPopupFormTitleBar"
+                                    DropShadow="True" CancelControlID="" OkControlID="">
+                                </ajaxToolkit:ModalPopupExtender>
+                            </asp:Panel>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel runat="server" ID="up_WFIPostbackData" ChildrenAsTriggers="true" UpdateMode="Conditional" Visible="false">
+                        <ContentTemplate>
+                            <div id="WFIPostbackData" style="display: none;">
+                                <asp:HiddenField ID="WFIPostbackArguments" runat="server" ClientIDMode="Static" />
+                                <asp:HiddenField ID="WFIPostbackCommand" runat="server" ClientIDMode="Static" />
+                                <asp:HiddenField ID="WFIPostbackAllowed" runat="server" Value="S" ClientIDMode="Static" />
+                                <asp:Button ID="WFIPostbackRun" runat="server" ClientIDMode="Static" />
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:Panel ID="PanelFooter" runat="server" ClientIDMode="Static">
+                        <div id="PanelBottomL">
+                            <asp:Literal ID="PanelBottomL_Content" runat="server"></asp:Literal>
+                        </div>
+                        <div id="PanelBottom">
+                        </div>
+                        <div id="PanelBottomR">
+                        </div>
+                    </asp:Panel>
+                </asp:Panel>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <telerik:RadToolTipManager ID="TlkTooltipManager" runat="server" RelativeTo="Element" Position="TopCenter" AutoTooltipify="true"
+            Visible="false" ContentScrolling="Default" Animation="none" ManualClose="False" AnimationDuration="300" ToolTipZoneID="" ShowCallout="False" AutoCloseDelay="3000"
+            EnableDataCaching="True">
+        </telerik:RadToolTipManager>
+    </form>
+</body>
+</html>

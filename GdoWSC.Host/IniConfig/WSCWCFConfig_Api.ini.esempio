@@ -1,0 +1,29 @@
+﻿[Debug]
+DebugMode = False
+UserDebug =
+InterfaceMode=False
+
+[Application]
+LogoApplicazione =
+LogoDitta =
+LogoIncas =
+TitoloApplicazione = GdoWSC WCF
+InfoIncas = © Incas 2010-2016
+TitoloModuloSoftware = TMS - GDOWSC
+TitoloModuloSoftwareAcronimo  = GDOWSCWCF
+
+[Log]
+SQLLeftLength=255
+DayOfPermanenceInLog=3
+DayOfPermanenceOfFile=3
+
+[Tables]
+SessionTable=WSCApiSessioni
+EventLogTable=WSCApiLogEventi
+UserTable=WSCApiUtenti
+
+[BackgroundActivity]
+BackgroundActivityTypeName = Incasbo.Web.WSCWCF.CustomBackgroundActivity
+
+[LoginManager]
+CryptographyEnable=false

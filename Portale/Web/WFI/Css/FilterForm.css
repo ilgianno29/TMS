@@ -1,0 +1,56 @@
+﻿/************************************************/
+/*			STILE DELLE FORM DI FILTRO			*/
+/************************************************/
+.FilterContentTable
+{
+	border-collapse: collapse;
+	padding: 3;
+	border: solid 1px #c0c0c0;
+	background-color: #f0f0f0;
+}
+.FilterContentTable td
+{
+	padding: 2pt;
+	vertical-align: top;
+}
+.FilterContentTableValueCell /*VALORE*/
+{
+	text-align: left;
+}
+.FilterContentTableDescCell /*DESCRIZIONE*/
+{
+	text-align: right;
+}
+.FilterContentTitle /*TITOLO*/
+{
+	font-size: 20pt;
+	background-color: #cecece;
+}
+.FilterContentContent
+{
+}
+.FilterContentMainDiv
+{
+	padding: 20pt;
+	width: 100%;
+}
+.FilterFormCommandsDiv /*div dei pulsanti*/
+{
+	padding: 5px;
+	border: solid 1px #c0c0c0;
+	text-align: center;
+	background-color: #cecece;
+}
+.FilterFormButton /*PULSANTI*/
+{
+	width: 100px;
+	height: 35px;
+}
+.ListSearchExtenderPrompt
+{
+	font-style:italic;
+	color:Gray;
+	background-color:white;
+	width:100px; 
+	text-align:left;
+}

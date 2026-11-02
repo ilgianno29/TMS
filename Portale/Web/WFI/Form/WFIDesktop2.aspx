@@ -1,0 +1,68 @@
+﻿<%@ Page Title="WFI Desktop" Language="vb" AutoEventWireup="false" MasterPageFile="~/WFI/Form/WFIMaster.Master" CodeBehind="WFIDesktop2.aspx.vb"
+    Inherits="Incasbo.Web.WFI.WFIDesktop2" Strict="false" %>
+
+<%@ Register Assembly="IboWebComponents" Namespace="Incasbo.Web.Components" TagPrefix="iwc" %>
+<%@ Register Assembly="IboGridView" Namespace="Incasbo.Web.Components" TagPrefix="iwc" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
+<%@ Register Src="~/WFI/Componenti/IboWebDate.ascx" TagName="IboWebDate" TagPrefix="iwc" %>
+<%@ Register Src="~/WFI/Componenti/IboWebNumeric.ascx" TagName="IboWebNumeric" TagPrefix="iwc" %>
+<%@ Register Src="~/WFI/Componenti/IboWebToolbar.ascx" TagName="iboWebToolbar" TagPrefix="iwc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="../css/Desktop.css?d=20161215" type="text/css" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="phPageContent" runat="server">
+    <asp:Panel runat="server" ID="pnlMainContent" CssClass="pnlMainContent">        
+        <asp:Panel runat="server" ID="DesktopContainer" CssClass="DesktopContainer">
+            <asp:DataList ID="dlDesktop" runat="server" CellSpacing="7" RepeatDirection="Horizontal" CssClass="dlDesktop" RepeatLayout="Table" RepeatColumns="6">
+                <HeaderTemplate>
+                    <asp:Panel ID="TitleContainer" runat="server" CssClass="TitleContainer">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 80%;">
+                                    <asp:Label runat="server" ID="TitleText1" CssClass="TitleText1" Text="My Desktop"></asp:Label>
+                                    <br />
+                                    <div class="LinkPath">
+                                        <asp:LinkButton runat="server" ID="LinkPath1" Text="" CommandArgument="0"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="LinkPath2" Text="" CommandArgument="1"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="LinkPath3" Text="" CommandArgument="2"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="LinkPath4" Text="" CommandArgument="3"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="LinkPath5" Text="" CommandArgument="4"></asp:LinkButton>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="WFIDesktop.aspx">
+                                        <img src="../../images/Toolbar/96/GoToHome.png" alt="Go to home" class="GoToHome" /></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <asp:LinkButton ID="ItemLink" runat="server" CssClass="ItemLink">
+                        <asp:Panel ID="ItemContainer" runat="server">
+                            <asp:Panel ID="ItemImagePanel" runat="server" CssClass="ItemImagePanel">
+                                <asp:Image ID="ItemImage" runat="server" CssClass="ItemImage" />
+                            </asp:Panel>
+                            <asp:Panel ID="ItemTopRightPanel" runat="server" CssClass="ItemTopRightPanel">
+                                <asp:Panel ID="ItemTopRightValue" runat="server" CssClass="ItemTopRightValue">
+                                    <asp:Literal ID="ltItemTopRightValue" runat="server" Text=""></asp:Literal>
+                                </asp:Panel>
+                            </asp:Panel>
+                            <asp:Panel ID="ItemTopLeftPanel" runat="server" CssClass="ItemTopLeftPanel">
+                                <asp:Panel ID="ItemTopLeftValue" runat="server" CssClass="ItemTopLeftValue">
+                                    <asp:Literal ID="ltItemTopLeftValue" runat="server" Text=""></asp:Literal>
+                                </asp:Panel>
+                            </asp:Panel>
+                            <asp:Panel ID="ItemTextPanel" runat="server" CssClass="ItemTextPanel">
+                                <asp:Label runat="server" ID="ItemText" CssClass="ItemText"></asp:Label>
+                                <br />
+                                <asp:Label runat="server" ID="ItemAdditionalText" CssClass="ItemAdditionalText"></asp:Label>
+                            </asp:Panel>
+                        </asp:Panel>
+                    </asp:LinkButton>
+                </ItemTemplate>
+            </asp:DataList>
+        </asp:Panel>
+    </asp:Panel>
+</asp:Content>

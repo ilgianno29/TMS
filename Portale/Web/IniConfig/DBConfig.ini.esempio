@@ -1,0 +1,15 @@
+﻿[Default]
+DefaultConnectionName=Lucart
+ConnectionList=
+
+[Lucart]
+DB_Provider=
+DB_ServerType=SQL
+DB_UseIntegratedSecurity=False
+DB_TimeOut=60
+DB_ProviderType=SQLCLIENT
+DB_Username=gdoadmin
+DB_Server=192.168.129.169
+DB_Password=
+DB_Database=DELSYLog91_Lucart
+DB_Description=Delsy Manager 9.2 Lucart

@@ -1,0 +1,49 @@
+﻿
+.tableVoci
+{
+    line-height: 20px;
+    font-size: 8pt;
+}
+
+.CollapsiblePanelBody .tableVoci tr
+{
+    width: 100%;
+}
+
+.CollapsiblePanelBody .tableVoci .Header th
+{
+    font-weight: bold;
+}
+
+.CollapsiblePanelBody .tableVoci .Header td
+{
+    font-weight: bold;
+}
+
+tr.Body
+{
+    min-height: 25px;
+}
+
+div#pnlVociContainer
+{
+    max-height: 400px;
+    overflow: auto;
+}
+
+#pnlVociCommands
+{
+    max-height: 400px;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.Button_CheckAll, .Button_UncheckAll
+{
+    margin-left: 10px;
+}
+
+.Button_CheckAll
+{
+    margin-bottom: 5px;
+}

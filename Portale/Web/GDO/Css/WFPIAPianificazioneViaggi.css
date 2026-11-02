@@ -1,0 +1,868 @@
+﻿#DivGrdElencoViaggi {
+    height: 100%;
+    float: inherit;
+    padding: 3px;
+}
+
+.HeaderElencoViaggi .ToolbarButton .ToolbarCell div {
+    border: solid 2px transparent;
+    background-color: #ce455b;
+    border-radius: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    border-width: 2px;
+    border-color: #9e253b;
+    color: #FFFFFF;
+}
+
+.HeaderElencoViaggi .ToolbarButton .ToolbarCellOnlyLink .ToolbarLinkButtonControl {
+    font-size: 7pt;
+    display: inline-block;
+    max-width: 100px;
+    color: #FFFFFF;
+}
+
+.HeaderElencoViaggi .ToolbarButton .ToolbarCell div:hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #FFC040;
+    background-color: #FFE080;
+    color: #9e253b;
+}
+
+    .HeaderElencoViaggi .ToolbarButton .ToolbarCell div:hover .ToolbarLinkButtonControl {
+        color: #9e253b;
+    }
+
+#HeaderElencoViaggi {
+    position: relative;
+    height: 26px;
+}
+
+
+.DivFiltroViaggi {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 450px;
+}
+
+.PanelFiltroViaggi {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+
+.FilterDateViaggi {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateViaggi .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateViaggi .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateViaggi .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberViaggi {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberViaggi {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberViaggi_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/*****************************
+    BTN FILTER GRD SPEDIZIONI
+******************************/
+#btnFilterResetContainerViaggi {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkContainerViaggi {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetContainerViaggi:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkContainerViaggi:hover {
+    background-color: #d5193c;
+}
+
+
+/*****************************
+   
+******************************/
+#DivGrdElencoSpedizioniViaggio {
+    height: 100%;
+    float: inherit;
+    padding: 3px;
+}
+
+
+
+.HeaderElencoSpedizioniViaggio .ToolbarButton .ToolbarCell div {
+    border: solid 2px transparent;
+    background-color: #ce455b;
+    border-radius: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    border-width: 2px;
+    border-color: #9e253b;
+    color: #FFFFFF;
+}
+
+.HeaderElencoSpedizioniViaggio .ToolbarButton .ToolbarCellOnlyLink .ToolbarLinkButtonControl {
+    font-size: 7pt;
+    display: inline-block;
+    max-width: 100px;
+    color: #FFFFFF;
+}
+
+.HeaderElencoSpedizioniViaggio .ToolbarButton .ToolbarCell div:hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #FFC040;
+    background-color: #FFE080;
+    color: #9e253b;
+}
+
+    .HeaderElencoSpedizioniViaggio .ToolbarButton .ToolbarCell div:hover .ToolbarLinkButtonControl {
+        color: #9e253b;
+    }
+
+#HeaderElencoSpedizioniViaggio {
+    position: relative;
+    height: 26px;
+}
+
+
+/*****************************
+   
+******************************/
+
+.FilterDate {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDate .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDate .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDate .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumber {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumber {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumber_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.GridBorders .rgMasterTable {
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.rsMainHeader ol {
+    padding-top: 3px !important;
+}
+
+.MyUI-TooltipDiv {
+    font-size: 11px;
+}
+
+.ui-tooltip {
+    padding: 5px;
+    max-width: 600px;
+}
+
+/*****************
+    DIMENSIONI
+******************/
+.pnlMainContainer {
+    width: 100%;
+}
+
+.pnlMainBody {
+    height: 100% !important;
+    width: 100% !important;
+    border: 1px solid #c0c0c0;
+}
+
+.DetailFormMainTable {
+    border-collapse: collapse;
+    padding: 0;
+    text-align: center;
+    margin: auto;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.PannelloEsternoGrigliaSpedizioni {
+    border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    border-top-width: 0px;
+    background-color: rgb(240,240,240);
+    padding: 0px;
+}
+
+.DetailFormGridContainerDivPia {
+    width: auto;
+    height: auto;
+    overflow: auto;
+    padding: 1px;
+    border: solid 0px #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.tableGridContainerPia {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+    .tableGridContainerPia td {
+        padding: 0px;
+        margin: 1px;
+    }
+
+    .tableGridContainerPia .IboWebGridView td {
+        padding: 1px 3px 1px 3px;
+        margin: 0px;
+    }
+
+    .tableGridContainerPia .ToolbarPanel {
+        float: inherit;
+    }
+
+/*
+* filtro spedizioni
+*/
+
+.DivFiltroSpedizioni, .DivFiltroSpedizioniRaggru, .DivFiltroSpedizioniRaggru2 {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 500px;
+}
+
+.PanelFiltroSpedizioni, .PanelFiltroSpedizioniRaggru {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.PianificazioneSplitter .RadSplitter_Default,
+.PianificazioneSplitter .RadSplitter_Default .rspPaneTabContainer,
+.PianificazioneSplitter .RadSplitter_Default .rspPane,
+.PianificazioneSplitter .RadSplitter_Default .rspResizeBar,
+.PianificazioneSplitter .RadSplitter_Default .rspSlideContainerResize,
+.PianificazioneSplitter .RadSplitter_Default .rspPaneHorizontal,
+.PianificazioneSplitter .RadSplitter_Default .rspResizeBarHorizontal,
+.PianificazioneSplitter .RadSplitter_Default .rspSlideContainerResizeHorizontal {
+    border-color: #c0c0c0;
+}
+
+.PannelloPopup {
+    height: 200px;
+    width: 400px;
+}
+
+div.PannelloPopup.PannelloPopupCreaViaggio {
+    height: 270px;
+    width: 650px;
+}
+
+.PannelloPopupAssociaViaggio {
+    width: 650px;
+}
+
+.PannelloPopupCambioData {
+    height: 100px;
+}
+
+.PannelloPopupCorrispondente {
+    width: 650px;
+}
+
+.PannelloPopupZona {
+    width: 650px;
+}
+
+/* Stile toolbar */
+#ToolbarContainer {
+    padding: 0px;
+    margin: 0px;
+    clear: both;
+}
+
+    #ToolbarContainer .PlanToolbar {
+        float: left;
+        margin-right: 20px;
+    }
+
+.PlanToolbarButton {
+    width: 30px;
+    height: 26px;
+    text-align: right;
+    background-position: center;
+    margin-left: 0px;
+    margin-right: -2px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+    .PlanToolbarButton.DetailFormButton_Cancel {
+        width: 65px;
+        background-position: left;
+        background-image: url('../../images/Toolbar/24/annulla.png');
+    }
+
+    .PlanToolbarButton.Aggiorna {
+        width: 90px;
+        background-position: left;
+        background-image: url('../../images/Toolbar/24/aggiorna.png');
+    }
+
+    .PlanToolbarButton.CambiaDate {
+        width: 115px;
+        background-position: left;
+        background-image: url('../../images/Toolbar/24/calendario.png');
+    }
+
+    .PlanToolbarButton.CalcolaPalletSagome {
+        background-image: url('../../images/Toolbar/24/CalcoloSagomePallet.png');
+    }
+
+    .PlanToolbarButton.GotoNextDate {
+        background-image: url('../../images/arrow_right_white.png');
+        position: absolute;
+        top: 0px;
+        right: 1px;
+    }
+
+    .PlanToolbarButton.GotoPreviousDate {
+        background-image: url('../../images/arrow_left_white.png');
+        position: absolute;
+        right: 35px;
+        top: 0px;
+    }
+
+/**********************************************************************************
+   VIAGGI
+**********************************************************************************/
+
+.PannelloEsternoGrigliaViaggi {
+    /*border-width:1px;*/
+    border-color: #c0c0c0;
+    border-style: solid;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 0px;
+    border-right-width: 0px;
+    background-color: rgb(240,240,240);
+    padding: 0px;
+}
+
+
+#DivGrdElencoViaggi {
+    height: 100%;
+}
+
+div.cpGrdElencoViaggi {
+    clear: both;
+    height: calc(100% - 27px);
+    overflow: auto;
+}
+
+
+/**********************************************************************************
+    Spedizioni Viaggio
+**********************************************************************************/
+
+.PannelloEsternoGrigliaSpedizioniViaggio {
+    border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    background-color: rgb(240,240,240);
+    padding: 0px;
+}
+
+#DivGrdElencoSpedizioniViaggio {
+    height: 100%;
+}
+
+div.cpGrdElencoSpedizioniViaggio {
+    height: calc(100% - 48px);
+    overflow: auto;
+    clear: both;
+}
+
+
+
+/*
+
+    SPEDIZIONI DEI VIAGGI
+
+*/
+div.footerElencoSpedizioniViaggio {
+    height: 20px;
+    border-top: 1px solid #cccccc;
+    padding-top: 2px;
+    font-size: 9pt;
+    margin-left: -3px;
+    margin-right: -3px;
+    position: relative;
+}
+
+    div.footerElencoSpedizioniViaggio .footerSpedizioniViaggio_Caption {
+        margin-left: 5px;
+        font-weight: bold;
+    }
+
+    div.footerElencoSpedizioniViaggio .footerSpedizioniViaggio_Value {
+        margin-left: 5px;
+        margin-right: 15px;
+    }
+
+
+/**********************************************************************************
+    SPEDIZIONI
+**********************************************************************************/
+#DivGrdElencoSpedizioni {
+    height: 100%;
+    float: inherit;
+    padding: 3px;
+}
+
+div.cpGrdElencoSpedizioni {
+    height: calc(100% - 48px);
+    overflow: auto;
+    clear: both;
+}
+
+div.footerElencoSpedizioni {
+    height: 20px;
+    border-top: 1px solid #cccccc;
+    padding-top: 2px;
+    font-size: 9pt;
+    margin-left: -3px;
+    margin-right: -3px;
+    position: relative;
+}
+
+    div.footerElencoSpedizioni .footerSpedizioni_Caption {
+        margin-left: 5px;
+        font-weight: bold;
+    }
+
+    div.footerElencoSpedizioni .footerSpedizioni_Value {
+        margin-left: 5px;
+        margin-right: 15px;
+    }
+
+/*****************************
+    BTN FILTER GRD SPEDIZIONI
+******************************/
+#btnFilterResetContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkContainer:hover {
+    background-color: #d5193c;
+}
+
+/**********************************************************************************
+    SPEDIZIONI RAGGRUPPATE
+**********************************************************************************/
+#DivGrdElencoSpedizioniRaggru {
+    height: 100%;
+    float: inherit;
+    padding: 3px;
+}
+
+div.cpGrdElencoSpedizioniRaggru {
+    height: calc(100% - 48px);
+    overflow: auto;
+    clear: both;
+}
+
+div.footerElencoSpedizioniRaggru {
+    height: 20px;
+    border-top: 1px solid #cccccc;
+    padding-top: 2px;
+    font-size: 9pt;
+    margin-left: -3px;
+    margin-right: -3px;
+}
+
+    div.footerElencoSpedizioniRaggru .footerSpedizioni_Caption {
+        margin-left: 5px;
+        font-weight: bold;
+    }
+
+    div.footerElencoSpedizioniRaggru .footerSpedizioni_Value {
+        margin-left: 5px;
+        margin-right: 15px;
+    }
+
+/*****************************************
+    BTN FILTER GRD SPEDIZIONI RAGGRUPPATE
+******************************************/
+#btnFilterResetContainerRaggru {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkContainerRaggru {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetContainerRaggru:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkContainerRaggru:hover {
+    background-color: #d5193c;
+}
+
+/*
+    Ridefinisce il layout della toolbar con solo iperlink
+*/
+.HeaderElencoSpedizioni .ToolbarButton .ToolbarCell div {
+    border: solid 2px transparent;
+    background-color: #ce455b;
+    border-radius: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    border-width: 2px;
+    border-color: #9e253b;
+    color: #FFFFFF;
+}
+
+.HeaderElencoSpedizioni .ToolbarButton .ToolbarCellOnlyLink .ToolbarLinkButtonControl {
+    font-size: 7pt;
+    display: inline-block;
+    max-width: 100px;
+    color: #FFFFFF;
+}
+
+.HeaderElencoSpedizioni .ToolbarButton .ToolbarCell div:hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #FFC040;
+    background-color: #FFE080;
+    color: #9e253b;
+}
+
+    .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell div:hover .ToolbarLinkButtonControl {
+        color: #9e253b;
+    }
+
+#HeaderElencoSpedizioni, #HeaderElencoSpedizioniRaggru, #HeaderElencoSpedizioniRaggru2 {
+    position: relative;
+    height: 26px;
+}
+
+#PanelBottomR /*IMMAGINE PIE' DI PAGINA DESTRA*/ {
+    height: 0px;
+}
+
+/*
+    Table Tooltip
+*/
+
+table.TooltipTable, .TooltipTable th, .TooltipTable td {
+    border: 1px solid #eaeaea;
+    border-collapse: collapse;
+}
+
+.TooltipTable td {
+    padding: 3px;
+}
+
+.TooltipTable th {
+    text-align: left;
+    padding: 3px;
+    background-color: #9e253b;
+    color: #ffffff;
+}
+
+div.htmltooltip {
+    max-width: 600px; /*max width of tooltip*/
+}
+
+/**********************************************************************************
+    SPEDIZIONI RAGGRUPPATE 2
+**********************************************************************************/
+#DivGrdElencoSpedizioniRaggru2 {
+    height: 100%;
+    float: inherit;
+    padding: 3px;
+}
+
+div.cpGrdElencoSpedizioniRaggru2 {
+    height: calc(100% - 48px);
+    overflow: auto;
+    clear: both;
+}
+/********************************************
+    BTN FILTER GRD SPEDIZIONI RAGGRUPPATE 2
+*********************************************/
+#btnFilterResetContainerRaggru2 {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkContainerRaggru2 {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetContainerRaggru2:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkContainerRaggru2:hover {
+    background-color: #d5193c;
+}
+
+
+#DivGrdElencoSpedizioni .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell.Spedizioni div {
+    background-color: #99FF99;
+}
+
+#DivGrdElencoSpedizioni .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell.Spedizioni .ToolbarLinkButtonControl {
+    color: #9e253b;
+}
+
+#DivGrdElencoSpedizioniRaggru .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell.Consegne div {
+    background-color: #99FF99;
+    color: #9e253b;
+}
+
+#DivGrdElencoSpedizioniRaggru .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell.Consegne .ToolbarLinkButtonControl {
+    color: #9e253b;
+}
+
+#DivGrdElencoSpedizioniRaggru2 .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell.Destinazioni div {
+    background-color: #BBFFBB;
+    color: #9e253b;
+}
+
+#DivGrdElencoSpedizioniRaggru2 .HeaderElencoSpedizioni .ToolbarButton .ToolbarCell.Destinazioni .ToolbarLinkButtonControl {
+    color: #9e253b;
+}
+
+div#ViaggiCaptionContainer {
+    float: left;
+    margin-right: 10px;
+    padding-top: 3px;
+    font-size: 14px;
+    color: #9E253B;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+div#ElencoSpedizioniViaggioContainer {
+    float: left;
+    margin-right: 10px;
+    padding-top: 1px;
+    font-size: 14px;
+    color: #9E253B;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+}
+
+div#ElencoSpedizioniContainer, div#ElencoSpedizioniContainer2, div#ElencoSpedizioniContainer3 {
+    float: left;
+    margin-right: 10px;
+    padding-top: 1px;
+    font-size: 14px;
+    color: #9E253B;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+}
+
+
+/*
+
+    PATCH PER CORREGGERE SCROLLBAR SU GRIGLIE QUANDO VENGONO UTILIZZATE CON LO SCROLLHEIGHT
+
+*/
+
+/*div.cpGrdElencoViaggi div.IboWebGridView.grdGriglia.stdGrdScrollableBody {
+    overflow-x:hidden !important ;
+}*/
+
+.DetailFormMainTable .PagerRow td {
+    padding: 0px;
+    padding-right: 5px;
+}
+
+table.grdSpedizioniRaggru .PagerRow td span, table.grdSpedizioni .PagerRow td span, table.grdSpedizioniRaggru2 .PagerRow td span {
+    color: #FFFFAA;
+    font-weight: bold;
+}
+
+.IFrameDimension_GestioneSequenza {
+    position: inherit;
+    width: 1300px;
+    height: 650px;
+}
+
+/*
+    LINK Spedizioni e consegne
+*/
+a.lnkElencoConsengeViaggioCaption, a.lnkElencoSpedizioniViaggioCaption {
+    width: 120px;
+    display: inline-block;
+    color: #ca8888;
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+    a.lnkElencoConsengeViaggioCaption.aspNetDisabled, a.lnkElencoSpedizioniViaggioCaption.aspNetDisabled {
+        color: #9E253B;
+        border-color: #9E253B;
+    }
+
+span.lblElencoSpedizioniCaption, span.lblElencoConsegneCaption, span.lblElencoDestinazioniCaption {
+    width: 130px;
+    display: inline-block;
+    color: #ca8888;
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    color: #9E253B;
+    border-color: #9E253B;
+}
+
+a.lnkElencoConsegneCaption, a.lnkElencoDestinazioniCaption, a.lnkElencoSpedizioniCaption {
+    width: 130px;
+    display: inline-block;
+    color: #ca8888;
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}

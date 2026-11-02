@@ -1,0 +1,126 @@
+﻿/********************************************************************/
+/*					STILE DELLA FORM PRINCIPALE  					*/
+/********************************************************************/
+.DetailFormSectionDiv
+{
+    border: solid 1px #c0c0c0;
+}
+
+.BtnGeocodifica
+{
+    width: 100px;
+    /*height: 23px;*/
+    height: 30px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/16/cerca.png');
+    background-repeat: no-repeat;
+}
+
+.btnConfermaPosizione
+{
+    width: 135px;    
+    height: 30px;
+    text-align: center;
+    _background-image: url('../../images/Toolbar/16/cerca.png');
+    _background-repeat: no-repeat;
+}
+
+.MapContainerDivClass
+{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 0px;
+    background-color: #f0f0f0;
+}
+
+.NoGeocodingExistDivClass
+{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 500px;
+}
+
+.NoGeocodingExistLabelClass
+{
+    font-size: x-large;
+    line-height: normal;
+}
+
+.DetailFormMainTable td
+{
+	padding: 3px;
+}
+
+/********************************************************************/
+/*					STILE DELLA MODAL POPUP FORM					*/
+/********************************************************************/
+.MapGeocodingPopupFormContainer
+{
+    width: auto;
+    max-width: 1300px;
+    min-width: 1000px;
+    height: auto;
+    border: solid 1px #777777;
+}
+
+.BtnSeleziona input
+{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.RowStyle
+{
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #CDCDCD;
+    font-size: 11px;
+}
+
+    .RowStyle td
+    {
+        text-align: left;
+        padding: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px solid #CDCDCD;
+    }
+
+.AlternateStyle
+{
+    text-align: left;
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #CDCDCD;
+    font-size: 11px;
+}
+
+    .AlternateStyle td
+    {
+        text-align: left;
+        padding: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px solid #CDCDCD;
+    }
+
+.HeaderStyle
+{
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #CDCDCD;
+    font-size: 11px;
+}
+
+    .HeaderStyle th
+    {
+        padding: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px solid #CDCDCD;
+    }

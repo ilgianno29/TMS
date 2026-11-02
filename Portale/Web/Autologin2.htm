@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Autologin2</title>
+    <script src="WFI/scripts/jquery-2.2.4.min.js"></script>
+    <style id="Body" type="text/css">
+        .body /* BODY */ {
+            font-family: Verdana,Arial,Tahoma;
+            font-size: 10pt;
+            background-color: #ffffff;
+            margin: 0px;
+            padding: 0px;
+            margin-top: 0pt;
+            padding-top: 0pt;
+        }
+
+        #appIFrame {
+            display: block; /* iframes are inline by default */
+            border: none;
+            height: 100vh; /* Viewport-relative units */
+            width: 100vw;
+        }
+
+        #contenitore {
+            min-width: 500px;
+            height: 100%;
+            border: 0px solid #000;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        var Myurl = "http://localhost:50019//WFI/Form/WFIAutoLogin.aspx?u=UTENTE&p=PASSWORD&r=";
+        var failures = 0;
+        var InactivityTimeOut = 180;
+        $(document).ready(function () {
+            RefreshIFrameUrl();
+            setInterval(function () {
+                //
+                // controllo se sono fermo sulla pagina di login
+                //
+                var LoginPage = $("#appIFrame").contents(0)[0].URL;
+
+                if (LoginPage.toUpperCase().indexOf("WFLOGIN2.ASPX") != -1) {
+                    RefreshIFrameUrl();
+                } else {
+                    try {
+                        //
+                        // controllo l'ultimo postback per determinare il tempo di inattività
+                        //
+                        var lp = $("#appIFrame").contents().find("body#MasterPageBodyTag #HF_LastPostBack")[0].value;
+                        var dateTimeArray = lp.split(" ");
+                        var dateArray = dateTimeArray[0].split("-");
+                        var timeArray = dateTimeArray[1].split(":");
+                        // Careful, month starts at 0!
+                        var dateLastPostback = new Date(dateArray[2], dateArray[1] - 1, dateArray[0], timeArray[0], timeArray[1], timeArray[2]);
+                        var diff = (Date.now().valueOf() - dateLastPostback.valueOf()) / 1000;
+                        if (diff > InactivityTimeOut) {
+                            failures++;
+                        }
+                    } catch (e) {
+                        if ((e.message.toUpperCase() == "AUTORIZZAZIONE NEGATA") || (e.message.toUpperCase() == "FAILED TO READ THE 'CONTENTDOCUMENT'")) {
+                            location.reload();
+                        } else {
+                            failures++;
+                        }
+                    }
+                    if (failures >= 1) {
+                        RefreshIFrameUrl();
+                    }
+                }
+            }, 10000);
+        });
+
+        function RefreshIFrameUrl() {
+            try {
+                failures = 0;
+                document.getElementById('appIFrame').src = "";
+                document.getElementById('appIFrame').src = Myurl;
+            } catch (e) { }
+        }
+    </script>
+</head>
+<body class="body">
+    <div id="contenitore">
+        <iframe id="appIFrame"></iframe>
+    </div>
+</body>
+</html>

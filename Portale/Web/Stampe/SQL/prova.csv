@@ -1,0 +1,2 @@
+﻿SELECT Unibol, Cliente, NumeroBolla, DataBolla, PCSDestinazione, PCSDestinazione_RagSoc, PCSDestinazione_Provincia, Volume, Pallet, Peso, Colli
+from spedizioni

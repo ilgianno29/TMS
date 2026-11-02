@@ -1,0 +1,2688 @@
+﻿/* ---------------------------------------------------------------------------
+
+		IMPOSTAZIONI GENERALI
+
+------------------------------------------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana,Tahoma,Arial;
+    font-size: 10pt;
+    background-color: #ffffff;
+    margin: 0;
+    margin-top: 0pt;
+    padding-top: 0pt;
+    background-color: #313840;
+    overflow: hidden;
+}
+
+    body.IsInIframeScrollable {
+        overflow: auto;
+    }
+
+    body.IsInIframeNotScrollable {
+        overflow: hidden;
+    }
+
+    body.IsInIframe {
+        background-color: inherit;
+    }
+
+
+input, textarea, keygen, select, button {
+    font-family: Verdana,Tahoma,Arial;
+}
+
+img {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #cc0000;
+    font-weight: bold;
+}
+
+    a:active {
+        text-decoration: none;
+        color: #aaaaaa;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+/* FOCUS DEL IBOWEBNUMERIC E IBOWEBDATE */
+.MaskedEditFocus {
+}
+/* MESSAGGIO DEL IBOWEBDATE */
+.MaskedEditMessage {
+    color: #ff0000;
+    font-weight: bold;
+}
+/* SFONDO ERRORE DEL IBOWEBDATE */
+.MaskedEditError {
+    background-color: #ffcccc;
+}
+/* FOCUS DELLA DATA SBAGLIATA COLORE DI SFONDO DEL IBOWEBDATE */
+.MaskedEditFocusNegative {
+    background-color: #ffffcc;
+    color: #ff0000;
+}
+/* LOSTFOCUS DELLA DATA SBAGLIATA COLORE DI SFONDO DEL IBOWEBDATE */
+.MaskedEditBlurNegative {
+    color: #ff0000;
+}
+/* Logo applicazione */
+.imgLogoApplicazione {
+    display: none;
+}
+
+.TitoloApplicazione {
+    font-size: 18pt;
+    color: #555555; /*background: #ffffff;*/
+    font-weight: bold;
+    text-align: center; /* 		UI-REVISION 	*/
+    padding-left: 8px;
+}
+
+.TitoloModuloSoftware {
+    font-size: 14pt;
+    color: #555555; /*background: #ffffff;*/
+    font-weight: normal;
+    font-style: italic;
+    text-align: center; /* 		UI.REVISION 	*/
+    padding-left: 8px;
+}
+
+
+/* -------------------------------------------------------------
+
+	       TOOLBAR
+
+----------------------------------------------------------------*/
+.ToolbarContainer /* contenitore esterno */ {
+}
+
+.ToolbarPanelRight /* elenco pulsanti a dx (esempio griglia su iframe)*/ {
+    float: right;
+    border: 0;
+    background-color: transparent;
+    text-align: left;
+}
+
+.ToolbarPanel /*PANNELLO TOOLBAR */ {
+    border: 0;
+    background-color: transparent;
+    text-align: left;
+    float: left;
+}
+
+    .ToolbarPanel .ToolbarTable /*TABELLA TOOLBAR*/ {
+        border: 0px;
+        margin: 0px;
+        border-spacing: 0px;
+    }
+
+    .ToolbarPanel .ToolbarButton {
+        padding: 0px !important;
+    }
+
+        .ToolbarPanel .ToolbarButton input.ToolbarLinkButtonControl {
+            padding: 5px;
+            margin: -3px;
+            vertical-align: middle;
+        }
+
+        .ToolbarPanel .ToolbarButton a.ToolbarLinkButtonControl {
+            padding: 5px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+            margin: -3px;
+            margin-top: -7px;
+            margin-bottom: -7px;
+            overflow: hidden;
+            _text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyLink a.ToolbarLinkButtonControl {
+            padding: 5px;
+            margin: -5px;
+            overflow: hidden;
+            _text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        /* 
+	PULSANTI TOOLBAR CON SOLO IMMAGINE
+*/
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyImage div {
+            border: solid 2px transparent;
+            background-color: #9e253b;
+            border-radius: 3px;
+            margin-right: 3px;
+            margin-bottom: 3px;
+            padding-right: 2px;
+            padding-left: 2px;
+        }
+
+            .ToolbarPanel .ToolbarButton .ToolbarCellOnlyImage div a.ToolbarLinkButtonControl {
+                display: none;
+            }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyImage .ToolbarLinkButtonControl {
+            color: #FFFFFF;
+            font-size: 7pt;
+            display: inline-block;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            max-width: 75px;
+            vertical-align: middle;
+        }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyImage div:hover {
+            border-style: solid;
+            border-width: 2px;
+            border-color: #FFC040;
+            background-color: #FFE080;
+        }
+        /* 
+	PULSANTI TOOLBAR CON IMMAGINE E LINK
+*/
+        .ToolbarPanel .ToolbarButton .ToolbarCellImageAndLink div {
+            border: solid 2px transparent;
+            background-color: #9e253b;
+            border-radius: 3px;
+            margin-right: 3px;
+            margin-bottom: 3px;
+            padding-right: 2px;
+            padding-left: 2px;
+            color: #FFFFFF;
+        }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellImageAndLink a {
+            color: #FFFFFF;
+        }
+
+            .ToolbarPanel .ToolbarButton .ToolbarCellImageAndLink a:hover {
+                color: #9e253b;
+            }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellImageAndLink .ToolbarLinkButtonControl {
+            font-size: 7pt;
+            display: inline-block;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            max-width: 75px;
+            vertical-align: middle;
+        }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellImageAndLink div:hover {
+            border-style: solid;
+            border-width: 2px;
+            border-color: #FFC040;
+            background-color: #FFE080;
+            color: #9e253b;
+        }
+
+            .ToolbarPanel .ToolbarButton .ToolbarCellImageAndLink div:hover a {
+                color: #9e253b;
+            }
+        /* 
+	PULSANTI TOOLBAR CON SOLO LINK
+*/
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyLink div {
+            border: solid 2px transparent;
+            background-color: transparent;
+            border-radius: 3px;
+            margin-right: 3px;
+            margin-bottom: 3px;
+            padding-right: 2px;
+            padding-left: 2px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            vertical-align: middle;
+        }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyLink .ToolbarLinkButtonControl {
+            font-size: 7pt;
+            display: inline-block;
+            max-width: 110px;
+            color: #9e253b;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .ToolbarPanel .ToolbarButton .ToolbarCellOnlyLink div:hover {
+            border-style: solid;
+            border-width: 2px;
+            border-color: #FFC040;
+            background-color: #FFE080;
+        }
+
+    .ToolbarPanel .ToolbarButtonControl {
+        width: 36px;
+        height: 36px;
+    }
+
+    .ToolbarPanel .ToolbarButtonSeparator div {
+        width: 10px;
+        height: 36px;
+        border: none 0px transparent;
+        background-color: transparent;
+        padding: 0px;
+    }
+
+    .ToolbarPanel .ToolbarButtonSeparator img {
+        width: 10px !important;
+        height: 36px;
+    }
+
+.hidden {
+    display: none;
+}
+
+.WFIHidden {
+    display: none;
+}
+
+.WFIVisibilityHidden {
+    visibility: hidden;
+}
+
+/* ---------------------------------------------------------
+
+						NUOVO MENU
+
+------------------------------------------------------------*/
+.IboWebMenu {
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    border-width: 0px;
+}
+
+    .IboWebMenu .static {
+        padding: 2px 5px 2px 5px;
+        background-color: transparent;
+        color: red;
+        cursor: pointer;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+    }
+
+        .IboWebMenu .static ul {
+            border: 1px solid red;
+        }
+
+/*
+	UI-REVISION
+*/
+
+.IboWebMenu {
+    left: 0px !important;
+    top: 0px !important;
+}
+
+    .IboWebMenu .static {
+        border-style: solid;
+        border-width: 1px;
+        color: #555555;
+        display: inline-block;
+        float: left;
+        font-size: 12px;
+        font-weight: 700;
+        height: 30px;
+        line-height: 30px;
+        margin-bottom: 0;
+        margin-left: -2px;
+        margin-top: -1px;
+        padding: 0;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: 0 1px 0 #FFFFFF;
+        white-space: nowrap;
+    }
+
+    .IboWebMenu li .static {
+        background-color: #E6ECEF;
+        border-color: #BAC5CC;
+        color: #333333;
+        text-shadow: 0 1px 0 #FFFFFF;
+    }
+
+    .IboWebMenu a.static {
+        color: #555555 !important;
+        font-weight: 700;
+        padding-left: 9px !important;
+        padding-right: 9px !important;
+    }
+
+        .IboWebMenu a.static:hover {
+            color: #7C1F30 !important;
+            border-style: solid !important;
+            border-width: 1px !important;
+            border-color: #BAC5CC !important;
+        }
+
+    .IboWebMenu ul .dynamic {
+        padding-left: 6px;
+    }
+
+    .IboWebMenu ul li.dynamic {
+        border: 1px solid transparent;
+        clear: both;
+        height: 25px;
+        line-height: 25px;
+    }
+
+        .IboWebMenu ul li.dynamic:hover {
+            background-color: rgb(243,243,243);
+            border: 1px solid #BAC5CC;
+        }
+
+    .IboWebMenu .dynamic {
+        border: none;
+        background-color: #E6ECEF; /*border-color: #BAC5CC;     border-style: solid;     border-width: 1px;*/
+        color: #333333;
+        text-shadow: 0 1px 0 #FFFFFF;
+        color: #555555;
+        display: inline-block;
+        float: left;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 0; /*margin-left:-2px;*/
+        margin-top: 0px;
+        padding: 0;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: 0 1px 0 #FFFFFF;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+        .IboWebMenu .dynamic a {
+            padding: 0px !important;
+            color: #555555 !important;
+            font-weight: 700;
+        }
+
+            .IboWebMenu .dynamic a:hover {
+                border: none;
+                color: #7C1F30 !important; /*text-decoration:underline!important;*/
+                background: none !important;
+            }
+
+#mnuMain a:hover {
+    background: none;
+}
+
+.IboWebMenu .has-popup.dynamic {
+    background: url('img/nav_plus.gif') no-repeat scroll right 3px transparent;
+    border: 1px solid transparent;
+    height: 25px;
+    line-height: 25px;
+}
+
+    .IboWebMenu .has-popup.dynamic:hover {
+        background-color: rgb(243,243,243);
+        border: 1px solid #BAC5CC;
+    }
+
+#mnuMain a.popout-dynamic {
+    background: none !important;
+    padding-right: 20px !important;
+}
+
+#mnuMain ul {
+    padding: 0px 12px 0px 6px !important;
+}
+
+    #mnuMain ul.dynamic {
+        border: #BAC5CC solid 1px !important;
+    }
+
+
+/************************************************************************/
+/*                                                                      */
+/*		GRAFICA GENERALE PAGINA MASTER INTESTAZIONE EPIE' DI PAGINA		*/
+/*                                                                      */
+/************************************************************************/
+
+#PanelHeader /*IMMAGINE INTESTAZIONE PARTE CENTRALE RIPETUTA*/ {
+    width: 100%;
+    height: 45px;
+    background: url('../images/masTB45.png') repeat-x;
+}
+
+.GoToHomePanelVisible /*IMMAGINE INTESTAZIONE PARTE SINISTRA NON RIPETUTA*/ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 46px;
+    background: url(../images/masTLX45.png) no-repeat;
+}
+
+#PanelHeaderContent {
+    /*position: absolute; 	top: 0; 	left: 32px; 	height: 45px; 	right: 42px;     max-width: 1150px;*/
+    width: 100%;
+}
+
+#PanelHeaderContentRight {
+    position: relative;
+    top: 0;
+    height: 45px;
+    right: 5px;
+    width: auto;
+    float: right;
+}
+
+#PanelHeaderRight /*IMMAGINE INTESTAZIONE PARTE DESTRA NON RIPETUTA*/ {
+    position: relative;
+    top: 0;
+    right: 0px;
+    margin-right: 5px;
+    width: 100px;
+    height: 25px; /*background: #ffffff; 	background: url(../images/masTRX45.png) no-repeat;*/
+}
+
+#PanelFooter /*IMMAGINE PIE' DI PAGINA CENTRO*/ {
+    position: inherit;
+    width: 100%;
+    height: 45px;
+    bottom: 0px;
+    left: 0px;
+    background-image: url(../images/masBB45.png);
+    background-repeat: repeat-x;
+}
+
+#PanelContent {
+    top: 100px;
+    min-height: 400px;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#PanelContentX {
+    text-align: center;
+    border: 0px solid #cacaca;
+    padding: 2px;
+    overflow: visible;
+    background-color: #f3f3f3;
+    margin: 2px;
+}
+
+#PanelBottomB {
+    position: absolute;
+    height: 60px;
+    left: 32px;
+    right: 32px;
+}
+
+#PanelBottomL {
+    position: absolute;
+    width: 24px;
+    height: 45px;
+}
+
+#PanelBottomR /*IMMAGINE PIE' DI PAGINA DESTRA*/ {
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 45px;
+    background-image: url(../Images/LogoIncas80x33.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+#PanelGlobalContainer {
+}
+
+.pnlMainMaster {
+    background-color: #e7e7e7;
+}
+
+#PanelGlobalContainer {
+    /*margin-top:100px;*/
+}
+
+#MPGeneralSearch {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 110px;
+}
+
+#MPGeneralSearchLabel {
+    position: absolute;
+    right: 120px;
+    bottom: 0px;
+    color: #494949;
+}
+
+#PanelHeader {
+    height: 32px !important; /*background-color: #E6ECEF;*/
+    background-image: none !important;
+}
+
+.GoToHomePanelVisible {
+    position: relative !important;
+    float: left;
+    background-image: none !important;
+    border-top: medium none !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    padding-bottom: 1px;
+    height: 32px !important;
+    background-color: #9e253b;
+    z-index: 1;
+}
+
+.GoToHomePanelNotVisible {
+    position: relative !important;
+    float: left;
+    background-image: none !important;
+    border-top: medium none !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    padding-bottom: 1px;
+    height: 31px !important;
+}
+
+#PanelHeaderRight {
+    /*position: absolute !important; 	top: 100px !important; 	height: 32px !important; 	background: none !important;*/
+}
+
+#PanelHeaderContentRight {
+    display: none;
+}
+
+.imgGoToHome {
+    top: 5px !important;
+}
+
+#PanelHeaderContent {
+    position: relative !important;
+    left: 0px !important;
+    height: 0px !important;
+}
+
+#PanelContent {
+    clear: both;
+    min-height: 0px !important;
+}
+
+/* -------------FOOTER-----------------*/
+
+#PanelFooter {
+    background: none !important;
+    height: 0px;
+}
+
+#PanelBottomL {
+    background: none;
+    height: 25px;
+    width: auto;
+    color: #FFFFFF;
+    font-size: 8pt;
+    padding-top: 1px;
+}
+
+    #PanelBottomL .sistemaDescr, #PanelBottomL .utenteDescr {
+        color: #FFFFFF;
+        margin-left: 5px;
+        font-weight: bold;
+        width:62px;
+        display:inline-block;
+    }
+
+    #PanelBottomL .utenteDescr {
+    }
+
+    #PanelBottomL .sistemaValue, #PanelBottomL .utenteValue {
+        color: #cacaca;
+        font-style: italic;
+    }
+
+
+
+
+
+/*
+		Da mettere a posto
+*/
+
+.DetailFormModeDiv {
+    background: none !important;
+}
+
+
+
+
+
+
+
+
+/*
+	TOOLTIP
+
+	CSS per la gestione del tooltip oggetto anchor <a>
+*/
+div.htmltooltip {
+    position: absolute; /*leave this and next 3 values alone*/
+    z-index: 1000;
+    left: -1000px;
+    top: -1000px;
+    background: #FFFFca;
+    border: 1px solid #cccccc;
+    color: #444444;
+    padding: 3px;
+    min-width: 250px; /*min width of tooltip*/
+    max-width: 700px; /*max width of tooltip*/
+    min-height: 35px;
+    max-height: 500px;
+    overflow: hidden;
+    word-wrap: break-word;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #666666;
+    font-size: 8pt;
+}
+
+a.htmltooltip {
+    text-decoration: inherit;
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+a:active.htmltooltip /* LINK ATTIVO */ {
+    text-decoration: inherit;
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+a.htmltooltip:hover /* PASSAGGIO SUL LINK */ {
+    text-decoration: underline;
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+
+
+/*
+	AJAX TOOLTIP
+
+	CSS per la gestione del tooltip AJAX oggetto anchor <a>
+*/
+div.WFIAjaxHtmlTooltipContent {
+    padding: 3px;
+    min-width: 250px; /*min width of tooltip*/
+    max-width: 750px; /*max width of tooltip*/
+    min-height: 35px;
+    max-height: 500px;
+    overflow: hidden;
+    font-size: 8pt;
+}
+
+    div.WFIAjaxHtmlTooltipContent.NoDataFound {
+        padding: 5px;
+        font-size: 12pt;
+        font-style: italic;
+        text-align: center;
+    }
+
+a.WFIAjaxHtmlTooltip {
+    text-decoration: inherit;
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+a:active.WFIAjaxHtmlTooltip /* LINK ATTIVO */ {
+    text-decoration: inherit;
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+a.WFIAjaxHtmlTooltip:hover /* PASSAGGIO SUL LINK */ {
+    text-decoration: underline;
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+
+/*-------------------------------------------------------------------------------
+
+			Header Panel Top (Grosso)
+
+-------------------------------------------------------------------------------*/
+.imgMasterLogoCliente {
+    top: 10px;
+    left: 220px;
+    height: 80px;
+    width: 180px;
+    position: absolute;
+}
+
+.imgMasterLogoIncas {
+    top: 10px;
+    left: 10px;
+    height: 80px;
+    width: 194px;
+    position: absolute;
+}
+
+.MasterPanelTopTitle {
+    top: 35px;
+    left: 420px;
+    position: absolute;
+    color: #FFFFFF;
+    font-size: 18pt;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#PanelTopHeader {
+    background-color: #313840;
+    height: 100px;
+    position: relative;
+}
+
+#PanelTopHeader1 {
+    /*background:#313840 url('img/logo-incas.gif') no-repeat;*/
+    height: 100px;
+}
+
+#PanelTopHeader2 {
+    /*display:none;*/
+    position: absolute;
+    top: 10px;
+    right: 360px;
+    padding: 0;
+    height: 79px;
+    width: 200px;
+}
+
+#PanelTopHeader3 {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 #000000;
+    border-radius: 3px 3px 3px 3px;
+    border: 0px solid rgba(0, 0, 0, 0.8) !important;
+    padding: 1px 1px 1px 10px;
+    height: 85px;
+    width: 345px;
+}
+
+#PanelTopHeader3Table {
+    margin-left: 0px;
+}
+
+#PanelHeaderContentRightTop {
+    position: relative;
+    height: 33px;
+    background-image: url(../Images/LogoIncas80x33.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    margin-right: 10px;
+}
+
+#PanelHeaderContentRightBottom {
+    position: relative;
+    height: 60px;
+    color: #333333;
+    font-style: italic;
+    font-size: 10px;
+    top: 0px;
+    right: 0px;
+    padding-top: 1px;
+}
+
+.lblMasterTitoloModuloSoftware {
+    position: relative;
+    top: 5px;
+    right: 0px;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.lblMasterUtenteApplicazione {
+    position: relative;
+    top: 3px;
+    right: 0px;
+    width: 240px;
+    font-style: italic;
+    font-size: 12px;
+    color: #AAAAAA;
+    font-style: normal;
+    float: left;
+    clear: both;
+    margin-top: 3px;
+    padding: 5px 20px 5px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.BottoneLogOff {
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/logoff16.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px; /*background-color: transparent; */
+    border: 1px solid #AAAAAA;
+}
+
+.lblMasterFilialeApplicazione {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    font-style: italic;
+    font-size: 12px;
+    color: #333333;
+    color: #AAAAAA;
+    font-style: normal;
+    float: left;
+    clear: both;
+    margin-top: 6px;
+    padding: 5px 20px 5px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.lblMasterOrganizzazioneApplicazione {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    font-style: italic;
+    font-size: 12px;
+    color: #333333;
+    color: #AAAAAA;
+    font-style: normal;
+    float: left;
+    clear: both;
+    margin-top: 6px;
+    padding: 0px 20px 0px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.BottoneFiliale {
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/factory16.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px; /*background-color: transparent; */
+}
+
+.lblMasterVersioneApplicazione {
+    position: absolute;
+    top: 7px;
+    right: 55px;
+    font-style: italic;
+    font-size: 9px;
+    color: #000000;
+}
+/*-------------------------------------------------------------------------------
+
+			Header Panel Top (Sottile)
+
+-------------------------------------------------------------------------------*/
+.ThinImgMasterLogoCliente {
+    top: 0px;
+    left: 55px;
+    height: 25px;
+    width: 50px;
+    position: absolute;
+    display: none;
+}
+
+.ThinImgMasterLogoIncas {
+    top: 0px;
+    left: 0px;
+    height: 25px;
+    width: 50px;
+    position: absolute;
+    display: none;
+}
+
+.MasterThinPanelTopTitle {
+    top: 4px;
+    left: 110px;
+    left: 5px;
+    position: absolute;
+    color: #FFFFFF;
+    font-size: 10pt;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#ThinPanelTopHeader {
+    background-color: #313840;
+    height: 25px;
+    position: relative;
+}
+
+#ThinPanelTopHeader1 {
+    height: 33px;
+}
+
+#ThinPanelTopHeader2 {
+    position: absolute;
+    top: 0px;
+    right: 400px;
+    padding: 0;
+    height: 25px;
+    width: 200px;
+}
+
+#ThinPanelTopHeader3 {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    color: #FFFFFF;
+    text-align: right;
+    text-shadow: 0 1px 0 #000000;
+    border: 0px solid rgba(0, 0, 0, 0.8) !important;
+    padding: 1px 1px 1px 10px;
+    height: 26px;
+    width: 345px;
+    _background-image: url(../Images/LogoIncas80x33.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    margin-right: 27px;
+}
+
+.ThinLblMasterTitoloModuloSoftware {
+    position: relative;
+    top: -4px;
+    right: 0px;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.Browser_MSIE .ThinLblMasterTitoloModuloSoftware, .Browser_FIREFOX .ThinLblMasterTitoloModuloSoftware {
+    top: 0px;
+}
+
+.ThinBottoneLogOff {
+    width: 22px;
+    height: 22px;
+    background-image: url('../images/logoff16.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: -1px;
+    margin-left: 5px;
+    border: 1px solid #AAAAAA;
+}
+
+.ThinBottoneFiliale {
+    width: 22px;
+    height: 22px;
+    background-image: url('../images/factory16.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: -1px;
+    margin-left: 5px;
+    border: 1px solid #AAAAAA;
+}
+
+/* ------------------------------------------------------------------------------------------
+
+		Wait Panel
+
+------------------------------------------------------------------------------------------
+*/
+
+.UPPnlMainContainer {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 100002;
+}
+
+.UPPnlMain {
+    position: fixed;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 150px;
+    margin-left: -100px;
+    margin-top: -75px;
+    color: #000;
+    font-weight: bold;
+    padding: 0;
+    background-color: #FFFDD0;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 0px;
+    border-style: solid;
+    border-color: #888888;
+    z-index: 100002;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(70,70,70,1);
+}
+
+    .UPPnlMain table {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 150px;
+        margin-left: -100px;
+        margin-top: -75px;
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.noBorderTable {
+    border-collapse: collapse;
+    padding: 0px;
+    width: auto;
+}
+
+.PanelTopHeader3Table {
+    border-collapse: collapse;
+    padding: 0px;
+    width: 340px;
+}
+
+.imgGoToHome {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+}
+
+    .imgGoToHome img {
+        position: relative;
+        top: 0px;
+        width: 24px;
+        height: 24px;
+    }
+
+.MenuLaterale {
+    position: absolute;
+    top: 5px;
+    left: 45px;
+    width: 24px;
+    height: 24px;
+}
+
+    .MenuLaterale img {
+        position: relative;
+        top: 0px;
+        width: 24px;
+        height: 24px;
+        padding: 0px 2px 0px 2px;
+    }
+
+        .MenuLaterale img:hover {
+            position: relative;
+            top: 0px;
+            width: 24px;
+            height: 24px;
+            background-color: Red;
+        }
+
+.imgCloseApplication {
+    position: absolute;
+    top: 4px;
+    right: 9px;
+    width: 24px;
+    height: 24px;
+}
+
+.FilialeContextMenuPanel {
+    border: 1px solid #868686;
+    z-index: 999999999;
+    background: url(../../WFI/images/menu-bg.gif) repeat-y 0 0 #FAFAFA;
+    cursor: default;
+    padding: 1px 1px 0px 1px;
+    font-size: 11px;
+}
+
+a.FilialeContextMenuItem {
+    margin: 1px 0 1px 0;
+    display: block;
+    color: #003399;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 4px 19px 4px 33px;
+    white-space: nowrap;
+}
+
+a.FilialeContextMenuItem-Selected {
+    font-weight: normal;
+}
+
+a.FilialeContextMenuItem:hover {
+    background-color: #FFE6A0;
+    color: #003399;
+    background-color: #BF2453;
+    border: 1px solid #D2B47A;
+    padding: 3px 18px 3px 32px;
+}
+
+.WFIDisabled {
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+}
+
+.WFIGrassetto {
+    font-weight: bold;
+}
+
+.WFIItalic {
+    font-style: italic;
+}
+
+.WFIEnabled {
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+/*--------------------------------------------------------------------------------------
+
+		AutoCompleteExtender
+
+--------------------------------------------------------------------------------------*/
+.AutoCompleteExtenderList {
+    font-family: Verdana,Tahoma,Arial;
+    font-size: 14px;
+    background-color: #eeeeee;
+    list-style-image: none;
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 3px;
+    z-index: 999999 !important;
+    border: 1px solid #cccccc;
+    color: #333333;
+    box-shadow: 3px 3px 3px #555555;
+    width: 342px !important;
+    left: -250px !important;
+    margin-top: 5px;
+}
+
+.AutoCompleteExtenderHighlightedItem {
+    background-color: rgb(158, 37, 59);
+    color: #eeeeee;
+    vertical-align: middle;
+    padding: 2px;
+    padding-left: 3px;
+}
+
+.AutoCompleteExtenderItem {
+    vertical-align: middle;
+    padding: 2px;
+    padding-left: 3px;
+}
+/*
+
+		I F R A M E    C O N T A I N E R
+
+*/
+.IFramePopupExtenderContainer {
+}
+
+.IFrameContainer {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    bottom: 5%;
+    right: 5%;
+    width: 90%;
+    height: 90%;
+    border: 1px solid #333333;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 999999;
+    background-color: #FFFFFF;
+}
+
+    .IFrameContainer .IFrameTitle {
+        font-size: 14pt;
+        font-weight: normal;
+        position: relative;
+        padding-left: 5px;
+        height: 25px;
+        background-color: #9e253b;
+        background: linear-gradient(to right, #9e253b, #CF304D);
+        color: #FFFFFF;
+        position: relative;
+        cursor: default;
+    }
+
+        .IFrameContainer .IFrameTitle.draggable {
+            cursor: move;
+        }
+
+        .IFrameContainer .IFrameTitle .IFrameCloseButton {
+            position: absolute;
+            right: 4px;
+        }
+
+    .IFrameContainer .IFrameContainerDiv {
+        font-size: 14pt;
+        font-weight: normal;
+        position: absolute;
+        top: 25px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+
+        .IFrameContainer .IFrameContainerDiv .MasterIFrame {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            z-index: 999999;
+            background-color: #FFFFFF;
+            width: 100%;
+            height: 100%;
+            border-style: none;
+        }
+
+.IFrameContainer100Percent {
+    top: 0.5%;
+    left: 0.5%;
+    bottom: 0.5%;
+    right: 0.5%;
+    width: 99%;
+    height: 99%;
+}
+
+.IFrameContainer95Percent {
+    top: 2.5%;
+    left: 2.5%;
+    bottom: 2.5%;
+    right: 2.5%;
+    width: 95%;
+    height: 95%;
+}
+
+.IFrameContainer90Percent {
+    top: 5%;
+    left: 5%;
+    bottom: 5%;
+    right: 5%;
+    width: 90%;
+    height: 90%;
+}
+
+.IFrameContainer80Percent {
+    top: 10%;
+    left: 10%;
+    bottom: 10%;
+    right: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+.IFrameContainer70Percent {
+    top: 10%;
+    left: 15%;
+    bottom: 10%;
+    right: 15%;
+    width: 70%;
+    height: 80%;
+}
+
+.IFrameContainer60Percent {
+    top: 15%;
+    left: 20%;
+    bottom: 15%;
+    right: 20%;
+    width: 60%;
+    height: 70%;
+}
+
+.IFrameContainer50Percent {
+    top: 18%;
+    left: 25%;
+    bottom: 18%;
+    right: 25%;
+    width: 50%;
+    height: 64%;
+}
+
+.IFrameContainer800x600 {
+    position: inherit;
+    width: 800px;
+    height: 600px;
+}
+
+.IFrameContainer900x600 {
+    position: inherit;
+    width: 900px;
+    height: 600px;
+}
+
+.IFrameContainer1000x600 {
+    position: inherit;
+    width: 1000px;
+    height: 600px;
+}
+
+.IFrameContainer1100x600 {
+    position: inherit;
+    width: 1100px;
+    height: 600px;
+}
+
+.IFrameContainer1200x600 {
+    position: inherit;
+    width: 1200px;
+    height: 600px;
+}
+
+.IFrameContainer700x500 {
+    position: inherit;
+    width: 700px;
+    height: 500px;
+}
+
+.IFrameContainer600x400 {
+    position: inherit;
+    width: 600px;
+    height: 400px;
+}
+
+.IFrameContainer800x500 {
+    position: inherit;
+    width: 800px;
+    height: 500px;
+}
+
+.IFrameContainer900x500 {
+    position: inherit;
+    width: 900px;
+    height: 500px;
+}
+
+.IFrameContainer900x450 {
+    position: inherit;
+    width: 900px;
+    height: 450px;
+}
+
+.IFrameContainer900x400 {
+    position: inherit;
+    width: 900px;
+    height: 400px;
+}
+
+.IFrameContainer1000x500 {
+    position: inherit;
+    width: 1000px;
+    height: 500px;
+}
+
+.IFrameContainer1100x500 {
+    position: inherit;
+    width: 1100px;
+    height: 500px;
+}
+
+.IFrameContainer1200x500 {
+    position: inherit;
+    width: 1200px;
+    height: 500px;
+}
+
+.IFrameContainer800x700 {
+    position: inherit;
+    width: 800px;
+    height: 700px;
+}
+
+.IFrameContainer900x700 {
+    position: inherit;
+    width: 900px;
+    height: 700px;
+}
+
+.IFrameContainer1000x700 {
+    position: inherit;
+    width: 1000px;
+    height: 700px;
+}
+
+.IFrameContainer1100x700 {
+    position: inherit;
+    width: 1100px;
+    height: 700px;
+}
+
+.IFrameContainer1200x700 {
+    position: inherit;
+    width: 1200px;
+    height: 700px;
+}
+
+.PanelContentInFrame {
+    padding: 1px !important;
+    margin: 0px !important;
+}
+
+.PanelContentXInFrame {
+    padding: 0px !important;
+    margin: 1px !important;
+}
+
+.onlydesign {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0;
+}
+
+.CollapserContainer {
+    position: absolute;
+    right: 0px;
+    top: 100px;
+}
+
+.CollapserContainer2 {
+    position: absolute;
+    right: 0px;
+    top: 25px;
+}
+
+#Collapser {
+    position: relative;
+    right: 0px;
+    top: -4px;
+}
+
+.JqueryUIToolTipDiv {
+    font-size: 11px;
+}
+
+    .JqueryUIToolTipDiv hr {
+        border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        margin-top: 5px;
+        margin-bottom: 3px;
+    }
+
+/*
+        Modifica al tema di jquery ui per quanto riguarda il tooltip
+*/
+.ui-tooltip {
+    padding: 5px;
+    max-width: 600px;
+    z-index: 99999;
+}
+
+.ui-widget-shadow {
+    -webkit-box-shadow: -0px -0px 5px #aaaaaa;
+    box-shadow: -0px -0px 5px #aaaaaa;
+}
+
+
+
+
+/************************************************************/
+/*                                                          */
+/*					STILE DELLA MODAL POPUP					*/
+/*                                                          */
+/************************************************************/
+.IboMessageBox_popupBack
+/*PAGINA CHE CONTIENE LA POPUP*/ {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+.IboMessageBox_popupDragBar
+/*BARRA PER IL DRAG&GROP DELLA POPUP*/ {
+    background-color: #d2d2d2;
+    border: solid 0px #000000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom: solid 1px #555555;
+    height: 40px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.IboMessageBox_popupContent
+/*CONTENUTO*/ {
+    background-color: #eeeeee;
+    border-left: solid 0px #000000;
+    border-right: solid 0px #000000;
+    height: auto;
+    min-height: 200px;
+    max-height: 400px;
+    vertical-align: middle;
+    text-align: center;
+    overflow: auto;
+}
+
+.IboMessageBox_popupButtons
+/*PULSANTI*/ {
+    background-color: #eeeeee;
+    border: solid 0px #000000;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: solid 1px #999999;
+    height: 50px;
+    text-align: right;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+    .IboMessageBox_popupButtons input {
+        width: 90px;
+        height: 30px;
+        position: relative;
+        top: 10px;
+        border-width: 1px;
+        color: #ffffff;
+    }
+
+.IboMessageBox_cmdOk01 {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+.IboMessageBox_cmdAnnulla01 {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+.IboMessageBox_cmdYes {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+.IboMessageBox_cmdNo {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+.IboMessageBox_cmdOkOnly {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+.IboMessageBox_popupDiv {
+    width: 600px;
+    height: auto;
+    border: solid 1px #555555;
+    border-radius: 10px;
+    border-radius: 0px;
+}
+
+.IboMessageBox_popupTitle {
+    font-size: 18pt;
+    font-weight: bold;
+    position: relative;
+    top: 5px;
+    padding-left: 10px;
+}
+
+.IboMessageBox_popupSubTitle {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.IboMessageBox_popupMessage {
+    font-size: 11pt;
+    font-weight: normal;
+    Height: auto;
+    Width: 100%;
+}
+
+.IboMessageBox_popupTable {
+    border-collapse: collapse;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+    .IboMessageBox_popupTable td {
+        text-align: left;
+        vertical-align: top;
+        padding: 10px;
+    }
+
+/*FABRIZIO*/
+#tableButtons, .tableButtons {
+    width: 100%;
+}
+
+#tableButtons_L, .tableButtons_L {
+    text-align: left;
+    width: 110px;
+}
+
+#tableButtons_R, .tableButtons_R {
+    text-align: right;
+    width: 110px;
+}
+
+.IboMessageBox_img {
+    width: 48px;
+    height: 48px;
+}
+
+
+
+
+
+/********************************************************************/
+/*                                                                  */
+/*					STILE DELLA MODAL POPUP FORM					*/
+/*                                                                  */
+/********************************************************************/
+.PopupFormContainer {
+    width: auto;
+    max-width: 1200px;
+    min-width: 350px;
+    height: auto;
+    border: solid 1px #777777;
+    border-radius: 10px;
+    border-radius: 0px;
+}
+
+/*BARRA PER IL DRAG&GROP DELLA POPUP*/
+.PopupFormTitleBar {
+    background-color: #9e253b;
+    background: linear-gradient(to right, #9e253b, #CF304D);
+    border: solid 0px #777777;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom: solid 1px #777777;
+    height: 30px;
+    cursor: all-scroll;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/*CAPTION DELLA POPUP*/
+.PopupFormCaption {
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: bold;
+    position: relative;
+    top: 3px;
+    padding-left: 7px;
+    color: #ffffff;
+}
+
+/*CONTENUTO DELLA POPUP*/
+.PopupFormBody {
+    background-color: #ffffff;
+    background-color: #eeeeee;
+    border-left: solid 0px #777777;
+    border-right: solid 0px #777777;
+    height: auto;
+    min-height: 200px;
+    max-height: 540px;
+    vertical-align: middle;
+    text-align: center;
+    overflow: auto;
+    padding: 5px;
+}
+
+/*PULSANTI DELLA POPUP*/
+.PopupFormButtons {
+    background-color: #ff9900;
+    background-color: #eeeeee;
+    border: solid 0px #777777;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: solid 1px #777777;
+    height: 40px;
+    text-align: right;
+    /*padding-right: 10px; */
+}
+
+    .PopupFormButtons input {
+        width: 90px;
+        height: 30px;
+        position: relative;
+        top: 5px;
+        border-width: 1px;
+    }
+
+/*PULSANTE OK*/
+.PopupForm_cmdOk {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+/*PULSANTE ANNULLA*/
+.PopupForm_cmdAnnulla {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+.PopupFormBackground
+/*PAGINA CHE CONTIENE LA POPUP*/ {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+/*FABRIZIO - BOTTONI POPUP*/
+
+#tableButtons, .tableButtons {
+    width: 100%;
+}
+
+#tableButtons_L, .tableButtons_L {
+    text-align: left;
+    width: 110px;
+}
+
+#tableButtons_R, .tableButtons_R {
+    text-align: right;
+    width: 110px;
+}
+
+
+
+
+
+
+/********************************************************************/
+/*					STILE DELLA MODAL POPUP FORM                    */
+/*					IMPLEMENTATA SULLA MASTER FORM                  */
+/********************************************************************/
+.MasterPopupFormContainer {
+    width: auto;
+    max-width: 1300px;
+    min-width: 350px;
+    height: auto;
+    border: solid 1px #999999;
+    border-radius: 10px;
+    border-radius: 0px;
+}
+
+/*BARRA PER IL DRAG&GROP DELLA POPUP*/
+.MasterPopupFormTitleBar {
+    background-color: #9e253b;
+    background: linear-gradient(to right, #9e253b, #CF304D);
+    border: solid 0px #999999;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom: solid 1px #999999;
+    height: 30px;
+    cursor: all-scroll;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/*CAPTION DELLA POPUP*/
+.MasterPopupFormCaption {
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: bold;
+    position: relative;
+    top: 3px;
+    padding-left: 7px;
+    color: #ffffff;
+}
+
+/*CONTENUTO DELLA POPUP*/
+.MasterPopupFormBody {
+    background-color: #ffffff;
+    background-color: #eeeeee;
+    border-left: solid 0px #999999;
+    border-right: solid 0px #999999;
+    height: auto;
+    min-height: 150px;
+    max-height: 600px;
+    vertical-align: middle;
+    text-align: center;
+    overflow: auto;
+    padding: 5px;
+}
+
+/*PULSANTI DELLA POPUP*/
+.MasterPopupFormButtons {
+    background-color: #ff9900;
+    background-color: #eeeeee;
+    border: solid 0px #999999;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: solid 1px #999999;
+    height: 40px;
+    text-align: right;
+    /*padding-right: 10px; */
+}
+
+    .MasterPopupFormButtons input {
+        width: 100px;
+        height: 30px;
+        position: relative;
+        top: 5px;
+        border-width: 1px;
+    }
+
+/*PULSANTE OK*/
+.MasterPopupForm_cmdOk {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+/*PULSANTE ANNULLA*/
+.MasterPopupForm_cmdAnnulla {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+.MasterPopupFormBackground
+/*PAGINA CHE CONTIENE LA POPUP*/ {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+/*BOTTONI POPUP*/
+
+.MasterPopupFormTableButtons {
+    width: 100%;
+}
+
+.MasterPopupFormTableButtons_L {
+    text-align: left;
+    width: 110px;
+}
+
+.MasterPopupFormTableButtons_R {
+    text-align: right;
+    width: 110px;
+}
+
+
+
+
+
+/********************************************************
+ *
+ *
+ *    STILE DELLA PROGRESSBAR
+ *
+ *
+ *********************************************************
+*/
+
+.ProgressbarContainer {
+    height: auto;
+    border: solid 1px #000000;
+    border-radius: 10px;
+    border-radius: 0px;
+}
+
+.ProgressbarTitleBar {
+    background-color: #d2d2d2;
+    border: solid 0px #000000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom: solid 1px #777777;
+    height: 35px;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.ProgressbarCaption {
+    font-size: 16pt;
+    font-weight: bold;
+    position: relative;
+    top: 5px;
+    padding-left: 10px;
+    color: #333333;
+}
+
+.ProgressbarBody {
+    background-color: #eeeeee;
+    border-left: solid 0px #000000;
+    border-right: solid 0px #000000;
+    height: auto;
+    min-height: 200px;
+    max-height: 500px;
+    vertical-align: middle;
+    text-align: center;
+    overflow: auto;
+    color: #333333;
+}
+
+.ProgressbarDescription {
+    text-align: left;
+    font-size: 14pt;
+    font-weight: normal;
+}
+
+.ProgressbarDescriptionPanel {
+    width: 420px;
+    height: 80px;
+    text-align: left;
+    overflow: hidden;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ProgressbarDetail {
+    text-align: left;
+}
+
+.ProgressbarDetailPanel {
+    width: 420px;
+    height: 40px;
+    overflow: hidden;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.ProgressbarButtons {
+    background-color: #d2d2d2;
+    border: solid 0px #000000;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: solid 1px #777777;
+    height: 40px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+    .ProgressbarButtons input {
+        width: 90px;
+        height: 30px;
+        position: relative;
+        top: 5px;
+        border-width: 1px;
+    }
+
+.Progressbar_cmdOk {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/check.png');
+    background-repeat: no-repeat;
+}
+
+.Progressbar_cmdAnnulla {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/delete.png');
+    background-repeat: no-repeat;
+}
+
+.ProgressbarBackground {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+.ProgressBarLayoutContainerPanel {
+    text-align: center;
+}
+
+.ProgressBarLayoutContainerPanel2 {
+    text-align: center;
+}
+
+.ProgressBarLayoutContainer {
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    border-radius: 0px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 420px;
+    height: 40px;
+}
+
+.ProgressBarLayoutContainer2 {
+    border: 0px solid #CCCCCC;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 420px;
+    height: 40px;
+    color: #9e253b;
+}
+
+#ProgressBarLayoutStaticImage {
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    width: 100%;
+}
+
+.ProgressBarLayout {
+    border: 0px solid #CCCCCC;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    border-radius: 0px;
+    background-color: #9e253b;
+    position: absolute;
+    height: 40px;
+}
+
+.ProgressBarLayoutPercentuale {
+    width: 100%;
+    border: 0px solid #CCCCCC;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+    color: #777777;
+    padding: 5px;
+    font-size: 14pt;
+}
+
+.ProgressBarLayoutTimeElapsed {
+    width: 100%;
+    border: 0px solid #CCCCCC;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+    color: #777777;
+    padding: 5px;
+    font-size: 14pt;
+}
+
+
+
+
+
+/************************************************************************/
+/*					STILE DELLA MODAL POPUP SELECT BOX					*/
+/************************************************************************/
+.IboSelectBox_popupBack /*PAGINA CHE CONTIENE LA POPUP*/ {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+.IboSelectBox_popupDragBar /*BARRA PER IL DRAG&GROP DELLA POPUP*/ {
+    background-color: #d2d2d2;
+    border: solid 1px #555555;
+    height: 40px;
+    cursor: pointer;
+    vertical-align: middle;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.IboSelectBox_popupContent /*CONTENUTO*/ {
+    background-color: #eeeeee;
+    border-left: solid 1px #555555;
+    border-right: solid 1px #555555;
+    height: auto;
+    min-height: 200px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.IboSelectBox_popupButtons /*PULSANTI*/ {
+    background-color: #eeeeee;
+    border: solid 1px #555555;
+    height: 40px;
+    text-align: right;
+    /*padding-right: 10px;*/
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+    .IboSelectBox_popupButtons input {
+        width: 95px;
+        height: 30px;
+        position: relative;
+        top: 5px;
+        border-width: 1px;
+    }
+
+.btnIboSelectBoxCancel {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+    background-repeat: no-repeat;
+}
+
+.btnIboSelectBoxConfirm {
+    text-align: right;
+    background-image: url('../images/Toolbar/24/conferma.png');
+    background-repeat: no-repeat;
+}
+
+.IboSelectBox_popupDiv {
+    width: 600px;
+    height: auto;
+    border-radius: 10px;
+    border-radius: 0px;
+}
+
+.IboSelectBox_popupTitle {
+    font-size: 18pt;
+    font-weight: bold;
+    position: relative;
+    top: 5px;
+    padding-left: 10px;
+}
+
+.IboSelectBox_popupSubTitle {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.IboSelectBox_popupMessage {
+    font-size: 12pt;
+    font-weight: normal;
+    height: auto;
+    width: 100%;
+}
+
+.IboSelectBox_popupTable {
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+    .IboSelectBox_popupTable td {
+        text-align: left;
+        vertical-align: top;
+        padding: 8px;
+    }
+
+    .IboSelectBox_popupTable select {
+        width: 570px;
+        height: 30px;
+        font-size: 14pt;
+        font-style: normal;
+    }
+
+.IboSelectBoxRadioButtonList {
+    width: 100%;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 12pt;
+}
+
+    .IboSelectBoxRadioButtonList td {
+        width: 100%;
+        padding: 5px;
+    }
+
+        .IboSelectBoxRadioButtonList td:hover {
+            background-color: rgb(158, 37, 59);
+            color: #FFFFFF;
+        }
+
+#IboSelectBoxDropDownList {
+    width: 100%;
+}
+
+/*FABRIZIO - POPUP FILTRO*/
+
+#tableButtons, .tableButtons {
+    width: 100%;
+}
+
+#tableButtons_L, .tableButtons_L {
+    text-align: left;
+    width: 110px;
+}
+
+#tableButtons_R, .tableButtons_R {
+    text-align: right;
+    width: 110px;
+}
+
+
+
+
+
+/********************************************************/
+/*                                                      */
+/*   STILE DELLE TAB                                    */
+/*                                                      */
+/********************************************************/
+
+/* xp theme */
+.Myajax__tab_xp .ajax__tab_header {
+    font-family: verdana,tahoma,helvetica;
+    font-size: 12px;
+    background: url(../images/Tabs/tab-line.gif) repeat-x bottom;
+}
+
+.Myajax__tab_xp .ajax__tab_outer {
+    padding-right: 4px;
+    background: url(../images/Tabs/tab-right.gif) no-repeat right;
+    height: 21px;
+}
+
+.Myajax__tab_xp .ajax__tab_inner {
+    padding-left: 3px;
+    background: url(../images/Tabs/tab-left.gif) no-repeat;
+}
+
+.Myajax__tab_xp .ajax__tab_tab {
+    height: 13px;
+    padding: 4px;
+    margin: 0;
+    background: url(../images/Tabs/tab.gif) repeat-x;
+}
+
+.Myajax__tab_xp .ajax__tab_hover .ajax__tab_outer {
+    background: url(../images/Tabs/tab-hover-right.gif) no-repeat right;
+}
+
+.Myajax__tab_xp .ajax__tab_hover .ajax__tab_inner {
+    background: url(../images/Tabs/tab-hover-left.gif) no-repeat;
+}
+
+.Myajax__tab_xp .ajax__tab_hover .ajax__tab_tab {
+    background: url(../images/Tabs/tab-hover.gif) repeat-x;
+}
+
+.Myajax__tab_xp .ajax__tab_active .ajax__tab_outer {
+    background: url(../images/Tabs/tab-active-right.gif) no-repeat right;
+}
+
+.Myajax__tab_xp .ajax__tab_active .ajax__tab_inner {
+    background: url(../images/Tabs/tab-active-left.gif) no-repeat;
+}
+
+.Myajax__tab_xp .ajax__tab_active .ajax__tab_tab {
+    background: url(../images/Tabs/tab-active.gif) repeat-x;
+}
+
+.Myajax__tab_xp .ajax__tab_body {
+    font-family: verdana,tahoma,helvetica;
+    font-size: 10pt;
+    border: 1px solid #999999;
+    border-top: 0px;
+    padding: 5px;
+    background-color: #ffffff;
+}
+
+/* WFI Bordeaux theme */
+.WFITab {
+}
+
+    .WFITab .ajax__tab_header, .WFITab .ajax__tab_header_verticalleft {
+        /*font-family: "Segoe UI", verdana,tahoma,helvetica;*/
+        font-size: 13px;
+        padding: 0px;
+        border: 0px;
+        width: auto;
+        min-width: 80px;
+        max-width: 150px;
+        /*background-color: rgb(240, 240, 240);*/
+    }
+
+        .WFITab .ajax__tab_header_verticalleft div {
+        }
+
+    .WFITab .ajax__tab_outer {
+        padding-right: 4px;
+        min-height: 30px;
+        max-height: 42px;
+        border: 1px solid #cccccc;
+        margin: 3px;
+        margin-top: 0px;
+        margin-right: 0px;
+        border-right: 0px;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px; /*background-color:rgb(158, 37, 59);*/
+        background-color: rgb(240, 240, 240);
+        color: rgb(158, 37, 59);
+        text-decoration: none;
+    }
+
+    .WFITab .ajax__tab_inner {
+        padding-left: 3px;
+        padding-top: 1px;
+    }
+
+    .WFITab .ajax__tab_tab {
+        min-height: 20px;
+        max-height: 32px;
+        padding: 4px 2px 4px 2px;
+        margin: 0; /*color: #ffffff;*/
+        font-weight: normal;
+    }
+
+    .WFITab .ajax__tab_active .ajax__tab_outer {
+        background-color: rgb(158, 37, 59);
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+    }
+
+    .WFITab .ajax__tab_active .ajax__tab_inner {
+        background-color: rgb(158, 37, 59);
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+    }
+
+    .WFITab .ajax__tab_active .ajax__tab_tab {
+        background-color: rgb(158, 37, 59);
+        color: rgb(240, 240, 240);
+    }
+
+    .WFITab .ajax__tab_hover .ajax__tab_outer {
+        background-color: rgb(255, 224, 128);
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        color: rgb(158, 37, 59);
+    }
+
+    .WFITab .ajax__tab_hover .ajax__tab_inner {
+        background-color: rgb(255, 224, 128);
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        color: rgb(158, 37, 59);
+    }
+
+    .WFITab .ajax__tab_hover .ajax__tab_tab {
+        background-color: rgb(255, 224, 128);
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        color: rgb(158, 37, 59);
+    }
+
+    .WFITab .ajax__tab_body, .WFITab .ajax__tab_body_verticalleft {
+        font-size: 10pt;
+        border: 1px solid #cccccc;
+        padding: 0px;
+        background-color: rgb(240, 240, 240);
+    }
+
+
+
+
+
+/* jQuery Dropdown: A simple dropdown plugin
+ *
+ *
+ * Contribute: https://github.com/claviska/jquery-dropdown
+ *
+ * @license: MIT license: http://opensource.org/licenses/MIT
+ *
+ *
+ */
+.jq-dropdown {
+    position: absolute;
+    z-index: 1039;
+    display: none;
+    text-align: left;
+}
+
+    .jq-dropdown .jq-dropdown-menu,
+    .jq-dropdown .jq-dropdown-panel {
+        min-width: 160px;
+        max-width: 360px;
+        list-style: none;
+        background: white;
+        border: solid 1px #ddd;
+        border-radius: 4px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        overflow: visible;
+        padding: 4px 0;
+        margin: 0;
+    }
+
+    .jq-dropdown .jq-dropdown-panel {
+        padding: 10px;
+    }
+
+    .jq-dropdown.jq-dropdown-tip {
+        margin-top: 8px;
+    }
+
+        .jq-dropdown.jq-dropdown-tip:before {
+            position: absolute;
+            top: -6px;
+            left: 9px;
+            content: "";
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid #ddd;
+            display: inline-block;
+        }
+
+        .jq-dropdown.jq-dropdown-tip:after {
+            position: absolute;
+            top: -5px;
+            left: 10px;
+            content: "";
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+            display: inline-block;
+        }
+
+        .jq-dropdown.jq-dropdown-tip.jq-dropdown-anchor-right:before {
+            left: auto;
+            right: 9px;
+        }
+
+        .jq-dropdown.jq-dropdown-tip.jq-dropdown-anchor-right:after {
+            left: auto;
+            right: 10px;
+        }
+
+    .jq-dropdown.jq-dropdown-scroll .jq-dropdown-menu,
+    .jq-dropdown.jq-dropdown-scroll .jq-dropdown-panel {
+        max-height: 180px;
+        overflow: auto;
+    }
+
+    .jq-dropdown .jq-dropdown-menu li {
+        list-style: none;
+        padding: 0 0;
+        margin: 0;
+        line-height: 20px;
+    }
+
+        .jq-dropdown .jq-dropdown-menu li > a,
+        .jq-dropdown .jq-dropdown-menu label {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+            line-height: 20px;
+            padding-left: 7px;
+            padding-right: 7px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            margin: 0;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+            .jq-dropdown .jq-dropdown-menu li > a:hover,
+            .jq-dropdown .jq-dropdown-menu label:hover {
+                background-color: #9e253b;
+                color: #ffffff;
+                cursor: pointer;
+            }
+
+    .jq-dropdown .jq-dropdown-menu .jq-dropdown-divider {
+        font-size: 1px;
+        border-top: solid 1px #e5e5e5;
+        padding: 0;
+        margin: 5px 0;
+    }
+
+    .jq-dropdown .jq-dropdown-menu li {
+        vertical-align: middle;
+    }
+
+        .jq-dropdown .jq-dropdown-menu li img {
+            margin-right: 5px;
+            vertical-align: middle;
+            background-color: #9e253b;
+            border-radius: 4px;
+            width: 28px;
+            height: 28px;
+            padding: 2px;
+        }
+
+
+
+
+/*
+ *   
+ *
+ * JQUERY cookie-bar ADDON
+ *
+ *
+*/
+#cookie-bar {
+    background: #111111;
+    height: auto;
+    line-height: 30px;
+    color: #eeeeee;
+    text-align: center;
+    padding: 3px 0;
+}
+
+    #cookie-bar.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+    }
+
+        #cookie-bar.fixed.bottom {
+            bottom: 0;
+            top: auto;
+        }
+
+    #cookie-bar p {
+        margin: 0;
+        padding: 0;
+    }
+
+    #cookie-bar a {
+        color: #ffffff;
+        display: inline-block;
+        border-radius: 3px;
+        text-decoration: none;
+        padding: 0 6px;
+        margin-left: 8px;
+    }
+
+    #cookie-bar .cb-enable {
+        background: #9e253b;
+    }
+
+        #cookie-bar .cb-enable:hover {
+            background: #d51935;
+        }
+
+    #cookie-bar .cb-disable {
+        background: #990000;
+    }
+
+        #cookie-bar .cb-disable:hover {
+            background: #bb0000;
+        }
+
+    #cookie-bar .cb-policy {
+        background: #0033bb;
+    }
+
+        #cookie-bar .cb-policy:hover {
+            background: #0055dd;
+        }

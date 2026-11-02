@@ -1,0 +1,29 @@
+﻿[Debug]
+DebugMode = False
+UserDebug =
+InterfaceMode=False
+
+[Application]
+LogoApplicazione =
+LogoDitta =
+LogoIncas =
+TitoloApplicazione = DelsyTourWSC
+InfoIncas = © Incas 2010-2016
+TitoloModuloSoftware = TMS - DelsyTour WSC
+TitoloModuloSoftwareAcronimo  = DelsyTourWSC
+
+[Log]
+SQLLeftLength=255
+DayOfPermanenceInLog=7
+DayOfPermanenceOfFile=7
+
+[Tables]
+SessionTable=DelsyTourWSC_Sessioni
+EventLogTable=DelsyTourWSC_LogEventi
+UserTable=DelsyTourWSC_Utenti
+
+[BackgroundActivity]
+BackgroundActivityTypeName = Incasbo.Web.WSC.CustomBackgroundActivity
+
+[LoginManager]
+CryptographyEnable=True

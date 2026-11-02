@@ -1,0 +1,1577 @@
+﻿/***********************************************************************************************
+    Ridefinizione layout di base della master page per avere una pagina a tutto schermo
+***********************************************************************************************/
+#PanelContent {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    top: 25px;
+    background-color: #f3f3f3;
+}
+
+#PanelContentX {
+    height: 100%;
+}
+
+#PanelFooter {
+    display: none;
+}
+
+
+.GrigliePannello33 {
+    height: 33%;
+    border-width: 0px;
+}
+
+
+.GrigliePannello50 {
+    height: 50%;
+}
+
+.GrigliePannello100 {
+    height: calc(100% - 0px);
+}
+
+
+/***********************************************************************************************
+    Contenitore globale esterno
+***********************************************************************************************/
+#SchedulerContainer.IncasScheduler {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    font-family: Tahoma;
+    font-size: 10px;
+}
+
+/*********************************************************************************************** 
+    Pannello Top 
+***********************************************************************************************/
+.TopPanel {
+    border: solid 1px #999999;
+    height: 45px;
+    position: absolute;
+    /*width: 100%;*/
+}
+
+/*********************************************************************************************** 
+    Pannello Pivot (incrocio risorse data)
+***********************************************************************************************/
+div.ResourcePlusPivotPanel {
+    border: solid 1px #999999;
+    height: calc(100% - 55px);
+    width: calc(825px + 180px + 18px);
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    overflow: auto;
+}
+
+div.PivotPanel {
+    border: solid 0px #000000;
+    width: 825px;
+    position: absolute;
+    left: calc(180px + 1px);
+    top: 0px;
+}
+
+/***********************************************************************************************
+    Pannello delle risorse
+***********************************************************************************************/
+div.ResourcePanel {
+    border: solid 0px #000000;
+    width: 180px;
+    position: absolute;
+    top: 0px;
+}
+
+/***********************************************************************************************
+    Pannello delle griglie    
+***********************************************************************************************/
+div.GridPanel {
+    border: solid 1px #999999;
+    height: calc(100% - 5px);
+    width: calc(100% - 180px - 5px - 825px - 22px);
+    position: absolute;
+    left: calc(180px + 5px + 825px + 22px);
+    /*top: 50px;*/
+}
+
+div.GridPanel2 {
+    height: calc(100% - 5px);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+/***********************************************************************************************
+    Item delle risorse    
+***********************************************************************************************/
+div.ResourceItemTemplate {
+    border: solid 1px #999999;
+    width: 180px;
+    height: 50px;
+    margin-left: -1px;
+    background-color: #FFFFda;
+    cursor: default;
+    position: relative;
+}
+
+    div.ResourceItemTemplate:hover {
+        background-color: #FFFFaa;
+        border: solid 2px #FF0000;
+        width: 178px;
+        height: 48px;
+    }
+
+    div.ResourceItemTemplate.InMiddleResource, .ResourceItemTemplate.LastResource {
+        margin-top: 5px;
+    }
+
+    div.ResourceItemTemplate.FirstResource {
+        margin-top: -1px;
+    }
+
+    div.ResourceItemTemplate.LastResource {
+        margin-bottom: -1px;
+    }
+
+    div.ResourceItemTemplate .AutistaDescrizione {
+        font-weight: bold;
+    }
+
+    div.ResourceItemTemplate.Dipendente {
+        background-color: #E5E5C4;
+    }
+
+div.ResourceItemTemplateContent {
+    padding: 3px;
+}
+
+a.lbResource {
+    font-weight: normal;
+    color: inherit;
+    cursor: pointer;
+}
+
+div.ResourceItemTemplate .InfoResource {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    visibility: hidden;
+}
+
+div:hover.ResourceItemTemplate .InfoResource {
+    visibility: visible;
+}
+
+div.ResourceInfoTooltip {
+    min-width: 200px;
+    max-width: 400px;
+    height: 100px;
+    background-color: #FFFFda;
+    margin: -5px;
+    padding: 5px;
+}
+
+
+
+/***********************************************************************************************
+ Pannello del titolo delle risorse    
+***********************************************************************************************/
+div.ResourceTitle {
+    border: solid 1px #999999;
+    vertical-align: middle;
+    text-align: center;
+    width: 180px;
+    height: 45px;
+    position: absolute;
+    margin-left: -1px;
+    margin-top: -1px;
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+/***********************************************************************************************
+ Pannello del titolo della tabella Pivot
+***********************************************************************************************/
+div.PivotTitle {
+    vertical-align: middle;
+    text-align: center;
+    left: calc(180px + 1px);
+    width: 835px;
+    height: 50px;
+    position: absolute;
+    clear: both;
+}
+
+/***********************************************************************************************
+ Pannello del titolo della griglia
+***********************************************************************************************/
+div.GridTitle {
+    _border: solid 1px #999999;
+    vertical-align: middle;
+    text-align: center;
+    left: calc(180px + 5px + 850px);
+    width: calc(100% - 180px - 5px - 850px);
+    height: 45px;
+    position: absolute;
+}
+
+/***********************************************************************************************
+    Item delle date
+***********************************************************************************************/
+div.DateItemTemplate {
+    float: left;
+    border: solid 1px #999999;
+    margin-right: 0px;
+    margin-top: -1px;
+    width: 269px;
+    height: 45px;
+}
+
+    div.DateItemTemplate.Festivo {
+        background-color: #FFcaca;
+    }
+
+div.DateItemTemplateContent {
+    padding-top: 2px;
+}
+
+div.DateItemSeparator {
+    width: 2px;
+    height: 60px;
+    background-color: transparent;
+    float: left;
+    margin-bottom: -10px;
+}
+
+    div.DateItemSeparator.Visible {
+        background-color: transparent;
+        width: 2px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+div.DateItemTemplateContent .lblDate {
+    font-size: 13px;
+}
+
+div.DateItemTemplateContent .lblDayOfWeek {
+}
+
+
+/***********************************************************************************************
+    Item degli appuntamenti    
+***********************************************************************************************/
+.AppointmentItemRowTemplate {
+    clear: both;
+}
+
+.AppointmentItemTemplateContent {
+    _margin: 3px;
+}
+
+div.AppointmentItemSeparator {
+    width: 2px;
+    height: 60px;
+    background-color: transparent;
+    margin-bottom: -10px;
+    float: left;
+}
+
+    div.AppointmentItemSeparator.Visible {
+        background-color: transparent;
+        width: 2px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+a.lbAppointmentMezzo {
+    font-weight: normal;
+    color: inherit;
+    cursor: pointer;
+    width: 50px;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    text-align: left;
+}
+
+a.lbAppointmentViaggio {
+    font-weight: normal;
+    color: inherit;
+    cursor: pointer;
+    width: 50px;
+    position: absolute;
+    top: 2px;
+    left: 56px;
+    text-align: left;
+}
+
+div.AppointmentInfoTooltip {
+    min-width: 200px;
+    max-width: 400px;
+    height: 100px;
+    background-color: #FFFFda;
+    margin: -5px;
+    padding: 5px;
+}
+
+
+/***************
+    pannello generico
+***************/
+
+div.AppointmentItemTemplate {
+    float: left;
+    border: solid 1px #999999;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    width: 269px;
+    height: 50px;
+    cursor: default;
+    position: relative;
+}
+
+    div.AppointmentItemTemplate:hover {
+        border: solid 2px #FF00bb;
+        width: calc(269px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.Libero {
+        background-color: #FFFFFF;
+    }
+
+    div.AppointmentItemTemplate.Occupato {
+        background-color: #FFdddd;
+    }
+
+        div.AppointmentItemTemplate.Occupato.S10 {
+            background-color: #FFFFFF;
+        }
+
+        div.AppointmentItemTemplate.Occupato.S20 {
+            background-color: #FFFFda;
+        }
+
+        div.AppointmentItemTemplate.Occupato.S30 {
+            background-color: #cff5bc;
+        }
+
+        div.AppointmentItemTemplate.Occupato.S40 {
+            background-color: #dbf2f2;
+        }
+
+    div.AppointmentItemTemplate.Selected {
+        border: solid 2px #FF0000;
+        width: calc(269px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.CanAccept {
+        border: solid 2px #FFaaaa;
+        width: calc(269px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.CanAcceptHover {
+        border: solid 2px #FF0000;
+        width: calc(269px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.FirstResource {
+        margin-top: -1px;
+    }
+
+    div.AppointmentItemTemplate.LastResource {
+        margin-bottom: -1px;
+    }
+
+    div.AppointmentItemTemplate.FirstDate {
+        margin-left: 0px;
+    }
+
+    div.AppointmentItemTemplate.LastDate {
+        margin-right: -1px;
+        width: calc(269px + 1px);
+    }
+
+        div.AppointmentItemTemplate.LastDate:hover {
+            width: calc(269px - 1px);
+        }
+
+    div.AppointmentItemTemplate .InfoViaggio {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        visibility: hidden;
+    }
+
+/*div:hover.AppointmentItemTemplate .InfoViaggio {
+    visibility: visible;    
+}*/
+
+.AppointmentItemTemplate .NumeroViaggi {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+
+/***********************************************************************************************
+ descrizione viaggio (stato 10 e 20)
+***********************************************************************************************/
+
+.ViaggioInfoStato20 {
+    position: absolute;
+    padding-left: 2px;
+}
+
+    .ViaggioInfoStato20 .Riga1 {
+    }
+
+    .ViaggioInfoStato20 .Riga2 {
+    }
+
+    .ViaggioInfoStato20 .Riga3 {
+    }
+
+    .ViaggioInfoStato20 .Riga4 {
+    }
+
+    .ViaggioInfoStato20 .Riga {
+        clear: both;
+    }
+
+        .ViaggioInfoStato20 .Riga .Col {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            float: left;
+            text-align: left;
+        }
+
+    /******************
+ riga1
+*******************/
+
+    .ViaggioInfoStato20 .Riga1 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato20 .Riga1 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato20 .Riga1 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato20 .Riga1 .Col4 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato20 .Riga1 .Col5 {
+        left: 15px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato20 .Riga1 .Col6 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato20 .Riga1 .Col7 {
+        left: 5px;
+        top: 0px;
+        width: 20px;
+    }
+
+    /******************
+ riga2
+*******************/
+
+    .ViaggioInfoStato20 .Riga2 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 120px;
+    }
+
+    .ViaggioInfoStato20 .Riga2 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato20 .Riga2 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato20 .Riga2 .Col4 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    /******************
+ riga3
+*******************/
+
+    .ViaggioInfoStato20 .Riga3 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 150px;
+    }
+
+    .ViaggioInfoStato20 .Riga3 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato20 .Riga3 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    /******************
+ riga4
+*******************/
+
+    .ViaggioInfoStato20 .Riga4 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 150px;
+    }
+
+    .ViaggioInfoStato20 .Riga4 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato20 .Riga4 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+/***********************************************************************************************
+ descrizione viaggio (stato 30)
+***********************************************************************************************/
+
+.ViaggioInfoStato30 {
+    position: absolute;
+    padding-left: 2px;
+}
+
+    .ViaggioInfoStato30 .Riga1 {
+    }
+
+    .ViaggioInfoStato30 .Riga2 {
+    }
+
+    .ViaggioInfoStato30 .Riga3 {
+    }
+
+    .ViaggioInfoStato30 .Riga4 {
+    }
+
+    .ViaggioInfoStato30 .Riga {
+        clear: both;
+    }
+
+        .ViaggioInfoStato30 .Riga .Col {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            float: left;
+            text-align: left;
+        }
+
+    /******************
+ riga1
+*******************/
+
+    .ViaggioInfoStato30 .Riga1 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato30 .Riga1 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato30 .Riga1 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato30 .Riga1 .Col4 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato30 .Riga1 .Col5 {
+        left: 15px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato30 .Riga1 .Col6 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato30 .Riga1 .Col7 {
+        left: 5px;
+        top: 0px;
+        width: 20px;
+    }
+
+    /******************
+ riga2
+*******************/
+
+    .ViaggioInfoStato30 .Riga2 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 60px;
+    }
+
+    .ViaggioInfoStato30 .Riga2 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato30 .Riga2 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 70px;
+    }
+
+    .ViaggioInfoStato30 .Riga2 .Col4 {
+        left: 5px;
+        top: 0px;
+        width: 70px;
+    }
+
+    /******************
+ riga3
+*******************/
+
+    .ViaggioInfoStato30 .Riga3 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 170px;
+    }
+
+    .ViaggioInfoStato30 .Riga3 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato30 .Riga3 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    /******************
+ riga4
+*******************/
+
+    .ViaggioInfoStato30 .Riga4 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 170px;
+    }
+
+    .ViaggioInfoStato30 .Riga4 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato30 .Riga4 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+/***********************************************************************************************
+ descrizione viaggio (stato 40)
+***********************************************************************************************/
+
+.ViaggioInfoStato40 {
+    position: absolute;
+    padding-left: 2px;
+}
+
+    .ViaggioInfoStato40 .Riga1 {
+    }
+
+    .ViaggioInfoStato40 .Riga2 {
+    }
+
+    .ViaggioInfoStato40 .Riga3 {
+    }
+
+    .ViaggioInfoStato40 .Riga4 {
+    }
+
+    .ViaggioInfoStato40 .Riga {
+        clear: both;
+    }
+
+        .ViaggioInfoStato40 .Riga .Col {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            float: left;
+            text-align: left;
+        }
+
+    /******************
+ riga1
+*******************/
+
+    .ViaggioInfoStato40 .Riga1 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato40 .Riga1 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato40 .Riga1 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato40 .Riga1 .Col4 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato40 .Riga1 .Col5 {
+        left: 15px;
+        top: 0px;
+        width: 50px;
+    }
+
+    .ViaggioInfoStato40 .Riga1 .Col6 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+      .ViaggioInfoStato40 .Riga1 .Col7 {
+        left: 5px;
+        top: 0px;
+        width: 20px;
+    }
+
+    /******************
+ riga2
+*******************/
+
+    .ViaggioInfoStato40 .Riga2 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 60px;
+    }
+
+    .ViaggioInfoStato40 .Riga2 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .ViaggioInfoStato40 .Riga2 .Col3 {
+        left: 5px;
+        top: 0px;
+        width: 70px;
+    }
+
+    .ViaggioInfoStato40 .Riga2 .Col4 {
+        left: 5px;
+        top: 0px;
+        width: 70px;
+    }
+
+    /******************
+ riga3
+*******************/
+
+    .ViaggioInfoStato40 .Riga3 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 170px;
+    }
+
+    .ViaggioInfoStato40 .Riga3 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato40 .Riga3 .Col3 {
+        left: 10px;
+        top: 0px;
+        width: 50px;
+    }
+
+    /******************
+ riga4
+*******************/
+
+    .ViaggioInfoStato40 .Riga4 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 170px;
+    }
+
+    .ViaggioInfoStato40 .Riga4 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .ViaggioInfoStato40 .Riga4 .Col3 {
+        left: 10px;
+        top: 0px;
+        width: 50px;
+    }
+
+
+
+/***********************************************************************************************
+ descrizione Mezzo
+***********************************************************************************************/
+
+.MezzoInfo {
+    position: absolute;
+    padding-left: 2px;
+}
+
+    .MezzoInfo .Riga1 {
+    }
+
+    .MezzoInfo .Riga {
+        clear: both;
+    }
+
+        .MezzoInfo .Riga .Col {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            float: left;
+            text-align: left;
+        }
+
+    /******************
+ riga1
+*******************/
+
+    .MezzoInfo .Riga1 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 40px;
+    }
+
+    .MezzoInfo .Riga1 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 60px;
+    }
+
+    .MezzoInfo .Riga1 .Col3 {
+        left: 10px;
+        top: 0px;
+        width: 60px;
+    }
+
+
+    /************************************************
+ slide show pannelli viaggi
+************************************************/
+
+div.SS_slideshow {
+}
+
+    div.SS_slideshow div.SS_slide {        
+        display: none;       
+    }
+
+    div.SS_slideshow div.SS_current {
+        display: block;
+    }
+
+/***********************************************************************************************
+    Stile griglia
+***********************************************************************************************/
+.RowDraggable {
+    background-color: #cacaca;
+}
+
+.RowDraggable-Dragging {
+    background-color: #ffacac;
+    width: 120px;
+    height: 30px;
+    opacity: 0.7;
+    padding: 5px;
+    border: 1px solid red;
+    cursor: move;
+}
+
+.AppointmentDraggable-Dragging {
+    background-color: #ffacac;
+    width: 120px;
+    height: 30px;
+    opacity: 0.7;
+    padding: 5px;
+    border: 1px solid red;
+    cursor: move;
+}
+
+
+
+/**********************************************************************************************
+    dimensione frame
+***********************************************************************************************/
+
+.SpedizioniDimensions {
+    position: inherit;
+    width: 1300px;
+    height: 600px;
+}
+
+.ViaggiDimensions {
+    position: inherit;
+    width: 1450px;
+    height: 550px;
+}
+
+.MezziDimensions {
+    position: inherit;
+    width: 1200px;
+    height: 730px;
+}
+
+.AutistiDimensions {
+    position: inherit;
+    width: 1200px;
+    height: 400px;
+}
+
+
+/**********************************************************************************************
+   toolbar pulsanti form
+***********************************************************************************************/
+#PnlToolbar.PnlToolbar {
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    height: 55px;
+    width: 100%;
+}
+
+#ToolbarContainer .PlanToolbar {
+    float: left;
+    margin-right: 20px;
+}
+
+.PlanToolbarButton {
+    width: 30px;
+    height: 26px;
+    text-align: right;
+    background-position: center;
+    margin-left: 0px;
+    margin-right: -2px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+    .PlanToolbarButton.DetailFormButton_Cancel {
+        background-image: url('../../images/Toolbar/24/annulla.png');
+    }
+
+    .PlanToolbarButton.VisualizzaViaggio {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.ModificaViaggio {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.EliminaViaggio {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.VisualizzaMezzo {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.ModificaMezziIndisponibilita {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.Indietro {
+        background-image: url('../../images/arrow_left_white.png');
+    }
+
+    .PlanToolbarButton.Avanti {       
+         background-image: url('../../images/arrow_right_white.png');
+    }
+
+
+/***********************************************************************************************
+  griglie
+***********************************************************************************************/
+.DetailFormGridContainerDiv .AltDataRow {
+    background-color: #F4F4F4;
+}
+
+.DetailFormGridContainerDiv .NorDataRow {
+    background-color: white;
+}
+
+.DetailFormGridContainerDiv .WFIRowSelected {
+    background-color: #E3506C;
+}
+
+
+/***********************************************************************************************
+    link sulle griglie
+***********************************************************************************************/
+
+a.CollapsiblePanelTitleCaption.aspNetDisabled:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+a.CollapsiblePanelTitleCaption.aspNetDisabled {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+a.CollapsiblePanelTitleCaption:hover {
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+a.CollapsiblePanelTitleCaption {
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+.CollapsiblePanelTitleCaption.SpedizioniLibere {
+    margin-right: 15px;
+}
+
+.CollapsiblePanelTitleCaption.SpedizioniPianificate {
+    margin-right: 15px;
+}
+
+
+
+/***********************************************************************************************
+  griglie spedizioni libere
+***********************************************************************************************/
+
+#HeaderElencoSpedizioniLibere {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroSpedizioniLibere {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroSpedizioniLibere {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateSpedizioniLibere {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateSpedizioniLibere .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateSpedizioniLibere .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateSpedizioniLibere .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberSpedizioniLibere {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberSpedizioniLibere {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberSpedizioniLibere_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetSpedizioniLibereContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkSpedizioniLibereContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetSpedizioniLibereContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkSpedizioniLibereContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlSpedizioniLibere.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow: auto;
+}
+
+/***********************************************************************************************
+  griglie Viaggi Liberi
+***********************************************************************************************/
+
+#HeaderElencoViaggiLiberi {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroViaggiLiberi {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroViaggiLiberi {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateViaggiLiberi {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateViaggiLiberi .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateViaggiLiberi .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateViaggiLiberi .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberViaggiLiberi {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberViaggiLiberi {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberViaggiLiberi_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetViaggiLiberiContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkViaggiLiberiContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetViaggiLiberiContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkViaggiLiberiContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlViaggiLiberi.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow: auto;
+    margin: 2px;
+}
+
+
+
+/***********************************************************************************************
+  griglie spedizioni Pianificate
+***********************************************************************************************/
+
+#HeaderElencoSpedizioniPianificate {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroSpedizioniPianificate {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroSpedizioniPianificate {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateSpedizioniPianificate {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateSpedizioniPianificate .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateSpedizioniPianificate .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateSpedizioniPianificate .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberSpedizioniPianificate {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberSpedizioniPianificate {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberSpedizioniPianificate_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetSpedizioniPianificateContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkSpedizioniPianificateContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetSpedizioniPianificateContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkSpedizioniPianificateContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlSpedizioniPianificate.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow: auto;
+}
+
+/***********************************************************************************************
+  griglia Mezzi Indisponibili
+***********************************************************************************************/
+
+#HeaderMezziLiberi {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroDataMezziLiberi {
+    position: absolute;
+    right: 470px;
+    width: 160px;
+    height: 25px;
+    z-index: 1;
+}
+
+.PanelFiltroMezziLiberi {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroMezziLiberi {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateMezziLiberi {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateMezziLiberi .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateMezziLiberi .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateMezziLiberi .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberMezziLiberi {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberMezziLiberi {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberMezziLiberi_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetMezziLiberiContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkMezziLiberiContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetMezziLiberiContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkMezziLiberiContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlMezziLiberi.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow: auto;
+    margin: 2px;
+}
+
+
+
+
+
+
+/***********************************************************************************************
+ descrizione Autista
+***********************************************************************************************/
+
+.AutistaInfo {
+    position: absolute;
+    padding-left: 2px;
+}
+
+    .AutistaInfo .Riga1 {
+    }
+
+    .AutistaInfo .Riga {
+        clear: both;
+    }
+
+        .AutistaInfo .Riga .Col {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            float: left;
+            text-align: left ;
+        }
+
+    /******************
+ riga1
+*******************/
+
+    .AutistaInfo .Riga1 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 165px;
+        font-weight: bold;
+        font-size: 11px;
+    }
+
+    .AutistaInfo .Riga2 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 165px;
+        
+    }
+
+    .AutistaInfo .Riga3 .Col1 {
+        left: 0px;
+        top: 0px;
+        width: 30px;
+    }
+
+    .AutistaInfo .Riga3 .Col2 {
+        left: 5px;
+        top: 0px;
+        width: 100px;
+    }
+
+
+

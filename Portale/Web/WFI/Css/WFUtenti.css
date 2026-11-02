@@ -1,0 +1,51 @@
+﻿.FormButton_CambiaPassword
+{
+	width: 100px;
+	height: 30px;
+	text-align: right;
+	background-image: url('../../images/Toolbar/24/change_password.png');
+	background-repeat: no-repeat;	
+}
+
+
+.BottoneAggiungiSoggetto
+{
+	width: 23px;
+	height: 23px;	
+	background-image: url('../../images/Toolbar/24/plus.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 0px;
+	padding-right: 0px;	
+}
+
+.BottoneGeneraPassword
+{
+	width: 23px;
+	height: 23px;	
+	background-image: url('../../images/Toolbar/16/inserisci.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 0px;
+	padding-right: 0px;	
+}
+
+.BottoneAttivazioneUtente
+{
+	width: 100px;
+	height: 30px;
+	text-align: right;
+	background-image: url('../../images/Toolbar/24/change_password.png');
+	background-repeat: no-repeat;	
+}
+
+
+.FilialeCaption
+{
+	border-width: 1px;
+    border-color: #c0c0c0;
+    border-style: solid;
+    height: 20px;
+    background-color: #9e253b;
+    background-repeat: repeat-x;
+}

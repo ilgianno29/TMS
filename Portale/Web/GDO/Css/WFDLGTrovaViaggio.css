@@ -1,0 +1,10 @@
+﻿#tabs .MyTabsBody
+{
+    height:100px;
+}
+
+#pnlGridResult.DetailFormGridContainerDiv
+{
+    max-height:250px;
+    min-height:120px;
+}

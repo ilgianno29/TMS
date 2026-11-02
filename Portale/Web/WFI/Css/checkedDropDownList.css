@@ -1,0 +1,116 @@
+﻿
+.ui-dropdownchecklist
+{
+    font-size: 11px;
+    color: black;
+}
+
+.ui-dropdownchecklist-selector
+{
+    height: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.ui-state-hover, .ui-state-active
+{
+    border-color: #5794bf;
+}
+
+.ui-dropdownchecklist-dropcontainer
+{
+    background-color: #fff;
+    border: 1px solid #999;
+    padding-left:3px;
+    padding-top:3px;
+}
+
+.ui-dropdownchecklist-item
+{
+}
+
+.ui-state-hover
+{
+    background-color: #39f;
+}
+
+.ui-state-disabled label
+{
+    color: #ccc;
+}
+
+.ui-dropdownchecklist-group
+{
+    font-weight: bold;
+    font-style: italic;
+}
+
+.ui-dropdownchecklist-indent
+{
+    padding-left: 7px;
+}
+
+.ui-dropdownchecklist-selector-wrapper
+{
+    vertical-align: middle;
+    font-size: 0px;
+}
+
+.WFIStd .ui-dropdownchecklist-selector.ui-state-default
+{
+    padding: 2px 2px 2px 2px;
+    font-size: 0px;
+    color:#000000;
+}
+
+.WFIStd .ui-dropdownchecklist-selector.ui-state-disabled
+{
+    opacity: 1;
+    filter:Alpha(Opacity=100);
+    color:#777777;
+}
+
+.ui-dropdownchecklist-text
+{
+    font-size: 11px;
+    padding-left:3px;
+}
+
+.ui-dropdownchecklist-group
+{
+    padding: 1px 2px 2px 2px;
+}
+
+.WFIStd .ui-dropdownchecklist-selector
+{
+    border-color: #cccccc;
+    border-radius: 3px;
+}
+
+    .WFIStd .ui-dropdownchecklist-selector:hover
+    {
+        background-color: #eeeeee;
+        border: 1px solid #cccccc;
+    }
+
+.WFIStd.ui-dropdownchecklist-dropcontainer-wrapper .ui-dropdownchecklist-item.ui-state-default.ui-state-hover
+{
+    background-color: #fafafa;
+    border: 1px solid #cccccc;
+}
+
+.WFIStd.ui-dropdownchecklist-dropcontainer-wrapper .ui-dropdownchecklist-item.ui-state-default
+{
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    color: #444444;
+    background:inherit;
+}
+.WFICheckedDropDownList
+{
+    display:none;
+}
+.WFIStd .ui-dropdownchecklist-selector
+{
+    height:15px;
+}

@@ -1,0 +1,681 @@
+<html>
+<head>
+<title>Campo minato</title>
+<!-- Modifiche e debug:  Daniela Giorgetti e Roberto Bruni -->
+<!-- Original:  Peter Occil -->
+<!-- Based on original code by Jason Hotchkiss -->
+<script type="text/JavaScript">
+<!-- Nascondi ai browser vecchi
+
+/*
+variabili globali per impostare casellexLarghezza (num. di caselle)
+casellexAltezza (num di caselle) e massimo numero di mine.
+*/
+var casellexLarghezza, casellexAltezza, maxmine;
+
+//limite minimo e massimo del numero di caselle 
+//(uguale in larghezza e altezza)
+var minCaselle=8, maxCaselle=50;
+
+var dir = "";//serve per impostare una dir di base...file://Desktop/Laboratorio/progetto
+var mine=[];//tiene traccia delle mine
+var icona=[];//tiene traccia dello stato di una casella
+
+//queste variabili servono per impostare le dimensioni in modo che 
+//il collage delle immagini risulti perfetto
+var larghezzaTopBar;
+var larghezzaMenuBar;
+var wideWidth;
+var highHeight;
+var cplLeft;
+var cplRight;
+var larghezzaTotale;
+var tW6;
+var ww2;
+
+//conterrà le 3 cifre del display dei secondi trascorsi 
+//dall'inizio partita
+var num;
+
+var tempo;
+//quante bandierine abbiamo ancora a disposizione 
+//(all'inizio coincidono col numero totale di mine)
+var bandierineRimaste;
+//quante caselle sono ancora ignote
+//(all'inizio coincidono col numero totale di caselle)
+var caselleCoperte;
+//true in nuovaPartita, false quando si vince o si perde
+var giocoIniziato;
+//il primo click fa avviare il timer
+var cliccato;
+//indica se è stato premuto ctrl
+var premutoCtrl;
+
+function settaParametri()
+{
+	casellexLarghezza = window.prompt("Inserite il numero di caselle per larghezza (" 
+							+ minCaselle + "-" + maxCaselle +")", minCaselle);
+	casellexAltezza = parseInt(casellexLarghezza);
+	verificaCasellexLarghezza()		
+}
+
+function verificaCasellexLarghezza()
+{
+	if (isNaN(casellexLarghezza))
+	{
+		alert("Ho detto un numero! Inserire di nuovo il numero di caselle per altezza");
+		settaParametri();
+	}
+	else if (casellexLarghezza > maxCaselle)
+	{
+		alert("Sono troppe! Inserire di nuovo il numero di caselle per larghezza");
+		settaParametri();
+	}
+	else if (casellexLarghezza < minCaselle)
+	{
+		alert("Sono poche! Inserire di nuovo il numero di caselle per larghezza");
+		settaParametri();
+	}
+	else accettaCasellexLarghezza();
+}
+
+function accettaCasellexLarghezza()
+{
+	casellexAltezza = window.prompt("Inserite il numero di caselle per altezza ("
+							+ minCaselle + "-" + maxCaselle + ")", minCaselle);
+	casellexAltezza = parseInt(casellexAltezza);
+	verificaCasellexAltezza();
+}
+
+function verificaCasellexAltezza()
+{
+	if (isNaN(casellexAltezza))
+	{
+		alert("Ho detto un numero! Inserire di nuovo il numero di caselle per altezza");
+		accettaCasellexLarghezza();
+	}
+	else if (casellexAltezza > maxCaselle)
+	{
+		alert("Sono troppe! Inserire di nuovo il numero di caselle per altezza");
+		accettaCasellexLarghezza();
+	}
+	else if (casellexAltezza < minCaselle)
+	{
+		alert("Sono poche! Inserire di nuovo il numero di caselle per altezza");
+		accettacasellexLarghezza();
+	}
+	else accettaCasellexAltezza();
+}
+
+function accettaCasellexAltezza()
+{
+	maxmine = window.prompt("Inserite il numero di mine ("
+					+ Math.ceil((casellexAltezza*casellexLarghezza)*5/100) + "-"
+					+ Math.floor((casellexAltezza*casellexLarghezza)*95/100) + ")", "10");
+	maxmine = parseInt(maxmine);
+	verificaMaxmine();
+}
+
+function verificaMaxmine()
+{
+	if (isNaN(maxmine))
+	{
+		alert("Ho detto un numero! Inserire di nuovo il numero di mine");
+		accettaCasellexAltezza();
+	}
+	else if (maxmine > (casellexAltezza*casellexLarghezza)*95/100)
+	{
+		alert("Sono troppe! Inserire di nuovo il numero di mine");
+		accettaCasellexAltezza();
+	}
+	else if (maxmine < (casellexAltezza*casellexLarghezza)*5/100)
+	{
+		alert("Sono poche! Inserire di nuovo il numero di mine");
+		accettaCasellexAltezza();
+	}
+	else impostaVar();
+}
+
+function impostaVar()
+{
+	var gridSq = casellexLarghezza * 16;	//128
+	var grid16 = casellexLarghezza - 8		//0
+	var grid32 = grid16 * 8					//0
+	var grid64 = grid16 * 16				//0
+	larghezzaTopBar = 8 + grid64;			//0
+	larghezzaMenuBar = 86 + grid64;		//86
+	wideWidth = casellexLarghezza * 16;	//128
+	highHeight = casellexAltezza * 16;		//128
+	cplLeft = 6 + grid32;					//6
+	cplRight = 4 + grid32;					//4
+	larghezzaTotale = gridSq + 32;			//160
+	tW6 = larghezzaTotale - 6;				//154
+	ww2 = wideWidth + 2;						//130
+	
+	//grid8 = gridSq - 128;//non usata!
+	
+	//load delle immagini delle cifre per il display del tempo
+	num=new Array(10);
+	for (var i=0;i<10;i++) 
+	{
+		num[i]=new Image()
+		num[i].src=i+".gif"
+	}
+	
+}
+
+function nuovaPartita() 
+{
+	// Resetta gli array di stato. 
+	// mine memorizza la posizione di tutte le mine. 
+	// icona tiene traccia dell'immagine mostrata in ogni casella della griglia
+	for(var y = 0; y < casellexAltezza; y++)
+	{
+		mine[y] = [];
+		icona[y] = [];
+		for (var x = 0; x < casellexLarghezza; x++)
+		{
+			mine[y][x] = false; 
+			icona[y][x] = 0; 
+		}
+	}
+	// Posiziona le mine, verificando che vadano a finire in punti diversi tra loro
+	for(var m = 0; m < maxmine; m++) 
+	{
+		var x,y;
+		do 
+		{
+			x = Math.floor(Math.random() * casellexLarghezza);
+			y = Math.floor(Math.random() * casellexAltezza);
+		} while(mine[y][x]);
+		mine[y][x] = true;
+	}
+	// inizializza le variabili del gioco
+	caselleCoperte= casellexAltezza * casellexLarghezza;
+	bandierineRimaste = maxmine;
+	tempo = 0;
+	giocoIniziato = true;
+	cliccato = false
+	premutoCtrl = false;
+	// insert the grid into the document
+	creaGriglia();
+	
+	// Set up dei gestori dell'evento "tasto premuto"
+	window.document.onkeydown = keyDown;
+	window.document.onkeyup = keyUp;
+	// setta orologio
+	setInterval("scandisci()", 1000);
+}
+
+function keyDown() 
+{   
+	premutoCtrl = window.event.ctrlKey;
+	aggiornaDisplay();
+}
+
+function keyUp() 
+{  
+	premutoCtrl = false;
+	aggiornaDisplay();
+}
+
+// scandisce il tempo passato aggiornando lo stato dei display di tempo e bandierine
+function scandisci() 
+{
+	if (giocoIniziato) 
+	{
+		//il tempo si comincia a contare dopo il primo click sulla griglia
+		if (cliccato) 
+		{
+			tempo++;
+			aggiornaDisplay();
+   		}
+   		else //mostra il numero totale di bandierine a disposizione
+  		{
+  			aggiornaDisplay();
+  		}
+  	}
+  	
+}
+
+// Aggiorna lo stato dei display di tempo e bandierine cifra per cifra
+function aggiornaDisplay() 
+{
+	document.images.elapse3.src=num[tempo-(Math.floor(tempo/10))*10].src;
+	document.images.elapse2.src=num[Math.floor((tempo-(Math.floor(tempo/100))*100)/10)].src;
+	document.images.elapse1.src=num[Math.floor(tempo/100)].src;
+	document.images.flag3.src=num[bandierineRimaste-(Math.floor(bandierineRimaste/10))*10].src;
+	document.images.flag2.src=num[Math.floor((bandierineRimaste-(Math.floor(bandierineRimaste/100))*100)/10)].src;
+	document.images.flag1.src=num[Math.floor(bandierineRimaste/100)].src;
+}
+
+//funzione che inserisce tutti i tag immagine che compongono la parte grafica del gioco nel documento
+function creaGriglia() 
+{
+	document.write("<!-- Finestra --><DIV align=center> "
+ 	+"<!-- Top Bar --> <table width="
+ 	+ larghezzaTotale
+ 	+" border=0 cells"
+ 	+"pacing=0 cellpadding=0> <tr bgcolor=#bbbbbb heigh"
+ 	+"t=1> <td width=1 bgcolor=#bbbbbb></td><td width"
+ 	+"=1 bgcolor=#bbbbbb></td> <td width=1 bgcolor=#bbb"
+	+"bbb></td><td width="
+ 	+ tW6
+	+" bgcolor=#bbbbbb></td> <t"
+ 	+"d width=1 bgcolor=#bbbbbb></td> <td width=1 bgcol"
+ 	+"or=#bbbbbb></td> <td width=1 bgcolor=#000000></td"
+ 	+"></tr><tr height=1><td width=1 bgcolor=#bbbb"
+ 	+"bb></td><td width=1 bgcolor=#ffffff></td><td w"
+ 	+"idth=1 bgcolor=#ffffff></td><td bgcolor=#ffffff>"
+ 	+"</td><td width=1 bgcolor=#ffffff></td><td widt"
+ 	+"h=1 bgcolor=#888888></td><td width=1 bgcolor=#00"
+ 	+"0000></td></tr><tr height=1><td width=1 bgco"
+ 	+"lor=#bbbbbb></td><td width=1 bgcolor=#ffffff></t"
+ 	+"d><td width=1 bgcolor=#bbbbbb></td><td bgcolor"
+ 	+"=#bbbbbb></td><td width=1 bgcolor=#bbbbbb></td> "
+ 	+"<td width=1 bgcolor=#888888></td><td width=1 bg"
+ 	+"color=#000000></td></tr></table><!-- Title -->"
+ 	+"<table border=0 cellspacing=0 cellpadding=0><t"
+ 	+"r height=18><td width=1 bgcolor=#bbbbbb></td><"
+ 	+"td width=1 bgcolor=#ffffff></td><td width=1 bgco"
+ 	+"lor=#bbbbbb></td><td bgcolor=#000088><img src='t"
+ 	+"itle.gif'><img src='a.gif' height=1 width="
+ 	+ larghezzaTopBar
+ 	+" name="
+ 	+"'titleBarEmptySpace'></td><td><img src='buttons."
+ 	+"gif'></td><td width=1 bgcolor=#bbbbbb></td><td"
+ 	+" width=1 bgcolor=#888888></td><td width=1 bgcolo"
+ 	+"r=#000000></td></tr></table><!-- Menu Bar --> "
+ 	+"<table border=0 cellspacing=0 cellpadding=0> <tr"
+ 	+" height=20 bgcolor=#bbbbbb> <td width=1 bgcolor=#"
+ 	+"bbbbbb></td> <td><img src='menu.gif'></td><td> <"
+ 	+"img src='a.gif' height=1 width="
+ 	+ larghezzaMenuBar
+ 	+" name='menuBarEmp"
+ 	+"tySpace'></td> <td width=1 bgcolor=#bbbbbb></td> "
+ 	+"<td width=1 bgcolor=#888888></td> <td width=1 bg"
+ 	+"color=#000000></td> </tr></table> <!-- Mine Fiel"
+ 	+"d --> <table border=0 cellspacing=0 cellpadding=0"
+ 	+"> <tr height=11 width=160> <td width=1 bgcolor=#"
+ 	+"bbbbbb></td> <td width=1 bgcolor=#ffffff></td> <"
+ 	+"td width=1 bgcolor=#bbbbbb></td> <td><img src='tl"
+ 	+".gif'></td> <td><img src='header.gif' width="
+	+ ww2
+ 	+" height=11></td> <td><img src='tr.gif'></td><td><"
+ 	+"img src='right.gif' width=5 height=11></td> </tr>"
+ 	+"</table><table width="
+ 	+ larghezzaTotale
+ 	+" border=0 cellspacing=0 cellpadd"
+ 	+"ing=0> <tr height=33> <td width=1 bgcolor=#bbbbb"
+ 	+"b></td> <td width=1 bgcolor=#ffffff></td> <td wi"
+ 	+"dth=1 bgcolor=#bbbbbb></td> <td><img src='cplleft"
+ 	+".gif' height=33 width=11></td> <td> <!-- Control"
+ 	+" Panel --> <table width="
+ 	+ ww2
+ 	+" border=0 cellspacing="
+ 	+"0 cellpadding=0><tr height=4 width="
+ 	+ ww2
+ 	+"><td bgcolor=#bbbbbb"
+ 	+"></td></tr></table> <table width="
+ 	+ ww2
+ 	+" border=0 cel"
+ 	+"lspacing=0 cellpadding=0><tr height=26><td "
+ 	+"width=5 bgcolor=#bbbbbb></td><td><!-- mine Remai"
+ 	+"ning --> <table width=41 border=0 cellspacing=0 c"
+ 	+"ellpadding=0><tr bgcolor=#888888><td></td><td>"
+ 	+"</td><td></td> <td></td><td></td><td></td> <td><"
+ 	+"/td><td></td> <td width=1 bgcolor=#bbbbbb></td></"
+ 	+"tr> <tr bgcolor=#000000> <td width=1 bgcolor=#88"
+ 	+"8888></td> <td></td><td></td> <td></td><td></td>"
+ 	+"<td></td><td></td><td></td> <td width=1 bgcolor"
+ 	+"=#ffffff></td></tr> <tr bgcolor=#000000> <td wid"
+ 	+"th=1 bgcolor=#888888></td> <td width=1 bgcolor=#0"
+ 	+"00000></td> <td><img src='0.gif' name='flag1'></t"
+ 	+"d><td width=2></td><td><img src='0.gif' name='"
+ 	+"flag2'></td><td width=2></td><td><img src='0.g"
+ 	+"if' name='flag3'></td><td width=1></td> <td wid"
+ 	+"th=1 bgcolor=#ffffff></td></tr> <tr bgcolor=#0000"
+ 	+"00> <td width=1 bgcolor=#888888></td> <td></td><"
+ 	+"td></td> <td></td><td></td><td></td> <td></td><t"
+ 	+"d></td> <td width=1 bgcolor=#ffffff></td></tr> <"
+ 	+"tr bgcolor=#ffffff> <td width=1 bgcolor=#bbbbbb><"
+ 	+"/td> <td></td><td></td> <td></td><td></td><td></"
+ 	+"td> <td></td><td></td> <td></td></tr><"
+ 	+"tr bgcolor=#bbbbbb> <td width=1 bgcolor=#bbbbbb><"
+ 	+"/td> <td></td><td></td> <td></td><td></td><td></"
+ 	+"td> <td></td><td></td> <td></td></tr></table><!--"
+ 	+" End mine Remaini"
+ 	+"ng --> </td> <td bgcolor=#bbbbbb><img height=1 "
+ 	+"src='a.gif' width=" + cplLeft + "name='cplLeft'>"
+ 	+"<td><img src='btnsmile.gif' name='condition' onmo"
+ 	+"usedown='document.images.condition.s"
+ 	+'rc="btnsmil2.gif"'
+ 	+";' onmouseu"
+ 	+"p='document.images.condition.s"
+ 	+'rc="btnsmile.gif";location.reload();'
+ 	+";'></td> <td width=4 bgcolor=#bbbbbb>"
+ 	+"<img height=1 src='a.gif'"
+ 	+" width=" + cplRight + ">"
+ 	+"</td> <td> <!-- Elapsed Time --> <table width=4"
+ 	+"1 border=0 cellspacing=0 cellpadding=0> <tr bgcol"
+ 	+"or=#888888> <td></td><td></td><td></td> <td></td"
+ 	+"><td></td><td></td><td></td><td></td> <td width"
+ 	+"=1 bgcolor=#bbbbbb></td></tr> <tr bgcolor=#000000"
+ 	+"> <td width=1 bgcolor=#888888></td> <td></td><td"
+ 	+"></td> <td></td><td></td><td></td> <td></td><td>"
+ 	+"</td> <td width=1 bgcolor=#ffffff></td></tr> <tr"
+ 	+" bgcolor=#000000> <td width=1 bgcolor=#888888></t"
+ 	+"d> <td width=1 bgcolor=#000000></td> <td><img sr"
+ 	+"c='0.gif' name='elapse1'></td> <td width=2></td> "
+ 	+"<td><img src='0.gif' name='elapse2'></td> <td wi"
+ 	+"dth=2></td> <td><img src='0.gif' name='elapse3'><"
+ 	+"/td> <td width=1></td> <td width=1 bgcolor=#ffff"
+ 	+"ff></td></tr> <tr bgcolor=#000000> <td width=1 b"
+ 	+"gcolor=#888888></td> <td></td><td></td> <td></td"
+ 	+"><td></td><td></td> <td></td><td></td> <td width"
+ 	+"=1 bgcolor=#ffffff></td></tr> <tr bgcolor=#ffffff"
+ 	+"> <td width=1 bgcolor=#bbbbbb></td> <td></td><td"
+ 	+"></td> <td></td><td></td><td></td> <td></td><td>"
+ 	+"</td> <td></td></tr> <"
+ 	+"tr bgcolor=#bbbbbb> <td width=1 bgcolor=#bbbbbb><"
+ 	+"/td> <td></td><td></td> <td></td><td></td><td></"
+ 	+"td> <td></td><td></td> <td></td></tr> "
+ 	+"</table> <!-- End Elapsed Time --> </td> <td "
+ 	+"width=7 bgcolor=#bbbbbb></td></tr></table><table "
+ 	+"width=" 
+ 	+ ww2
+ 	+" border=0 cellspacing=0 cellpadding=0> "
+ 	+"<tr height=3><td bgcolor=#bbbbbb></td></tr></table"
+ 	+"> <!-- End Control Panel --> </td> <td><img src"
+ 	+"='cplright.gif' height=33 width=11></td> <td><img"
+ 	+" src='right.gif' height=33 width=5></td> </tr></t"
+ 	+"able><!-- Separator --> <table border=0 cells"
+ 	+"pacing=0 cellpadding=0> <tr height=11 width="
+ 	+ larghezzaTotale
+ 	+"> "
+ 	+"<td width=1 bgcolor=#bbbbbb></td> <td width=1 bg"
+ 	+"color=#ffffff></td> <td width=1 bgcolor=#bbbbbb><"
+ 	+"/td> <td><img src='ml.gif'></td><td><img src='"
+ 	+"separatr.gif' width="
+ 	+ wideWidth
+ 	+" height=11></td><td><img"
+ 	+" src='mr.gif'></td><td><img src='right.gif' width"
+ 	+"=5></td></tr></table> <!-- Mine Field --> <table"
+ 	+" width="
+ 	+ larghezzaTotale
+ 	+" border=0 cellspacing=0 cellpadding=0> "
+ 	+"<tr height="
+ 	+ highHeight
+ 	+"> <td width=1 bgcolor=#bbbbbb></td>"
+ 	+" <td width=1 bgcolor=#ffffff></td> <td width=1 b"
+ 	+"gcolor=#bbbbbb></td> <td><img src='fielside.gif' "
+ 	+"width=12 height="
+ 	+ highHeight
+ 	+"></td> <td> <!-- Game Field -"
+ 	+"->");
+ 	
+	var s = "";
+	var x, y;
+	for(y = 0; y < casellexAltezza; ++y) 
+	{
+		for(x = 0; x < casellexLarghezza; ++x) 
+		{
+		
+			s = s + 
+				'<a href="javascript:clickCasella(' + 
+				y + 
+				',' + 
+				x +
+				');">' +
+				'<img src="' + 
+				dir + 'sqt0.gif"' +
+				' name="grd' + y + '_' + x +  
+				'" border=0></a>'
+		}
+		s = s + "<br>";
+	}
+	document.write(s);
+	document.write('<!-- End Game Field --></td><td'
+ 	+' valign=right><img src="fielside.gif" width=12 heig'
+ 	+'ht='
+ 	+ highHeight
+ 	+'></td> <td valign=right><img src="right.gif'
+ 	+'" width=5 height='
+ 	+ highHeight
+ 	+'></td></tr></table><!-- En'
+ 	+'d Mine Field --><!-- Footer --><table width='
+ 	+ larghezzaTotale
+ 	+' border=0 cellspacing=0 cellpadding=0><tr heigh'
+ 	+'t=12> <td width=1 bgcolor=#bbbbbb></td> <td widt'
+ 	+'h=1 bgcolor=#ffffff></td> <td width=1 bgcolor=#bb'
+ 	+'bbbb></td> <td><img src="bl.gif"></td> <td><img '
+ 	+'src="footer.gif" width='
+ 	+ wideWidth
+ 	+' height=12></td> <td><i'
+ 	+'mg src="br.gif"></td> <td><img src="right.gif" he'
+	+'ight=12></td></tr></table><!-- Bottom --> <ta'
+ 	+'ble width='
+ 	+ larghezzaTotale
+ 	+' border=0 cellspacing=0 cellpadding=0'
+ 	+'> <tr bgcolor=#bbbbbb height=1> <td width=1 bgco'
+ 	+'lor=#bbbbbb></td><td width=1 bgcolor=#ffffff></t'
+ 	+'d> <td width=1 bgcolor=#bbbbbb></td><td width='
+ 	+ tW6
+ 	+' bgcolor=#bbbbbb></td><td width=1 bgcolor=#bbb'
+ 	+'bbb></td> <td width=1 bgcolor=#888888></td> <td '
+ 	+'width=1 bgcolor=#000000></td> </tr> <tr height=1'
+ 	+'> <td width=1 bgcolor=#bbbbbb></td> <td width=1 '
+ 	+'bgcolor=#888888></td> <td width=1 bgcolor=#888888'
+ 	+'></td> <td bgcolor=#888888></td> <td width=1 bgc'
+ 	+'olor=#888888></td> <td width=1 bgcolor=#888888></'
+ 	+'td> <td width=1 bgcolor=#000000></td> </tr> <tr'
+ 	+' height=1> <td width=1 bgcolor=#000000></td> <td'
+ 	+' width=1 bgcolor=#000000></td> <td width=1 bgcolo'
+ 	+'r=#000000></td> <td bgcolor=#000000></td> <td wi'
+ 	+'dth=1 bgcolor=#000000></td> <td width=1 bgcolor=#'
+ 	+'000000></td> <td width=1 bgcolor=#000000></td> <'
+ 	+'/tr></table> </div>');
+
+}
+
+// Funzione che calcola il numero di mine adiacenti a una data casella pos: (riga y, col x)
+function mineIntorno(y,x) 
+{
+	var conta = 0;
+	//controllo in alto a sx
+	if (y > 0 && x > 0 && mine[y-1][x-1]) 
+		conta++;
+	//controllo in alto sopra
+	if (y > 0 && mine[y-1][x]) 
+		conta ++;
+	//controllo in alto a dx
+	if (y > 0 && x < casellexLarghezza-1 && mine[y-1][x+1]) 
+		conta++;
+	//controllo a sx
+	if (x > 0 && mine[y][x-1]) 
+		conta++;
+	//controllo a dx
+	if (x < casellexLarghezza-1 && mine[y][x+1]) 
+		conta++;
+	//controllo in basso a sx
+	if (y < casellexAltezza-1 && x > 0 && mine[y+1][x-1]) 
+		conta++;
+	//controllo in basso sotto
+	if (y < casellexAltezza-1 && mine[y+1][x]) 
+		conta++;
+	//controllo in basso a dx
+	if (y < casellexAltezza-1 && x < casellexLarghezza-1 && mine[y+1][x+1]) 
+		conta++;
+	return conta;
+}
+
+// Funzione ricorsiva per "l'apertura" della griglia quando 
+// l'utente clicca su una casella senza mine intorno
+function scopri(y,x) 
+{
+	if (y >= 0 && y < casellexAltezza && x >=0 && x < casellexLarghezza) 
+	{
+		if (icona[y][x] != 3) 
+		{
+			//si contano le mine adiacenti alla casella e si sostituisce l'immagine corrispondente
+			var c = mineIntorno(y,x);
+			icona[y][x] = 3;//casella dove non ci si deve fare più nulla
+			caselleCoperte--;
+			document.images["grd" + y + "_" + x].src = dir + "sq" + c + ".gif";
+			
+			if (caselleCoperte == 0)//vittoria
+			{
+				document.images.condition.src = dir + "btncool.gif";//faccina vittoriosa
+				giocoIniziato = false;//ferma l'orologio
+      		}
+
+			//se non ha mine intorno, per tutte le caselle adiacenti si fanno 
+			//ricorsivamente controlli analoghi
+			if (c == 0) 
+			{
+				scopri(y-1,x-1);
+				scopri(y-1,x);
+				scopri(y-1,x+1);
+				scopri(y,x-1);
+				scopri(y,x+1);
+				scopri(y+1,x-1);
+				scopri(y+1,x);
+				scopri(y+1,x+1);
+         	}
+       }
+   }
+}
+
+// Funzione chiamata quando il giocatore incappa in una mina. 
+// Vengono mostrate tutte le mine dello schema (oltre a quella fatale)
+function addio(i,j) 
+{
+	var y, x;
+	for(y = 0; y < casellexAltezza; ++y) 
+	{
+		for(x = 0; x < casellexLarghezza; ++x) 
+		{
+			if (mine[y][x])//se c'è la mina
+			{
+				//faccio vedere le mine al posto delle caselle coperte e di quelle con ?
+				if (icona[y][x] != 1) 
+				{
+					document.images["grd"+y+"_"+x].src = dir + "mine.gif";
+   				}
+			}
+			else if (icona[y][x] == 1) //non c'è la mina e era flaggato (avevo esagerato con le bandierine)
+			{
+				document.images["grd"+y+"_"+x].src = dir + "nomine.gif";
+      		}
+   		}
+	}
+	document.images["grd" + i + "_" + j].src = dir + "minered.gif";
+
+	document.images.condition.src = dir + "btndead.gif";
+	giocoIniziato = false;
+	cliccato = false;
+}
+
+// questo gestore dell'evento click è associato a ogni casella (v. creaGriglia)
+function clickCasella(y, x) 
+{
+	if (giocoIniziato) 
+	{
+		cliccato = true;
+		if (premutoCtrl) //è true se ho premuto ctrl key
+		{
+			if (icona[y][x] < 3) //0: normale, 1: bandierina, 2: punto interrogativo
+			{	
+				var s = icona[y][x];
+				var change = true;
+				
+				//s==1: c'è la bandierina, la tolgo e incremento il numero di bandierine rimaste	
+				// e di caselle rimaste da scoprire			
+				if (s == 1)
+				{
+					bandierineRimaste++;
+					caselleCoperte++;
+				}
+				
+				//se non ci sono rimaste bandierine e sono su una casella coperta lascio tutto come è
+				if (bandierineRimaste == 0 && s == 0) 
+				{
+					change = false;
+				}
+				else 
+				{
+					if (s == 2) //punto interrogativo diventa casella coperta 'normale'
+						s = 0;
+					else 
+						s++;//0->1 (normale->bandierina) 1->2 (bandierina->punto interrogativo)
+					
+					//se sono passata da normale a bandierina decremento le bandierine e le caselle rimaste	
+					if (s == 1) 
+					{
+						bandierineRimaste--;
+						caselleCoperte--;
+   					}
+				}
+				if (change)//cambio l'immagine relativa alla casella
+				{
+					icona[y][x] = s;
+					document.images["grd"+y+"_"+x].src = dir + "sqt"+s+".gif";
+					aggiornaDisplay();
+				}
+				if (caselleCoperte == 0)//vittoria
+				{
+					document.images.condition.src = dir + "btncool.gif";//faccina vittoriosa
+					giocoIniziato = false;//ferma l'orologio
+      			}
+   			}
+		}
+		// ho cliccato pensando che non ci fosse una mina: controllo!
+		else if (icona[y][x] != 1) 
+		{
+			//sono finita su una mina: addio!
+			if (mine[y][x]) 
+			{
+				document.images["grd"+y+"_"+x].src = dir + "minered.gif";//inutile qui, sovrascritta da addio()
+				addio(y,x);
+			}
+			else //l'ho scampata, vediamo che c'è intorno
+			{
+				scopri(y,x);
+         	}
+      }
+   }
+}
+
+function vai()
+{
+	settaParametri();		
+	nuovaPartita();
+}
+
+// -->
+</script>
+</head>
+
+<body>
+
+<p>
+<script type="text/JavaScript">
+<!--
+	//riceve parametri da utente
+	settaParametri(); 
+	//inizia a giocare!
+	nuovaPartita();
+-->
+</script>
+
+<noscript>
+Per giocare dovete avere un browser che supporta JavaScript
+e abilitarne l'esecuzione degli script.
+</noscript>
+<!--
+<form>
+<input type="button" value="Nuova partita" onClick="vai()">
+</form>
+-->
+</body>
+</html>

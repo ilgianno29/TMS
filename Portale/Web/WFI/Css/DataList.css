@@ -1,0 +1,382 @@
+﻿/************************************************************/
+/*					STILE DELLA MODAL POPUP					*/
+/************************************************************/
+.popupBack
+/*PAGINA CHE CONTIENE LA POPUP*/
+{
+	background-color: Gray;
+	filter: alpha(opacity=70);
+	opacity: 0.7;
+}
+.popupDragBar
+/*BARRA PER IL DRAG&GROP DELLA POPUP*/
+{
+	background-color: #ff9900;
+	border: solid 1px #000000;
+	height: 40px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+.popupContent
+/*CONTENUTO*/
+{
+	background-color: #ffffff;
+	border-left: solid 1px #000000;
+	border-right: solid 1px #000000;
+	height: 300px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.popupButtons
+/*PULSANTI*/
+{
+	background-color: #ff9900;
+	border: solid 1px #000000;
+	height: 40px;	
+}
+
+.popupButtons input
+{
+	width: 95px;	
+	height: 30px;
+	position: relative;
+	top: 5px;	 
+}
+
+.popupDiv
+{
+	width: 480px;
+	height: auto;
+}
+
+.popupTitle
+{
+	font-size: 18pt;
+	font-weight: bold;
+	position: relative;
+	top: 5px;
+}
+
+.popupTable
+{
+	border-collapse: collapse;
+	padding: 10px;	
+}
+
+.popupTable td
+{
+	text-align: left;
+	vertical-align: top;
+	padding: 10px;
+}
+
+/************************************************************/
+/*					STILE DELLA MODAL DEL FILTRO            */
+/************************************************************/
+
+.pnlFiltro_txtFiltroStringVal
+{
+	width: 350px; 	
+	font-size : medium; 
+}
+
+.pnlFiltro_ddlFiltroOperatore
+{
+	width: 350px; 	
+	font-size: medium;
+}	
+
+.pnlFiltro_lblFiltroOperatore
+{	
+	font-size: medium;	
+}
+.pnlFiltro_lblFiltroVal
+{	
+	font-size: medium;	
+}	
+.pnlFiltro_txtFiltroNumericVal
+{	
+	font-size: medium;	
+}
+.pnlFiltro_txtFiltroDateVal
+{
+	font-size: medium;	
+}
+.pnlFiltro_lblFiltroCampo
+{
+	font-weight: bold; 	
+	font-size: medium;
+	font-style: italic; 
+}
+
+.pnlFiltro_lblFiltroCampoDesc
+{
+	font-size: medium;
+	font-weight: bold;
+}
+
+.pnlFiltro_btnFiltroConferma 
+{	
+	border-width: 1px;
+	text-align: right;
+	background-image: url('../images/Toolbar/24/check.png');
+	background-repeat: no-repeat;	
+}
+
+.pnlFiltro_btnFiltroAnnulla 
+{	
+	border-width: 1px;
+	text-align: right;
+	background-image: url('../images/Toolbar/24/delete.png');
+	background-repeat: no-repeat;	
+}
+
+.pnlMain{     
+     padding:0px;
+     border-color: #404040;
+     border-width:0px;
+     border-style:solid;
+     overflow:hidden;
+     text-align:left;  
+ }
+ 
+.pnlListViewContainer{
+     float:left;     
+     padding:0px;     
+     width: 250px;      
+     border-color: #404040;
+     border-width:1px;     
+     border-style:solid;    
+}
+
+.pnlListViewContent{     
+     padding:0px;                         
+     /*background-color:yellow;*/
+     margin-left:255px;
+     border-color: #404040;
+     border-width:1px;    
+     border-style:solid;   
+     height:805px;
+}
+
+.pnlListViewContentTop{     
+     padding:0px;                              
+     height:33%;  
+     overflow:auto;   
+}
+
+.pnlListViewContentCenter{     
+     padding:0px;                              
+     height:34%;
+     overflow:auto;   
+}
+
+.pnlListViewContentBottom{     
+     padding:0px;                              
+     height:33%;
+     overflow:auto;   
+}
+.pnlListViewTitle
+{	
+	height: 25px;
+	padding: 5px;
+	border-color: #404040;	
+    border-width:0px;    
+    border-bottom-width: 1px;
+    border-style:solid;   
+	background-color:Orange;
+	text-align: left;
+	font-size:16pt;
+}
+
+.pnlListViewFilter
+{	
+	height: 20px;
+	padding: 5px;
+	border-color: #404040;	
+    border-width:0px;    
+    border-bottom-width: 1px;
+    border-style:solid;   
+	background-color:#FFCC99;
+	text-align: left;
+	font-size:12pt;
+}
+
+.pnlListViewBody
+{	
+	height: 745px;
+	background-color:orange;
+	overflow:auto; 
+}
+
+/*	----------------------------------------------
+
+		LIST ITEM
+
+	----------------------------------------------*/
+
+.ListViewItemContainer
+{
+	border-width: 1px; 
+	border-bottom-width:0px;  
+	border-style:solid; 
+	border-color:#404040; 
+	width: 250px;	
+	font-size:8pt;
+	background-color: #FFFACD;
+}
+
+.ListViewItemTable
+{
+	
+}
+
+.ListViewItemTabletd1
+{
+	width: 80px;	
+	font-weight:bold; 
+}
+
+.ListViewItemTabletd2
+{
+	font-style:italic;
+}
+
+/*	----------------------------------------------
+
+		ALTERNATE LIST ITEM
+
+	---------------------------------------------- */
+
+.ListViewAlternateItemContainer
+{
+	border-width: 1px; 
+	border-bottom-width:0px;  
+	border-style:solid; 
+	border-color:#404040; 
+	width: 250px;	
+	font-size:8pt;
+	background-color: #FFFADD;
+}
+
+.ListViewAlternateItemTable
+{
+	
+}
+
+.ListViewAlternateItemTabletd1
+{
+	width: 80px;	
+	font-weight:bold; 
+}
+
+.ListViewAlternateItemTabletd2
+{
+	font-style:italic;
+}
+
+
+/*	----------------------------------------------
+
+		SELECTED LIST ITEM
+
+	---------------------------------------------- */
+
+.ListViewSelectedItemContainer
+{
+	border-width: 1px; 
+	border-bottom-width:0px;  
+	border-style:solid; 
+	border-color:#404040; 
+	width: 250px;	
+	font-size:8pt;
+	background-color: #ff7f50;
+}
+
+.ListViewSelectedItemTable
+{
+	
+}
+
+.ListViewSelectedItemTabletd1
+{
+	width: 80px;	
+	font-weight:bold; 
+}
+
+.ListViewSelectedItemTabletd2
+{
+	font-style:italic;
+}
+
+.ListViewItemContainerOnMouseOver
+{
+	border-width: 1px; 
+	border-bottom-width:0px;  
+	border-style:solid; 
+	border-color:#404040; 
+	width: 250px;	
+	font-size:8pt;
+	background-color: #FDE910;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.tableGridContainer
+{
+	width: 100%;
+	padding: 0px;
+}
+
+.ListSearchExtenderPrompt
+{
+	font-style: italic;
+	color: Gray;
+	background-color: white;
+}
+
+.TableCaption_td
+{
+	background-color: #ABCDEF;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.tableGridContainer
+{
+	width: 100%;
+	padding: 0px;
+}
+
+.lblEmptyDataTemplate
+{
+	font-style: italic;
+	font-size: medium;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.EmptyDataTemplateContainer
+{
+	text-align: center;
+	height: auto;
+	width: 100%;
+}
+
+.EmptyDataTemplateContainerInterno
+{
+	vertical-align: middle;
+}
+

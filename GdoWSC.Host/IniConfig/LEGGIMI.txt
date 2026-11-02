@@ -1,0 +1,2 @@
+I file *.ini con le credenziali NON sono nel repository.
+Copiare i *.ini.esempio togliendo ".esempio" e inserire le password del proprio ambiente.

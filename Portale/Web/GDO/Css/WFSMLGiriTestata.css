@@ -1,0 +1,150 @@
+﻿div.pnlIniziale1
+{
+    clear: both;    
+}
+
+div.pnlRiferimentiCaption
+{
+    border: solid 1px #cacaca;
+    _padding-top: 5px;
+    padding-bottom: 7px;
+    margin-top: 5px;
+    width: 1188px;
+    float: left;
+    position: relative;
+    height: 60px;
+}
+
+.lblRiferimentiCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.RiferimentiTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+table.RiferimentiTable2
+{     
+    position: absolute;
+    left: 5px;
+    top: 40px;
+}
+
+
+
+div.pnlIniziale2
+{
+    clear: both;    
+}
+
+div.pnlEstremi
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 7px;
+    margin-top: 5px;
+    width: 1188px;
+    float: left;
+    position: relative;
+    height: 150px;    
+}
+
+.lblEstremiCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.EstremiTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    width:550px;
+}
+
+table.EstremiTable2
+{
+    position: absolute;
+    left: 600px;
+    top: 20px;
+    width:550px;
+}
+
+div.pnlIniziale3
+{
+    clear: both;
+    height: 75px;
+    /*border: solid 1px #cacaca;*/
+}
+
+div.pnlNotaCaption
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 7px;
+    margin-top: 5px;
+    width: 1188px;
+    float: left;
+    position: relative;
+    height: 55px;
+}
+
+.lblNotaCaption
+{
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 10px;
+}
+
+table.NoteTable
+{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+
+table.NoteTable2
+{     
+    position: absolute;
+    left: 5px;
+    top: 42px;
+}
+
+div.DetailFormGridContainerDiv.pnlGiriDettagli
+{
+    max-height: 400px;
+    min-height: 150px;
+}
+
+div.DetailFormModeImageDiv img /*IMMAGINE MODALITA DI ACCESSO(VISUALIZZA MODIFICA...)*/
+{
+    border: solid 0px transparent;
+    background-color: #9e253b;
+    border-radius: 3px;
+    margin-right: 3px;
+    padding-right: 2px;
+    padding-left: 2px;
+    width: 24px;
+    height: 24px;
+}
+
+div.DetailFormModeImageDiv
+{
+    position: absolute;
+    right: 2px;
+    top: 0px;
+}

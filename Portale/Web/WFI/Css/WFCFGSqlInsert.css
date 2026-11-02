@@ -1,0 +1,175 @@
+﻿#btnGo, #btnQueryGo
+{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+
+#btnEsportaWFI
+{
+    width: 160px;
+    height: 30px;
+    text-align: center;
+}
+
+#btnEsportaTutto
+{
+    width: 160px;
+    height: 30px;
+    text-align: center;
+}
+
+#btnAggiungi, #btnAggiungiQuery
+{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#btnTogli, #btnTogliQuery
+{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#btnSpostaSu, #btnSpostaSuQuery
+{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#btnSpostaGiu, #btnSpostaGiuQuery
+{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+
+#ElencoTabelle
+{
+    width: 400px;
+    height: 350px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+}
+
+#ElencoTabelleDaEsportare
+{
+    width: 400px;
+    height: 350px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+}
+
+#pnlElencoTabelleDisponibili, #pnlElencoTabelleDaEsportare, #pnlSposta, #pnlServerType
+{
+    float: left;
+}
+
+#pnlElencoQueryDisponibili, #pnlQuerySposta, #pnlQueryServerType
+{
+    float: left;
+}
+
+#pnlElencoTabelleDaEsportare
+{
+    margin-left: 10px;
+}
+
+#pnlServerType
+{
+    margin-left: 10px;
+    height: 25px;
+}
+
+#pnlQueryServerType
+{
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 90px;
+}
+
+#pnlElencoTabelleDisponibili
+{
+    margin-right: 10px;
+}
+
+#pnlElencoQueryDisponibili
+{
+    margin-right: 10px;
+}
+
+#pnlTables, #pnlComandi
+{
+    clear: both;
+}
+
+#pnlQuery, #pnlQueryComandi
+{
+    clear: both;
+}
+
+#pnlTables
+{
+    margin: 4px;
+}
+
+#pnlQuery
+{
+    margin: 4px;
+}
+
+#pnlSposta
+{
+    margin-top: 40px;
+}
+
+#pnlQuerySposta
+{
+    margin-top: 0px;
+}
+
+#ElencoTabelleFiltro
+{
+    width: 335px;
+    margin-bottom: 3px;
+}
+
+#btnFiltro
+{
+    width: 55px;
+    height: 22px;
+}
+
+#pnlQueryText
+{
+    height: 100px;
+    margin-left: 5px;
+    position: relative;
+}
+
+#QueryText
+{
+    width: 750px;
+}
+
+#btnAddQuery
+{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+
+#ElencoQuery
+{
+    width: 757px;
+    height: 300px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+}

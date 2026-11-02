@@ -1,0 +1,44 @@
+﻿[Debug]
+DebugMode = False
+UserDebug =
+InterfaceMode=False
+
+[Application]
+LogoApplicazione =
+LogoDitta =
+LogoIncas =
+TitoloApplicazione = GdoWSC WCF TMSServiceForMap
+InfoIncas = © Incas 2010-2017
+TitoloModuloSoftware = TMS - TMSServiceForMap
+TitoloModuloSoftwareAcronimo  = TMSServiceForMap
+
+[Log]
+SQLLeftLength=255
+DayOfPermanenceInLog=3
+DayOfPermanenceOfFile=3
+
+[Tables]
+SessionTable=TMSServiceForMap_Sessioni
+EventLogTable=TMSServiceForMap_LogEventi
+UserTable=TMSServiceForMap_Utenti
+
+[BackgroundActivity]
+BackgroundActivityTypeName = Incasbo.Web.WSCWCF.CustomBackgroundActivity
+
+[LoginManager]
+CryptographyEnable=true
+
+[RoutingOptions]
+Optimization =
+Avoid_TollRoads =
+Avoid_Highways =
+Avoid_Ferries =
+Avoid_Residents_Only =
+Avoid_Urban_Areas =
+Avoid_Ramps =
+Avoid_VignetteRoads =
+Avoid_Low_Emission_Zones =
+Route_Language =
+Speed_Profile =
+TempoCaricoScarico =
+MaximumDistanceToSegment =

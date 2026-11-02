@@ -1,0 +1,17 @@
+﻿/*Nasconde le parti che non devono essere visibili in stampa*/
+#PanelHeader
+{
+	visibility: hidden;
+	display:none;
+}
+#divDataGridPrint
+{
+	visibility: hidden;
+	display:none;
+}
+
+#PanelFooter
+{
+	visibility: hidden;
+	display:none;
+}

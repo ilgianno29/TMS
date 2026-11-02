@@ -1,0 +1,5 @@
+﻿EXEC sp_generate_inserts 'WFI_OBJECTMANAGER', @from = "FROM WFI_OBJECTMANAGER WHERE (CODICE LIKE '%BancheConti%') OR (CODICE LIKE '%Sezionali%') OR (CODICE LIKE '%ANA.SOCIETA%')"
+EXEC sp_generate_inserts 'WFI_ALLGRD', @from = "FROM WFI_ALLGRD WHERE (NOMRIF LIKE '%BancheConti%') OR (NOMRIF LIKE '%Sezionali%') OR (NOMRIF LIKE '%ANA.SOCIETA%')"
+EXEC sp_generate_inserts 'WFI_TABGRD', @from = "FROM WFI_TABGRD WHERE (NOMRIF LIKE '%BancheConti%') OR (NOMRIF LIKE '%Sezionali%') OR (NOMRIF LIKE '%ANA.SOCIETA%')"
+EXEC sp_generate_inserts 'WFI_TABBOT', @from = "FROM WFI_TABBOT WHERE (NOMRIF LIKE '%BancheConti%') OR (NOMRIF LIKE '%Sezionali%') OR (NOMRIF LIKE '%ANA.SOCIETA%')"
+EXEC sp_generate_inserts 'WFI_MENU_VOCI', @from = "FROM WFI_MENU_VOCI WHERE (VOCE LIKE '%BancheConti%') OR (VOCE LIKE '%Sezionali%') OR (VOCE LIKE '%ANA.SOCIETA%')"

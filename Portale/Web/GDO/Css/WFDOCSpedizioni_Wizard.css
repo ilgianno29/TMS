@@ -1,0 +1,239 @@
+﻿.EstremiConsegna .DetailFormSectionTable .DetailFormValueCell
+{
+    font-weight: bold;
+}
+
+.EstremiConsegna .DetailFormSectionTable tr
+{
+    line-height: 20px;
+}
+
+/*
+		W I Z A R D
+*/
+.WizardContainer
+{
+    border: 1px solid #c0c0c0;
+    background-color: #f0f0f0;
+}
+
+.WizardTitle
+{
+    padding: 2px;
+    font-size: 14px;
+    background-color: #9e253b;
+    color: #ffffff;
+}
+
+.WizardFasi
+{
+    padding: 2px;
+    font-size: 14px;
+    /*background-color: #b1b1d2;*/
+    color: #C0C0C0;
+}
+
+.LabelAttivo
+{
+    color: #404040;
+}
+
+.LabelNonAttivo
+{
+    color: #C0C0C0;
+}
+
+.WizardBody
+{
+    min-height: 200px;
+    padding-top: 10px;
+}
+
+    .WizardBody.WSRiepilogoSpedizioneBodyDiv
+    {
+        line-height: 18px;
+    }
+
+.WizardCommands
+{
+}
+
+.WizardForward
+{
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/24/navigate_right2.png');
+}
+
+.WizardBack
+{
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/24/navigate_left2.png');
+}
+
+.WizardCancel
+{
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../../images/Toolbar/24/annulla.png');
+}
+
+.tableButtons_R
+{
+    text-align: right;
+    width: 250px;
+}
+/*
+
+	VIEW di Riferimento Documento
+
+*/
+.RiferimentoDocumentoTable
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+    .RiferimentoDocumentoTable td
+    {
+        border-bottom: 1px none;
+    }
+/*
+
+	VIEW di Punto Carico
+
+*/
+.PuntoRitiroTable
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/*
+.PuntoRitiroTable td
+{
+	border-bottom: 1px none;
+	text-align: center;
+}
+
+/*
+
+	VIEW di Punto Scarico
+
+*/
+.PuntoScaricoTable
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/*
+.PuntoRitiroTable td
+{
+	border-bottom: 1px none;
+	text-align: center;
+}
+
+*/
+
+/*
+
+	VIEW di selezione Altri Dati Spedizione
+
+*/
+.AltriDatiSpedizione
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+    .AltriDatiSpedizione td
+    {
+        border-bottom: 1px none;
+    }
+/*
+
+	VIEW di selezione Tipi Imballo
+
+*/
+.SpedizioneTipiImballiTable
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+    .SpedizioneTipiImballiTable td
+    {
+        border-bottom: 1px none;
+    }
+/*
+
+	VIEW di riepilogo
+
+*/
+.RiepilogoSpedizioneTable
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 20px;
+}
+
+    .RiepilogoSpedizioneTable td
+    {
+        _border-bottom: 1px none;
+    }
+
+    .RiepilogoSpedizioneTable .DetailFormValueCell
+    {
+        font-weight: bold;
+    }
+
+.TipoImballoDescrizione
+{
+    font-size: 10px;
+}
+
+.TipoImballoQuantita
+{
+    font-size: 10px;
+}
+
+/*
+.TipoImballoQuantitaDaValorizzare
+{
+    font-size:10px;   
+    border-color: Red; 
+}
+*/
+
+
+/*--------------------------------------------------------------------------------------
+
+		AutoCompleteExtender
+
+--------------------------------------------------------------------------------------*/
+.AutoCompleteExtenderList
+{
+    /*font-family: "Segoe UI";*/
+    font-size: 9pt;
+    background-color: #eeeeee;
+    list-style-image: none;
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 3px;
+    z-index: 9999 !important;
+    border: 1px solid #cccccc;
+    color: #333333;
+    box-shadow: 3px 3px 3px #555555;
+    width: 550px !important;
+    left: 0px !important;
+    top: 23px !important;
+}
+
+.AutoCompleteExtenderHighlightedItem
+{
+    background-color: rgb(158, 37, 59);
+    color: #eeeeee;
+}

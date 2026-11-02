@@ -1,0 +1,950 @@
+﻿/***********************************************************************************************
+    Ridefinizione layout di base della master page per avere una pagina a tutto schermo
+***********************************************************************************************/
+#PanelContent {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    top: 25px;
+    background-color: #f3f3f3;
+}
+
+#PanelContentX {
+    height: 100%;
+}
+
+#PanelFooter {
+    display: none;
+}
+
+
+/***********************************************************************************************
+    tab del pannello delle griglie
+***********************************************************************************************/
+#PanelContentX {
+    text-align: left;
+}
+
+.ajax__tab_default.ajax__tab_xp .ajax__tab_body {
+    padding: 2px;
+}
+
+div.ajax__tab_xp.ajax__tab_container.ajax__tab_default {
+    height: 100%;
+}
+
+    div.ajax__tab_xp.ajax__tab_container.ajax__tab_default .ajax__tab_panel {
+        height: 100%;
+    }
+
+div.DetailFormContainerDivCollapsiblePanel.TabContent {
+    height: 100%;
+}
+
+div.ajax__tab_xp.ajax__tab_container.ajax__tab_default .ajax__tab_tab {
+    color: black;
+    font-weight:normal;
+    font-size:9pt;
+}
+
+#ctl00_phPageContent_TcMain_body {
+    height: calc(100% - 28px) !important;
+}
+
+.GrigliePannello50 {
+height:50%;
+}
+
+.GrigliePannello100 {
+height:100%;
+}
+
+
+/***********************************************************************************************
+    Contenitore globale esterno
+***********************************************************************************************/
+#SchedulerContainer.IncasScheduler {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    font-family: Tahoma;
+    font-size: 10px;
+}
+
+/*********************************************************************************************** 
+    Pannello Top 
+***********************************************************************************************/
+.TopPanel {
+    border: solid 1px #999999;
+    height: 45px;
+    position: absolute;
+    /*width: 100%;*/
+}
+
+/*********************************************************************************************** 
+    Pannello Pivot (incrocio risorse data)
+***********************************************************************************************/
+div.ResourcePlusPivotPanel {
+    border: solid 1px #999999;
+    height: calc(100% - 55px);
+    width: calc(825px + 180px + 18px);
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    overflow: auto;
+}
+
+div.PivotPanel {
+    border: solid 0px #000000;
+    width: 825px;
+    position: absolute;
+    left: calc(180px + 1px);
+    top: 0px;
+}
+
+/***********************************************************************************************
+    Pannello delle risorse
+***********************************************************************************************/
+div.ResourcePanel {
+    border: solid 0px #000000;
+    width: 180px;
+    position: absolute;
+    top: 0px;
+}
+
+/***********************************************************************************************
+    Pannello delle griglie    
+***********************************************************************************************/
+div.GridPanel {
+    border: solid 1px #999999;
+    height: calc(100% - 5px);
+    width: calc(100% - 180px - 5px - 825px - 22px);
+    position: absolute;
+    left: calc(180px + 5px + 825px + 22px);
+    /*top: 50px;*/
+}
+
+/***********************************************************************************************
+    Item delle risorse    
+***********************************************************************************************/
+div.ResourceItemTemplate {
+    border: solid 1px #999999;
+    width: 180px;
+    height: 50px;
+    margin-left: -1px;
+    background-color: #FFFFda;
+    cursor: default;
+    position: relative;
+}
+
+    div.ResourceItemTemplate:hover {
+        background-color: #FFFFaa;
+        border: solid 2px #FF0000;
+        width: 178px;
+        height: 48px;
+    }
+
+    div.ResourceItemTemplate.InMiddleResource, .ResourceItemTemplate.LastResource {
+        margin-top: 5px;
+    }
+
+    div.ResourceItemTemplate.FirstResource {
+        margin-top: -1px;
+    }
+
+    div.ResourceItemTemplate.LastResource {
+        margin-bottom: -1px;
+    }
+
+    div.ResourceItemTemplate .AutistaDescrizione {
+        font-weight: bold;
+    }
+
+    div.ResourceItemTemplate.Dipendente {
+        background-color: #E5E5C4;
+    }
+
+div.ResourceItemTemplateContent {
+    padding: 3px;
+}
+
+a.lbResource {
+    font-weight: normal;
+    color: inherit;
+    cursor: pointer;
+}
+
+div.ResourceItemTemplate .InfoResource {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    visibility: hidden;
+}
+
+div:hover.ResourceItemTemplate .InfoResource {
+    visibility: visible;
+}
+
+div.ResourceInfoTooltip {
+    min-width: 200px;
+    max-width: 400px;
+    height: 100px;
+    background-color: #FFFFda;
+    margin: -5px;
+    padding: 5px;
+}
+
+
+
+/***********************************************************************************************
+ Pannello del titolo delle risorse    
+***********************************************************************************************/
+div.ResourceTitle {
+    border: solid 1px #999999;
+    vertical-align: middle;
+    text-align: center;
+    width: 180px;
+    height: 45px;
+    position: absolute;
+    margin-left: -1px;
+    margin-top: -1px;
+    font-size:16px;
+    padding-top:10px;
+}
+
+/***********************************************************************************************
+ Pannello del titolo della tabella Pivot
+***********************************************************************************************/
+div.PivotTitle {
+    vertical-align: middle;
+    text-align: center;
+    left: calc(180px + 1px);
+    width: 835px;
+    height: 50px;
+    position: absolute;
+    clear: both;
+}
+
+/***********************************************************************************************
+ Pannello del titolo della griglia
+***********************************************************************************************/
+div.GridTitle {
+    _border: solid 1px #999999;
+    vertical-align: middle;
+    text-align: center;
+    left: calc(180px + 5px + 850px);
+    width: calc(100% - 180px - 5px - 850px);
+    height: 45px;
+    position: absolute;
+}
+
+/***********************************************************************************************
+    Item delle date
+***********************************************************************************************/
+div.DateItemTemplate {
+    float: left;
+    border: solid 1px #999999;
+    margin-right: 0px;
+    margin-top: -1px;
+    width: 130px;
+    height: 45px;
+}
+
+    div.DateItemTemplate.Festivo {
+        background-color: #FFcaca;
+    }
+
+div.DateItemTemplateContent {
+    padding-top: 2px;
+}
+
+div.DateItemSeparator {
+    width: 2px;
+    height: 60px;
+    background-color: transparent;
+    float: left;
+    margin-bottom: -10px;
+}
+
+    div.DateItemSeparator.Visible {
+        background-color: #0000ff;
+        width: 2px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+/***********************************************************************************************
+    Item degli appuntamenti    
+***********************************************************************************************/
+.AppointmentItemRowTemplate {
+    clear: both;
+}
+
+div.AppointmentItemTemplate {
+    float: left;
+    border: solid 1px #999999;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    width: 130px;
+    height: 50px;
+    cursor: default;
+    position: relative;
+}
+
+    div.AppointmentItemTemplate:hover {
+        border: solid 2px #FF00bb;
+        width: calc(130px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.Libero {
+        background-color: #FFFFFF;
+    }
+
+    div.AppointmentItemTemplate.Occupato {
+        background-color: #FFdddd;
+    }
+
+        div.AppointmentItemTemplate.Occupato.S10 {
+            background-color: #cdf8f6;
+        }
+
+        div.AppointmentItemTemplate.Occupato.S20 {
+            background-color: #0e8fe5;
+        }
+
+        div.AppointmentItemTemplate.Occupato.S30 {
+            background-color: #dfb0ff;
+        }
+
+        div.AppointmentItemTemplate.Occupato.S40 {
+            background-color: #913bf3;
+        }
+
+    div.AppointmentItemTemplate.Selected {
+        border: solid 2px #FF0000;
+        width: calc(130px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.CanAccept {
+        border: solid 2px #FFaaaa;
+        width: calc(130px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.CanAcceptHover {
+        border: solid 2px #FF0000;
+        width: calc(130px - 2px);
+        height: 48px;
+    }
+
+    div.AppointmentItemTemplate.FirstResource {
+        margin-top: -1px;
+    }
+
+    div.AppointmentItemTemplate.LastResource {
+        margin-bottom: -1px;
+    }
+
+    div.AppointmentItemTemplate.FirstDate {
+        margin-left: 0px;
+    }
+
+    div.AppointmentItemTemplate.LastDate {
+        margin-right: -1px;
+        width: calc(130px + 1px);
+    }
+
+        div.AppointmentItemTemplate.LastDate:hover {
+            width: calc(130px - 1px);
+        }
+
+    div.AppointmentItemTemplate .InfoViaggio {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        visibility: hidden;
+    }
+
+div:hover.AppointmentItemTemplate .InfoViaggio {
+    visibility: visible;
+}
+
+.AppointmentItemTemplateContent {
+    margin: 3px;
+}
+
+div.AppointmentItemSeparator {
+    width: 2px;
+    height: 60px;
+    background-color: transparent;
+    margin-bottom: -10px;
+    float: left;
+}
+
+    div.AppointmentItemSeparator.Visible {
+        background-color: #0000ff;
+        width: 2px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+a.lbAppointmentMezzo {
+    font-weight: normal;
+    color: inherit;
+    cursor: pointer;
+    width: 50px;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    text-align: left;
+}
+
+a.lbAppointmentViaggio {
+    font-weight: normal;
+    color: inherit;
+    cursor: pointer;
+    width: 50px;
+    position: absolute;
+    top: 2px;
+    left: 56px;
+    text-align: left;
+}
+
+div.AppointmentInfoTooltip {
+    min-width: 200px;
+    max-width: 400px;
+    height: 100px;
+    background-color: #FFFFda;
+    margin: -5px;
+    padding: 5px;
+}
+
+.AppointmentItemTemplateContentInfo {
+   padding-top:6px;
+}
+
+/***********************************************************************************************
+    Stile griglia
+***********************************************************************************************/
+.RowDraggable {
+    background-color: #cacaca;
+}
+
+.RowDraggable-Dragging {
+    background-color: #ffacac;
+    width: 120px;
+    height: 30px;
+    opacity: 0.7;
+    padding: 5px;
+    border: 1px solid red;
+    cursor: move;
+}
+
+.AppointmentDraggable-Dragging {
+    background-color: #ffacac;
+    width: 120px;
+    height: 30px;
+    opacity: 0.7;
+    padding: 5px;
+    border: 1px solid red;
+    cursor: move;
+}
+
+
+
+/**********************************************************************************************
+    dimensione frame
+***********************************************************************************************/
+
+.SpedizioniDimensions {
+    position: inherit;
+    width: 1300px;
+    height: 600px;
+}
+
+.ViaggiDimensions {
+    position: inherit;
+    width: 1450px;
+    height: 550px;
+}
+
+.MezziDimensions {
+    position: inherit;
+    width: 1200px;
+    height: 730px;
+}
+
+.AutistiDimensions {
+    position: inherit;
+    width: 1200px;
+    height: 400px;
+}
+
+
+/**********************************************************************************************
+   toolbar pulsanti form
+***********************************************************************************************/
+#PnlToolbar.PnlToolbar {
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    height: 55px;
+    width: 100%;
+}
+
+#ToolbarContainer .PlanToolbar {
+    float: left;
+    margin-right: 20px;
+}
+
+.PlanToolbarButton {
+    width: 30px;
+    height: 26px;
+    text-align: right;
+    background-position: center;
+    margin-left: 0px;
+    margin-right: -2px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+    .PlanToolbarButton.DetailFormButton_Cancel {
+        background-image: url('../../images/Toolbar/24/annulla.png');
+    }
+
+    .PlanToolbarButton.VisualizzaViaggio {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.ModificaViaggio {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+      .PlanToolbarButton.EliminaViaggio {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.VisualizzaMezzo {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.ModificaMezziIndisponibilita {
+        /*background-image: url('../../images/Toolbar/24/annulla.png');*/
+        width: 80px;
+    }
+
+    .PlanToolbarButton.VisualizzaAutista {
+        background-image: url('../../images/Toolbar/24/annulla.png');
+    }
+
+
+/***********************************************************************************************
+  griglie
+***********************************************************************************************/
+.DetailFormGridContainerDiv .AltDataRow {
+    background-color: #F4F4F4;
+}
+
+.DetailFormGridContainerDiv .NorDataRow {
+    background-color: white;
+}
+
+.DetailFormGridContainerDiv .WFIRowSelected {
+    background-color: #E3506C;
+}
+
+
+/***********************************************************************************************
+  griglie spedizioni libere
+***********************************************************************************************/
+
+#HeaderElencoSpedizioniLibere {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroSpedizioniLibere {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroSpedizioniLibere {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateSpedizioniLibere {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateSpedizioniLibere .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateSpedizioniLibere .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateSpedizioniLibere .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberSpedizioniLibere {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberSpedizioniLibere {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberSpedizioniLibere_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetSpedizioniLibereContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkSpedizioniLibereContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetSpedizioniLibereContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkSpedizioniLibereContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlSpedizioniLibere.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow:auto;
+}
+
+/***********************************************************************************************
+  griglie spedizioni viaggi
+***********************************************************************************************/
+
+#HeaderElencoSpedizioniViaggi {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroSpedizioniViaggi {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroSpedizioniViaggi {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateSpedizioniViaggi {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateSpedizioniViaggi .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateSpedizioniViaggi .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateSpedizioniViaggi .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberSpedizioniViaggi {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberSpedizioniViaggi {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberSpedizioniViaggi_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetSpedizioniViaggiContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkSpedizioniViaggiContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetSpedizioniViaggiContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkSpedizioniViaggiContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlSpedizioniViaggi.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow:auto;
+}
+
+
+
+/***********************************************************************************************
+  griglie spedizioni Pianificate
+***********************************************************************************************/
+
+#HeaderElencoSpedizioniPianificate {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroSpedizioniPianificate {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroSpedizioniPianificate {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateSpedizioniPianificate {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateSpedizioniPianificate .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateSpedizioniPianificate .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateSpedizioniPianificate .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberSpedizioniPianificate {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberSpedizioniPianificate {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberSpedizioniPianificate_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetSpedizioniPianificateContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkSpedizioniPianificateContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetSpedizioniPianificateContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkSpedizioniPianificateContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlSpedizioniPianificate.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow:auto;
+}
+
+/***********************************************************************************************
+  griglia Mezzi Indisponibili
+***********************************************************************************************/
+
+#HeaderMezziIndisponibili {
+    position: relative;
+    height: 25px;
+}
+
+.PanelFiltroMezziIndisponibili {
+    position: absolute;
+    right: 0px;
+    width: 385px;
+    height: 25px;
+    z-index: 1;
+}
+
+.DivFiltroMezziIndisponibili {
+    float: right;
+    border: 0px solid #aaaaaa;
+    height: 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60%;
+}
+
+.FilterDateMezziIndisponibili {
+    position: absolute;
+    top: -2px;
+}
+
+    .FilterDateMezziIndisponibili .IboWebDate_txtInput {
+        height: 13px;
+        font-size: 8pt;
+    }
+
+    .FilterDateMezziIndisponibili .IboWebDate_imgButton {
+        margin-top: 2px;
+        height: 19px;
+    }
+
+    .FilterDateMezziIndisponibili .IboWebDateCalendar {
+        left: -40px !important;
+    }
+
+.FilterNumberMezziIndisponibili {
+    width: 100px;
+    height: 13px;
+    font-size: 8pt;
+}
+
+.IboWebNumericTlk input.FilterNumberMezziIndisponibili {
+    padding: 1px 2px 1px 2px !important;
+    height: 15px !important;
+    font-size: 8pt !important;
+}
+
+#FilterNumberMezziIndisponibili_wrapper.IboWebNumericTlk {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+#btnFilterResetMezziIndisponibiliContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 359px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterOkMezziIndisponibiliContainer {
+    position: absolute;
+    top: 1px;
+    bottom: 2px;
+    left: 334px;
+    background-color: #9e253b;
+    border-radius: 4px;
+}
+
+#btnFilterResetMezziIndisponibiliContainer:hover {
+    background-color: #d5193c;
+}
+
+#btnFilterOkMezziIndisponibiliContainer:hover {
+    background-color: #d5193c;
+}
+
+div.pnlMezziIndisponibili.DetailFormGridContainerDiv.tableGridContainer {
+    height: calc(100% - 30px);
+    overflow:auto;
+}

@@ -1,0 +1,73 @@
+﻿.StandardReport_pnlMain
+{
+    text-align: center;
+    margin: 0 auto;
+}
+
+.pnlReport
+{
+    text-align: left;
+}
+
+.pdfIFrame
+{
+    width: 1300px;
+    height: 550px;
+}
+
+.cmdEsci
+{
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/annulla.png');
+}
+
+.cmdDownload
+{
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    background-image: url('../images/Toolbar/24/download.png');
+    margin: 5px;
+}
+
+#MainTable
+{
+    border: 1px;
+    padding: 2px;
+    border-color: gray;
+    border-collapse: collapse;
+    border-width: 1px;
+    border-style: solid;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+#MainTable_Report
+{
+    border: 1px;
+    padding: 2px;
+    border-color: gray;
+    border-collapse: collapse;
+    border-width: 1px;
+    border-style: solid;
+    border-spacing: 0px;
+    width: auto;
+}
+
+#MainTable_Buttons_tr
+{
+    border: 1px;
+    padding: 20px;
+    border-color: gray;
+    border-collapse: collapse;
+    border-width: 1px;
+    border-style: solid;
+    border-spacing: 0px;
+}
+
+.WFStandardReport_pnlButtons
+{
+    text-align: right;
+}

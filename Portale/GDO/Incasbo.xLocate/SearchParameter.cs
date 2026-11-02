@@ -1,0 +1,30 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Xml.Serialization;
+
+namespace Incasbo.xLocate;
+
+[Serializable]
+[GeneratedCode("System.Xml", "4.0.30319.34234")]
+[XmlType(Namespace = "http://xlocate.xserver.ptvag.com")]
+public enum SearchParameter
+{
+	COUNTRY_CODETYPE,
+	SEARCH_BINARY,
+	SEARCH_PHONETIC,
+	SEARCH_FUZZY,
+	SWAPANDSPLITMODE,
+	STREET_HNRPOSITION,
+	STREET_RETURNALLHNR,
+	RESULT_LANGUAGE,
+	CITY_RETURNALLCITY2,
+	MULTIWORDINDEX_ENABLE,
+	POSTCODE_AGGREGATE,
+	ASTERISKMODE,
+	INTERSECTIONS_ENABLE,
+	HNR_OFFSET,
+	MAX_RESULT,
+	SINGLE_FIELD_SEPARATORS,
+	ENGINE_ADDRESSSEARCH_ENABLE,
+	ENGINE_COMBINEDTRANSPORTSEARCH_ENABLE
+}

@@ -1,0 +1,50 @@
+﻿
+#btnTogliGiri, #btnSvuotaGiri, #btnTogliPCS, #btnSvuotaPCS, #btnAggiungiGiri, #btnAggiungiPCS {
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+#ElencoGiri, #ElencoPCS {
+    width: 420px;
+    height: 400px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+}
+
+#pnlElencoGiri, #pnlElencoPCS, #pnlComandiGiri, #pnlComandiPCS {
+    float: left;
+}
+
+#pnlElencoPCS {
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+#pnlElencoGiri {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+#pnlSimulazione {
+    margin: 4px;
+}
+
+#pnlComandiGiri, #pnlComandiPCS {
+    margin-top: 40px;
+}
+
+#lblElencoPCS, #lblElencoGiri {
+    height: 23px;
+    margin-bottom: 3px;
+}
+
+#btnConferma {
+    width: 125px;
+}
+
+div#pnlInfo table.DetailFormSectionTable2Fixed {
+    margin: 6px;
+}

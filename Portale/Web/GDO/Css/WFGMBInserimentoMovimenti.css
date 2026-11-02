@@ -1,0 +1,91 @@
+﻿.imgMinus
+{
+    width: 48px;
+    height: 48px;
+}
+
+.imgPlus
+{
+    width: 48px;
+    height: 48px;
+}
+
+.PanelDati
+{
+    border: solid 1px #cacaca;
+    padding-top: 2px;
+    padding-bottom: 5px;
+}
+
+.pnlPrimoSoggetto
+{
+    border: solid 1px #cacaca;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+}
+
+.pnlSecondoSoggetto
+{
+    border: solid 1px #cacaca;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+}
+
+div.DettaglioBancali
+{
+    border: solid 1px #cacaca;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+}
+
+.DetailFormDescriptionCell.PrimoSoggetto
+{
+    text-align: left;
+}
+
+.cmbPrimoSoggetto
+{
+    height: 148px;
+}
+/*
+    
+    */
+.DettaglioBancaliContent
+{
+    margin-top: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.noBorderTable.DettaglioBancaliTable
+{
+    width: calc(100% + 2px);
+    margin-left: -1px;
+}
+
+.DettaglioBancaliTable .Intestazione
+{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.DettaglioBancaliTable tr
+{
+    border: solid 1px #cacaca;
+}
+
+    .DettaglioBancaliTable tr td
+    {
+        border: solid 1px #cacaca;
+        padding: 1px;
+        padding-left: 4px;
+    }
+
+.DetailFormSectionTable2Fixed.DetailFormSectionTable2FixedTitle
+{
+    margin-bottom: 5px;
+}
