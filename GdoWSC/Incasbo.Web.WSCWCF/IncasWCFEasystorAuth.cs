@@ -9,7 +9,7 @@ public abstract class IncasWCFEasystorAuth : IncasWCFStandardAuth
 	public IncasWCFEasystorAuth()
 	{
 		_EmbeddedUser = "ES";
-		_EmbeddedPassword = "74incasbo04";
+		_EmbeddedPassword = Incasbo.Web.WSCWCF.TechnicalUsers.InternalPassword; // prima: password fissa nel codice
 	}
 
 	protected FXRETURN AutenticazioneUtente(ref string rsmess)

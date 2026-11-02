@@ -191,7 +191,7 @@ public abstract class IncasWCF : IDisposable
 	public IncasWCF()
 	{
 		_EmbeddedUser = "EU_INCAS";
-		_EmbeddedPassword = "74incasbo04";
+		_EmbeddedPassword = Incasbo.Web.WSCWCF.TechnicalUsers.InternalPassword; // prima: password fissa nel codice
 		_iErrFileMaxLength = 10485760;
 		_iLogFileMaxLength = 10485760;
 		_ServiceInitialized = false;
