@@ -13,6 +13,7 @@ namespace Delsy.Tests;
 /// Esegue il motore tariffe originale contro un database Delsy di prova
 /// (Tests/DatabaseDiProva). Si attiva impostando DELSY_TEST_DB con la stringa di connessione.
 /// </summary>
+[Collection("DatabaseDiProva")]
 public class MotoreTariffeIntegrazioneTests
 {
     private readonly ITestOutputHelper _out;

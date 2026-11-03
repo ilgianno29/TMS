@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 namespace Delsy.Tests;
 
 /// <summary>«Perché questo costo?» contro il database di prova (DELSY_TEST_DB).</summary>
+[Collection("DatabaseDiProva")]
 public class SpiegazioneIntegrazioneTests
 {
     private readonly ITestOutputHelper _out;
@@ -62,6 +63,7 @@ public class SpiegazioneIntegrazioneTests
     }
 }
 
+[Collection("DatabaseDiProva")]
 public class ListiniIntegrazioneTests
 {
     private static string? Cs => Environment.GetEnvironmentVariable("DELSY_TEST_DB");
