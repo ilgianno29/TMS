@@ -1,0 +1,69 @@
+@page "/listini"
+@attribute [Authorize]
+@inject ServizioListini Servizio
+
+<PageTitle>Listini vettori · Delsy</PageTitle>
+
+<div class="head">
+    <div>
+        <h1>Listini vettori</h1>
+        <p>Contratti passivi in vigore, come li usa il calcolo dei costi. Le modifiche passano da bozza e approvazione.</p>
+    </div>
+    <div class="actions">
+    <a class="btn primary" href="listini/nuovo">Nuovo listino</a>
+    <form method="get" class="search" role="search">
+        <input type="search" name="cerca" value="@Cerca" placeholder="Vettore o contratto" aria-label="Cerca vettore o contratto" />
+        <button class="btn" type="submit">Cerca</button>
+    </form>
+    </div>
+</div>
+
+<div class="tiles">
+    <div class="tile"><span class="k">Contratti</span><span class="v">@_contratti.Count</span><span class="s">passivi</span></div>
+    <div class="tile"><span class="k">Validi oggi</span><span class="v">@Conta("Valido")</span><span class="s">&nbsp;</span></div>
+    <div class="tile"><span class="k">In scadenza</span><span class="v">@Conta("In scadenza")</span><span class="s">entro 60 giorni</span></div>
+    <div class="tile"><span class="k">Bozze aperte</span><span class="v">@_contratti.Sum(c => c.BozzeAperte)</span><span class="s">da completare o approvare</span></div>
+</div>
+
+<section class="panel">
+    <div class="scroll">
+        <table>
+            <thead>
+                <tr><th>Contratto</th><th>Vettore</th><th>Validità</th><th>Stato</th><th class="num">Tariffe</th><th>Ultima modifica</th><th>Bozze</th></tr>
+            </thead>
+            <tbody>
+                @foreach (ContrattoListino c in Filtrati)
+                {
+                    string stato = c.StatoValidita(DateTime.Today);
+                    <tr>
+                        <td><a href="listini/@Uri.EscapeDataString(c.Codice)">@c.Codice</a><div class="muted small">@c.Descrizione</div></td>
+                        <td>@c.Trasportatore<div class="muted small">@c.NomeTrasportatore</div></td>
+                        <td class="nowrap">@Formato.Data(c.DataInizio) → @Formato.Data(c.DataFine)</td>
+                        <td><span class="pill @Formato.ClasseStato(stato)">@stato</span></td>
+                        <td class="num">@c.Tariffe</td>
+                        <td class="nowrap">@Formato.Data(c.UltimaModifica) <span class="muted small">@c.ModificatoDa</span></td>
+                        <td>@if (c.BozzeAperte > 0) { <a href="bozze" class="pill info">@(c.BozzeAperte == 1 ? "1 aperta" : $"{c.BozzeAperte} aperte")</a> }</td>
+                    </tr>
+                }
+                @if (!Filtrati.Any())
+                {
+                    <tr><td colspan="7" class="vuoto">Nessun contratto trovato.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@code {
+    [SupplyParameterFromQuery] private string? Cerca { get; set; }
+
+    private IReadOnlyList<ContrattoListino> _contratti = Array.Empty<ContrattoListino>();
+
+    protected override void OnInitialized() => _contratti = Servizio.Contratti();
+
+    private IEnumerable<ContrattoListino> Filtrati => string.IsNullOrWhiteSpace(Cerca)
+        ? _contratti
+        : _contratti.Where(c => $"{c.Codice} {c.Descrizione} {c.Trasportatore} {c.NomeTrasportatore}".Contains(Cerca.Trim(), StringComparison.OrdinalIgnoreCase));
+
+    private int Conta(string stato) => _contratti.Count(c => c.StatoValidita(DateTime.Today) == stato);
+}

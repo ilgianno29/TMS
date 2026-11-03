@@ -1,0 +1,23 @@
+@page "/Error"
+@layout EmptyLayout
+@using System.Diagnostics
+
+<PageTitle>Errore · Delsy Listini</PageTitle>
+
+<div class="login">
+    <h1>Si è verificato un errore</h1>
+    <p>La richiesta non è stata completata. Riprova; se il problema continua, comunica all'assistenza il codice qui sotto.</p>
+    @if (RequestId != null)
+    {
+        <p class="mono small">Codice: @RequestId</p>
+    }
+    <a class="btn" href="listini">Torna ai listini</a>
+</div>
+
+@code {
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+
+    private string? RequestId { get; set; }
+
+    protected override void OnInitialized() => RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+}

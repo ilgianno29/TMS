@@ -1,0 +1,98 @@
+@* Crea in un colpo le tariffe per il costo zero via Transit Point:
+   viaggio dallo stabilimento a prezzo concordato + spedizioni dal magazzino alle zone. *@
+
+<section class="panel cz-panel">
+    <div class="panel-head">
+        <h2>Costo zero guidato</h2>
+        <button class="btn small" type="button" @onclick="OnChiudi">Chiudi</button>
+    </div>
+    <div class="panel-body">
+        <p class="hint">Il viaggio dallo stabilimento al Transit Point ha un costo fisso concordato (spesso 0). Le spedizioni del viaggio
+            vengono poi tariffate una per una dal magazzino alla destinazione. Qui crei entrambe le parti; i prezzi delle spedizioni li inserisci poi nella griglia.</p>
+        <div class="cz-cards">
+            <div class="cz-card">
+                <div class="k">1 · Viaggio verso il Transit Point</div>
+                <div class="field"><label for="cz-st">Stabilimento di partenza</label><input id="cz-st" list="dl-PCSPartenza" @bind="_stabilimento" placeholder="es. STTMOSTO" /></div>
+                <div class="field"><label for="cz-ts">Tipo spedizione</label><input id="cz-ts" list="dl-TipoSpedizione" @bind="_tipoSpedizione" /></div>
+                <div class="field"><label for="cz-tm">Tipo mezzo</label><input id="cz-tm" list="dl-TipoMezzo" @bind="_tipoMezzo" /></div>
+                <div class="field"><label for="cz-imp">Nolo del viaggio (€, forfait)</label><CampoNumero id="cz-imp" Valore="_nolo" ValoreChanged="x => _nolo = x" /></div>
+            </div>
+            <div class="cz-card">
+                <div class="k">2 · Spedizioni dal magazzino</div>
+                <div class="field"><label for="cz-mg">Magazzino di partenza</label><input id="cz-mg" list="dl-PCSPartenza" @bind="_magazzino" placeholder="es. STDIECIMO" /></div>
+                <div class="field"><label for="cz-zone">Zone di arrivo (separate da virgola)</label><input id="cz-zone" @bind="_zone" placeholder="es. CORTI, TOLME, CROVI" /></div>
+                <div class="field"><label for="cz-base">Base di calcolo</label>
+                    <select id="cz-base" @bind="_base">@foreach (string c in Campi) { <option value="@c">@c</option> }</select></div>
+                <div class="field"><label for="cz-fasce">Fasce</label><input id="cz-fasce" @bind="_fasce" placeholder="0-5, 5-10, 10-20, 20-33" /></div>
+            </div>
+        </div>
+        @if (_errore != null) { <p class="avviso bad">@_errore</p> }
+        <div class="actions"><button class="btn primary" type="button" @onclick="Crea">Crea le tariffe</button></div>
+    </div>
+</section>
+
+@code {
+    [Parameter] public IReadOnlyList<string> Campi { get; set; } = Array.Empty<string>();
+    [Parameter] public string TipoSpedizioneCostoZero { get; set; } = "CZ";
+    [Parameter] public string TipoMezzoGenerico { get; set; } = "GEN";
+    [Parameter] public EventCallback<List<TariffaModificabile>> OnCrea { get; set; }
+    [Parameter] public EventCallback OnChiudi { get; set; }
+
+    private string? _stabilimento, _magazzino, _zone, _errore;
+    private string _tipoSpedizione = "", _tipoMezzo = "", _base = "Pallet", _fasce = "0-5, 5-10, 10-20, 20-33";
+    private decimal _nolo;
+
+    protected override void OnInitialized()
+    {
+        _tipoSpedizione = TipoSpedizioneCostoZero;
+        _tipoMezzo = TipoMezzoGenerico;
+        if (!Campi.Contains(_base, StringComparer.OrdinalIgnoreCase)) _base = Campi.FirstOrDefault() ?? "Pallet";
+    }
+
+    private async Task Crea()
+    {
+        _errore = null;
+        List<TariffaModificabile> nuove = new();
+        if (!string.IsNullOrWhiteSpace(_stabilimento))
+        {
+            TariffaModificabile v = new();
+            v.ImpostaCriterio("TipoDocumento", "VIAGGIO");
+            v.ImpostaCriterio("TipoSpedizione", _tipoSpedizione);
+            v.ImpostaCriterio("TipoMezzo", _tipoMezzo);
+            v.ImpostaCriterio("PCSPartenza", _stabilimento);
+            v.Voci.Add(new VoceModificabile { Voce = "NOLO", CampoCalcolo = VoceModificabile.Forfait, Fasce = { new() { Da = 0, A = VoceModificabile.SenzaLimite, Fisso = _nolo } } });
+            nuove.Add(v);
+        }
+        List<string> zone = (_zone ?? "").Split(new[] { ',', ';', ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+        if (zone.Count > 0)
+        {
+            if (string.IsNullOrWhiteSpace(_magazzino)) { _errore = "Indica il magazzino da cui partono le spedizioni."; return; }
+            List<FasciaModificabile>? fasce = LeggiFasce(_fasce);
+            if (fasce == null) { _errore = "Scrivi le fasce come «0-5, 5-10, 10-20»."; return; }
+            foreach (string z in zone)
+            {
+                TariffaModificabile s = new();
+                s.ImpostaCriterio("TipoDocumento", "SPEDIZIONE");
+                s.ImpostaCriterio("PCSPartenza", _magazzino);
+                s.ImpostaCriterio("ZonaArrivo", z);
+                s.Voci.Add(new VoceModificabile { Voce = "NOLO", CampoCalcolo = _base, Fasce = fasce.Select(f => f.Copia()).ToList() });
+                nuove.Add(s);
+            }
+        }
+        if (nuove.Count == 0) { _errore = "Indica almeno lo stabilimento o le zone di arrivo."; return; }
+        await OnCrea.InvokeAsync(nuove);
+    }
+
+    private static List<FasciaModificabile>? LeggiFasce(string testo)
+    {
+        List<FasciaModificabile> r = new();
+        foreach (string parte in testo.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            string[] ab = parte.Split('-', StringSplitOptions.TrimEntries);
+            if (ab.Length != 2 || !decimal.TryParse(ab[0].Replace(',', '.'), NumberStyles.Number, CultureInfo.InvariantCulture, out decimal a)
+                || !decimal.TryParse(ab[1].Replace(',', '.'), NumberStyles.Number, CultureInfo.InvariantCulture, out decimal b)) return null;
+            r.Add(new FasciaModificabile { Da = a, A = b });
+        }
+        return r.Count == 0 ? null : r;
+    }
+}

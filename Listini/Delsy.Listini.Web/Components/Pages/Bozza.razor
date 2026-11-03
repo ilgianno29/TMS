@@ -1,0 +1,564 @@
+@page "/bozze/{Id:int}"
+@attribute [Authorize]
+@rendermode InteractiveServer
+@inject ServizioBozze Bozze
+@inject ServizioAnagrafiche Anagrafiche
+@inject AuthenticationStateProvider Auth
+
+<PageTitle>@(_b?.Info.Codice ?? "Bozza") · Delsy</PageTitle>
+
+@if (_b == null)
+{
+    <div class="head"><div><div class="crumbs"><a href="bozze">Bozze</a></div><h1>@(_errore ?? "Caricamento…")</h1></div></div>
+    return;
+}
+
+<div class="head">
+    <div>
+        <div class="crumbs"><a href="bozze">Bozze e approvazioni</a> / @_b.Info.Codice</div>
+        <h1>@_l.Contratto.Codice <span class="pill @Delsy.Listini.Web.Components.Pages.Bozze.ClasseStato(_b.Info.Stato)">@StatiBozza.Etichetta(_b.Info.Stato)</span></h1>
+        <p>Bozza <b>@_b.Info.Codice</b> · @_b.Info.Titolo · @Delsy.Listini.Web.Components.Pages.Bozze.Origine(_b.Info.Origine) · creata da @_b.Info.CreataDa il @Formato.DataOra(_b.Info.CreataIl)
+            @if (_b.Info.ContrattoNuovo == null) { <text> · <a href="listini/@Uri.EscapeDataString(_l.Contratto.Codice)">listino in vigore</a></text> }</p>
+    </div>
+    @if (Modificabile)
+    {
+        <div class="actions">
+            <button class="btn" type="button" disabled="@(_nonSalvate.Count == 0)" @onclick="Salva">Salva bozza</button>
+            <button class="btn primary" type="button" disabled="@(!PuoInviare)" title="@MotivoNonInvio" @onclick="Invia">Invia in validazione</button>
+        </div>
+    }
+</div>
+
+@if (_messaggio != null) { <p class="avviso ok" role="status">@_messaggio</p> }
+@if (_errore != null) { <p class="avviso bad" role="alert">@_errore</p> }
+
+@if (_b.Info.Stato == StatiBozza.Validazione)
+{
+    <section class="panel decisione">
+        <div class="panel-head"><h2>Approvazione</h2><span class="muted small">inviata da @_b.Info.InviataDa il @Formato.DataOra(_b.Info.InviataIl ?? DateTime.Now)</span></div>
+        <div class="panel-body form-grid">
+            <p class="full">Controlla le <button class="link" type="button" @onclick='() => _scheda = "modifiche"'>@_b.Righe.Count modifiche</button> rispetto al listino in vigore.
+                Approvando, vengono scritte nel listino usato dal calcolo dei costi.</p>
+            @if (_b.Info.ContrattoNuovo == null)
+            {
+                <div class="field">
+                    <label for="dal">Applica dal</label>
+                    <input id="dal" type="date" @bind="_applicaDal" />
+                    <span class="muted small">Vuoto = subito. Con una data futura la bozza resta approvata e si applica da sola quel giorno.</span>
+                </div>
+            }
+            <div class="field full">
+                <label for="nota">Nota (obbligatoria per rifiutare)</label>
+                <textarea id="nota" rows="2" @bind="_nota"></textarea>
+            </div>
+            <div class="full actions">
+                <button class="btn primary" type="button" disabled="@(Errori > 0)" @onclick="Approva">Approva</button>
+                <button class="btn danger" type="button" @onclick="Rifiuta">Rifiuta</button>
+                <button class="btn" type="button" @onclick="RiportaInBozza">Riporta in bozza per modificarla</button>
+            </div>
+        </div>
+    </section>
+}
+else if (_b.Info.Stato == StatiBozza.Approvata)
+{
+    <p class="hint">Approvata da @_b.Info.DecisaDa il @Formato.DataOra(_b.Info.DecisaIl ?? DateTime.Now): verrà applicata al listino il <b>@Formato.Data(_b.Info.ApplicaDal)</b>.
+        <button class="btn small" type="button" @onclick="Annulla">Annulla</button></p>
+}
+else if (!Modificabile)
+{
+    <p class="hint">@StatiBozza.Etichetta(_b.Info.Stato) @(_b.Info.DecisaDa != null ? $"da {_b.Info.DecisaDa} il {Formato.DataOra(_b.Info.DecisaIl!.Value)}" : "")
+        @if (!string.IsNullOrWhiteSpace(_b.Info.NotaDecisione)) { <text> · «@_b.Info.NotaDecisione»</text> }</p>
+}
+
+<div class="tabs" role="tablist">
+    <button role="tab" aria-selected="@(_scheda == "tariffe")" @onclick='() => _scheda = "tariffe"'>Tariffe (@_l.Tariffe.Count)</button>
+    <button role="tab" aria-selected="@(_scheda == "contratto")" @onclick='() => _scheda = "contratto"'>Contratto</button>
+    <button role="tab" aria-selected="@(_scheda == "modifiche")" @onclick='() => _scheda = "modifiche"'>Modifiche (@_b.Righe.Count@(_nonSalvate.Count > 0 ? "+" : ""))</button>
+    <button role="tab" aria-selected="@(_scheda == "controlli")" @onclick='() => _scheda = "controlli"'>
+        Controlli @if (Errori > 0) { <span class="pill bad">@Errori</span> } else if (_problemi.Count > 0) { <span class="pill warn">@_problemi.Count</span> } else { <span class="pill ok">ok</span> }
+    </button>
+</div>
+
+@switch (_scheda)
+{
+    case "contratto":
+        <section class="panel">
+            <div class="panel-body form-grid">
+                <div class="field"><label>Codice</label><input value="@_l.Contratto.Codice" disabled /></div>
+                <div class="field"><label for="c-desc">Descrizione</label><input id="c-desc" @bind="_l.Contratto.Descrizione" @bind:after="Cambiato" disabled="@(!Modificabile)" /></div>
+                <div class="field"><label for="c-vet">Vettore</label>
+                    <select id="c-vet" @bind="_l.Contratto.Trasportatore" @bind:after="Cambiato" disabled="@(!Modificabile)">
+                        @foreach (VoceAnagrafica v in _vettori) { <option value="@v.Codice">@v.Codice · @v.Descrizione</option> }
+                    </select></div>
+                <div class="field"><label for="c-arr">Arrotondamento importi</label><CampoNumero id="c-arr" Valore="_l.Contratto.Arrotondamento" ValoreChanged="async x => { _l.Contratto.Arrotondamento = x; await Cambiato(); }" Disabilitato="!Modificabile" /></div>
+                <div class="field"><label for="c-dal">Valido dal</label><input id="c-dal" type="date" @bind="_l.Contratto.DataInizio" @bind:after="Cambiato" disabled="@(!Modificabile)" /></div>
+                <div class="field"><label for="c-al">Valido fino al</label><input id="c-al" type="date" @bind="_l.Contratto.DataFine" @bind:after="Cambiato" disabled="@(!Modificabile)" /></div>
+                <label class="check full"><input type="checkbox" @bind="_l.Contratto.Attivo" @bind:after="Cambiato" disabled="@(!Modificabile)" /> Contratto attivo</label>
+                @if (_l.ChiudiPrecedente is { } ch)
+                {
+                    <p class="hint full">All'approvazione il contratto <b>@ch.Codice</b> finirà il @Formato.Data(ch.NuovaDataFine) invece del @Formato.Data(ch.DataFineAttuale).
+                        @if (Modificabile) { <button class="btn small" type="button" @onclick="async () => { _l.ChiudiPrecedente = null; await Cambiato(); }">Non chiuderlo</button> }</p>
+                }
+            </div>
+        </section>
+        break;
+
+    case "modifiche":
+        <section class="panel">
+            <div class="panel-head"><h2>Modifiche rispetto al listino in vigore</h2><span class="muted small">salvate nella bozza</span></div>
+            <ul class="modifiche">
+                @foreach (RigaBozza r in _b.Righe)
+                {
+                    <li><span class="pill @(r.Operazione switch { "NUOVA" => "ok", "ELIMINA" => "bad", _ => "warn" })">@Operazione(r)</span> @r.Descrizione</li>
+                }
+                @if (_b.Righe.Count == 0) { <li class="muted">Nessuna modifica salvata.</li> }
+            </ul>
+            @if (_nonSalvate.Count > 0)
+            {
+                <div class="panel-head"><h2>Non ancora salvate</h2></div>
+                <ul class="modifiche">@foreach (string m in _nonSalvate) { <li>@m</li> }</ul>
+            }
+        </section>
+        break;
+
+    case "controlli":
+        <section class="panel">
+            <ul class="modifiche">
+                @foreach (Problema p in _problemi.OrderBy(p => p.Gravita))
+                {
+                    <li>
+                        <span class="pill @(p.Gravita == Gravita.Errore ? "bad" : "warn")">@(p.Gravita == Gravita.Errore ? "Errore" : "Avviso")</span>
+                        @if (p.Tariffa is Guid g) { <button class="link" type="button" @onclick="() => Apri(g)">@p.Messaggio</button> } else { @p.Messaggio }
+                    </li>
+                }
+                @if (_problemi.Count == 0) { <li class="muted">Nessun problema trovato.</li> }
+            </ul>
+        </section>
+        break;
+
+    default:
+        <div class="toolbar">
+            <select aria-label="Partenza" @bind="_fPartenza">
+                <option value="">Tutte le partenze</option>
+                @foreach (string p in _l.Tariffe.Select(t => t.Partenza).Distinct().Order()) { <option value="@p">@p</option> }
+            </select>
+            <select aria-label="Documento" @bind="_fDocumento">
+                <option value="">Viaggi e spedizioni</option>
+                @foreach (string d in _l.Tariffe.Select(t => t.Criterio("TipoDocumento")).Distinct().Order()) { <option value="@d">@Formato.Criterio(d)</option> }
+            </select>
+            <input type="search" placeholder="Cerca destinazione, mezzo, merce…" aria-label="Cerca" @bind="_fCerca" @bind:event="oninput" />
+            @if (Modificabile)
+            {
+                <span class="spacer"></span>
+                <button class="btn" type="button" @onclick="NuovaTariffa">+ Nuova tariffa</button>
+                <button class="btn" type="button" @onclick="() => _costoZero = !_costoZero">Costo zero guidato</button>
+            }
+        </div>
+
+        @if (_costoZero)
+        {
+            <CostoZeroGuidato Campi="_campi" TipoSpedizioneCostoZero="@_tipoCostoZero" TipoMezzoGenerico="@_mezzoGenerico" OnCrea="AggiungiCostoZero" OnChiudi="() => _costoZero = false" />
+        }
+
+        @foreach (Gruppo g in Gruppi())
+        {
+            <section class="panel gruppo">
+                <div class="panel-head">
+                    <div>
+                        <h2>@g.Titolo</h2>
+                        <span class="muted small">@g.Tariffe.Count @(g.Tariffe.Count == 1 ? "destinazione" : "destinazioni") con le stesse fasce</span>
+                    </div>
+                    @if (Modificabile && g.Voce != null && !g.Misto && !(g.Voce.Fasce.Count == 1 && g.Voce.Fasce[0].A >= VoceModificabile.SenzaLimite))
+                    {
+                        <button class="btn small" type="button" @onclick="() => _fasceInModifica = _fasceInModifica == g.Chiave ? null : g.Chiave">
+                            @(_fasceInModifica == g.Chiave ? "Fine modifica fasce" : "Modifica fasce del gruppo")</button>
+                    }
+                </div>
+                <div class="scroll">
+                    <table class="grid">
+                        <thead>
+                            <tr>
+                                <th>Partenza → destinazione</th>
+                                @if (g.Voce != null && !g.Misto)
+                                {
+                                    List<FasciaModificabile> modello = Ordinate(g.Voce);
+                                    for (int i = 0; i < modello.Count; i++)
+                                    {
+                                        int col = i;
+                                        <th class="num fascia-th">
+                                            @if (_fasceInModifica == g.Chiave)
+                                            {
+                                                <div class="fascia-edit">
+                                                    <CampoNumero Valore="modello[col].Da" ValoreChanged="x => ImpostaLimite(g, col, true, x)" Etichetta="Da" />
+                                                    <span>–</span>
+                                                    <CampoNumero Valore="modello[col].A" ValoreChanged="x => ImpostaLimite(g, col, false, x)" Etichetta="A" />
+                                                    <button class="link" type="button" title="Togli questa fascia a tutto il gruppo" @onclick="() => TogliColonna(g, col)">✕</button>
+                                                </div>
+                                            }
+                                            else { @Differenze.Intervallo(modello[col]) }
+                                        </th>
+                                    }
+                                    @if (_fasceInModifica == g.Chiave) { <th><button class="btn small" type="button" @onclick="() => AggiungiColonna(g)">+ Fascia</button></th> }
+                                }
+                                else
+                                {
+                                    <th>Prezzi</th>
+                                }
+                                <th>Altre voci</th>
+                                <th><span class="sr-only">Azioni</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (TariffaModificabile t in g.Tariffe)
+                            {
+                                <tr class="@ClasseRiga(t)">
+                                    <td class="zone">@(t.Destinazione == "Tutte" ? "Tutte le destinazioni" : t.Destinazione) <small>da @t.Partenza@Dettagli(t)</small></td>
+                                    @if (g.Voce != null && !g.Misto)
+                                    {
+                                        foreach (FasciaModificabile f in Ordinate(t.Voci[0]))
+                                        {
+                                            <td class="cell"><CampoNumero Valore="@(g.Fisso ? f.Fisso : f.Variabile)" Disabilitato="!Modificabile" Etichetta="@($"{t.Destinazione} {Differenze.Intervallo(f)}")"
+                                                ValoreChanged="async x => { if (g.Fisso) f.Fisso = x; else f.Variabile = x; await Cambiato(); }" /></td>
+                                        }
+                                        @if (_fasceInModifica == g.Chiave) { <td></td> }
+                                    }
+                                    else
+                                    {
+                                        <td class="small">@(t.Voci.Count == 0 ? "nessuna voce" : string.Join(", ", t.Voci[0].Fasce.OrderBy(f => f.Da).Select(f => $"{Differenze.Intervallo(f)}: {Differenze.Prezzo(f)}")))</td>
+                                    }
+                                    <td class="small">@string.Join(" · ", t.Voci.Skip(1).Select(v => v.Fasce.Count == 1 ? $"{v.Voce} {Differenze.Prezzo(v.Fasce[0])}" : $"{v.Voce} ({v.Fasce.Count} fasce)"))</td>
+                                    <td><div class="azioni">
+                                        <button class="link" type="button" @onclick="() => Apri(t.Chiave)">@(Modificabile ? "Modifica" : "Dettagli")</button>
+                                        @if (Modificabile)
+                                        {
+                                            <button class="link" type="button" @onclick="() => Duplica(t)">Duplica</button>
+                                            <button class="link danger" type="button" @onclick="() => Elimina(t)">Elimina</button>
+                                        }
+                                    </div></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Modificabile && g.Voce != null)
+                {
+                    <div class="aggiungi">
+                        <span class="muted small">Aggiungi destinazione con queste fasce:</span>
+                        <select aria-label="Tipo destinazione" @bind="_nuovaDestTipo">
+                            <option value="ZonaArrivo">Zona</option>
+                            <option value="MacroZonaArrivo">Macro zona</option>
+                            <option value="PCSArrivo">PCS arrivo</option>
+                            <option value="GruppoTariffarioArrivo">Gruppo tariffario</option>
+                        </select>
+                        <input list="dl-@_nuovaDestTipo" placeholder="Codice" aria-label="Codice destinazione" value="@(_nuovaDestGruppo == g.Chiave ? _nuovaDestCodice : "")"
+                               @onchange="e => { _nuovaDestGruppo = g.Chiave; _nuovaDestCodice = e.Value?.ToString(); }" />
+                        <button class="btn small" type="button" @onclick="() => AggiungiDestinazione(g)">Aggiungi</button>
+                    </div>
+                }
+            </section>
+        }
+        @if (!Gruppi().Any())
+        {
+            <p class="vuoto-box">@(_l.Tariffe.Count == 0 ? "Il listino non ha ancora tariffe: aggiungine una con «Nuova tariffa» o con «Costo zero guidato»." : "Nessuna tariffa con questi filtri.")</p>
+        }
+        break;
+}
+
+@if (_dettaglio is Guid chiave && _l.Tariffe.FirstOrDefault(t => t.Chiave == chiave) is { } td)
+{
+    <div class="drawer-sfondo" @onclick="() => _dettaglio = null"></div>
+    <DettaglioTariffa T="td" SolaLettura="!Modificabile" Voci="_voci" Campi="_campi" Problemi="_problemi.Where(p => p.Tariffa == chiave).ToList()"
+                      OnCambiato="Cambiato" OnChiudi="() => _dettaglio = null" />
+}
+
+@foreach ((string nome, _) in CriteriTariffa.Elenco.DistinctBy(e => e.Nome))
+{
+    <datalist id="dl-@nome">
+        @foreach (VoceAnagrafica v in _elenchi.GetValueOrDefault(nome) ?? new List<VoceAnagrafica>()) { <option value="@v.Codice">@v.Descrizione</option> }
+    </datalist>
+}
+
+@if (Modificabile && _nonSalvate.Count > 0)
+{
+    <div class="dirty-bar sticky">
+        <span>@_nonSalvate.Count @(_nonSalvate.Count == 1 ? "modifica non salvata" : "modifiche non salvate")</span>
+        <button class="btn primary small" type="button" @onclick="Salva">Salva bozza</button>
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    private BozzaAperta? _b;
+    private ListinoModificabile _l = new();
+    private ListinoModificabile _salvato = new();
+    private Anagrafiche _anagrafiche = new();
+    private List<Problema> _problemi = new();
+    private List<string> _nonSalvate = new();
+    private IReadOnlyList<VoceAnagrafica> _voci = Array.Empty<VoceAnagrafica>(), _vettori = Array.Empty<VoceAnagrafica>();
+    private IReadOnlyList<string> _campi = Array.Empty<string>();
+    private Dictionary<string, List<VoceAnagrafica>> _elenchi = new();
+    private HashSet<Guid> _cambiate = new();
+    private string _utente = "";
+    private string _tipoCostoZero = "CZ", _mezzoGenerico = "GEN";
+
+    private string _scheda = "tariffe";
+    private string _fPartenza = "", _fDocumento = "", _fCerca = "";
+    private Guid? _dettaglio;
+    private string? _fasceInModifica, _nuovaDestGruppo, _nuovaDestCodice;
+    private string _nuovaDestTipo = "ZonaArrivo";
+    private bool _costoZero;
+    private string? _messaggio, _errore, _nota;
+    private DateTime? _applicaDal;
+
+    private bool Modificabile => _b?.Info.Modificabile == true;
+    private int Errori => _problemi.Count(p => p.Gravita == Gravita.Errore);
+    private bool PuoInviare => MotivoNonInvio == null;
+    private string? MotivoNonInvio =>
+        _nonSalvate.Count > 0 ? "Salva prima le modifiche."
+        : Errori > 0 ? "Correggi prima gli errori (scheda Controlli)."
+        : _b?.Righe.Count == 0 ? "La bozza non contiene modifiche." : null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _utente = (await Auth.GetAuthenticationStateAsync()).User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+        _anagrafiche = Anagrafiche.PerControlli();
+        _voci = Anagrafiche.Voci();
+        _vettori = Anagrafiche.Vettori();
+        _campi = Anagrafiche.CampiCalcolo();
+        foreach ((string nome, _) in CriteriTariffa.Elenco) _elenchi[nome] = Anagrafiche.Elenco(nome).ToList();
+        _tipoCostoZero = _elenchi["TipoSpedizione"].FirstOrDefault(v => v.Descrizione.Contains("ZERO", StringComparison.OrdinalIgnoreCase))?.Codice ?? "CZ";
+        _mezzoGenerico = _elenchi["TipoMezzo"].FirstOrDefault(v => v.Descrizione.Contains("GENERIC", StringComparison.OrdinalIgnoreCase))?.Codice ?? "GEN";
+        Carica();
+    }
+
+    private void Carica()
+    {
+        try
+        {
+            _b = Bozze.Apri(Id);
+        }
+        catch (OperazioneBozzaException e)
+        {
+            _errore = e.Message;
+            return;
+        }
+        _l = _b.Listino.Copia();
+        _salvato = _b.Listino.Copia();
+        Ricalcola();
+    }
+
+    private Task Cambiato()
+    {
+        _messaggio = null;
+        Ricalcola();
+        return Task.CompletedTask;
+    }
+
+    private void Ricalcola()
+    {
+        _problemi = Controlli.Esegui(_l, _anagrafiche);
+        _nonSalvate = Differenze.Descrivi(_salvato, _l);
+        Dictionary<int, string> vigore = (_b?.InVigore?.Tariffe ?? new()).ToDictionary(t => t.IdTariffa!.Value, t => t.Canonico());
+        _cambiate = _l.Tariffe.Where(t => t.IdTariffa is not int id || !vigore.TryGetValue(id, out string? c) || c != t.Canonico()).Select(t => t.Chiave).ToHashSet();
+    }
+
+    private void Salva()
+    {
+        _errore = null;
+        try
+        {
+            Bozze.Salva(Id, _l.Copia(), _utente);
+            int n = _nonSalvate.Count;
+            Carica();
+            _messaggio = $"Bozza salvata ({n} {(n == 1 ? "modifica" : "modifiche")}). Il listino in vigore non cambia finché la bozza non viene approvata.";
+        }
+        catch (OperazioneBozzaException e) { _errore = e.Message; }
+    }
+
+    private void Esegui(Action azione, string messaggio)
+    {
+        _errore = null;
+        _messaggio = null;
+        try
+        {
+            azione();
+            Carica();
+            _messaggio = messaggio;
+        }
+        catch (Exception e) when (e is OperazioneBozzaException or ConflittoListinoException)
+        {
+            _errore = e.Message;
+            Carica();
+        }
+    }
+
+    private void Invia() => Esegui(() => Bozze.InviaInValidazione(Id, _utente), "Bozza inviata in validazione.");
+
+    private void RiportaInBozza() => Esegui(() => Bozze.RiportaInBozza(Id, _utente), "La bozza è di nuovo modificabile.");
+
+    private void Rifiuta() => Esegui(() => Bozze.Rifiuta(Id, _utente, _nota ?? ""), "Bozza rifiutata.");
+
+    private void Annulla() => Esegui(() => Bozze.Annulla(Id, _utente), "Bozza annullata.");
+
+    private void Approva()
+    {
+        string esito = "";
+        Esegui(() => esito = Bozze.Approva(Id, _utente, _nota, _applicaDal), "");
+        if (_errore == null)
+            _messaggio = esito == StatiBozza.Applicata
+                ? "Bozza approvata e applicata: da ora il calcolo dei costi usa i nuovi prezzi."
+                : $"Bozza approvata: verrà applicata il {Formato.Data(_applicaDal)}.";
+    }
+
+    // ---- griglia ----
+
+    private sealed record Gruppo(string Chiave, string Titolo, VoceModificabile? Voce, bool Fisso, bool Misto, List<TariffaModificabile> Tariffe);
+
+    private IEnumerable<TariffaModificabile> Visibili => _l.Tariffe
+        .Where(t => _fPartenza == "" || t.Partenza == _fPartenza)
+        .Where(t => _fDocumento == "" || t.Criterio("TipoDocumento") == _fDocumento)
+        .Where(t => string.IsNullOrWhiteSpace(_fCerca) || string.Join(" ", t.Criteri.Values).Contains(_fCerca.Trim(), StringComparison.OrdinalIgnoreCase));
+
+    private IEnumerable<Gruppo> Gruppi()
+    {
+        foreach (IGrouping<string, TariffaModificabile> g in Visibili.GroupBy(ChiaveGruppo))
+        {
+            TariffaModificabile primo = g.First();
+            string doc = Formato.Criterio(primo.Criterio("TipoDocumento"));
+            if (primo.Voci.Count == 0)
+            {
+                yield return new Gruppo(g.Key, $"{doc} · senza voci", null, false, true, g.ToList());
+                continue;
+            }
+            VoceModificabile v = primo.Voci[0];
+            string modo = Modo(v);
+            string base_ = v.CampoCalcolo.Equals(VoceModificabile.Forfait, StringComparison.OrdinalIgnoreCase) ? "forfait" : $"per {v.CampoCalcolo}";
+            string prezzo = modo switch { "fisso" => "importo fisso €", "variabile" => $"€ per unità ({v.CampoCalcolo})", _ => "prezzi misti: modifica dal dettaglio" };
+            yield return new Gruppo(g.Key, $"{doc} · {v.Voce} {base_} · {prezzo}", v, modo == "fisso", modo == "misto", g.ToList());
+        }
+    }
+
+    private static string ChiaveGruppo(TariffaModificabile t) =>
+        t.Voci.Count == 0 ? $"{t.Criterio("TipoDocumento")}|-" : $"{t.Criterio("TipoDocumento")}|{t.Voci[0].Voce}|{t.Voci[0].CampoCalcolo}|{t.Voci[0].SchemaFasce}|{Modo(t.Voci[0])}";
+
+    private static string Modo(VoceModificabile v)
+    {
+        if (v.Fasce.All(f => f.TuttoZero)) return v.CampoCalcolo.Equals(VoceModificabile.Forfait, StringComparison.OrdinalIgnoreCase) ? "fisso" : "variabile";
+        if (v.Fasce.All(f => f.Variabile == 0 && f.Percentuale == 0)) return "fisso";
+        if (v.Fasce.All(f => f.Fisso == 0 && f.Percentuale == 0)) return "variabile";
+        return "misto";
+    }
+
+    private static List<FasciaModificabile> Ordinate(VoceModificabile v) => v.Fasce.OrderBy(f => f.Da).ThenBy(f => f.A).ToList();
+
+    private string ClasseRiga(TariffaModificabile t) =>
+        (_problemi.Any(p => p.Tariffa == t.Chiave && p.Gravita == Gravita.Errore) ? "con-errori " : "") + (_cambiate.Contains(t.Chiave) ? "cambiata" : "");
+
+    private static string Dettagli(TariffaModificabile t)
+    {
+        List<string> d = new[] { ("TipoSpedizione", "sped."), ("TipoMezzo", "mezzo"), ("TipoMerce", "merce"), ("Cliente", "cliente") }
+            .Where(x => t.Criterio(x.Item1) != CriteriTariffa.Tutti).Select(x => $"{x.Item2} {t.Criterio(x.Item1)}").ToList();
+        return d.Count == 0 ? "" : " · " + string.Join(" · ", d);
+    }
+
+    private Task ImpostaLimite(Gruppo g, int colonna, bool inferiore, decimal valore)
+    {
+        foreach (TariffaModificabile t in g.Tariffe)
+        {
+            FasciaModificabile f = Ordinate(t.Voci[0])[colonna];
+            if (inferiore) f.Da = valore; else f.A = valore;
+        }
+        _fasceInModifica = ChiaveGruppo(g.Tariffe[0]);
+        return Cambiato();
+    }
+
+    private Task AggiungiColonna(Gruppo g)
+    {
+        foreach (TariffaModificabile t in g.Tariffe)
+        {
+            List<FasciaModificabile> f = Ordinate(t.Voci[0]);
+            decimal da = f.Count == 0 ? 0 : f[^1].A;
+            t.Voci[0].Fasce.Add(new FasciaModificabile { Da = da, A = da + 10 });
+        }
+        _fasceInModifica = ChiaveGruppo(g.Tariffe[0]);
+        return Cambiato();
+    }
+
+    private Task TogliColonna(Gruppo g, int colonna)
+    {
+        foreach (TariffaModificabile t in g.Tariffe) t.Voci[0].Fasce.Remove(Ordinate(t.Voci[0])[colonna]);
+        _fasceInModifica = ChiaveGruppo(g.Tariffe[0]);
+        return Cambiato();
+    }
+
+    private Task AggiungiDestinazione(Gruppo g)
+    {
+        if (_nuovaDestGruppo != g.Chiave || string.IsNullOrWhiteSpace(_nuovaDestCodice))
+        {
+            _errore = "Scrivi il codice della destinazione da aggiungere.";
+            return Task.CompletedTask;
+        }
+        _errore = null;
+        TariffaModificabile n = g.Tariffe[^1].CopiaComeNuova();
+        foreach (string c in new[] { "MacroZonaArrivo", "ZonaArrivo", "GruppoTariffarioArrivo", "PCSArrivo" }) n.ImpostaCriterio(c, null);
+        n.ImpostaCriterio(_nuovaDestTipo, _nuovaDestCodice);
+        n.Voci[0].Fasce.ForEach(f => { f.Fisso = 0; f.Variabile = 0; f.Percentuale = 0; });
+        _l.Tariffe.Insert(_l.Tariffe.IndexOf(g.Tariffe[^1]) + 1, n);
+        _nuovaDestCodice = null;
+        return Cambiato();
+    }
+
+    private Task NuovaTariffa()
+    {
+        TariffaModificabile t = new();
+        t.ImpostaCriterio("TipoDocumento", _fDocumento == "" ? "SPEDIZIONE" : _fDocumento);
+        if (_fPartenza != "" && _fPartenza != "Tutte") t.ImpostaCriterio("PCSPartenza", _fPartenza);
+        t.Voci.Add(new VoceModificabile
+        {
+            Voce = "NOLO", CampoCalcolo = _campi.FirstOrDefault(c => c.Equals("Pallet", StringComparison.OrdinalIgnoreCase)) ?? VoceModificabile.Forfait,
+            Fasce = { new() { Da = 0, A = 5 }, new() { Da = 5, A = 10 }, new() { Da = 10, A = 20 }, new() { Da = 20, A = 33 } }
+        });
+        _l.Tariffe.Add(t);
+        _dettaglio = t.Chiave;
+        return Cambiato();
+    }
+
+    private Task Duplica(TariffaModificabile t)
+    {
+        TariffaModificabile n = t.CopiaComeNuova();
+        _l.Tariffe.Insert(_l.Tariffe.IndexOf(t) + 1, n);
+        _dettaglio = n.Chiave;
+        return Cambiato();
+    }
+
+    private Task Elimina(TariffaModificabile t)
+    {
+        _l.Tariffe.Remove(t);
+        if (_dettaglio == t.Chiave) _dettaglio = null;
+        return Cambiato();
+    }
+
+    private Task AggiungiCostoZero(List<TariffaModificabile> nuove)
+    {
+        HashSet<string> esistenti = _l.Tariffe.Select(t => t.ChiaveCriteri).ToHashSet();
+        List<TariffaModificabile> aggiunte = nuove.Where(n => esistenti.Add(n.ChiaveCriteri)).ToList();
+        _l.Tariffe.AddRange(aggiunte);
+        _costoZero = false;
+        _messaggio = $"Create {aggiunte.Count} tariffe" + (aggiunte.Count < nuove.Count ? $" ({nuove.Count - aggiunte.Count} esistevano già)" : "") + ". Inserisci i prezzi delle spedizioni e salva.";
+        Ricalcola();
+        return Task.CompletedTask;
+    }
+
+    private void Apri(Guid chiave)
+    {
+        _scheda = "tariffe";
+        _dettaglio = chiave;
+    }
+
+    private static string Operazione(RigaBozza r) => (r.Oggetto, r.Operazione) switch
+    {
+        ("CONTRATTO", "NUOVA") => "Nuovo contratto", ("CONTRATTO", _) => "Contratto",
+        (_, "NUOVA") => "Aggiunta", (_, "ELIMINA") => "Tolta", _ => "Modificata"
+    };
+}

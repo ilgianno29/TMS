@@ -1,0 +1,90 @@
+@page "/bozze"
+@attribute [Authorize]
+@inject ServizioBozze Servizio
+
+<PageTitle>Bozze e approvazioni · Delsy</PageTitle>
+
+<div class="head">
+    <div>
+        <h1>Bozze e approvazioni</h1>
+        <p>Le modifiche ai listini restano qui finché non vengono approvate. Chi crea una bozza può anche approvarla.</p>
+    </div>
+    <div class="actions"><a class="btn primary" href="listini/nuovo">Nuovo listino</a></div>
+</div>
+
+<nav class="tabs-link" aria-label="Filtra per stato">
+    @foreach ((string chiave, string etichetta) in Schede)
+    {
+        <a href="bozze?stato=@chiave" aria-current="@(chiave == Scheda ? "page" : null)">@etichetta <span class="conta">@Conta(chiave)</span></a>
+    }
+</nav>
+
+<section class="panel">
+    <div class="scroll">
+        <table>
+            <thead><tr><th>Bozza</th><th>Listino</th><th>Origine</th><th>Stato</th><th class="num">Modifiche</th><th>Creata</th><th>Ultimo passaggio</th></tr></thead>
+            <tbody>
+                @foreach (InfoBozza b in Filtrate)
+                {
+                    <tr>
+                        <td><a href="bozze/@b.IdBozza" class="mono">@b.Codice</a></td>
+                        <td><b>@b.CodiceContratto</b> @if (b.ContrattoNuovo != null) { <span class="pill info">nuovo</span> }<div class="muted small">@b.Titolo</div></td>
+                        <td>@Origine(b.Origine)</td>
+                        <td><span class="pill @ClasseStato(b.Stato)">@StatiBozza.Etichetta(b.Stato)</span>
+                            @if (b.Stato == StatiBozza.Approvata && b.ApplicaDal != null) { <div class="muted small">dal @Formato.Data(b.ApplicaDal)</div> }</td>
+                        <td class="num">@b.Righe</td>
+                        <td class="nowrap">@Formato.DataOra(b.CreataIl) <span class="muted small">@b.CreataDa</span></td>
+                        <td class="small">@UltimoPassaggio(b)</td>
+                    </tr>
+                }
+                @if (!Filtrate.Any())
+                {
+                    <tr><td colspan="7" class="vuoto">Nessuna bozza in questo stato.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@code {
+    [SupplyParameterFromQuery] private string? Stato { get; set; }
+
+    private static readonly (string, string)[] Schede =
+    {
+        ("aperte", "Aperte"), (StatiBozza.Validazione, "Da approvare"), (StatiBozza.Approvata, "In attesa di data"), ("chiuse", "Chiuse")
+    };
+
+    private IReadOnlyList<InfoBozza> _tutte = Array.Empty<InfoBozza>();
+
+    private string Scheda => Schede.Any(s => s.Item1 == Stato) ? Stato! : "aperte";
+
+    protected override void OnInitialized() => _tutte = Servizio.Elenco();
+
+    private IEnumerable<InfoBozza> DiScheda(string scheda) => scheda switch
+    {
+        "aperte" => _tutte.Where(b => StatiBozza.Aperti.Contains(b.Stato)),
+        "chiuse" => _tutte.Where(b => !StatiBozza.Aperti.Contains(b.Stato)),
+        _ => _tutte.Where(b => b.Stato == scheda)
+    };
+
+    private IEnumerable<InfoBozza> Filtrate => DiScheda(Scheda);
+
+    private int Conta(string scheda) => DiScheda(scheda).Count();
+
+    public static string ClasseStato(string stato) => stato switch
+    {
+        StatiBozza.Bozza => "lock", StatiBozza.Validazione => "warn", StatiBozza.Approvata => "info",
+        StatiBozza.Applicata => "ok", _ => "bad"
+    };
+
+    public static string Origine(string o) => o switch
+    {
+        "MANUALE" => "Inserimento manuale", "TEMPLATE" => "Template Excel", "FILE_VETTORE" => "File del vettore", "RINNOVO" => "Rinnovo", _ => o
+    };
+
+    private static string UltimoPassaggio(InfoBozza b) =>
+        b.ApplicataIl != null ? $"applicata il {Formato.DataOra(b.ApplicataIl.Value)}"
+        : b.DecisaIl != null ? $"{StatiBozza.Etichetta(b.Stato).ToLowerInvariant()} da {b.DecisaDa} il {Formato.DataOra(b.DecisaIl.Value)}"
+        : b.InviataIl != null ? $"inviata da {b.InviataDa} il {Formato.DataOra(b.InviataIl.Value)}"
+        : "";
+}

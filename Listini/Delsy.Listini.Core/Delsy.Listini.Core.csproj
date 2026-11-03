@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Logica del modulo Listini: accesso al motore tariffe Delsy, bozze, registro. Nessuna interfaccia. -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Delsy.Listini</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../GdoApi/GdoApi.csproj" />
+    <ProjectReference Include="../../GdoParamsDefault/GdoParamsDefault.csproj" />
+  </ItemGroup>
+</Project>

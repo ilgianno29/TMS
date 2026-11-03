@@ -194,3 +194,49 @@ Dopo la conversione completa, le password non sono più recuperabili: un utente 
 1. `Database/2026-11_02_autologin_token.sql`.
 2. Per ogni totem: `DelsyPassword autologin-crea --connessione "..." --utente TOTEM --descrizione "Totem 1" --url http://server/WFI/Form/WFIAutoLogin.aspx`
    e aggiornare l'indirizzo nella pagina del totem (`Autologin.htm`, `Autologin2.htm`).
+
+## Listini – modulo web per listini vettori e costi viaggio (`Listini/`)
+
+Nuova applicazione .NET 8 (Blazor) che lavora sullo **stesso database** e usa lo **stesso motore tariffe** di Delsy
+(`GdoApi`, `Incasbo.Api.Gdo.Tariffe`): i costi che mostra sono quelli che calcolerebbe Delsy.
+
+- `Delsy.Listini.Core` – logica senza interfaccia:
+  - `Motore/MotoreTariffe` apre il contesto applicativo Delsy (connessione, parametri, log) per eseguire il motore;
+  - `Spiegazione/ServizioSpiegazione` – «Perché questo costo?»: per un viaggio (e per le spedizioni che passano da un
+    corrispondente/Transit Point) mostra dati usati, contratto scelto e perché, tariffa applicata criterio per criterio
+    oppure, se non ne trova, le tariffe più vicine e il criterio che non torna. Gli importi vengono dal motore in
+    **simulazione**: non viene salvato nulla;
+  - `Listini/ServizioListini` – contratti passivi, testate, voci e fasce in vigore;
+  - `Registro/RegistroListini` – registro modifiche (`TAR_Registro`), solo inserimento;
+  - `Accesso/ServizioAccesso` – accesso con gli utenti del portale (`WFI_UTENTI`), stesse regole password (hash, conversione al primo accesso).
+  - `Bozze/` – modifiche ai listini in bozza: `ListinoModificabile` (contratto, tariffe, voci, fasce diverse per ogni zona),
+    `Differenze` (in `TAR_BozzeRighe` solo le modifiche, con dati prima/dopo e descrizione leggibile), `Controlli`
+    (codici inesistenti, tariffe doppie, fasce sovrapposte o con buchi, prezzi a zero), `ServizioBozze`
+    (nuova modifica, nuovo contratto, rinnovo, salvataggio, invio, approvazione subito o a data futura, rifiuto con motivo,
+    annullamento). All'approvazione verifica che il listino non sia cambiato nel frattempo e scrive nelle tabelle del motore
+    con i contatori di Delsy (`COUNTERS.TRA.TARIFFEPASSIVE.*`), nella stessa transazione del registro.
+- `Delsy.Listini.Web` – interfaccia: accesso, *Listini vettori* (nuovo listino, modifica, rinnovo), dettaglio contratto,
+  *Bozze e approvazioni* con l'editor a griglia (righe raggruppate per fasce, fasce personalizzabili per destinazione,
+  dettaglio tariffa, costo zero guidato), *Perché questo costo?*, *Registro modifiche*. Ogni ora applica le bozze approvate
+  con data di applicazione raggiunta (`AttivazioneListini`).
+
+Database: eseguire `Database/2026-11_03_listini_bozze_registro.sql` (tabelle `TAR_Bozze`, `TAR_BozzeRighe`, `TAR_Registro`;
+il registro rifiuta modifiche e cancellazioni). Ripetibile.
+
+Configurazione (`appsettings.json`): la stringa di connessione **non** va nel repository; impostarla in
+`appsettings.Production.json` sul server, oppure con la variabile d'ambiente `ConnectionStrings__Delsy`.
+`Listini:CryptographyEnable` deve avere lo stesso valore di `LoginManager/CryptographyEnable` del portale.
+Su IIS si pubblica come GdoWSC.Host (ASP.NET Core Module, pool senza codice gestito).
+
+Prova in locale con il database di prova (`Tests/DatabaseDiProva`, vedi sotto):
+
+```
+cd Listini/Delsy.Listini.Web
+ConnectionStrings__Delsy="Server=localhost,14330;Database=DELSYLOG91_LUCART;User ID=sa;Password=Delsy!Prova2026;TrustServerCertificate=True" dotnet run
+```
+
+### Database di prova
+
+`python3 Tests/DatabaseDiProva/prepara_database.py` crea in Docker un SQL Server con lo schema Delsy e dati di esempio
+(contratti BENNATO e TROSSI, costo zero via Transit Point TPBELLUNO). I test di integrazione si attivano con la
+variabile `DELSY_TEST_DB` (stessa stringa di connessione); senza, vengono saltati.

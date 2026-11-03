@@ -1,0 +1,36 @@
+@* Numero all'italiana (virgola decimale), accetta anche il punto. Mostra senza zeri inutili. *@
+<input type="text" inputmode="decimal" size="7" class="@Classe" value="@Testo" disabled="@Disabilitato" aria-label="@Etichetta"
+       @onchange="Cambia" @attributes="Altri" />
+
+@code {
+    private static readonly CultureInfo It = CultureInfo.GetCultureInfo("it-IT");
+
+    [Parameter] public decimal Valore { get; set; }
+    [Parameter] public EventCallback<decimal> ValoreChanged { get; set; }
+    [Parameter] public bool Disabilitato { get; set; }
+    [Parameter] public string? Etichetta { get; set; }
+    [Parameter] public string? Classe { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object>? Altri { get; set; }
+
+    private string Testo => Valore >= Delsy.Listini.Bozze.VoceModificabile.SenzaLimite ? "∞" : Valore.ToString("#,##0.#####", It);
+
+    private async Task Cambia(ChangeEventArgs e)
+    {
+        string s = (e.Value?.ToString() ?? "").Trim().Replace(" ", "").Replace("€", "");
+        decimal v;
+        if (s is "∞" or "oltre") v = Delsy.Listini.Bozze.VoceModificabile.SenzaLimite;
+        else if (s == "") v = 0;
+        else
+        {
+            // "1.234,5" o "1234,5" (italiano) oppure "1234.5"
+            if (s.Contains(',')) s = s.Replace(".", "").Replace(',', '.');
+            if (!decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out v))
+            {
+                StateHasChanged();
+                return;
+            }
+        }
+        Valore = v;
+        await ValoreChanged.InvokeAsync(v);
+    }
+}

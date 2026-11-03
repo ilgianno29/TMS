@@ -1,0 +1,10 @@
+<tr class="@(K.Corrisponde ? (K.Qualsiasi ? "generico" : "") : "no")">
+    <td>@K.Etichetta</td>
+    <td>@(K.ValoreDocumento == "" ? "—" : Formato.Criterio(K.ValoreDocumento))</td>
+    <td>@Formato.Criterio(K.ValoreTariffa)</td>
+    <td>@(K.Corrisponde ? (K.Qualsiasi ? "qualsiasi" : "✓") : "✗")</td>
+</tr>
+
+@code {
+    [Parameter, EditorRequired] public Criterio K { get; set; } = default!;
+}

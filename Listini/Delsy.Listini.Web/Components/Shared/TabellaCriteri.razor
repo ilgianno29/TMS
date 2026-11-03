@@ -1,0 +1,32 @@
+@* Criteri della tariffa a confronto con il documento: prima quelli che decidono, poi (ripiegati) quelli validi per qualsiasi valore *@
+<div class="scroll">
+    <table class="criteri">
+        <thead><tr><th>Criterio</th><th>Documento</th><th>Tariffa</th><th><span class="sr-only">Esito</span></th></tr></thead>
+        <tbody>
+            @foreach (Criterio k in Confronto.Criteri.Where(k => !k.Qualsiasi || !k.Corrisponde))
+            {
+                <Riga K="k" />
+            }
+        </tbody>
+    </table>
+</div>
+@if (Generici.Count > 0)
+{
+    <details class="generici">
+        <summary>@Generici.Count criteri validi per qualsiasi valore</summary>
+        <table class="criteri">
+            <tbody>
+                @foreach (Criterio k in Generici)
+                {
+                    <Riga K="k" />
+                }
+            </tbody>
+        </table>
+    </details>
+}
+
+@code {
+    [Parameter, EditorRequired] public ConfrontoTariffa Confronto { get; set; } = default!;
+
+    private List<Criterio> Generici => Confronto.Criteri.Where(k => k.Qualsiasi && k.Corrisponde).ToList();
+}

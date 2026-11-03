@@ -1,0 +1,72 @@
+@page "/costo"
+@page "/costo/{Viaggio}"
+@attribute [Authorize]
+@inject ServizioSpiegazione Spiegazioni
+
+<PageTitle>Perché questo costo? · Delsy</PageTitle>
+
+<div class="head">
+    <div>
+        <h1>Perché questo costo?</h1>
+        <p>Inserisci un viaggio: vedi quale contratto e quale tariffa usa il calcolo, criterio per criterio, e come arriva all'importo.
+           Il calcolo è una simulazione con il motore di Delsy: non modifica i costi salvati.</p>
+    </div>
+    <form method="get" action="costo" class="search" role="search">
+        <input type="search" name="viaggio" value="@Codice" placeholder="Numero viaggio" aria-label="Numero viaggio" inputmode="numeric" />
+        <button class="btn primary" type="submit">Spiega</button>
+    </form>
+</div>
+
+@if (_errore != null)
+{
+    <p class="avviso bad">@_errore</p>
+}
+else if (_s != null)
+{
+    <div class="tiles">
+        <div class="tile"><span class="k">Totale costo</span><span class="v">@Formato.Euro(_s.Totale)</span><span class="s">viaggio + spedizioni</span></div>
+        <div class="tile"><span class="k">Viaggio</span><span class="v">@Formato.Euro(_s.Viaggio.Totale)</span><span class="s">tipo @_s.TipoViaggio</span></div>
+        <div class="tile"><span class="k">Spedizioni tariffate</span><span class="v">@_s.Spedizioni.Count</span><span class="s">tramite corrispondente</span></div>
+        <div class="tile"><span class="k">Esito</span><span class="v">@(Completo ? "Completo" : "Da verificare")</span><span class="s">@(Problemi == 1 ? "1 documento senza costo" : $"{Problemi} documenti senza costo")</span></div>
+    </div>
+    @if (_s.Spedizioni.Count > 0)
+    {
+        <p class="hint">Le spedizioni che passano da un corrispondente (es. Transit Point) sono tariffate a parte con il contratto del trasportatore del corrispondente;
+            il tratto fino al corrispondente è coperto dalla tariffa del viaggio (con tipo spedizione «costo zero» di solito vale 0).</p>
+    }
+    <SchedaDocumento D="_s.Viaggio" />
+    @foreach (SpiegazioneDocumento sp in _s.Spedizioni)
+    {
+        <SchedaDocumento D="sp" />
+    }
+}
+
+@code {
+    [Parameter] public string? Viaggio { get; set; }
+    [SupplyParameterFromQuery(Name = "viaggio")] private string? ViaggioQuery { get; set; }
+
+    private string? Codice => string.IsNullOrWhiteSpace(ViaggioQuery) ? Viaggio : ViaggioQuery.Trim();
+    private SpiegazioneViaggio? _s;
+    private string? _errore;
+
+    private int Problemi => _s == null ? 0 : new[] { _s.Viaggio }.Concat(_s.Spedizioni).Count(d => !d.Calcolato);
+    private bool Completo => Problemi == 0;
+
+    protected override void OnParametersSet()
+    {
+        _s = null;
+        _errore = null;
+        if (string.IsNullOrWhiteSpace(Codice))
+        {
+            return;
+        }
+        try
+        {
+            _s = Spiegazioni.SpiegaViaggio(Codice);
+        }
+        catch (KeyNotFoundException e)
+        {
+            _errore = e.Message;
+        }
+    }
+}

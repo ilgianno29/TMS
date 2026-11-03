@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
@@ -18,5 +19,6 @@
     <ProjectReference Include="../../WMSApi/WMSApi.csproj" />
     <ProjectReference Include="../../GdoApi/GdoApi.csproj" />
     <ProjectReference Include="../../GdoWSC.Host/GdoWSC.Host.csproj" />
+    <ProjectReference Include="../../Listini/Delsy.Listini.Core/Delsy.Listini.Core.csproj" />
   </ItemGroup>
 </Project>

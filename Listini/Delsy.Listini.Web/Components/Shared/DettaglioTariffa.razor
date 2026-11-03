@@ -1,0 +1,137 @@
+@* Tutti i dati di una tariffa: criteri, voci e fasce (anche personalizzate per questa sola destinazione). *@
+
+<aside class="drawer" aria-label="Dettaglio tariffa">
+    <div class="drawer-head">
+        <div>
+            <h2>@T.Etichetta</h2>
+            <p class="muted small">@(T.IdTariffa is int id ? $"Tariffa {id}" : "Tariffa nuova") · i campi vuoti valgono per «Tutti»</p>
+        </div>
+        <button class="btn small" type="button" @onclick="OnChiudi">Chiudi</button>
+    </div>
+
+    <div class="drawer-body">
+        <h3>A cosa si applica</h3>
+        <div class="criteri-grid">
+            @foreach ((string nome, string etichetta) in CriteriTariffa.Elenco)
+            {
+                string valore = T.Criterio(nome);
+                <div class="field">
+                    <label for="cr-@nome">@etichetta</label>
+                    <input id="cr-@nome" list="dl-@nome" value="@(valore == CriteriTariffa.Tutti ? "" : valore)" placeholder="Tutti" disabled="@SolaLettura"
+                           @onchange="e => CambiaCriterio(nome, e.Value?.ToString())" />
+                </div>
+            }
+        </div>
+
+        @foreach (VoceModificabile v in T.Voci)
+        {
+            <section class="voce-box">
+                <div class="voce-head">
+                    <div class="field">
+                        <label>Voce</label>
+                        <select value="@v.Voce" disabled="@SolaLettura" @onchange="async e => { v.Voce = e.Value?.ToString() ?? v.Voce; await Cambiato(); }">
+                            @if (!Voci.Any(x => x.Codice.Equals(v.Voce, StringComparison.OrdinalIgnoreCase))) { <option value="@v.Voce">@v.Voce (non valida)</option> }
+                            @foreach (VoceAnagrafica a in Voci) { <option value="@a.Codice">@a.Codice · @a.Descrizione</option> }
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Base di calcolo</label>
+                        <select value="@v.CampoCalcolo" disabled="@SolaLettura" @onchange="async e => { v.CampoCalcolo = e.Value?.ToString() ?? v.CampoCalcolo; await Cambiato(); }">
+                            @if (!Campi.Any(x => x.Equals(v.CampoCalcolo, StringComparison.OrdinalIgnoreCase))) { <option value="@v.CampoCalcolo">@v.CampoCalcolo</option> }
+                            @foreach (string c in Campi) { <option value="@c">@c</option> }
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Fasce</label>
+                        <select value="@v.Eccedenza" disabled="@SolaLettura" @onchange="e => CambiaEccedenza(v, e)">
+                            <option value="N">Prezzo della fascia raggiunta</option>
+                            <option value="S">A scaglioni (ogni fascia per la sua parte)</option>
+                        </select>
+                    </div>
+                    @if (!SolaLettura)
+                    {
+                        <button class="btn small danger" type="button" @onclick="async () => { T.Voci.Remove(v); await Cambiato(); }">Togli voce</button>
+                    }
+                </div>
+                <div class="scroll">
+                    <table class="grid fasce">
+                        <thead><tr><th class="num">Da</th><th class="num">A</th><th class="num">Fisso €</th><th class="num">€ per unità</th><th class="num">%</th><th></th></tr></thead>
+                        <tbody>
+                            @foreach (FasciaModificabile f in v.Fasce.OrderBy(x => x.Da).ToList())
+                            {
+                                <tr>
+                                    <td class="cell"><CampoNumero Valore="f.Da" ValoreChanged="async x => { f.Da = x; await Cambiato(); }" Disabilitato="SolaLettura" Etichetta="Da" /></td>
+                                    <td class="cell"><CampoNumero Valore="f.A" ValoreChanged="async x => { f.A = x; await Cambiato(); }" Disabilitato="SolaLettura" Etichetta="A" /></td>
+                                    <td class="cell"><CampoNumero Valore="f.Fisso" ValoreChanged="async x => { f.Fisso = x; await Cambiato(); }" Disabilitato="SolaLettura" Etichetta="Fisso" /></td>
+                                    <td class="cell"><CampoNumero Valore="f.Variabile" ValoreChanged="async x => { f.Variabile = x; await Cambiato(); }" Disabilitato="SolaLettura" Etichetta="Per unità" /></td>
+                                    <td class="cell"><CampoNumero Valore="f.Percentuale" ValoreChanged="async x => { f.Percentuale = x; await Cambiato(); }" Disabilitato="SolaLettura" Etichetta="Percentuale" /></td>
+                                    <td>@if (!SolaLettura) { <button class="link" type="button" title="Togli fascia" @onclick="async () => { v.Fasce.Remove(f); await Cambiato(); }">✕</button> }</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (!SolaLettura)
+                {
+                    <button class="btn small" type="button" @onclick="async () => { AggiungiFascia(v); await Cambiato(); }">+ Fascia</button>
+                }
+            </section>
+        }
+        @if (!SolaLettura)
+        {
+            <button class="btn" type="button" @onclick="AggiungiVoce">+ Aggiungi voce</button>
+        }
+
+        @if (Problemi.Count > 0)
+        {
+            <h3>Da sistemare</h3>
+            @foreach (Problema p in Problemi)
+            {
+                <p class="avviso @(p.Gravita == Gravita.Errore ? "bad" : "warn")">@p.Messaggio</p>
+            }
+        }
+    </div>
+</aside>
+
+@code {
+    [Parameter, EditorRequired] public TariffaModificabile T { get; set; } = default!;
+    [Parameter] public bool SolaLettura { get; set; }
+    [Parameter] public IReadOnlyList<VoceAnagrafica> Voci { get; set; } = Array.Empty<VoceAnagrafica>();
+    [Parameter] public IReadOnlyList<string> Campi { get; set; } = Array.Empty<string>();
+    [Parameter] public IReadOnlyList<Problema> Problemi { get; set; } = Array.Empty<Problema>();
+    [Parameter] public EventCallback OnCambiato { get; set; }
+    [Parameter] public EventCallback OnChiudi { get; set; }
+
+    private Task Cambiato() => OnCambiato.InvokeAsync();
+
+    private async Task CambiaCriterio(string nome, string? valore)
+    {
+        T.ImpostaCriterio(nome, valore);
+        await Cambiato();
+    }
+
+    private Task CambiaEccedenza(VoceModificabile v, ChangeEventArgs e)
+    {
+        v.Eccedenza = e.Value?.ToString() ?? "N";
+        return Cambiato();
+    }
+
+    private Task AggiungiVoce()
+    {
+        T.Voci.Add(new VoceModificabile
+        {
+            Voce = Voci.FirstOrDefault(v => !T.Voci.Any(x => x.Voce == v.Codice))?.Codice ?? "NOLO",
+            CampoCalcolo = VoceModificabile.Forfait,
+            Fasce = { new() { Da = 0, A = VoceModificabile.SenzaLimite } }
+        });
+        return Cambiato();
+    }
+
+    private static void AggiungiFascia(VoceModificabile v)
+    {
+        FasciaModificabile? ultima = v.Fasce.OrderBy(f => f.Da).LastOrDefault();
+        decimal da = ultima == null ? 0 : ultima.A >= VoceModificabile.SenzaLimite ? ultima.Da + 10 : ultima.A;
+        if (ultima != null && ultima.A >= VoceModificabile.SenzaLimite) ultima.A = da;
+        v.Fasce.Add(new FasciaModificabile { Da = da, A = da + 10 });
+    }
+}

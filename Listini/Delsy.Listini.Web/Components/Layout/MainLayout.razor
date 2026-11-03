@@ -1,0 +1,60 @@
+@inherits LayoutComponentBase
+@inject ServizioBozze Bozze
+
+<div class="shell">
+    <aside class="side">
+        <div class="brand">
+            <div class="brand-mark" aria-hidden="true">D</div>
+            <div><b>Delsy</b><small>Listini e costi</small></div>
+        </div>
+        <nav class="menu" aria-label="Sezioni">
+            <NavLink href="listini">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10" /></svg>
+                Listini vettori
+            </NavLink>
+            <NavLink href="bozze">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16z" /><path d="m13 7 4 4" /></svg>
+                Bozze e approvazioni
+                @if (_daApprovare > 0) { <span class="count" title="Da approvare">@_daApprovare</span> }
+            </NavLink>
+            <NavLink href="costo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                Perché questo costo?
+            </NavLink>
+            <NavLink href="registro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h9l3 3v15H6z" /><path d="M9 10h6M9 14h6M9 18h4" /></svg>
+                Registro modifiche
+            </NavLink>
+        </nav>
+        <AuthorizeView>
+            <Authorized>
+                <div class="side-foot">
+                    <div><b>@context.User.Identity?.Name</b></div>
+                    <div class="muted">@context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value</div>
+                    <form method="post" action="esci">
+                        <button class="btn small" type="submit">Esci</button>
+                    </form>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+    </aside>
+    <main>
+        @Body
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    Si è verificato un errore imprevisto.
+    <a href="" class="reload">Ricarica</a>
+    <a class="dismiss">✕</a>
+</div>
+
+@code {
+    private int _daApprovare;
+
+    protected override void OnParametersSet()
+    {
+        try { _daApprovare = Bozze.Elenco(StatiBozza.Validazione).Count; }
+        catch (Exception) { _daApprovare = 0; }
+    }
+}

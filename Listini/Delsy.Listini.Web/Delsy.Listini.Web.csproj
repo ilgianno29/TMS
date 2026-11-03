@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- Interfaccia web del modulo Listini (Blazor, .NET 8): stesso database e stesso motore tariffe di Delsy. -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Delsy.Listini.Web</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Delsy.Listini.Core/Delsy.Listini.Core.csproj" />
+  </ItemGroup>
+</Project>
