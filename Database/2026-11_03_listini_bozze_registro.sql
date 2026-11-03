@@ -16,7 +16,7 @@ BEGIN
     CREATE TABLE dbo.TAR_Bozze
     (
         IdBozza          int IDENTITY(1,1) NOT NULL CONSTRAINT PK_TAR_Bozze PRIMARY KEY,
-        Codice           AS ('B-' + RIGHT('0000' + CAST(IdBozza AS varchar(10)), 4)) PERSISTED,
+        Codice           AS ('B-' + CASE WHEN IdBozza < 10000 THEN RIGHT('0000' + CAST(IdBozza AS varchar(10)), 4) ELSE CAST(IdBozza AS varchar(10)) END), -- non PERSISTED: nessun vincolo sulle opzioni SET dei client
         AttivaPassiva    char(1)        NOT NULL CONSTRAINT DF_TAR_Bozze_AP DEFAULT ('P'),
         Contratto        varchar(15)    NULL,     -- contratto esistente da modificare; NULL se la bozza ne crea uno nuovo
         ContrattoNuovo   varchar(15)    NULL,     -- codice del contratto creato dalla bozza (rinnovo, nuovo listino)
@@ -44,6 +44,16 @@ BEGIN
     );
     CREATE INDEX IX_TAR_Bozze_Stato ON dbo.TAR_Bozze (Stato, ApplicaDal);
     PRINT N'Tabella TAR_Bozze creata.';
+END
+
+-- Versioni precedenti dello script: colonna Codice PERSISTED (richiede QUOTED_IDENTIFIER ON per ogni modifica)
+-- e troncata oltre B-9999
+IF EXISTS (SELECT 1 FROM sys.computed_columns WHERE object_id = OBJECT_ID(N'dbo.TAR_Bozze') AND name = N'Codice'
+           AND (is_persisted = 1 OR definition NOT LIKE N'%10000%'))
+BEGIN
+    ALTER TABLE dbo.TAR_Bozze DROP COLUMN Codice;
+    ALTER TABLE dbo.TAR_Bozze ADD Codice AS ('B-' + CASE WHEN IdBozza < 10000 THEN RIGHT('0000' + CAST(IdBozza AS varchar(10)), 4) ELSE CAST(IdBozza AS varchar(10)) END);
+    PRINT N'Colonna TAR_Bozze.Codice aggiornata.';
 END
 
 IF OBJECT_ID(N'dbo.TAR_BozzeRighe', N'U') IS NULL

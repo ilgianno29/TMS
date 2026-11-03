@@ -9,10 +9,13 @@
         <h1>Listini vettori</h1>
         <p>Contratti passivi in vigore, come li usa il calcolo dei costi. Le modifiche passano da bozza e approvazione.</p>
     </div>
+    <div class="actions">
+    <a class="btn primary" href="listini/nuovo">Nuovo listino</a>
     <form method="get" class="search" role="search">
         <input type="search" name="cerca" value="@Cerca" placeholder="Vettore o contratto" aria-label="Cerca vettore o contratto" />
         <button class="btn" type="submit">Cerca</button>
     </form>
+    </div>
 </div>
 
 <div class="tiles">
@@ -39,7 +42,7 @@
                         <td><span class="pill @Formato.ClasseStato(stato)">@stato</span></td>
                         <td class="num">@c.Tariffe</td>
                         <td class="nowrap">@Formato.Data(c.UltimaModifica) <span class="muted small">@c.ModificatoDa</span></td>
-                        <td>@if (c.BozzeAperte > 0) { <span class="pill info">@c.BozzeAperte aperte</span> }</td>
+                        <td>@if (c.BozzeAperte > 0) { <a href="bozze" class="pill info">@(c.BozzeAperte == 1 ? "1 aperta" : $"{c.BozzeAperte} aperte")</a> }</td>
                     </tr>
                 }
                 @if (!Filtrati.Any())

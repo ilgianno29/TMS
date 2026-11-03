@@ -124,6 +124,8 @@ public static class Controlli
 			p.Add(Avviso($"{nome}: la prima fascia parte da {f[0].Da:0.##}: sotto questo valore non verrà calcolato niente.", tariffa));
 		if (f.All(x => x.TuttoZero))
 			p.Add(Avviso($"{nome}: tutti gli importi sono a zero (va bene solo per il costo zero).", tariffa));
+		else if (f.Any(x => x.TuttoZero))
+			p.Add(Avviso($"{nome}: prezzo zero nelle fasce {string.Join(", ", f.Where(x => x.TuttoZero).Select(Differenze.Intervallo))}.", tariffa));
 	}
 
 	private static Problema Errore(string m, Guid? t = null) => new(Gravita.Errore, m, t);

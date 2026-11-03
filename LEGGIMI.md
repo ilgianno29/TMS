@@ -209,7 +209,16 @@ Nuova applicazione .NET 8 (Blazor) che lavora sullo **stesso database** e usa lo
   - `Listini/ServizioListini` – contratti passivi, testate, voci e fasce in vigore;
   - `Registro/RegistroListini` – registro modifiche (`TAR_Registro`), solo inserimento;
   - `Accesso/ServizioAccesso` – accesso con gli utenti del portale (`WFI_UTENTI`), stesse regole password (hash, conversione al primo accesso).
-- `Delsy.Listini.Web` – interfaccia: accesso, *Listini vettori*, dettaglio contratto, *Perché questo costo?*, *Registro modifiche*.
+  - `Bozze/` – modifiche ai listini in bozza: `ListinoModificabile` (contratto, tariffe, voci, fasce diverse per ogni zona),
+    `Differenze` (in `TAR_BozzeRighe` solo le modifiche, con dati prima/dopo e descrizione leggibile), `Controlli`
+    (codici inesistenti, tariffe doppie, fasce sovrapposte o con buchi, prezzi a zero), `ServizioBozze`
+    (nuova modifica, nuovo contratto, rinnovo, salvataggio, invio, approvazione subito o a data futura, rifiuto con motivo,
+    annullamento). All'approvazione verifica che il listino non sia cambiato nel frattempo e scrive nelle tabelle del motore
+    con i contatori di Delsy (`COUNTERS.TRA.TARIFFEPASSIVE.*`), nella stessa transazione del registro.
+- `Delsy.Listini.Web` – interfaccia: accesso, *Listini vettori* (nuovo listino, modifica, rinnovo), dettaglio contratto,
+  *Bozze e approvazioni* con l'editor a griglia (righe raggruppate per fasce, fasce personalizzabili per destinazione,
+  dettaglio tariffa, costo zero guidato), *Perché questo costo?*, *Registro modifiche*. Ogni ora applica le bozze approvate
+  con data di applicazione raggiunta (`AttivazioneListini`).
 
 Database: eseguire `Database/2026-11_03_listini_bozze_registro.sql` (tabelle `TAR_Bozze`, `TAR_BozzeRighe`, `TAR_Registro`;
 il registro rifiuta modifiche e cancellazioni). Ripetibile.

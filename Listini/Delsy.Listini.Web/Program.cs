@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using Delsy.Listini.Accesso;
+using Delsy.Listini.Bozze;
+using Delsy.Listini.Web;
 using Delsy.Listini.Dati;
 using Delsy.Listini.Listini;
 using Delsy.Listini.Motore;
@@ -24,6 +26,9 @@ builder.Services.AddSingleton(new Db(connectionString));
 builder.Services.AddSingleton(sp => new ServizioAccesso(sp.GetRequiredService<Db>(), cryptographyEnable));
 builder.Services.AddSingleton<ServizioListini>();
 builder.Services.AddSingleton<RegistroListini>();
+builder.Services.AddSingleton<ServizioAnagrafiche>();
+builder.Services.AddSingleton<ServizioBozze>();
+builder.Services.AddHostedService<AttivazioneListini>();
 builder.Services.AddScoped(sp => new ServizioSpiegazione(sp.GetRequiredService<Db>(),
 	() => MotoreTariffe.Apri(connectionString, Utente(sp), cartellaLog)));
 

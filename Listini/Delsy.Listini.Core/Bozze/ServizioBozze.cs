@@ -65,6 +65,11 @@ SELECT B.*, (SELECT COUNT(*) FROM TAR_BozzeRighe R WHERE R.IdBozza = B.IdBozza) 
 		return _db.Righe(SqlInfo + filtro + " ORDER BY B.IdBozza DESC", stati.Select((s, i) => ("@s" + i, (object?)s)).ToArray()).Select(Info).ToList();
 	}
 
+	/// <summary>La bozza ancora aperta (in bozza, da approvare o approvata in attesa) per un contratto, se c'è.</summary>
+	public InfoBozza? AperteDelContratto(string contratto) =>
+		_db.Righe(SqlInfo + " WHERE (B.Contratto = @c OR B.ContrattoNuovo = @c) AND B.Stato IN ('BOZZA', 'VALIDAZIONE', 'APPROVATA')", ("@c", contratto))
+			.Select(Info).FirstOrDefault();
+
 	public InfoBozza? Info(int id) => _db.Righe(SqlInfo + " WHERE B.IdBozza = @id", ("@id", id)).Select(Info).FirstOrDefault();
 
 	public BozzaAperta Apri(int id)

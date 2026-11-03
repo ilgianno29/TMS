@@ -193,7 +193,8 @@ public static class Differenze
 		return p.Count == 0 ? "0,00 €" : string.Join(" + ", p);
 	}
 
-	public static string Intervallo(FasciaModificabile f) => f.A >= VoceModificabile.SenzaLimite ? $"oltre {N(f.Da)}" : $"{N(f.Da)}–{N(f.A)}";
+	public static string Intervallo(FasciaModificabile f) =>
+		f.A >= VoceModificabile.SenzaLimite ? (f.Da == 0 ? "qualsiasi quantità" : $"oltre {N(f.Da)}") : $"{N(f.Da)}–{N(f.A)}";
 
 	private static string Formato(string v) => v == CriteriTariffa.Tutti ? "tutti" : v;
 

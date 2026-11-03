@@ -1,0 +1,134 @@
+@page "/listini/nuovo"
+@page "/listini/{Origine}/rinnovo"
+@attribute [Authorize]
+@inject ServizioBozze Bozze
+@inject ServizioAnagrafiche Anagrafiche
+@inject ServizioListini Listini
+@inject NavigationManager Nav
+
+<PageTitle>@(Rinnovo ? "Rinnovo" : "Nuovo listino") · Delsy</PageTitle>
+
+<div class="head">
+    <div>
+        <div class="crumbs"><a href="listini">Listini vettori</a> / @(Rinnovo ? $"{Origine} / rinnovo" : "nuovo")</div>
+        <h1>@(Rinnovo ? $"Rinnova {Origine}" : "Nuovo listino")</h1>
+        <p>@(Rinnovo
+            ? "Il nuovo contratto parte con tutte le tariffe di quello attuale: correggi solo i prezzi che cambiano. Niente diventa operativo finché la bozza non viene approvata."
+            : "Crea il contratto e inserisci le tariffe nella bozza. Niente diventa operativo finché la bozza non viene approvata.")</p>
+    </div>
+</div>
+
+<section class="panel form-panel">
+    <EditForm Model="Dati" FormName="nuovo-listino" OnValidSubmit="Crea" method="post" class="form-grid">
+        <div class="field">
+            <label for="codice">Codice contratto</label>
+            <InputText id="codice" @bind-Value="Dati.Codice" maxlength="15" placeholder="es. TROSSI 2027" />
+            <span class="muted small">Massimo 15 caratteri, non modificabile dopo.</span>
+        </div>
+        <div class="field">
+            <label for="descrizione">Descrizione</label>
+            <InputText id="descrizione" @bind-Value="Dati.Descrizione" maxlength="255" />
+        </div>
+        <div class="field">
+            <label for="vettore">Vettore</label>
+            <InputSelect id="vettore" @bind-Value="Dati.Trasportatore">
+                <option value="">Scegli…</option>
+                @foreach (VoceAnagrafica v in _vettori)
+                {
+                    <option value="@v.Codice">@v.Codice · @v.Descrizione</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="field">
+            <label for="arr">Arrotondamento importi</label>
+            <InputNumber id="arr" @bind-Value="Dati.Arrotondamento" step="0.01" />
+        </div>
+        <div class="field">
+            <label for="dal">Valido dal</label>
+            <InputDate id="dal" @bind-Value="Dati.DataInizio" />
+        </div>
+        <div class="field">
+            <label for="al">Valido fino al</label>
+            <InputDate id="al" @bind-Value="Dati.DataFine" />
+        </div>
+        @if (Rinnovo)
+        {
+            <label class="check full">
+                <InputCheckbox @bind-Value="Dati.ChiudiPrecedente" />
+                Chiudi @Origine il giorno prima dell'inizio del nuovo contratto (se finirebbe dopo)
+            </label>
+        }
+        @if (_errore != null)
+        {
+            <p class="avviso bad full" role="alert">@_errore</p>
+        }
+        <div class="full actions">
+            <button class="btn primary" type="submit">@(Rinnovo ? "Crea la bozza di rinnovo" : "Crea la bozza")</button>
+            <a class="btn" href="@(Rinnovo ? $"listini/{Uri.EscapeDataString(Origine!)}" : "listini")">Annulla</a>
+        </div>
+    </EditForm>
+</section>
+
+@code {
+    [Parameter] public string? Origine { get; set; }
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+    [SupplyParameterFromForm] private DatiNuovo Dati { get; set; } = new();
+
+    private bool Rinnovo => !string.IsNullOrEmpty(Origine);
+    private IReadOnlyList<VoceAnagrafica> _vettori = Array.Empty<VoceAnagrafica>();
+    private string? _errore;
+
+    protected override void OnInitialized()
+    {
+        _vettori = Anagrafiche.Vettori();
+        if (HttpMethods.IsGet(HttpContext.Request.Method) && Rinnovo && Listini.Dettaglio(Origine!) is { } d)
+        {
+            ContrattoListino c = d.Contratto;
+            DateTime inizio = (c.DataFine ?? DateTime.Today).AddDays(1);
+            Dati = new DatiNuovo
+            {
+                Trasportatore = c.Trasportatore, Descrizione = c.Descrizione, DataInizio = inizio,
+                DataFine = new DateTime(inizio.Year, 12, 31), Arrotondamento = 0.01m, ChiudiPrecedente = true
+            };
+        }
+    }
+
+    private void Crea()
+    {
+        string utente = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        DatiContratto d = new()
+        {
+            Codice = (Dati.Codice ?? "").Trim().ToUpperInvariant(), Descrizione = (Dati.Descrizione ?? "").Trim(), Trasportatore = Dati.Trasportatore ?? "",
+            DataInizio = Dati.DataInizio, DataFine = Dati.DataFine, Arrotondamento = Dati.Arrotondamento
+        };
+        List<Problema> errori = Controlli.Esegui(new ListinoModificabile { Contratto = d, ContrattoNuovo = true }, Anagrafiche.PerControlli())
+            .Where(p => p.Gravita == Gravita.Errore).ToList();
+        if (errori.Count > 0)
+        {
+            _errore = string.Join(" ", errori.Select(e => e.Messaggio));
+            return;
+        }
+        int id;
+        try
+        {
+            id = Rinnovo ? Bozze.Rinnovo(Origine!, d, Dati.ChiudiPrecedente, utente) : Bozze.NuovoContratto(new ListinoModificabile { Contratto = d }, utente);
+        }
+        catch (OperazioneBozzaException e)
+        {
+            _errore = e.Message;
+            return;
+        }
+        Nav.NavigateTo($"bozze/{id}");
+    }
+
+    private sealed class DatiNuovo
+    {
+        public string? Codice { get; set; }
+        public string? Descrizione { get; set; }
+        public string? Trasportatore { get; set; }
+        public DateTime DataInizio { get; set; } = DateTime.Today;
+        public DateTime DataFine { get; set; } = new(DateTime.Today.Year, 12, 31);
+        public decimal Arrotondamento { get; set; } = 0.01m;
+        public bool ChiudiPrecedente { get; set; }
+    }
+}

@@ -1,6 +1,8 @@
 @page "/listini/{Codice}"
 @attribute [Authorize]
 @inject ServizioListini Servizio
+@inject ServizioBozze Bozze
+@inject NavigationManager Nav
 
 <PageTitle>@Codice · Listini · Delsy</PageTitle>
 
@@ -18,7 +20,29 @@
         <h1>@c.Codice <span class="pill @Formato.ClasseStato(stato)">@stato</span></h1>
         <p>@c.Descrizione · vettore <b>@c.Trasportatore</b> @c.NomeTrasportatore · valido dal @Formato.Data(c.DataInizio) al @Formato.Data(c.DataFine)</p>
     </div>
+    <div class="actions">
+        @if (_aperta != null)
+        {
+            <a class="btn primary" href="bozze/@_aperta.IdBozza">Continua la bozza @_aperta.Codice</a>
+        }
+        else
+        {
+            <form method="post" @formname="modifica" @onsubmit="Modifica">
+                <AntiforgeryToken />
+                <button class="btn primary" type="submit">Modifica listino</button>
+            </form>
+        }
+        <a class="btn" href="listini/@Uri.EscapeDataString(c.Codice)/rinnovo">Rinnova</a>
+    </div>
 </div>
+@if (_aperta != null)
+{
+    <p class="hint">C'è una bozza aperta per questo listino (@StatiBozza.Etichetta(_aperta.Stato).ToLowerInvariant()): qui sotto vedi il listino in vigore, le modifiche sono nella bozza.</p>
+}
+@if (_errore != null)
+{
+    <p class="avviso bad">@_errore</p>
+}
 
 <section class="panel">
     <div class="panel-head">
@@ -93,9 +117,32 @@
     [SupplyParameterFromQuery] private string? Partenza { get; set; }
     [SupplyParameterFromQuery] private string? Cerca { get; set; }
 
-    private DettaglioContratto? _dettaglio;
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
 
-    protected override void OnParametersSet() => _dettaglio = Servizio.Dettaglio(Codice);
+    private DettaglioContratto? _dettaglio;
+    private InfoBozza? _aperta;
+    private string? _errore;
+
+    protected override void OnParametersSet()
+    {
+        _dettaglio = Servizio.Dettaglio(Codice);
+        _aperta = Bozze.AperteDelContratto(Codice);
+    }
+
+    private void Modifica()
+    {
+        int id;
+        try
+        {
+            id = Bozze.NuovaModifica(Codice, HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        }
+        catch (OperazioneBozzaException e)
+        {
+            _errore = e.Message;
+            return;
+        }
+        Nav.NavigateTo($"bozze/{id}");
+    }
 
     private IEnumerable<string> Valori(string criterio) => _dettaglio!.Tariffe.Select(t => t.Criterio(criterio)).Distinct().Order();
 
