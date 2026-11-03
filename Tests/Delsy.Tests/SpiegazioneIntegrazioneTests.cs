@@ -61,3 +61,26 @@ public class SpiegazioneIntegrazioneTests
         Assert.Equal("CORTI", sbagliato.ValoreTariffa);
     }
 }
+
+public class ListiniIntegrazioneTests
+{
+    private static string? Cs => Environment.GetEnvironmentVariable("DELSY_TEST_DB");
+
+    [SkippableFact]
+    public void Dettaglio_contratto_con_forfait_e_fasce()
+    {
+        Skip.If(Cs is null, "DELSY_TEST_DB non impostata");
+        var servizio = new Delsy.Listini.Listini.ServizioListini(new Db(Cs!));
+        Assert.Contains(servizio.Contratti(), c => c.Codice == "BENNATO 2024" && c.Tariffe == 7);
+
+        var d = servizio.Dettaglio("BENNATO 2024")!;
+        var costoZero = d.Tariffe.Single(t => t.IdTariffa == 123130);
+        Assert.Equal("STTMOSTO", costoZero.Partenza);
+        Assert.True(Assert.Single(costoZero.Voci).Forfait);
+
+        var corti = d.Tariffe.Single(t => t.IdTariffa == 123134);
+        Assert.Equal("CORTI", corti.Destinazione);
+        Assert.Equal(new[] { 44m, 39m, 35m, 31m }, corti.Voci.Single().Fasce.Select(f => f.Variabile));
+        Assert.Null(servizio.Dettaglio("NON ESISTE"));
+    }
+}

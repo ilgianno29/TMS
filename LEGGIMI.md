@@ -194,3 +194,40 @@ Dopo la conversione completa, le password non sono più recuperabili: un utente 
 1. `Database/2026-11_02_autologin_token.sql`.
 2. Per ogni totem: `DelsyPassword autologin-crea --connessione "..." --utente TOTEM --descrizione "Totem 1" --url http://server/WFI/Form/WFIAutoLogin.aspx`
    e aggiornare l'indirizzo nella pagina del totem (`Autologin.htm`, `Autologin2.htm`).
+
+## Listini – modulo web per listini vettori e costi viaggio (`Listini/`)
+
+Nuova applicazione .NET 8 (Blazor) che lavora sullo **stesso database** e usa lo **stesso motore tariffe** di Delsy
+(`GdoApi`, `Incasbo.Api.Gdo.Tariffe`): i costi che mostra sono quelli che calcolerebbe Delsy.
+
+- `Delsy.Listini.Core` – logica senza interfaccia:
+  - `Motore/MotoreTariffe` apre il contesto applicativo Delsy (connessione, parametri, log) per eseguire il motore;
+  - `Spiegazione/ServizioSpiegazione` – «Perché questo costo?»: per un viaggio (e per le spedizioni che passano da un
+    corrispondente/Transit Point) mostra dati usati, contratto scelto e perché, tariffa applicata criterio per criterio
+    oppure, se non ne trova, le tariffe più vicine e il criterio che non torna. Gli importi vengono dal motore in
+    **simulazione**: non viene salvato nulla;
+  - `Listini/ServizioListini` – contratti passivi, testate, voci e fasce in vigore;
+  - `Registro/RegistroListini` – registro modifiche (`TAR_Registro`), solo inserimento;
+  - `Accesso/ServizioAccesso` – accesso con gli utenti del portale (`WFI_UTENTI`), stesse regole password (hash, conversione al primo accesso).
+- `Delsy.Listini.Web` – interfaccia: accesso, *Listini vettori*, dettaglio contratto, *Perché questo costo?*, *Registro modifiche*.
+
+Database: eseguire `Database/2026-11_03_listini_bozze_registro.sql` (tabelle `TAR_Bozze`, `TAR_BozzeRighe`, `TAR_Registro`;
+il registro rifiuta modifiche e cancellazioni). Ripetibile.
+
+Configurazione (`appsettings.json`): la stringa di connessione **non** va nel repository; impostarla in
+`appsettings.Production.json` sul server, oppure con la variabile d'ambiente `ConnectionStrings__Delsy`.
+`Listini:CryptographyEnable` deve avere lo stesso valore di `LoginManager/CryptographyEnable` del portale.
+Su IIS si pubblica come GdoWSC.Host (ASP.NET Core Module, pool senza codice gestito).
+
+Prova in locale con il database di prova (`Tests/DatabaseDiProva`, vedi sotto):
+
+```
+cd Listini/Delsy.Listini.Web
+ConnectionStrings__Delsy="Server=localhost,14330;Database=DELSYLOG91_LUCART;User ID=sa;Password=Delsy!Prova2026;TrustServerCertificate=True" dotnet run
+```
+
+### Database di prova
+
+`python3 Tests/DatabaseDiProva/prepara_database.py` crea in Docker un SQL Server con lo schema Delsy e dati di esempio
+(contratti BENNATO e TROSSI, costo zero via Transit Point TPBELLUNO). I test di integrazione si attivano con la
+variabile `DELSY_TEST_DB` (stessa stringa di connessione); senza, vengono saltati.

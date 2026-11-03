@@ -1,0 +1,70 @@
+@page "/accesso"
+@layout EmptyLayout
+@using Delsy.Listini.Accesso
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@inject ServizioAccesso Accessi
+@inject NavigationManager Nav
+
+<PageTitle>Accesso · Delsy Listini</PageTitle>
+
+<div class="login">
+    <div class="brand">
+        <div class="brand-mark" aria-hidden="true">D</div>
+        <div><b>Delsy</b><small>Listini e costi</small></div>
+    </div>
+    <h1>Accesso</h1>
+    <p class="muted">Usa le stesse credenziali del portale Delsy.</p>
+
+    <EditForm Model="Dati" FormName="accesso" OnValidSubmit="Entra" method="post">
+        <div class="field">
+            <label for="utente">Utente</label>
+            <InputText id="utente" @bind-Value="Dati.Utente" autocomplete="username" autofocus />
+        </div>
+        <div class="field">
+            <label for="password">Password</label>
+            <InputText id="password" type="password" @bind-Value="Dati.Password" autocomplete="current-password" />
+        </div>
+        @if (_errore != null)
+        {
+            <p class="errore" role="alert">@_errore</p>
+        }
+        <button class="btn primary" type="submit">Entra</button>
+    </EditForm>
+</div>
+
+@code {
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm] private DatiAccesso Dati { get; set; } = new();
+
+    [SupplyParameterFromQuery] private string? Ritorno { get; set; }
+
+    private string? _errore;
+
+    private async Task Entra()
+    {
+        UtenteDelsy? u = Accessi.Verifica(Dati.Utente ?? "", Dati.Password ?? "");
+        if (u == null)
+        {
+            _errore = "Utente o password non validi.";
+            return;
+        }
+        ClaimsIdentity id = new(new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, u.Codice),
+            new Claim(ClaimTypes.Name, u.Nome),
+            new Claim("gruppo", u.Gruppo)
+        }, CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        // solo indirizzi interni all'applicazione
+        string destinazione = Ritorno is { Length: > 1 } r && r.StartsWith('/') && !r.StartsWith("//") && !r.StartsWith("/\\") ? r : "/listini";
+        Nav.NavigateTo(destinazione);
+    }
+
+    private sealed class DatiAccesso
+    {
+        public string? Utente { get; set; }
+        public string? Password { get; set; }
+    }
+}

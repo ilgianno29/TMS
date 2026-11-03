@@ -1,0 +1,103 @@
+@* Spiegazione del costo di un viaggio o di una spedizione *@
+
+<article class="panel doc">
+    <div class="panel-head">
+        <h2>@D.Titolo</h2>
+        <div class="actions">
+            @if (D.BloccaCosti) { <span class="pill lock" title="I costi non vengono ricalcolati alla generazione della prefattura">Costi bloccati</span> }
+            @if (D.Calcolato) { <span class="pill ok">Calcolato</span> }
+            else { <span class="pill bad">Non calcolato</span> }
+            <span class="totale">@Formato.Euro(D.Totale)</span>
+        </div>
+    </div>
+    <div class="panel-body explain">
+        <div class="col">
+            <h3>Dati usati dal calcolo</h3>
+            <dl class="dati">
+                @foreach ((string etichetta, string valore) in D.Dati)
+                {
+                    <dt>@etichetta</dt><dd>@(string.IsNullOrWhiteSpace(valore) ? "—" : Formato.Criterio(valore))</dd>
+                }
+            </dl>
+            @foreach (string m in D.DatiMancanti)
+            {
+                <p class="avviso bad">@m</p>
+            }
+
+            <h3>Contratto</h3>
+            @if (D.Contratto is { } c)
+            {
+                <p><a href="listini/@Uri.EscapeDataString(c.Codice)"><b>@c.Codice</b></a> @c.Descrizione<br />
+                    <span class="muted small">valido dal @Formato.Data(c.DataInizio) al @Formato.Data(c.DataFine) · @c.Motivo</span></p>
+            }
+            else if (D.DatiMancanti.Count == 0)
+            {
+                <p class="avviso bad">Nessun contratto valido per @(string.IsNullOrEmpty(D.Soggetto) ? "il vettore" : D.Soggetto) alla data del documento.</p>
+            }
+            @foreach (string n in D.NoteContratto)
+            {
+                <p class="muted small">@n</p>
+            }
+        </div>
+
+        <div class="col">
+            @if (D.TariffaApplicata is { } t)
+            {
+                <h3>Tariffa applicata <span class="mono">#@t.IdTariffa</span></h3>
+                <p class="muted small">La più specifica tra quelle che corrispondono (su @D.TariffeDelContratto @(D.TariffeDelContratto == 1 ? "tariffa" : "tariffe") del contratto).</p>
+                <TabellaCriteri Confronto="t" />
+            }
+            else if (D.Contratto != null)
+            {
+                <h3>Nessuna tariffa corrisponde</h3>
+                <p class="muted small">@(D.TariffeDelContratto == 1 ? "L'unica tariffa del contratto non vale" : $"Nessuna delle {D.TariffeDelContratto} tariffe del contratto vale") per questo documento. @(D.TariffeVicine.Count == 1 ? "La più vicina:" : "Le più vicine:")</p>
+                @foreach (ConfrontoTariffa v in D.TariffeVicine)
+                {
+                    <div class="vicina">
+                        <p><b class="mono">#@v.IdTariffa</b> — non corrisponde per:
+                            @foreach (Criterio k in v.NonCorrispondenti)
+                            {
+                                <span class="pill bad">@k.Etichetta: documento @(k.ValoreDocumento == "" ? "vuoto" : k.ValoreDocumento), tariffa @k.ValoreTariffa</span>
+                            }
+                        </p>
+                    </div>
+                }
+            }
+
+            @if (D.Costi.Count > 0)
+            {
+                <h3>Calcolo</h3>
+                <div class="scroll">
+                    <table>
+                        <thead><tr><th>Voce</th><th>Base</th><th class="num">Quantità</th><th class="num">Tassata</th><th class="num">Unitario</th><th class="num">Importo</th></tr></thead>
+                        <tbody>
+                            @foreach (RigaCosto r in D.Costi)
+                            {
+                                <tr title="@r.NoteDiCalcolo">
+                                    <td><b>@r.Voce</b></td>
+                                    <td>@r.CampoCalcolo</td>
+                                    <td class="num">@Formato.Numero(r.QuantitaOriginale)</td>
+                                    <td class="num">@Formato.Numero(r.QuantitaTassata)</td>
+                                    <td class="num">@Formato.Euro(r.ImportoUnitario)</td>
+                                    <td class="num"><b>@Formato.Euro(r.Importo)</b></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else if (D.Calcolato)
+            {
+                <p class="muted">Il motore non ha prodotto righe di costo: tutte le voci valgono zero.</p>
+            }
+            @foreach (string m in D.MessaggiMotore)
+            {
+                <p class="avviso warn">Motore: @m</p>
+            }
+        </div>
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public SpiegazioneDocumento D { get; set; } = default!;
+}

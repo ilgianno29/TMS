@@ -1,0 +1,115 @@
+@page "/listini/{Codice}"
+@attribute [Authorize]
+@inject ServizioListini Servizio
+
+<PageTitle>@Codice · Listini · Delsy</PageTitle>
+
+@if (_dettaglio == null)
+{
+    <div class="head"><div><div class="crumbs"><a href="listini">Listini vettori</a></div><h1>Contratto non trovato</h1></div></div>
+    return;
+}
+
+@{ ContrattoListino c = _dettaglio.Contratto; string stato = c.StatoValidita(DateTime.Today); }
+
+<div class="head">
+    <div>
+        <div class="crumbs"><a href="listini">Listini vettori</a> / @c.Codice</div>
+        <h1>@c.Codice <span class="pill @Formato.ClasseStato(stato)">@stato</span></h1>
+        <p>@c.Descrizione · vettore <b>@c.Trasportatore</b> @c.NomeTrasportatore · valido dal @Formato.Data(c.DataInizio) al @Formato.Data(c.DataFine)</p>
+    </div>
+</div>
+
+<section class="panel">
+    <div class="panel-head">
+        <h2>Tariffe <span class="muted">(@Filtrate.Count() di @_dettaglio.Tariffe.Count)</span></h2>
+        <form method="get" class="filtri-tariffe">
+            <select name="documento" aria-label="Tipo documento">
+                <option value="">Viaggi e spedizioni</option>
+                @foreach (string t in Valori("TipoDocumento"))
+                {
+                    <option value="@t" selected="@(t == Documento)">@Formato.Criterio(t)</option>
+                }
+            </select>
+            <select name="partenza" aria-label="Partenza">
+                <option value="">Tutte le partenze</option>
+                @foreach (string p in _dettaglio.Tariffe.Select(t => t.Partenza).Distinct().Order())
+                {
+                    <option value="@p" selected="@(p == Partenza)">@p</option>
+                }
+            </select>
+            <input type="search" name="cerca" value="@Cerca" placeholder="Destinazione, mezzo, merce…" aria-label="Cerca" />
+            <button class="btn" type="submit">Filtra</button>
+        </form>
+    </div>
+    <div class="scroll">
+        <table class="tariffe">
+            <thead>
+                <tr><th>Id</th><th>Documento</th><th>Partenza</th><th>Destinazione</th><th>Spedizione</th><th>Mezzo</th><th>Merce</th><th>Cliente</th><th>Voci e fasce</th></tr>
+            </thead>
+            <tbody>
+                @foreach (TariffaListino t in Filtrate)
+                {
+                    <tr>
+                        <td class="mono">@t.IdTariffa</td>
+                        <td>@Formato.Criterio(t.Criterio("TipoDocumento"))</td>
+                        <td>@t.Partenza</td>
+                        <td><b>@t.Destinazione</b></td>
+                        <td>@Formato.Criterio(t.Criterio("TipoSpedizione"))</td>
+                        <td>@Formato.Criterio(t.Criterio("TipoMezzo"))</td>
+                        <td>@Formato.Criterio(t.Criterio("TipoMerce"))</td>
+                        <td>@Formato.Criterio(t.Criterio("Cliente"))</td>
+                        <td>
+                            @foreach (VoceListino v in t.Voci)
+                            {
+                                <div class="voce">
+                                    <span class="voce-nome" title="@v.DescrizioneVoce">@v.Voce</span>
+                                    @if (v.Forfait)
+                                    {
+                                        <span class="fascia">forfait <b>@Formato.Euro(v.Fasce[0].Fisso)</b></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="muted small">per @v.CampoCalcolo</span>
+                                        @foreach (FasciaListino f in v.Fasce)
+                                        {
+                                            <span class="fascia">@Formato.Numero(f.Da)–@Formato.Numero(f.A): <b>@Importo(f)</b></span>
+                                        }
+                                    }
+                                </div>
+                            }
+                            @if (t.Voci.Count == 0) { <span class="muted">nessuna voce</span> }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@code {
+    [Parameter] public string Codice { get; set; } = "";
+    [SupplyParameterFromQuery] private string? Documento { get; set; }
+    [SupplyParameterFromQuery] private string? Partenza { get; set; }
+    [SupplyParameterFromQuery] private string? Cerca { get; set; }
+
+    private DettaglioContratto? _dettaglio;
+
+    protected override void OnParametersSet() => _dettaglio = Servizio.Dettaglio(Codice);
+
+    private IEnumerable<string> Valori(string criterio) => _dettaglio!.Tariffe.Select(t => t.Criterio(criterio)).Distinct().Order();
+
+    private IEnumerable<TariffaListino> Filtrate => _dettaglio!.Tariffe
+        .Where(t => string.IsNullOrEmpty(Documento) || t.Criterio("TipoDocumento") == Documento)
+        .Where(t => string.IsNullOrEmpty(Partenza) || t.Partenza == Partenza)
+        .Where(t => string.IsNullOrWhiteSpace(Cerca) || string.Join(" ", t.Criteri.Values).Contains(Cerca.Trim(), StringComparison.OrdinalIgnoreCase));
+
+    private static string Importo(FasciaListino f)
+    {
+        List<string> parti = new();
+        if (f.Fisso != 0) parti.Add(Formato.Euro(f.Fisso));
+        if (f.Variabile != 0) parti.Add(Formato.Euro(f.Variabile) + "/u");
+        if (f.Percentuale != 0) parti.Add(Formato.Numero(f.Percentuale) + "%");
+        return parti.Count == 0 ? Formato.Euro(0) : string.Join(" + ", parti);
+    }
+}
